@@ -279,7 +279,110 @@ nav .navbar-brand span:nth-child(9)
 
   .standard
   {
-    
     font-size: large;
     font-family: 'Times New Roman', Times, serif;
   }
+
+  .namecard {
+    background-color: black;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .links {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
+  .links img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .interestsmain {
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .interestssub {
+    font-size: 20px;
+    line-height: 1.5;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+  }
+
+  .interests2 {
+    font-size: 18px;
+    line-height: 1.5;
+    color:#64dfdf;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+  }
+
+  .aboutme
+  {
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .aboutme2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+  .centertext1
+  {
+    text-align: center;
+    padding-right: 62%; 
+  }
+
+  .centertext1new
+  {
+    text-align: center;
+    padding-right: 61%; 
+  }
+
+
+  .centertext2
+  {
+    line-height: 160%;
+    padding-left: 15%;
+    padding-right:15%; 
+  }
+
+.gold
+{
+  color: goldenrod;
+}
+
+.teal
+{
+  color:#64dfdf;
+}
+
+.centertext2new
+{
+  line-height: 160%;
+  padding-left: 17%;
+  padding-right:17%; 
+}
+
