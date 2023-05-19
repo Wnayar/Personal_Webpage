@@ -53,54 +53,57 @@ nav .navbar-brand span:nth-child(9)
 /* colors for letters on gyro home*/
 #one
 {
-    /* color: #ff5f5f; Red */
-    color:white
+  color: #ff5f5f;
   
 }
   
 #two
 {
-    color:white
+  color: #ff9f40;
   
 }
   
 #three
 {
-    color:white
+  color: #ffd95f;
   
 }
   
 #four
 {
-    color:white
+  color: #64dfdf;
   
 }
   
 #five
 {
-    color:white
-  
+  color: #8ac926;
 }
   
 #six
 {
-    color:white
+  color: #1982c4;
   
 }
   
 #seven
 {
-    color:white
+  color: #6a4c93;
   
 }
   
 #eight
 {
-    color:white
+  color: #d65db1;
   
 }
   
 #nine
+{
+  color: #ff5f5f;
+  
+}
+#ten
 {
     color:white
   
@@ -114,7 +117,9 @@ nav .navbar-brand span:nth-child(9)
 .gyroscope {
     position:relative;
     margin: auto;
-    top: 10%
+    align-items: center;
+    justify-content: center;
+
     
     
     /* Other CSS properties for the gyroscope */
@@ -136,55 +141,55 @@ nav .navbar-brand span:nth-child(9)
 
   .circle:nth-child(1) {
     animation: rotate1 6s infinite linear;
-    border: 2px solid red;
+    border: 2px solid #64dfdf;
     
   }
   
   .circle:nth-child(2) {
     animation: rotate2 8s infinite linear;
-    border: 2px solid orange;
+    border: 2px solid white;
     
   }
   
   .circle:nth-child(3) {
     animation: rotate3 10s infinite linear;
-    border: 2px solid yellow;
+    border: 2px solid goldenrod;
   }
   
   .circle:nth-child(4) {
     animation: rotate4 12s infinite linear;
-    border: 2px solid teal;
+    border: 2px solid #64dfdf;
     
   }
   
   .circle:nth-child(5) {
     animation: rotate5 14s infinite linear;
-    border: 2px solid green;
+    border: 2px solid white;
   }
   
   .circle:nth-child(6) {
     animation: rotate6 16s infinite linear;
-    border: 2px solid blue;
+    border: 2px solid goldenrod;
   }
   
   .circle:nth-child(7) {
     animation: rotate7 18s infinite linear;
-    border: 2px solid purple;
+    border: 2px solid #64dfdf;
   }
   
   .circle:nth-child(8) {
     animation: rotate8 20s infinite linear;
-    border: 2px solid pink;
+    border: 2px solid white;
   }
   
   .circle:nth-child(9) {
     animation: rotate9 22s infinite linear;
-    border: 2px solid violet;
+    border: 2px solid goldenrod;
   }
   
   .circle:nth-child(10) {
     animation: rotate10 24s infinite linear;
-    border: 2px solid orangered;
+    border: 2px solid #64dfdf;
   }
   
   @keyframes rotate1 {
@@ -385,3 +390,13 @@ nav .navbar-brand span:nth-child(9)
   padding-right:17%; 
 }
 
+.bordertest
+{
+ border: 3px solid red; 
+}
+
+.centergyro
+{
+  display: flex;
+  justify-content: center;
+}
