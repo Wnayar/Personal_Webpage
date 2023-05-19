@@ -4,6 +4,7 @@ nav .navbar-brand
     font-size: xx-large;
 }
 
+
 /* colors for webpage home*/
 nav .navbar-brand span:nth-child(1) 
 {
@@ -52,82 +53,25 @@ nav .navbar-brand span:nth-child(9)
     color: #ff5f5f; 
 }
 
-/* colors for letters on gyro home*/
-#one
-{
-  color: #ff5f5f;
-  
-}
-  
-#two
-{
-  color: #ff9f40;
-  
-}
-  
-#three
-{
-  color: #ffd95f;
-  
-}
-  
-#four
-{
-  color: #64dfdf;
-  
-}
-  
-#five
-{
-  color: #8ac926;
-}
-  
-#six
-{
-  color: #1982c4;
-  
-}
-  
-#seven
-{
-  color: #6a4c93;
-  
-}
-  
-#eight
-{
-  color: #d65db1;
-  
-}
-  
-#nine
-{
-  color: #ff5f5f;
-  
-}
-#ten
-{
-    color:white
-  
-}
+
 .layoutbody
 {
   background-color: black;  
   color:white
 }
 
-.gyroscope {
+
+.gyroscope 
+{
     position:relative;
     margin: auto;
     align-items: center;
     justify-content: center;
-
-    
-    
-    /* Other CSS properties for the gyroscope */
-  }
+}
   
-  .circle {
+
+.circle 
+{
     position: absolute;
     top: 10%;
     margin: 0 auto;
@@ -136,64 +80,71 @@ nav .navbar-brand span:nth-child(9)
     border: 2px solid white;
     border-radius: 50%;
     transform-style: preserve-3d;
-    /* Other CSS properties for the circle */
-  }
+}
   
 
-
-  .circle:nth-child(1) {
+  .circle:nth-child(1) 
+  {
     animation: rotate1 6s infinite linear;
     border: 2px solid #64dfdf;
     
   }
   
-  .circle:nth-child(2) {
+  .circle:nth-child(2) 
+  {
     animation: rotate2 8s infinite linear;
     border: 2px solid white;
-    
   }
   
-  .circle:nth-child(3) {
+  .circle:nth-child(3) 
+  {
     animation: rotate3 10s infinite linear;
     border: 2px solid goldenrod;
   }
   
-  .circle:nth-child(4) {
+  .circle:nth-child(4) 
+  {
     animation: rotate4 12s infinite linear;
     border: 2px solid #64dfdf;
-    
   }
   
-  .circle:nth-child(5) {
+  .circle:nth-child(5) 
+  {
     animation: rotate5 14s infinite linear;
     border: 2px solid white;
   }
   
-  .circle:nth-child(6) {
+  .circle:nth-child(6) 
+  {
     animation: rotate6 16s infinite linear;
     border: 2px solid goldenrod;
   }
   
-  .circle:nth-child(7) {
+  .circle:nth-child(7) 
+  {
     animation: rotate7 18s infinite linear;
     border: 2px solid #64dfdf;
   }
   
-  .circle:nth-child(8) {
+  .circle:nth-child(8) 
+  {
     animation: rotate8 20s infinite linear;
     border: 2px solid white;
   }
   
-  .circle:nth-child(9) {
+  .circle:nth-child(9) 
+  {
     animation: rotate9 22s infinite linear;
     border: 2px solid goldenrod;
   }
   
-  .circle:nth-child(10) {
+  .circle:nth-child(10) 
+  {
     animation: rotate10 24s infinite linear;
     border: 2px solid #64dfdf;
   }
   
+
   @keyframes rotate1 {
     0% {
       transform: rotateX(0) rotateY(0);
@@ -284,13 +235,16 @@ nav .navbar-brand span:nth-child(9)
     }
   }
 
+
   .standard
   {
     font-size: large;
     font-family: 'Times New Roman', Times, serif;
   }
 
-  .namecard {
+
+  .namecard 
+  {
     background-color: black;
     width: 100%;
     max-width: 400px;
@@ -305,38 +259,49 @@ nav .navbar-brand span:nth-child(9)
     text-align: center;
   }
   
-  img {
+
+  img 
+  {
     width: 200px;
     height: 200px;
     border-radius: 50%;
     margin-bottom: 20px;
   }
   
-  .links {
+
+  .links 
+  {
     display: flex;
     justify-content: space-between;
     width: 150px;
     margin-bottom: 20px;
   }
   
-  .links img {
+  .links img 
+  {
     width: 30px;
     height: 30px;
   }
   
-  .interestsmain {
+
+  .interestsmain 
+  {
     font-size: 16px;
     line-height: 1.5;
     font-family: 'Times New Roman', Times, serif;
   }
 
-  .interestssub {
+
+  .interestssub 
+  {
     font-size: 20px;
     line-height: 1.5;
     font-family: 'Times New Roman', Times, serif;
   }
 
-  .interests2 {
+
+  .interests2 
+  {
     font-size: 18px;
     line-height: 1.5;
     color:#64dfdf;
@@ -344,22 +309,27 @@ nav .navbar-brand span:nth-child(9)
     font-style: italic;
   }
 
+
   .aboutme
   {
     font-family: 'Times New Roman', Times, serif;
   }
 
-  .aboutme2 {
+
+  .aboutme2 
+  {
     font-size: 24px;
     margin-bottom: 20px;
     font-family: 'Times New Roman', Times, serif;
   }
+
 
   .centertext1
   {
     text-align: center;
     padding-right: 62%; 
   }
+
 
   .centertext1new
   {
@@ -375,15 +345,18 @@ nav .navbar-brand span:nth-child(9)
     padding-right:15%; 
   }
 
+
 .gold
 {
   color: goldenrod;
 }
 
+
 .teal
 {
   color:#64dfdf;
 }
+
 
 .centertext2new
 {
@@ -392,10 +365,12 @@ nav .navbar-brand span:nth-child(9)
   padding-right:17%; 
 }
 
+
 .bordertest
 {
  border: 3px solid red; 
 }
+
 
 .centergyro
 {
