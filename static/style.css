@@ -260,7 +260,7 @@ nav .navbar-brand span:nth-child(9)
   }
   
 
-  img 
+  #profile
   {
     width: 200px;
     height: 200px;
@@ -335,11 +335,35 @@ nav .navbar-brand span:nth-child(9)
   }
 
 
+  .centertext1motivation
+  {
+    text-align: center;
+    padding-right: 61%; 
+  }
+
+
   .centertext1new
   {
     text-align: center;
     padding-right: 61%; 
   }
+
+
+  .centertext1motivation
+  {
+    text-align: center;
+    padding-right: 61%; 
+  }
+
+
+  .centertext1motivationnew
+  {
+    text-align: center;
+    padding-right: 54%; 
+  }
+
+  
+
 
   .centertextsimple
   {
@@ -386,4 +410,11 @@ nav .navbar-brand span:nth-child(9)
 {
   display: flex;
   justify-content: center;
+}
+
+
+.motivationvideos
+{
+    width: 100%;
+    height: auto;
 }
