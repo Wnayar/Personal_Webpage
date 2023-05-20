@@ -14,6 +14,9 @@
 
         <link href="/Personal_Webpage/static/style.css" rel="stylesheet">
 
+        <!-- https://github.com/mattboldt/typed.js/ -->
+        <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+
         <title>William Nayar: {% block title %}{% endblock %} </title>
     </head>
     <body class="layoutbody">
@@ -93,18 +96,21 @@
                 <li>Software Development</li>
             </ul>
         </div>
-
-
-
-
-
-        
-
-
+        <div class="container-fluid">
+            <div><br><br></div>
+            <h1 class="centertextsimple aboutme">Be willing to: <span id="words" class="teal"></span></h1>
+        </div>
+        <script>
+            var typed = new Typed ('#words', {
+            strings: ["take calculated risks", "follow your dreams", ],
+            typeSpeed: 100,
+            backSpeed: 100,
+            loop: true
+            });
+        </script>
+        <br>
+        <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
 
     
-
-
-
     </body>
 </html>

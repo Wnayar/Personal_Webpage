@@ -323,6 +323,10 @@ nav .navbar-brand span:nth-child(9)
     font-family: 'Times New Roman', Times, serif;
   }
 
+  .copyright
+  {
+    font-family: 'Times New Roman', Times, serif;
+  }
 
   .centertext1
   {
@@ -335,6 +339,12 @@ nav .navbar-brand span:nth-child(9)
   {
     text-align: center;
     padding-right: 61%; 
+  }
+
+  .centertextsimple
+  {
+    text-align: center;
+     
   }
 
 
