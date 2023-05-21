@@ -15,19 +15,14 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/deeplearning")
+@app.route("/insights")
 def deeplearning():
-    return render_template("deeplearning.html")
-
-
-@app.route("/blog")
-def blog():
-    return render_template("blog.html")
+    return render_template("insights.html")
 
 
 @app.route("/motivation")
 def motivation():
     return render_template("motivation.html")
 
-
+# in the future I want to add a Deep Learning route/page to discuss research fidnings
 
