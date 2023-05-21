@@ -407,7 +407,7 @@ nav .navbar-brand span:nth-child(9)
 
 .borderinsights
 {
- border: 3px solid white; 
+ border: 1px solid #64dfdf; 
 }
 
 
@@ -422,4 +422,24 @@ nav .navbar-brand span:nth-child(9)
 {
     width: 100%;
     height: auto;
+}
+
+
+#more
+{
+  display: none;
+}
+
+
+#more2
+{
+  display: none;
+}
+
+
+.buttoninsights
+{
+  float:right;
+  background-color: #64dfdf;
+  filter: brightness(90%);
 }
