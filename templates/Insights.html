@@ -5,4 +5,63 @@
 {% endblock %}
 
 {% block main %}
+    <br><br><br>
+    <div class="container-fluid">
+        <h1 class="aboutme centertext1motivationnewest teal">Insights</h1>
+        <br>
+        <h2 class="aboutme2 centertext2">Welcome to my insights page! Here I will share with you some of my thoughts and guides to educational content I have learnt. <span class="gold">I hope you find something within this page that is insightful for you!</span></h2>
+        <br><br>
+        <ul class="aboutme2 centertext2new">
+            <li class="teal"><h2>Havard's CS50 Course</h2></li>
+            <div class="borderinsights"></div>
+            <br>
+            <div>If you have minimal experience in computer science and coding I highly reccomend starting with Harvard's CS50: Introduction to Computer Science. In fact this very website that your on was made for Harvard's CS50 Final Project. After just 10 weeks of content you too could be achieving this level proficiency or even more! </div>
+            <br>
+            <!-- description taken from  https://pll.harvard.edu/course/cs50-introduction-computer-science?delta=0-->
+            <div> It is an entry-level course taught by David J. Malan, it teaches students how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web development. Languages include C, Python, SQL, and JavaScript plus CSS and HTML. Problem sets inspired by real-world domains of biology, cryptography, finance, forensics, and gaming. You can sign up for the course for free and complete in at your own pace here is a link to sign up! <a class="gold" href="https://pll.harvard.edu/course/cs50-introduction-computer-science?delta=0">Harvard CS50 sign up</a> </div>
+            <br>
+            <div>I will admit that the course was daunting at first as the jump from the lecture content to the problem set is fairly huge, but you will soon realise google and stackoverflow are your best friends to work through any bugs you face! Dont give up and I guarantee by week 5 of the course you will like programming and coding comes natural to you!</div>
+            <br><br>
+            <li class="teal"><h2>CS50 Final Project: Local Development, Git & Github</h2></li>
+            <div class="borderinsights"></div>
+            <br>
+            <div>Throughout the course of CS50, students code in a virtual workplace called codespaces. This is essentialy accessing a virtual machine where all the local environments and packages has been set up for you by the CS50 team. This is great for new programmers as they do not have to deal with the hassle of setting up a workspace. However I highly encourage you to attempt to develop your final project locally on your own local copy of vscode as its offers a truly rich learning experience. Feel free to refer to my github repository where I show how to develop the week 9 problem set, Finance stock tracker, where I remove all CS50 training wheels and develop it locally: <a class="gold" href="https://github.com/Wnayar/finance_local_development">Finance Local Development</a> </div>
+            <br>
+            <div>I also firmly belive it is very important to learn about Git and Github and understand how to use it. In short it essentially tracks your changes locally (GIT) and allows you to post your changes to an online tracker (GITHUB) which u can then pull back into your local device. Please refer to my github repository where I discuss in detail further how to develop locally and use Git and Github. Some key topics included are: installing Windows Subsytem for Linux (WSL), install ubuntu to host WSL, learning about apt-get and pip3 packet managers, installing extensions, and all the resources and links needed to create a Github repository and how to utilise it with Git on your machine: <a class="gold" href="https://github.com/Wnayar/git_github_cs50_guide">Git & Github-More Local Developement</a></div>
+            <br>
+            <div>I personally spent a lot of time learning how to develop locally and  how to use Git & Github, I hope this guide flattens the learnign curve for these topics which can be daunting for a new programmer, but dont worry its really not as complicated as it appears to be!</div>
+            <br><br>
+        </ul>
+    </div>
+    <div class="container-fluid">
+        <div class="gyroscope">
+            <div class="centergyro">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+    <div class="container-fluid">
+        <div><br><br></div>
+        <h1 class="centertextsimple aboutme">Insights: <span id="words" class="teal"></span></h1>
+    </div>
+    <script>
+        var typed = new Typed ('#words', {
+        strings: ["seek knowledge", "be comfortable being uncomfortable"],
+        typeSpeed: 100,
+        backSpeed: 100,
+        loop: true
+        });
+    </script>
+    <br>
+    <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
 {% endblock %}

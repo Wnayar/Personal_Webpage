@@ -362,9 +362,14 @@ nav .navbar-brand span:nth-child(9)
     padding-right: 54%; 
   }
 
+
+  .centertext1motivationnewest
+  {
+    text-align: center;
+    padding-right: 63%; 
+  }
+
   
-
-
   .centertextsimple
   {
     text-align: center;
@@ -400,9 +405,9 @@ nav .navbar-brand span:nth-child(9)
 }
 
 
-.bordertest
+.borderinsights
 {
- border: 3px solid red; 
+ border: 3px solid white; 
 }
 
 
