@@ -5,62 +5,63 @@
 {% endblock %}
 
 {% block main %}
-    <br><br><br>
-    <div class="container-fluid">
-        <h1 class="aboutme centertext1motivation teal">Motivation</h1>
-        <br>
-        <h2 class="aboutme2 centertext2">Welcome to my motivational page! Get ready to embark on a transformative journey as I share with you the motivational videos, I find myself going back too constantly for a boost of inspiration, and one of my key approaches to life which I live by every day. <span class="gold">I hope you find something within this page which inspires you to achieve all the great things you are supposed to achieve in your life!</span></h2>
-        <br><br>
-        <ul class="aboutme2 centertext2new">
-            <li class="teal">Kaizen Life Philosophy</li>
+    <div class="opacity">
+        <br><br><br>
+        <div class="container-fluid">
+            <h1 class="aboutme centertext1motivation teal">Motivation</h1>
             <br>
-            <div>The philosophy of constant improvement. Every day is an opportunity to improve, even if it's only by 1%. It's not about being invincible, it's about being unstoppable.</div>
+            <h2 class="aboutme2 centertext2">Welcome to my motivational page! Get ready to embark on a transformative journey as I share with you the motivational videos, I find myself going back to constantly for a boost of inspiration, and one of my key approaches to life which I live by every day. <span class="gold">I hope you find something within this page which inspires you to achieve all the great things you are supposed to achieve in your life!</span></h2>
             <br><br>
-            <li class="teal">Gym Motivational Video</li>
-            <!--Credits to: MAKAVELI*MOTIVATION channel on youtube https://www.youtube.com/@MAKAVELIMOTIVATION-->
-            <br>
-            <video class="motivationvideos" autoplay muted playsinline controls>
-                <source src="/static/gym_motivation.mp4" type="video/mp4">
-            </video>
-            <br><br>
-            <li class="teal">Life Motivational Video</li>
-            <!--Credits to: Goalcast channel on youtube https://www.youtube.com/@goalcast-->
-            <br>
-            <video class="motivationvideos" autoplay muted playsinline controls>
-                <source src="/static/life_motivation.mp4" type="video/mp4">
-            </video>
-        </ul>
-    </div>
-    <div class="container-fluid">
-        <div class="gyroscope">
-            <div class="centergyro">
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
+            <ul class="aboutme2 centertext2new">
+                <li class="teal">Kaizen Life Philosophy</li>
+                <br>
+                <div>The philosophy of constant improvement. Every day is an opportunity to improve, even if it's only by 1%. It's not about being invincible, it's about being unstoppable.</div>
+                <br><br>
+                <li class="teal">Gym Motivational Video</li>
+                <!--Credits to: MAKAVELI*MOTIVATION channel on youtube https://www.youtube.com/@MAKAVELIMOTIVATION-->
+                <br>
+                <video class="motivationvideos" autoplay muted playsinline controls>
+                    <source src="/static/gym_motivation.mp4" type="video/mp4">
+                </video>
+                <br><br>
+                <li class="teal">Life Motivational Video</li>
+                <!--Credits to: Goalcast channel on youtube https://www.youtube.com/@goalcast-->
+                <br>
+                <video class="motivationvideos" autoplay muted playsinline controls>
+                    <source src="/static/life_motivation.mp4" type="video/mp4">
+                </video>
+            </ul>
+        </div>
+        <div class="container-fluid">
+            <div class="gyroscope">
+                <div class="centergyro">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
             </div>
         </div>
+        <br><br><br><br>
+        <div class="container-fluid">
+            <div><br><br></div>
+            <h1 class="centertextsimple aboutme">Kaizen: <span id="words" class="teal"></span></h1>
+        </div>
+        <script>
+            var typed = new Typed ('#words', {
+            strings: ["1% improvement every day", "become unstoppable"],
+            typeSpeed: 100,
+            backSpeed: 100,
+            loop: true
+            });
+        </script>
+        <br>
+        <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
     </div>
-    <br><br><br><br>
-    <div class="container-fluid">
-        <div><br><br></div>
-        <h1 class="centertextsimple aboutme">Kaizen: <span id="words" class="teal"></span></h1>
-    </div>
-    <script>
-        var typed = new Typed ('#words', {
-        strings: ["1% improvement every day", "become unstoppable"],
-        typeSpeed: 100,
-        backSpeed: 100,
-        loop: true
-        });
-    </script>
-    <br>
-    <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
-
 {% endblock %}

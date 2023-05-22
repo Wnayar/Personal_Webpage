@@ -57,7 +57,13 @@ nav .navbar-brand span:nth-child(9)
 .layoutbody
 {
   background-color: black;  
-  color:white
+  color:white;
+}
+
+
+.opacity
+{
+  opacity: 87%;
 }
 
 

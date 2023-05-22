@@ -4,78 +4,80 @@
 {% endblock %}
 
 {% block main %}
-    <br>
-    <div class="container-fluid standard interests2 centergyro">
-        Make goals so great
-    </div>
-    <div class="container-fluid standard centergyro">
-        That you must achieve them.
-    </div>
-    <br>
-    <div class="container-fluid">
-        <div class="gyroscope">
-            <div class="centergyro">
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
-                <div class="circle"></div>
+    <div class="opacity">
+        <br>
+        <div class="container-fluid standard interests2 centergyro">
+            Make goals so great
+        </div>
+        <div class="container-fluid standard centergyro">
+            That you must achieve them.
+        </div>
+        <br>
+        <div class="container-fluid">
+            <div class="gyroscope">
+                <div class="centergyro">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <br><br><br><br><br><br>
-    <div class="namecard">
-        <img id="profile" src="/static/profile_picture_black.png" alt="Profile Picture">
-        <div class="interestsmain teal">
-            <h2>William Nayar</h2>
+        <br><br><br><br><br><br>
+        <div class="namecard">
+            <img id="profile" src="/static/profile_picture_black.png" alt="Profile Picture">
+            <div class="interestsmain teal">
+                <h2>William Nayar</h2>
+            </div>
+            <p class="interestssub">
+                I love solving hard problems
+            </p>
+            <div class="links">
+            <a href="https://sg.linkedin.com/in/william-nayar" target="_blank">
+                <img src="/static/linkedin.png" alt="LinkedIn">
+            </a>
+            <a href="https://github.com/Wnayar" target="_blank">
+                <img src="/static/github.png" alt="GitHub">
+            </a>
+            <a href="https://www.facebook.com/william.nayar.5" target="_blank">
+                <img src="/static/facebook.png" alt="Facebook">
+            </a>
+            </div>
         </div>
-        <p class="interestssub">
-            I love solving hard problems
-        </p>
-        <div class="links">
-        <a href="https://sg.linkedin.com/in/william-nayar" target="_blank">
-            <img src="/static/linkedin.png" alt="LinkedIn">
-        </a>
-        <a href="https://github.com/Wnayar" target="_blank">
-            <img src="/static/github.png" alt="GitHub">
-        </a>
-        <a href="https://www.facebook.com/william.nayar.5" target="_blank">
-            <img src="/static/facebook.png" alt="Facebook">
-        </a>
+        <div class="container-fluid">
+            <h1 class="aboutme centertext1 teal">About me</h1>
+            <h2 class="aboutme2 centertext2"> I have a strong passion for merging both finance and computer science to develop <span class="gold">automated arbitrage algorithms</span>. By merging my expertise in <span class="gold">computer science</span> with my understanding of <span class="gold">finance</span>, I bring a unique perspective to algorithmic trading. My goal after university is to pursue a career as a <span class="gold"> quantitative trader</span> in high performing firms and to eventually become the best quantitative trader.</h2>
+            <br>
+            <h3 class="aboutme centertext1new teal">Areas of interest</h3>
+            <ul class="aboutme2 centertext2new">
+                <li>Automated Algorithm Development</li>
+                <li>Computer Science</li>
+                <li>Finance</li>
+                <li>Financial Arbitrage Strategies</li>
+                <li>Full Stack Development</li>
+                <li>Machine Learning</li>
+                <li>Software Development</li>
+            </ul>
         </div>
-    </div>
-    <div class="container-fluid">
-        <h1 class="aboutme centertext1 teal">About me</h1>
-        <h2 class="aboutme2 centertext2"> I have a strong passion for merging both finance and computer science to develop <span class="gold">automated arbitrage algorithms</span>. By merging my expertise in <span class="gold">computer science</span> with my understanding of <span class="gold">finance</span>, I bring a unique perspective to algorithmic trading. My goal after university is to pursue a career as a <span class="gold"> quantitative trader</span> in high performing firms and to eventually become the best quantitative trader.</h2>
+        <div class="container-fluid">
+            <div><br><br></div>
+            <h1 class="centertextsimple aboutme">Be willing to: <span id="words" class="teal"></span></h1>
+        </div>
+        <script>
+            var typed = new Typed ('#words', {
+            strings: ["take calculated risks", "follow your dreams"],
+            typeSpeed: 100,
+            backSpeed: 100,
+            loop: true
+            });
+        </script>
         <br>
-        <h3 class="aboutme centertext1new teal">Areas of interest</h3>
-        <ul class="aboutme2 centertext2new">
-            <li>Automated Algorithm Development</li>
-            <li>Computer Science</li>
-            <li>Finance</li>
-            <li>Financial Arbitrage Strategies</li>
-            <li>Full Stack Development</li>
-            <li>Machine Learning</li>
-            <li>Software Development</li>
-        </ul>
+        <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
     </div>
-    <div class="container-fluid">
-        <div><br><br></div>
-        <h1 class="centertextsimple aboutme">Be willing to: <span id="words" class="teal"></span></h1>
-    </div>
-    <script>
-        var typed = new Typed ('#words', {
-        strings: ["take calculated risks", "follow your dreams"],
-        typeSpeed: 100,
-        backSpeed: 100,
-        loop: true
-        });
-    </script>
-    <br>
-    <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
-{% endblock %}
+  {% endblock %}
