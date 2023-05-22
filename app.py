@@ -24,5 +24,5 @@ def deeplearning():
 def motivation():
     return render_template("motivation.html")
 
-# in the future I want to add a Deep Learning route/page to discuss research fidnings
+# in the future I want to add a Deep Learning route/page to discuss research findings
 
