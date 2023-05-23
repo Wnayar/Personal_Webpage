@@ -61,6 +61,12 @@ nav .navbar-brand span:nth-child(9)
 }
 
 
+.divborder
+{
+  border:1px solid #111111;
+}
+
+
 .opacity
 {
   opacity: 87%;
