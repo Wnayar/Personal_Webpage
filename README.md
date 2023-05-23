@@ -1,2 +1,7 @@
-# Personal_Webpage
-CS50 Final Project: A full stack application for a personal webpage utilizing Flask framework.
+# William_Nayar_Personal_Webpage
+### Video Demo: <URL HERE>
+### Description: 
+This project is Personal Webpage containing an introduction on who William Nayar is as a person and what his goals are, his insights and a motivational page to inspire all users. The website is hosted on Pythonanywhere and is public you can view the website follow this link: http://williamnayar.pythonanywhere.com/
+  
+It is a full stack apllication utilising a Flask Framework from python. Langauges used for the front-end application was HTML, CSS and JavaScript, with elements of jinja from Flask to streamline the development process and reduce errors associated with copy and pastign elements that appear on all pages. The back-end was developed using the Flask Framework, certain modifications have been made to ensure the website runs on a hosting website called Pythonanywhere based on the documentation. Pythonanywhere was chosen as the hosting website service as it offered a free lifetime service and integration was fairly seamless. I chose to develop this website on a local instance on VScode, setting up a local environment outside of CS50 codespaces, and I utilised Git and Github to manage my progress and streamline the development process while dynamically creating backups. The github repository for my personal webpage can be found in the following link: https://github.com/Wnayar/Personal_Webpage . I chose to pursue the local development route as I believed it offered a lot of learnign opportunties and growth as a new web developer. 
+
