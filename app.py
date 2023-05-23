@@ -26,3 +26,7 @@ def motivation():
 
 # in the future I want to add a Deep Learning route/page to discuss research findings
 
+
+# the following below is to configure to host on pythonanywhere
+if __name__ == "__main__":
+    app.run(debug=True)
