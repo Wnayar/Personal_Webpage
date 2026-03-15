@@ -1,37 +1,77 @@
 {% extends "layout.html" %}
 
 {% block title %}
-: Motivation
+: Philosophy
 {% endblock %}
 
 {% block main %}
     <div class="opacity">
         <br><br><br>
         <div class="container-fluid">
-            <h1 class="aboutme centertext1motivation teal">Motivation</h1>
+            <h1 class="aboutme centertext1motivation teal">Philosophy</h1>
             <br>
-            <h2 class="aboutme2 centertext2">Welcome to my motivational page! Get ready to embark on a transformative journey as I share with you the motivational videos, I find myself going back to constantly for a boost of inspiration, and one of my key approaches to life which I live by every day. <span class="gold">I hope you find something within this page which inspires you to achieve all the great things you are supposed to achieve in your life!</span></h2>
+            <h2 class="aboutme2 centertext2">How I approach learning, building, and growing as a software engineer.</h2>
             <br><br>
-            <ul class="aboutme2 centertext2new">
-                <li class="teal">Kaizen Life Philosophy</li>
+            <div class="aboutme2 centertext2 fade-in">
+                <h3 class="teal">Kaizen: Continuous Improvement</h3>
                 <br>
-                <div>The philosophy of constant improvement. Every day is an opportunity to improve, even if it's only by 1%. It's not about being invincible, it's about being unstoppable.</div>
-                <br><br>
-                <li class="teal">Gym Motivational Video</li>
-                <!--Credits to: MAKAVELI*MOTIVATION channel on youtube https://www.youtube.com/@MAKAVELIMOTIVATION-->
+                <p><span class="gold">Kaizen</span> is a Japanese philosophy meaning "change for better" or continuous improvement. It's the idea that small, incremental changes compound into remarkable results over time. I don't aim to be perfect. I aim to be 1% better than yesterday.</p>
                 <br>
-                <video class="motivationvideos" autoplay muted playsinline controls>
-                    <source src="/static/gym_motivation.mp4" type="video/mp4">
-                </video>
-                <br><br>
-                <li class="teal">Life Motivational Video</li>
-                <!--Credits to: Goalcast channel on youtube https://www.youtube.com/@goalcast-->
+                <p>This philosophy has shaped my journey as a developer. When I started learning to code in 2023, I could barely write a for loop. But I showed up every day, debugged every error, and pushed through every challenge. That consistency took me from beginner to <span class="gold">founding and developing Aqua Vitae</span> and building production applications.</p>
                 <br>
-                <video class="motivationvideos" autoplay muted playsinline controls>
-                    <source src="/static/life_motivation.mp4" type="video/mp4">
-                </video>
-            </ul>
+                <p>What drives me is simple: <span class="gold">I love learning and building</span>. Every problem I solve, every project I ship teaches me something valuable. Continuous learning isn't just a buzzword for me. It's how I operate.</p>
+                <br>
+                <p>What Kaizen means to me:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Always learning, always growing</li>
+                    <li>Embracing challenges without fear</li>
+                    <li>Progress over perfection</li>
+                    <li>Small steps, big results</li>
+                </ul>
+            </div>
+            <br><br>
+            <div class="aboutme2 centertext2 fade-in">
+                <h3 class="teal">Beyond Code</h3>
+                <br>
+                <p>I apply this same mindset to everything I do. Whether it's rock climbing, strength training, or entrepreneurship, progress comes from showing up consistently and focusing on incremental growth. <span class="gold">It's not about being invincible. It's about being unstoppable.</span></p>
+                <br>
+                <p>Every project I build, every bug I fix, every line of code I write is part of a larger journey. <span class="gold">The goal isn't perfection. The goal is progress.</span></p>
+            </div>
         </div>
+        <div class="divborder"></div>
+        <br>
+        <style>
+            .explore-button {
+                background-color: #64dfdf;
+                border: 2px solid #64dfdf;
+                color: #1a1a1a;
+                padding: 15px 45px;
+                font-size: 18px;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+                box-shadow: 0 2px 8px rgba(100, 223, 223, 0.3);
+            }
+            .explore-button:hover {
+                background-color: #4fc9c9;
+                border-color: #4fc9c9;
+                color: #000000;
+                transform: translateY(-3px);
+                box-shadow: 0 6px 16px rgba(100, 223, 223, 0.5);
+            }
+        </style>
+        <div class="container-fluid" style="text-align: center;">
+            <h2 class="aboutme2" style="margin-bottom: 20px;">See what I've built</h2>
+            <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 0 auto;">
+                <a href="/" class="explore-button">Home →</a>
+                <a href="/projects" class="explore-button">Projects →</a>
+                <a href="/blogs" class="explore-button">Blog →</a>
+            </div>
+        </div>
+        <br><br><br>
         <div class="container-fluid">
             <div class="gyroscope">
                 <div class="centergyro">

@@ -35,3 +35,19 @@ function readMore2(){
 
     }
 }
+
+// Make dots clickable
+document.addEventListener('DOMContentLoaded', function() {
+    const dots = document.querySelector("#dots");
+    const dots2 = document.querySelector("#dots2");
+    
+    if (dots) {
+        dots.style.cursor = "pointer";
+        dots.addEventListener('click', readMore);
+    }
+    
+    if (dots2) {
+        dots2.style.cursor = "pointer";
+        dots2.addEventListener('click', readMore2);
+    }
+});

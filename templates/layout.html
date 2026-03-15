@@ -19,6 +19,33 @@
         <!-- https://github.com/mattboldt/typed.js/ -->
         <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 
+        <style>
+            .nav-link {
+                transition: color 0.3s ease;
+            }
+            .nav-link:hover {
+                color: #D4AF37 !important;
+            }
+            .navbar-brand span {
+                transition: color 0.3s ease;
+            }
+            .navbar-brand:hover span {
+                color: #D4AF37 !important;
+            }
+            /* Global link hover effects */
+            a {
+                transition: all 0.3s ease;
+            }
+            a.gold:hover {
+                color: #FFD700 !important;
+                text-decoration: underline;
+            }
+            a:not(.gold):not(.nav-link):not(.navbar-brand):not(.explore-button):hover {
+                opacity: 0.8;
+                transform: translateY(-1px);
+            }
+        </style>
+
         <title>William Nayar {% block title %}{% endblock %} </title>
     </head>
     <body class="layoutbody">
@@ -30,9 +57,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/insights">Insights</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/motivation">Motivation</a></li>
-                        <!-- in the future I want to add a Deep Learning page to discuss research fidnings -->
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/blogs">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/motivation">Philosophy</a></li>
                     </ul>
                 </div>
             </div>

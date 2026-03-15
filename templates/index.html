@@ -5,6 +5,24 @@
 
 {% block main %}
     <script src="/static/index.js"></script>
+    <style>
+        .links a img {
+            transition: all 0.3s ease;
+            filter: grayscale(0%);
+        }
+        .links a:hover img {
+            transform: translateY(-5px) scale(1.1);
+            filter: brightness(1.2);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+        }
+        #profile {
+            transition: all 0.4s ease;
+        }
+        #profile:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(100, 223, 223, 0.6);
+        }
+    </style>
     <div class="opacity">
         <br>
         <div class="container-fluid standard interests2 centergyro">
@@ -36,50 +54,64 @@
         </div>
         <div class="container-fluid">
             <h1 class="aboutme centertext1 teal">About me</h1>
-            <h2 class="aboutme2 centertext2"> I have a strong passion for merging both finance and computer science to develop <span class="gold">automated arbitrage algorithms</span>. By merging my expertise in <span class="gold">computer science</span> with my understanding of <span class="gold">finance</span>, I bring a unique perspective to algorithmic trading. My goal after university is to pursue a career as a <span class="gold"> quantitative trader</span> in high performing firms and to eventually become the best quantitative trader.</h2>
+            <h2 class="aboutme2 centertext2">I am a <span class="gold">Computer Science student</span> at the <span class="gold">National University of Singapore</span> with a strong interest in building software and turning ideas into real products.</h2>
+            <br>
+            <h2 class="aboutme2 centertext2">Alongside my studies, I <span class="gold">founded Aqua Vitae</span>, a <span class="gold">niche perfume house</span> created to explore craftsmanship, storytelling, and creativity through fragrance. The project reflects my interest in building things from the ground up and combining technical problem solving with design and entrepreneurship.</h2>
+            <br>
+            <h2 class="aboutme2 centertext2">Outside of software and entrepreneurship, I enjoy playing guitar, rock climbing, and strength training.</h2>
             <br>
             <h3 class="aboutme centertext1new teal">Areas of interest</h3>
             <ul class="aboutme2 centertext2new">
-                <li>Automated Algorithm Development</li>
-                <li>Computer Science</li>
-                <li>Finance</li>
-                <li>Financial Arbitrage Strategies</li>
+                <li>Software Engineering</li>
                 <li>Full Stack Development</li>
-                <li>Machine Learning</li>
-                <li>Software Development</li>
+                <li>Product Development</li>
+                <li>Entrepreneurship</li>
+                <li>Creative Projects</li>
+                <li>Rock Climbing</li>
+                <li>Guitar</li>
             </ul>
         </div>
         <br><br>
         <div class="divborder"></div>
         <div class="container-fluid">
-            <ul class="aboutme2 centertext2new">
-                <br>
-                <li class="teal"><h2>Insights</h2></li>
-                <br>
-                <div>If you have minimal experience in computer science and coding, I highly recommend starting with Harvard's CS50: Introduction to Computer Science. In fact, this very website that you're on was made for Harvard's CS50 Final Project. After just 10 weeks of content, you too could be achieving this level proficiency or even more! <span id="dots">...</span></div>
-                <br>
-                <span id="more">
-                <!-- description taken from  https://pll.harvard.edu/course/cs50-introduction-computer-science?delta=0-->
-                <div> It is an entry-level course taught by David J. Malan, it teaches students how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web development. Languages include C, Python, SQL, and JavaScript plus CSS and HTML. Problem sets inspired by real-world domains of biology, cryptography, finance, forensics, and gaming. You can sign up for the course for free and complete in at your own pace here is a link to sign up! <a class="gold" href="https://pll.harvard.edu/course/cs50-introduction-computer-science?delta=0">Harvard CS50 sign up</a> </div>
-                <br>
-                <div>I will admit that the course was daunting at first as the jump from the lecture content to the problem set is fairly huge, but you will soon realise Google and Stackoverflow are your best friends to work through any bugs you face! Don't give up and I guarantee by week 5 of the course you will like programming and coding comes natural to you!</div>
-                </span>
-                <button class="buttoninsights" id="button1home" onclick="redirectinsight()">Read more >></button>
-                <br><br>
-            </ul>
-            <div class="divborder"></div>
+            <h1 class="aboutme centertext1 teal" style="padding-left: 2%;">Get in Touch</h1>
+            <h2 class="aboutme2 centertext2">I enjoy building systems, experimenting with ideas, and solving interesting problems. If you would like to connect or discuss opportunities, feel free to reach out.</h2>
+            <br>
+            <h2 class="aboutme2 centertext2"><a href="mailto:wnayar98@gmail.com" class="gold">wnayar98@gmail.com</a></h2>
         </div>
-        <br><br><br>
-        <div class="container-fluid">
-            <ul class="aboutme2 centertext2new">
-                <li class="teal"><h2>Motivation</h2></li>
-                <br>
-                <div>Kaizen Life Philosophy: The philosophy of constant improvement. Every day is an opportunity to improve, even if it's only by 1%. It's not about being invincible, it's about being unstoppable...</div>
-                <br>
-                <button class="buttoninsights" id="button2home" onclick="redirectmotivation()">Read more >></button>
-                <br><br><br>
-            </ul>
-            <div class="divborder"></div>
+        <br><br>
+        <div class="divborder"></div>
+        <br>
+        <style>
+            .explore-button {
+                background-color: #64dfdf;
+                border: 2px solid #64dfdf;
+                color: #1a1a1a;
+                padding: 15px 45px;
+                font-size: 18px;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+                box-shadow: 0 2px 8px rgba(100, 223, 223, 0.3);
+            }
+            .explore-button:hover {
+                background-color: #4fc9c9;
+                border-color: #4fc9c9;
+                color: #000000;
+                transform: translateY(-3px);
+                box-shadow: 0 6px 16px rgba(100, 223, 223, 0.5);
+            }
+        </style>
+        <div class="container-fluid" style="text-align: center;">
+            <h2 class="aboutme2" style="margin-bottom: 20px;">Want to see more?</h2>
+            <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 0 auto;">
+                <a href="/projects" class="explore-button">Projects →</a>
+                <a href="/blogs" class="explore-button">Blog →</a>
+                <a href="/motivation" class="explore-button">Philosophy →</a>
+            </div>
         </div>
         <br><br><br>
         <div class="container-fluid">

@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+
+{% block title %}
+: Projects
+{% endblock %}
+
+{% block main %}
+    <style>
+        .project-button {
+            background-color: transparent;
+            border: 2px solid #64dfdf;
+            color: #64dfdf;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 15px;
+        }
+        .project-button:hover {
+            background-color: #64dfdf;
+            color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(100, 223, 223, 0.4);
+        }
+    </style>
+    <div class="opacity">
+        <br><br><br>
+        <div class="container-fluid">
+            <h1 class="aboutme centertext1 teal">Projects</h1>
+            <br>
+            <ul class="aboutme2 centertext2new">
+                <li class="teal"><h3>Aqua Vitae</h3></li>
+                <div><span class="gold">Jan 2026 - Present</span> | React, TypeScript, Tailwind CSS, Vite, React Router, Vercel, Figma</div>
+                <br>
+                <div>
+                    <a class="project-button" href="https://www.aquavitaeparfums.com/" target="_blank">Live Site</a>
+                    <a class="project-button" href="https://github.com/Wnayar/aqua-vitae" target="_blank">GitHub</a>
+                </div>
+                <br>
+                <ul>
+                    <li>Developed single-page application using React, TypeScript, and Tailwind CSS with modular architecture</li>
+                    <li>Designed and implemented 14 reusable React components improving scalability, maintainability, and efficiency</li>
+                    <li>Implemented client-side routing using React Router enabling fast navigation without full page reloads</li>
+                    <li>Built centralized state management using React Context API with persistent localStorage synchronization</li>
+                    <li>Integrated secure checkout flow with external Shopify backend enabling reliable real-world transaction processing</li>
+                    <li>Tested frontend functionality, routing behavior, and component state using Chrome DevTools and debugging tools</li>
+                    <li>Deployed production frontend using Vercel with automated CI/CD pipeline</li>
+                </ul>
+                <br><br>
+                
+                <li class="teal"><h3>PeerPrep</h3></li>
+                <div><span class="gold">Aug 2025 - Nov 2025</span> | MongoDB Atlas, Express.js, Node.js, TypeScript, Mongoose</div>
+                <br>
+                <div>
+                    <a class="project-button" href="https://github.com/Wnayar/PeerPrep" target="_blank">GitHub</a>
+                </div>
+                <br>
+                <ul>
+                    <li>Developed Question Service microservice exposing 15 REST API endpoints using Express.js and TypeScript</li>
+                    <li>Designed MongoDB schemas and populated database with 300+ interview questions supporting efficient retrieval</li>
+                    <li>Implemented filtering, querying, and aggregation pipelines improving query performance and scalability</li>
+                    <li>Tested REST API endpoints using Postman validating request handling, response correctness, and error handling</li>
+                    <li>Integrated service into distributed microservices architecture supporting independent deployment and scaling</li>
+                    <li>Collaborated using Git branching workflow, pull requests, and Jira-based Agile development practices</li>
+                </ul>
+                <br><br>
+                
+                <li class="teal"><h3>NUS-GroupMatch</h3></li>
+                <div><span class="gold">May 2024 - Jul 2024</span> | MongoDB, Express.js, React, Node.js, Mongoose, Bootstrap</div>
+                <br>
+                <div>
+                    <a class="project-button" href="https://github.com/Wnayar/NUS-GroupMatch" target="_blank">GitHub</a>
+                </div>
+                <br>
+                <ul>
+                    <li>Developed full-stack MERN application using modular architecture separating frontend, backend, and data layers</li>
+                    <li>Implemented backend REST API using Express.js with structured routing, middleware, and controller logic</li>
+                    <li>Designed MongoDB schemas supporting persistent storage and efficient retrieval of user and group data</li>
+                    <li>Built responsive frontend using React enabling dynamic UI rendering and improved usability</li>
+                </ul>
+                <br><br>
+                
+                <li class="teal"><h3>Personal Portfolio</h3></li>
+                <div><span class="gold">Mar 2023 - May 2023</span> | Python, Flask, Jinja2, HTML, CSS, JavaScript</div>
+                <br>
+                <div>
+                    <a class="project-button" href="https://williamnayar.pythonanywhere.com/" target="_blank">Live Site</a>
+                    <a class="project-button" href="https://github.com/Wnayar/Personal_Webpage" target="_blank">GitHub</a>
+                </div>
+                <br>
+                <ul>
+                    <li>Developed full-stack web application using Flask with server-side routing and template rendering</li>
+                    <li>Implemented backend request handling, session management, and dynamic content delivery</li>
+                    <li>Structured application using clear separation between routing, backend logic, and frontend templates</li>
+                    <li>Built responsive frontend using HTML, CSS, JavaScript, and Jinja2 templating engine</li>
+                </ul>
+            </ul>
+        </div>
+        <br><br>
+        <div class="divborder"></div>
+        <br>
+        <style>
+            .explore-button {
+                background-color: #64dfdf;
+                border: 2px solid #64dfdf;
+                color: #1a1a1a;
+                padding: 15px 45px;
+                font-size: 18px;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+                box-shadow: 0 2px 8px rgba(100, 223, 223, 0.3);
+            }
+            .explore-button:hover {
+                background-color: #4fc9c9;
+                border-color: #4fc9c9;
+                color: #000000;
+                transform: translateY(-3px);
+                box-shadow: 0 6px 16px rgba(100, 223, 223, 0.5);
+            }
+        </style>
+        <div class="container-fluid" style="text-align: center;">
+            <h2 class="aboutme2" style="margin-bottom: 20px;">Learn more about me</h2>
+            <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 0 auto;">
+                <a href="/" class="explore-button">Home →</a>
+                <a href="/blogs" class="explore-button">Blog →</a>
+                <a href="/motivation" class="explore-button">Philosophy →</a>
+            </div>
+        </div>
+        <br><br><br>
+        <div class="container-fluid">
+            <div class="gyroscope">
+                <div class="centergyro">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br><br><br>
+        <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
+    </div>
+{% endblock %}

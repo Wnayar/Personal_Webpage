@@ -1,24 +1,127 @@
-# William_Nayar_Personal_Webpage
-### Video Demo: https://youtu.be/jv52GUs3MuA
-### Description: 
-This project is a personal webpage that contains an introduction to who William Nayar is as a person, his goals, insights, and a motivational page to inspire all users. The website is hosted on PythonAnywhere and can be viewed at the following link: http://williamnayar.pythonanywhere.com/.
+# Personal Portfolio Website
 
-It is a **full-stack application** that utilizes the **Flask framework** from **Python**. The front-end application uses **HTML, CSS,** and **JavaScript**, with elements of **Jinja** from Flask to streamline the development process and reduce errors associated with copying and pasting elements that appear on all pages. The back-end was developed using the Flask framework, with certain modifications made to ensure the website runs on PythonAnywhere based on the documentation. **PythonAnywhere** was chosen as the **hosting service** because it offers a free lifetime service and integration was fairly seamless. **I chose to develop this website locally using VS Code**, setting up a local environment outside of CS50 Codespaces. I utilized **Git and GitHub** to manage my progress and streamline the development process while dynamically creating backups. The GitHub repository for my personal webpage can be found at the following link: https://github.com/Wnayar/Personal_Webpage. I chose to pursue the local development route as I believed it offered a lot of learning opportunities and growth as a new web developer.
+A full-stack personal portfolio website built with Flask, showcasing my projects, technical skills, and professional journey.
 
-Now, let's discuss the framework of the application and what each file contains. The **"Personal_Webpage" directory** contains all the relevant files for the application. Inside the "Personal_Webpage" directory, you will find the following relevant files: **"app.py", "README.md",** and the following relevant directories: **"static"** and **"templates"**. I will now provide an in-depth description of what each file/directory does and contains.
+**Live Site:** https://williamnayar.pythonanywhere.com/
 
-**"app.py"**: This file contains the Flask framework, which specifies different routes to be taken and generates the relevant HTML templates based on user clicks. It essentially manages the flow of information and redirects the user appropriately.
+## Overview
 
-**"requirements.txt"**: This file specifies which pip modules are needed to run the Flask application.
+This is a responsive, modern personal portfolio website featuring:
+- Project showcase with detailed technical descriptions
+- Blog posts about my coding journey
+- Interactive UI elements and smooth animations
+- Mobile-responsive design
+- Clean, professional aesthetic
 
-Within the "templates" directory, you will find all the HTML pages, namely **"index.html", "insights.html", "layout.html",** and **"motivation.html"**. By utilizing the Flask framework, we are able to leverage an embedded functionality called Jinja, which is a shorthand way of regenerating HTML pages efficiently during the design process. This can be seen with the base layout.html being created and other HTML files utilizing Jinja syntax to replicate this layout page while adding their respective elements. This streamlines the design process and reduces errors in copy and pasting.
+## Tech Stack
 
-**"index.html"**: This is the homepage that introduces William Nayar and links several social platforms such as LinkedIn, GitHub, and Facebook. It then describes William and his areas of interest, with two subsections giving a snippet of what's contained within the website's other pages. At the bottom of the page, there is a visually appealing 3D-looking gyroscope rotating and some dynamically typed text. I added these elements to create a "wow" factor and make the page stand out.
+**Backend:**
+- Python
+- Flask (web framework)
+- Jinja2 (templating)
+- Flask-Session
 
-**"insights.html"**: This page is similar to a blog where I share my thoughts through short articles. Currently, there are two articles: "Harvard's CS50 Course" and "CS50 Final Project: Local Development, Git & GitHub." My goal here was to share my computer science journey, help others get started, and provide guidance on navigating the final project and using Git and GitHub. At the bottom of the page, the gyroscope and dynamically typed words are added to maintain a common theme throughout the website.
+**Frontend:**
+- HTML5
+- CSS3
+- JavaScript
+- Bootstrap 5
+- Typed.js (dynamic text animations)
 
-**"motivation.html"**: In this page, I shared my life philosophy and embedded two of my favorite videos: one is a gym motivational video, and the other is a life motivational video. At the bottom of the page, the gyroscope and dynamically typed words are included to retain the same theme.
+**Deployment:**
+- PythonAnywhere (hosting)
+- Git/GitHub (version control)
 
-The "static" directory contains all videos and images used throughout the website, several JavaScript files, namely "index.js" and "insights.js", and a "style.css" file. The **"index.js"** file ensures that if users press the "read more" button from the subsections, they are redirected to the correct page. The **"insights.js"** file ensures that when the "read more" button is pressed, the full article is shown, and when the "read less" button is pressed, the article is minimized back to its original size. The **"style.css"** file contains various elements, including the choice of a black background, teal or white fonts, and elements of gold throughout the page to create a visually appealing and cohesive look. Opacity adjustments were made to enhance readability. Some Bootstrap elements were incorporated to increase efficiency in designing the page, such as the "container-fluid" class, which adds padding to the sides of the elements. All elements were dynamically scaled using relative values and work as intended visually on all devices.
+## Key Features
 
-Overall, this project is a full-stack application that yields an interactive, well-designed, modern-looking, and dynamic webpage, which is a great design for a personal website to stand out while retaining professionalism. I intend to add more content to this personal webpage in the future as I have more topics to share.
+### Projects Page
+Detailed breakdown of my technical projects including:
+- Aqua Vitae (React/TypeScript e-commerce site)
+- PeerPrep (Node.js microservices backend)
+- NUS-GroupMatch (MERN stack application)
+
+### Blog Section
+Articles covering:
+- My journey starting with Harvard's CS50
+- Local development setup guides
+- Git and GitHub workflows
+
+### Interactive Elements
+- Animated 3D gyroscope
+- Dynamic typing effects
+- Smooth hover animations
+- Responsive navigation
+
+## Project Structure
+
+```
+Personal_Webpage/
+├── app.py                 # Flask application and routing
+├── requirements.txt       # Python dependencies
+├── static/
+│   ├── style.css         # Custom styling
+│   ├── index.js          # Homepage interactions
+│   ├── insights.js       # Blog post interactions
+│   └── [images/videos]   # Media assets
+└── templates/
+    ├── layout.html       # Base template
+    ├── index.html        # Homepage
+    ├── projects.html     # Projects showcase
+    ├── blogs.html        # Blog posts
+    └── motivation.html   # Motivational content
+```
+
+## Local Development
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Wnayar/Personal_Webpage.git
+cd Personal_Webpage
+```
+
+2. Create and activate virtual environment:
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+4. Run the application:
+```bash
+python app.py
+```
+
+5. Visit `http://127.0.0.1:5000` in your browser
+
+## Design Philosophy
+
+- **Simple and Clean:** Focus on content over flashy design
+- **Professional:** Suitable for recruiters and technical audiences
+- **Responsive:** Works seamlessly on desktop, tablet, and mobile
+- **Fast:** Minimal dependencies, quick load times
+- **Accessible:** Clear navigation and readable typography
+
+## Future Enhancements
+
+- Add more blog posts documenting technical learnings
+- Include project screenshots/demos
+- Add dark/light mode toggle
+- Implement contact form with backend integration
+
+## About This Project
+
+Originally created as my CS50 final project in 2023, this website has evolved into a professional portfolio showcasing my growth as a software engineer. The site demonstrates full-stack development skills, clean code practices, and attention to user experience.
+
+## Contact
+
+- **Email:** wnayar98@gmail.com
+- **LinkedIn:** [linkedin.com/in/william-nayar](https://sg.linkedin.com/in/william-nayar)
+- **GitHub:** [github.com/Wnayar](https://github.com/Wnayar)
+
+---
+
+Built with Flask and deployed on PythonAnywhere.

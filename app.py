@@ -15,16 +15,24 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/projects")
+def projects():
+    return render_template("projects.html")
+
+
+@app.route("/blogs")
+def blogs():
+    return render_template("blogs.html")
+
+
 @app.route("/insights")
-def deeplearning():
-    return render_template("insights.html")
+def insights_redirect():
+    return render_template("blogs.html")
 
 
 @app.route("/motivation")
 def motivation():
     return render_template("motivation.html")
-
-# in the future I want to add a Deep Learning route/page to discuss research findings
 
 
 # the following below is to configure to host on pythonanywhere

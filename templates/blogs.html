@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+
+{% block title %}
+: Blog
+{% endblock %}
+
+{% block main %}
+    <script src="/static/insights.js"></script>
+    <style>
+        .blog-content {
+            line-height: 160%;
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+        .clickable-dots {
+            color: #64dfdf;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .clickable-dots:hover {
+            color: #D4AF37;
+            transform: scale(1.2);
+            display: inline-block;
+        }
+        .buttoninsights {
+            background-color: #64dfdf;
+            border: 2px solid #64dfdf;
+            color: #1a1a1a;
+            padding: 10px 25px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            float: right;
+            box-shadow: 0 2px 6px rgba(100, 223, 223, 0.3);
+        }
+        .buttoninsights:hover {
+            background-color: #4fc9c9;
+            border-color: #4fc9c9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(100, 223, 223, 0.5);
+        }
+    </style>
+    <div class="opacity">
+        <br><br><br>
+        <div class="container-fluid">
+            <h1 class="aboutme centertext2 teal">Blog</h1>
+            <br>
+            <h2 class="aboutme2 centertext2">Welcome to my blog! Here I share thoughts, guides, and lessons learned from my coding journey. <span class="gold">I hope you find something useful!</span></h2>
+            <br><br>
+            <div class="aboutme2 blog-content fade-in">
+                <h2 class="teal">How I Started My Coding Journey</h2>
+                <div style="color: #64dfdf; font-size: 16px; margin-top: 5px; margin-bottom: 10px; font-weight: 500;">May 2023</div>
+                <div class="borderinsights"></div>
+                <br>
+                <div>My journey into computer science began with Harvard's CS50: Introduction to Computer Science in early 2023. In fact, this very website was built as my CS50 Final Project. That foundation launched me into building production applications like Aqua Vitae, working with microservices architectures in PeerPrep, and developing full-stack MERN applications. <span id="dots" class="clickable-dots">...</span></div>
+                <br>
+                <span id="more">
+                    <!-- description taken from  https://pll.harvard.edu/course/cs50-introduction-computer-science?delta=0-->
+                    <div>If you're starting your coding journey, I highly recommend CS50. It's an entry-level course taught by David J. Malan that teaches you how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web development. Languages include C, Python, SQL, and JavaScript plus CSS and HTML. You can sign up for the course for free and complete it at your own pace: <a class="gold" href="https://pll.harvard.edu/course/cs50-introduction-computer-science?delta=0">Harvard CS50 sign up</a></div>
+                    <br>
+                    <div>The course was challenging at first—the jump from lectures to problem sets is significant—but Google and Stack Overflow become your best friends. Don't give up! By week 5, programming will start to feel natural. From there, you can build real projects and continue growing your skills, just like I did.</div>
+                </span>
+                <button class="buttoninsights" id="button1" onclick="readMore()">Read more >></button>
+            </div>
+            <br><br><br><br>
+            <div class="aboutme2 blog-content">
+                <h2 class="teal">Local Development, Git & GitHub Guide</h2>
+                <div style="color: #64dfdf; font-size: 16px; margin-top: 5px; margin-bottom: 10px; font-weight: 500;">May 2023</div>
+                <div class="borderinsights"></div>
+                <br>
+                <div>Throughout CS50, students code in Codespaces—a virtual machine with everything pre-configured. While great for beginners, I highly encourage developing your final project locally on your own machine. It offers a truly rich learning experience. Check out my GitHub repository where I show how to develop the CS50 Week 9 problem set (Finance stock tracker) locally without the training wheels: <a class="gold" href="https://github.com/Wnayar/finance_local_development">Finance Local Development</a> <span id="dots2" class="clickable-dots">...</span> </div>
+                <br>
+                <span id="more2">
+                    <div>I also firmly believe it's important to learn Git and GitHub. In short, Git tracks your code changes locally (version control), while GitHub hosts your code online for backup, sharing, and collaboration. My GitHub repository covers everything you need: installing Windows Subsystem for Linux (WSL), setting up Ubuntu, using apt-get and pip3 package managers, installing VS Code extensions, and creating your first GitHub repository: <a class="gold" href="https://github.com/Wnayar/git_github_cs50_guide">Git & GitHub Guide</a></div>
+                    <br>
+                    <div>I personally spent a lot of time learning local development and Git/GitHub. I hope this guide flattens the learning curve for these topics, which can seem daunting for new programmers—but don't worry, it's really not as complicated as it appears!</div>
+                </span>
+                <button class="buttoninsights" id="button2" onclick="readMore2()">Read more >></button>
+                <br><br>
+            </div>
+            <br><br>  
+        </div>
+        <div class="divborder"></div>
+        <br>
+        <style>
+            .explore-button {
+                background-color: #64dfdf;
+                border: 2px solid #64dfdf;
+                color: #1a1a1a;
+                padding: 15px 45px;
+                font-size: 18px;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+                box-shadow: 0 2px 8px rgba(100, 223, 223, 0.3);
+            }
+            .explore-button:hover {
+                background-color: #4fc9c9;
+                border-color: #4fc9c9;
+                color: #000000;
+                transform: translateY(-3px);
+                box-shadow: 0 6px 16px rgba(100, 223, 223, 0.5);
+            }
+        </style>
+        <div class="container-fluid" style="text-align: center;">
+            <h2 class="aboutme2" style="margin-bottom: 20px;">Check out my work</h2>
+            <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 0 auto;">
+                <a href="/" class="explore-button">Home →</a>
+                <a href="/projects" class="explore-button">Projects →</a>
+                <a href="/motivation" class="explore-button">Philosophy →</a>
+            </div>
+        </div>
+        <br><br><br>
+        <div class="container-fluid">
+            <div class="gyroscope">
+                <div class="centergyro">
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="container-fluid">
+            <div><br><br></div>
+            <h1 class="centertextsimple aboutme">Never stop: <span id="words" class="teal"></span></h1>
+        </div>
+        <script>
+            var typed = new Typed ('#words', {
+            strings: ["seeking knowledge", "sharing insights"],
+            typeSpeed: 100,
+            backSpeed: 100,
+            loop: true
+            });
+        </script>
+        <br>
+        <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
+    </div>
+{% endblock %}
