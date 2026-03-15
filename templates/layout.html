@@ -44,6 +44,27 @@
                 opacity: 0.8;
                 transform: translateY(-1px);
             }
+            /* Mobile responsive padding */
+            @media (max-width: 768px) {
+                .centertext2, .centertext2new, .blog-content {
+                    padding-left: 5% !important;
+                    padding-right: 5% !important;
+                    font-size: 18px !important;
+                }
+                .centertext1, .centertext1new {
+                    padding-left: 5% !important;
+                    padding-right: 5% !important;
+                    text-align: left !important;
+                }
+                .centertext2new li {
+                    margin-left: 0 !important;
+                    padding-left: 0 !important;
+                    list-style-position: inside;
+                }
+                .aboutme2 h2, .aboutme2 h3 {
+                    font-size: 22px !important;
+                }
+            }
         </style>
 
         <title>William Nayar {% block title %}{% endblock %} </title>
