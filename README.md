@@ -7,11 +7,12 @@ A full-stack personal portfolio website built with Flask, showcasing my projects
 ## Overview
 
 This is a responsive, modern personal portfolio website featuring:
-- Project showcase with detailed technical descriptions
-- Blog posts about my coding journey
-- Interactive UI elements and smooth animations
-- Mobile-responsive design
-- Clean, professional aesthetic
+- Project showcase with detailed technical descriptions and live demos
+- Guides and resources for aspiring developers
+- Interactive UI elements with scroll animations and hover effects
+- GitHub activity integration and technical skills visualization
+- Mobile-responsive design optimized for all devices
+- Clean, professional aesthetic with teal and gold accent colors
 
 ## Tech Stack
 
@@ -36,21 +37,27 @@ This is a responsive, modern personal portfolio website featuring:
 
 ### Projects Page
 Detailed breakdown of my technical projects including:
-- Aqua Vitae (React/TypeScript e-commerce site)
-- PeerPrep (Node.js microservices backend)
-- NUS-GroupMatch (MERN stack application)
+- PeerPrep (Node.js microservices backend with 15 REST API endpoints)
+- Aqua Vitae (React/TypeScript e-commerce site with Shopify integration)
+- NUS-GroupMatch (MERN stack study group platform)
+- Personal Portfolio (this Flask website)
 
-### Blog Section
-Articles covering:
-- My journey starting with Harvard's CS50
-- Local development setup guides
-- Git and GitHub workflows
+Each project includes role, tech stack, detailed bullet points, and links to live sites and GitHub repositories.
+
+### Guides Section
+Resources and tutorials covering:
+- Getting started with Harvard's CS50
+- Local development environment setup
+- Git and GitHub workflows for beginners
 
 ### Interactive Elements
-- Animated 3D gyroscope
-- Dynamic typing effects
-- Smooth hover animations
-- Responsive navigation
+- Scroll-triggered fade-in animations
+- Project card tilt effects on hover (desktop)
+- GitHub activity widgets (Top Languages, Total Contributions)
+- Technical skills badges with logos
+- Smooth hover animations throughout
+- Sticky frosted glass navbar
+- Animated timeline on Philosophy page
 
 ## Project Structure
 
@@ -59,16 +66,16 @@ Personal_Webpage/
 ├── app.py                 # Flask application and routing
 ├── requirements.txt       # Python dependencies
 ├── static/
-│   ├── style.css         # Custom styling
+│   ├── style.css         # Global styling
 │   ├── index.js          # Homepage interactions
-│   ├── insights.js       # Blog post interactions
-│   └── [images/videos]   # Media assets
+│   ├── insights.js       # Guide interactions
+│   └── [images]          # Profile picture and social icons
 └── templates/
-    ├── layout.html       # Base template
-    ├── index.html        # Homepage
-    ├── projects.html     # Projects showcase
-    ├── blogs.html        # Blog posts
-    └── motivation.html   # Motivational content
+    ├── layout.html       # Base template with navbar and global styles
+    ├── index.html        # Homepage with stats and intro
+    ├── projects.html     # Projects showcase with GitHub activity
+    ├── guides.html       # Developer guides and resources
+    └── motivation.html   # Philosophy page with timeline
 ```
 
 ## Local Development
@@ -99,18 +106,12 @@ python app.py
 
 ## Design Philosophy
 
-- **Simple and Clean:** Focus on content over flashy design
-- **Professional:** Suitable for recruiters and technical audiences
-- **Responsive:** Works seamlessly on desktop, tablet, and mobile
-- **Fast:** Minimal dependencies, quick load times
-- **Accessible:** Clear navigation and readable typography
-
-## Future Enhancements
-
-- Add more blog posts documenting technical learnings
-- Include project screenshots/demos
-- Add dark/light mode toggle
-- Implement contact form with backend integration
+- **Recruiter-Focused:** Clear project descriptions, prominent contact info, and professional presentation
+- **Content-First:** Technical depth without overwhelming complexity
+- **Responsive:** Optimized mobile experience with adjusted padding and font sizes
+- **Interactive:** Subtle animations and hover effects that enhance without distracting
+- **Fast:** Minimal dependencies, quick load times, smooth navigation
+- **Modern:** Teal and gold color scheme with frosted glass navbar and card-based layouts
 
 ## About This Project
 
