@@ -20,35 +20,59 @@
         <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 
         <style>
+            /* Smooth scroll behavior */
+            html {
+                scroll-behavior: smooth;
+            }
             .nav-link {
                 transition: color 0.3s ease;
             }
             .nav-link:hover {
-                color: #D4AF37 !important;
+                color: #14b8a6 !important;
             }
             .navbar-brand span {
                 transition: color 0.3s ease;
             }
             .navbar-brand:hover span {
-                color: #D4AF37 !important;
+                color: #14b8a6 !important;
             }
             /* Global link hover effects */
             a {
                 transition: all 0.3s ease;
             }
             a.gold:hover {
-                color: #FFD700 !important;
+                color: #fde68a !important;
                 text-decoration: underline;
             }
             a:not(.gold):not(.nav-link):not(.navbar-brand):not(.explore-button):hover {
                 opacity: 0.8;
                 transform: translateY(-1px);
             }
+            /* Smooth fade-in animations */
+            .fade-in-section {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .fade-in-section.is-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            /* Button click feedback */
+            .explore-button:active, .project-button:active, .buttoninsights:active {
+                transform: scale(0.97) !important;
+                transition: transform 0.1s ease;
+            }
             /* Mobile responsive padding */
             @media (max-width: 768px) {
-                .centertext2, .centertext2new, .blog-content {
+                .centertext2, .blog-content, .guide-card {
                     padding-left: 5% !important;
                     padding-right: 5% !important;
+                    font-size: 18px !important;
+                }
+                .centertext2new {
+                    padding-left: 3% !important;
+                    padding-right: 3% !important;
                     font-size: 18px !important;
                 }
                 .centertext1, .centertext1new {
@@ -70,7 +94,7 @@
         <title>William Nayar {% block title %}{% endblock %} </title>
     </head>
     <body class="layoutbody">
-        <nav class="navbar navbar-light navbar-expand-md bg-light">
+        <nav class="navbar navbar-dark navbar-expand-md">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/"><span>W</span><span>I</span><span>L</span><span>L</span><span>-</span><span>I</span><span>-</span><span>A</span><span>M</span></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,12 +103,31 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/projects">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/blogs">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/guides">Guides</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/motivation">Philosophy</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         {% block main %}{% endblock %}
+        <script>
+            // Smooth scroll fade-in effect
+            const fadeInSections = document.querySelectorAll('.fade-in-section');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            fadeInSections.forEach(section => {
+                fadeInObserver.observe(section);
+            });
+        </script>
     </body>
 </html>

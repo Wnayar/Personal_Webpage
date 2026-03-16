@@ -20,14 +20,19 @@ def projects():
     return render_template("projects.html")
 
 
+@app.route("/guides")
+def guides():
+    return render_template("guides.html")
+
+
 @app.route("/blogs")
-def blogs():
-    return render_template("blogs.html")
+def blogs_redirect():
+    return render_template("guides.html")
 
 
 @app.route("/insights")
 def insights_redirect():
-    return render_template("blogs.html")
+    return render_template("guides.html")
 
 
 @app.route("/motivation")

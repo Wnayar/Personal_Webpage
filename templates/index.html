@@ -13,32 +13,101 @@
         .links a:hover img {
             transform: translateY(-5px) scale(1.1);
             filter: brightness(1.2);
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.5);
         }
         #profile {
             transition: all 0.4s ease;
         }
         #profile:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(100, 223, 223, 0.6);
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.6);
+        }
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 0px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 20px 30px;
+            background-color: rgba(20, 184, 166, 0.05);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            border-radius: 10px;
+            min-width: 180px;
+            transition: all 0.3s ease;
+        }
+        .stat-item:hover {
+            transform: translateY(-2px);
+            background-color: rgba(20, 184, 166, 0.08);
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+            border-color: rgba(20, 184, 166, 0.3);
+        }
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #14b8a6;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: #e6e6e6;
+            font-weight: 500;
+        }
+        .primary-cta {
+            display: inline-block;
+            background-color: #14b8a6;
+            border: 2px solid #14b8a6;
+            color: #0f0f0f;
+            padding: 18px 50px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
+            margin: 20px 0;
+        }
+        .primary-cta:hover {
+            background-color: #0d9488;
+            border-color: #0d9488;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.6);
+        }
+        @media (max-width: 768px) {
+            .stats-bar {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            .stat-item {
+                width: 90%;
+                max-width: 300px;
+            }
+            .primary-cta {
+                padding: 15px 40px;
+                font-size: 18px;
+            }
         }
     </style>
     <div class="opacity">
-        <br>
-        <div class="container-fluid standard interests2 centergyro">
-            Make goals so great
-        </div>
-        <div class="container-fluid standard centergyro">
-            That you must achieve them.
-        </div>
         <br>
         <div class="namecard">
             <img id="profile" src="/static/profile_picture_black.png" alt="Profile Picture">
             <div class="interestsmain teal">
                 <h2>William Nayar</h2>
             </div>
-            <p class="interestssub">
+            <p class="interestssub" style="color: #14b8a6; font-size: 16px; margin-top: 5px; margin-bottom: 5px;">
+                CS @ NUS | Founder @ Aqua Vitae
+            </p>
+            <p class="interestssub" style="font-size: 18px; margin-top: 10px; margin-bottom: 8px;">
                 I love solving hard problems
+            </p>
+            <p style="font-size: 15px; color: #64748b; margin-bottom: 15px;">
+                <a href="mailto:wnayar98@gmail.com" style="color: #14b8a6; text-decoration: none; transition: color 0.3s ease;">wnayar98@gmail.com</a>
             </p>
             <div class="links">
             <a href="https://sg.linkedin.com/in/william-nayar" target="_blank">
@@ -52,41 +121,41 @@
             </a>
             </div>
         </div>
-        <div class="container-fluid">
-            <h1 class="aboutme centertext1 teal">About me</h1>
-            <h2 class="aboutme2 centertext2">I am a <span class="gold">Computer Science student</span> at the <span class="gold">National University of Singapore</span> with a strong interest in building software and turning ideas into real products.</h2>
-            <br>
-            <h2 class="aboutme2 centertext2">Alongside my studies, I <span class="gold">founded Aqua Vitae</span>, a <span class="gold">niche perfume house</span> created to explore craftsmanship, storytelling, and creativity through fragrance. The project reflects my interest in building things from the ground up and combining technical problem solving with design and entrepreneurship.</h2>
-            <br>
-            <h2 class="aboutme2 centertext2">Outside of software and entrepreneurship, I enjoy playing guitar, rock climbing, and strength training.</h2>
-            <br>
-            <h3 class="aboutme centertext1new teal">Areas of interest</h3>
-            <ul class="aboutme2 centertext2new">
-                <li>Software Engineering</li>
-                <li>Full Stack Development</li>
-                <li>Product Development</li>
-                <li>Entrepreneurship</li>
-                <li>Creative Projects</li>
-                <li>Rock Climbing</li>
-                <li>Guitar</li>
-            </ul>
+        <div class="stats-bar fade-in-section">
+            <div class="stat-item">
+                <div class="stat-number">4,392</div>
+                <div class="stat-label">GitHub Contributions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2026</div>
+                <div class="stat-label">Founder</div>
+            </div>
         </div>
-        <br><br>
-        <div class="divborder"></div>
-        <div class="container-fluid">
-            <h3 class="aboutme centertext1new teal">Get in Touch</h3>
-            <h2 class="aboutme2 centertext2">I enjoy building systems, experimenting with ideas, and solving interesting problems. If you would like to connect or discuss opportunities, feel free to reach out.</h2>
-            <br>
-            <h2 class="aboutme2 centertext2"><a href="mailto:wnayar98@gmail.com" class="gold">wnayar98@gmail.com</a></h2>
-        </div>
-        <br><br>
-        <div class="divborder"></div>
         <br>
+        <div class="container-fluid fade-in-section">
+            <h2 class="aboutme2 centertext2" style="text-align: center;">I build scalable web applications using <span class="gold">React</span>, <span class="gold">Node.js</span>, and <span class="gold">MongoDB</span>. Currently developing <span class="gold">Aqua Vitae</span>, a production e-commerce platform, while studying Computer Science at NUS.</h2>
+        </div>
+        <br><br>
+        <div style="text-align: center;">
+            <a href="/projects" class="primary-cta">View My Projects →</a>
+        </div>
+        <br><br><br>
+        <div class="divborder"></div>
+        <br><br>
+        <div class="container-fluid fade-in-section">
+            <div class="aboutme2 centertext2">
+                <h3 class="aboutme teal" style="margin-bottom: 20px;">Get in Touch</h3>
+                <div>I enjoy building systems, experimenting with ideas, and solving interesting problems. If you would like to connect or discuss opportunities, reach me at <a href="mailto:wnayar98@gmail.com" class="gold" style="font-size: 20px; font-weight: 700;">wnayar98@gmail.com</a></div>
+            </div>
+        </div>
+        <br>        <br><br>
+        <div class="divborder"></div>
+        <br><br>
         <style>
             .explore-button {
-                background-color: #64dfdf;
-                border: 2px solid #64dfdf;
-                color: #1a1a1a;
+                background-color: #14b8a6;
+                border: 2px solid #14b8a6;
+                color: #0f0f0f;
                 padding: 15px 45px;
                 font-size: 18px;
                 font-weight: 600;
@@ -95,55 +164,26 @@
                 transition: all 0.3s ease;
                 text-decoration: none;
                 display: inline-block;
-                box-shadow: 0 2px 8px rgba(100, 223, 223, 0.3);
+                box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);
             }
             .explore-button:hover {
-                background-color: #4fc9c9;
-                border-color: #4fc9c9;
-                color: #000000;
+                background-color: #0d9488;
+                border-color: #0d9488;
+                color: #ffffff;
                 transform: translateY(-3px);
-                box-shadow: 0 6px 16px rgba(100, 223, 223, 0.5);
+                box-shadow: 0 6px 16px rgba(20, 184, 166, 0.5);
             }
         </style>
         <div class="container-fluid" style="text-align: center;">
             <h2 class="aboutme2" style="margin-bottom: 20px;">Want to see more?</h2>
             <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 0 auto;">
                 <a href="/projects" class="explore-button">Projects →</a>
-                <a href="/blogs" class="explore-button">Blog →</a>
+                <a href="/guides" class="explore-button">Guides →</a>
                 <a href="/motivation" class="explore-button">Philosophy →</a>
             </div>
         </div>
         <br><br><br>
-        <div class="container-fluid">
-            <div class="gyroscope">
-                <div class="centergyro">
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                </div>
-            </div>
-        </div>
-        <br><br><br><br><br><br>
-        <div class="container-fluid">
-            <div><br><br></div>
-            <h1 class="centertextsimple aboutme">Be willing to: <span id="words" class="teal"></span></h1>
-        </div>
-        <script>
-            var typed = new Typed ('#words', {
-            strings: ["take calculated risks", "follow your dreams"],
-            typeSpeed: 100,
-            backSpeed: 100,
-            loop: true
-            });
-        </script>
-        <br>
         <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
+        <br><br>
     </div>
   {% endblock %}

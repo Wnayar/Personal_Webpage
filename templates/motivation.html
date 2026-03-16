@@ -5,46 +5,144 @@
 {% endblock %}
 
 {% block main %}
+    <style>
+        .timeline-container {
+            position: relative;
+            padding: 40px 0;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #14b8a6 0%, #fbbf24 100%);
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .timeline-item.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 52%;
+            text-align: right;
+        }
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 52%;
+            text-align: left;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 10px;
+            width: 16px;
+            height: 16px;
+            background-color: #14b8a6;
+            border: 3px solid #0f0f0f;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.6);
+        }
+        .timeline-year {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 8px;
+        }
+        .timeline-text {
+            font-size: 16px;
+            color: #e6e6e6;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 30px;
+            }
+            .timeline-dot {
+                left: 30px;
+            }
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 60px;
+                margin-right: 5%;
+                text-align: left;
+            }
+        }
+    </style>
     <div class="opacity">
         <br><br><br>
         <div class="container-fluid">
-            <h1 class="aboutme centertext1motivation teal">Philosophy</h1>
-            <br>
-            <h2 class="aboutme2 centertext2">How I approach learning, building, and growing as a software engineer.</h2>
-            <br><br>
-            <div class="aboutme2 centertext2 fade-in">
-                <h3 class="teal">Kaizen: Continuous Improvement</h3>
-                <br>
-                <p><span class="gold">Kaizen</span> is a Japanese philosophy meaning "change for better" or continuous improvement. It's the idea that small, incremental changes compound into remarkable results over time. I don't aim to be perfect. I aim to be 1% better than yesterday.</p>
-                <br>
-                <p>This philosophy has shaped my journey as a developer. When I started learning to code in 2023, I could barely write a for loop. But I showed up every day, debugged every error, and pushed through every challenge. That consistency took me from beginner to <span class="gold">founding and developing Aqua Vitae</span> and building production applications.</p>
-                <br>
-                <p>What drives me is simple: <span class="gold">I love learning and building</span>. Every problem I solve, every project I ship teaches me something valuable. Continuous learning isn't just a buzzword for me. It's how I operate.</p>
-                <br>
-                <p>What Kaizen means to me:</p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li>Always learning, always growing</li>
-                    <li>Embracing challenges without fear</li>
-                    <li>Progress over perfection</li>
-                    <li>Small steps, big results</li>
-                </ul>
+            <div class="aboutme2 centertext2">
+                <h1 class="aboutme teal" style="margin-bottom: 20px;">Philosophy</h1>
+                <div>How I approach learning, building, and growing as a software engineer.</div>
             </div>
             <br><br>
-            <div class="aboutme2 centertext2 fade-in">
-                <h3 class="teal">Beyond Code</h3>
+            <div class="aboutme2 centertext2">
+                <h3 class="teal" style="text-align: center; font-size: 32px; margin-bottom: 30px;">My Journey</h3>
+            </div>
+            <div class="timeline-container" style="padding-left: 15%; padding-right: 15%;">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Jan 2023</div>
+                        <div class="timeline-text"><strong>Harvard CS50</strong> - Started my coding journey. Learned C, Python, algorithms, and data structures.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Aug 2023</div>
+                        <div class="timeline-text"><strong>National University of Singapore</strong> - Began Computer Science degree, specializing in Software Engineering.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">May 2024</div>
+                        <div class="timeline-text"><strong>NUS-GroupMatch</strong> - Built my first full-stack MERN application with authentication and MongoDB.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Aug 2025</div>
+                        <div class="timeline-text"><strong>PeerPrep Backend</strong> - Developed microservices architecture with 15 REST API endpoints and MongoDB aggregation.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Jan 2026</div>
+                        <div class="timeline-text"><strong>Founded Aqua Vitae</strong> - Launched production e-commerce site with React, TypeScript, and Shopify integration.</div>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+            <div class="aboutme2 centertext2 fade-in-section">
+                <h3 class="teal" style="font-size: 28px; margin-bottom: 20px;">Kaizen: Continuous Improvement</h3>
+                <p><span class="gold">Kaizen</span> is a Japanese philosophy meaning "change for better." Small, incremental changes compound into remarkable results over time. <span class="gold">I aim to be 1% better than yesterday.</span></p>
                 <br>
-                <p>I apply this same mindset to everything I do. Whether it's rock climbing, strength training, or entrepreneurship, progress comes from showing up consistently and focusing on incremental growth. <span class="gold">It's not about being invincible. It's about being unstoppable.</span></p>
+                <p><span class="gold">I love learning and building</span>. Every problem I solve, every project I ship teaches me something valuable. This philosophy took me from barely writing a for loop in 2023 to <span class="gold">founding and developing Aqua Vitae</span> and building production applications.</p>
                 <br>
-                <p>Every project I build, every bug I fix, every line of code I write is part of a larger journey. <span class="gold">The goal isn't perfection. The goal is progress.</span></p>
+                <p><span class="gold">The goal isn't perfection. The goal is progress.</span></p>
             </div>
         </div>
+        <br><br><br>
         <div class="divborder"></div>
-        <br>
+        <br><br>
         <style>
             .explore-button {
-                background-color: #64dfdf;
-                border: 2px solid #64dfdf;
-                color: #1a1a1a;
+                background-color: #14b8a6;
+                border: 2px solid #14b8a6;
+                color: #0f0f0f;
                 padding: 15px 45px;
                 font-size: 18px;
                 font-weight: 600;
@@ -53,14 +151,14 @@
                 transition: all 0.3s ease;
                 text-decoration: none;
                 display: inline-block;
-                box-shadow: 0 2px 8px rgba(100, 223, 223, 0.3);
+                box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);
             }
             .explore-button:hover {
-                background-color: #4fc9c9;
-                border-color: #4fc9c9;
-                color: #000000;
+                background-color: #0d9488;
+                border-color: #0d9488;
+                color: #ffffff;
                 transform: translateY(-3px);
-                box-shadow: 0 6px 16px rgba(100, 223, 223, 0.5);
+                box-shadow: 0 6px 16px rgba(20, 184, 166, 0.5);
             }
         </style>
         <div class="container-fluid" style="text-align: center;">
@@ -68,40 +166,28 @@
             <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 0 auto;">
                 <a href="/" class="explore-button">Home →</a>
                 <a href="/projects" class="explore-button">Projects →</a>
-                <a href="/blogs" class="explore-button">Blog →</a>
+                <a href="/guides" class="explore-button">Guides →</a>
             </div>
         </div>
         <br><br><br>
-        <div class="container-fluid">
-            <div class="gyroscope">
-                <div class="centergyro">
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                </div>
-            </div>
-        </div>
-        <br><br><br><br>
-        <div class="container-fluid">
-            <div><br><br></div>
-            <h1 class="centertextsimple aboutme">Kaizen: <span id="words" class="teal"></span></h1>
-        </div>
-        <script>
-            var typed = new Typed ('#words', {
-            strings: ["1% improvement every day", "become unstoppable"],
-            typeSpeed: 100,
-            backSpeed: 100,
-            loop: true
-            });
-        </script>
-        <br>
         <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
+        <br><br>
     </div>
+    <script>
+        // Timeline animation
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+        
+        timelineItems.forEach(item => {
+            timelineObserver.observe(item);
+        });
+    </script>
 {% endblock %}

@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+
+{% block title %}
+: Guides
+{% endblock %}
+
+{% block main %}
+    <script src="/static/insights.js"></script>
+    <style>
+        .blog-content {
+            line-height: 160%;
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+        .guide-card {
+            background-color: rgba(20, 184, 166, 0.03);
+            border: 1px solid rgba(20, 184, 166, 0.2);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        /* Only enable tilt on desktop */
+        @media (min-width: 769px) {
+            .guide-card:hover {
+                transform: perspective(1000px) rotateX(2deg) translateY(-5px);
+                background-color: rgba(20, 184, 166, 0.08);
+                box-shadow: 0 10px 30px rgba(20, 184, 166, 0.15);
+            }
+        }
+        /* Simple highlight on mobile */
+        @media (max-width: 768px) {
+            .guide-card:active {
+                background-color: rgba(20, 184, 166, 0.08);
+            }
+        }
+        .guide-link {
+            display: inline-block;
+            background-color: #14b8a6;
+            color: #0f0f0f;
+            padding: 10px 25px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 2px 6px rgba(20, 184, 166, 0.3);
+        }
+        .guide-link:hover {
+            background-color: #0d9488;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.5);
+        }
+    </style>
+    <div class="opacity">
+        <br><br><br>
+        <div class="container-fluid">
+            <div class="aboutme2 centertext2">
+                <h1 class="aboutme teal" style="margin-bottom: 20px;">Guides</h1>
+                <div>Resources and guides I've created to help others on their coding journey. <span class="gold">I hope you find them useful!</span></div>
+            </div>
+            <br><br>
+            <div class="aboutme2 centertext2new">
+            <div class="fade-in-section guide-card">
+                <h2 class="teal">Getting Started with CS50</h2>
+                <div style="color: #fbbf24; font-size: 15px; margin-top: 8px; margin-bottom: 15px; font-weight: 600;">Beginner's Guide</div>
+                <p>My journey into computer science began with Harvard's CS50: Introduction to Computer Science in early 2023. In fact, this very website was built as my CS50 Final Project. That foundation launched me into building production applications like Aqua Vitae, working with microservices architectures in PeerPrep, and developing full-stack MERN applications.</p>
+                <p>If you're starting your coding journey, I highly recommend CS50. It's an entry-level course taught by David J. Malan that teaches you how to think algorithmically and solve problems efficiently. Topics include abstraction, algorithms, data structures, encapsulation, resource management, security, software engineering, and web development. Languages include C, Python, SQL, and JavaScript plus CSS and HTML.</p>
+                <p>The course was challenging at first—the jump from lectures to problem sets is significant—but documentation, AI tools, and online communities become your best resources. Don't give up! By week 5, programming will start to feel natural. From there, you can build real projects and continue growing your skills, just like I did.</p>
+                <a class="guide-link" href="https://pll.harvard.edu/course/cs50-introduction-computer-science?delta=0" target="_blank">View CS50 Course →</a>
+            </div>
+            <div class="fade-in-section guide-card">
+                <h2 class="teal">Local Development & Git/GitHub Setup</h2>
+                <div style="color: #fbbf24; font-size: 15px; margin-top: 8px; margin-bottom: 15px; font-weight: 600;">Developer Tools Guide</div>
+                <p>Throughout CS50, students code in Codespaces—a virtual machine with everything pre-configured. While great for beginners, I highly encourage developing your final project locally on your own machine. It offers a truly rich learning experience.</p>
+                <p>Learning Git and GitHub is essential for any developer. Git tracks your code changes locally (version control), while GitHub hosts your code online for backup, sharing, and collaboration.</p>
+                <p>I've created comprehensive GitHub repositories covering everything you need: installing Windows Subsystem for Linux (WSL), setting up Ubuntu, using package managers, installing VS Code extensions, developing CS50 projects locally, and creating your first GitHub repository.</p>
+                <p>I personally spent a lot of time learning local development and Git/GitHub. I hope these guides flatten the learning curve for these topics, which can seem daunting for new programmers—but they're more approachable than they first appear!</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
+                    <a class="guide-link" href="https://github.com/Wnayar/finance_local_development" target="_blank">Local Development Guide →</a>
+                    <a class="guide-link" href="https://github.com/Wnayar/git_github_cs50_guide" target="_blank">Git & GitHub Guide →</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="divborder"></div>
+        <br>
+        <style>
+            .explore-button {
+                background-color: #14b8a6;
+                border: 2px solid #14b8a6;
+                color: #0f0f0f;
+                padding: 15px 45px;
+                font-size: 18px;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+                box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);
+            }
+            .explore-button:hover {
+                background-color: #0d9488;
+                border-color: #0d9488;
+                color: #ffffff;
+                transform: translateY(-3px);
+                box-shadow: 0 6px 16px rgba(20, 184, 166, 0.5);
+            }
+        </style>
+        <div class="container-fluid" style="text-align: center;">
+            <h2 class="aboutme2" style="margin-bottom: 20px;">Want to see more?</h2>
+            <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 0 auto;">
+                <a href="/" class="explore-button">Home →</a>
+                <a href="/projects" class="explore-button">Projects →</a>
+                <a href="/motivation" class="explore-button">Philosophy →</a>
+            </div>
+        </div>
+        <br><br><br>
+        <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
+        <br><br>
+    </div>
+{% endblock %}
