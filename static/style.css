@@ -2,6 +2,10 @@
 :root {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", "Source Code Pro", monospace;
+  /* Shared reading scale (Projects/Guides cards, Philosophy body, home lead copy) */
+  --font-body-size: 1.0625rem;
+  --font-body-line-height: 1.72;
+  --font-ui-size: 1rem;
   --color-bg: #0a0a0b;
   --color-text: #e2e8f0;
   --color-muted: #94a3b8;
@@ -65,17 +69,77 @@ nav .navbar-brand {
   border-bottom: 1px solid var(--color-border);
 }
 
+/* Clear viewport edge + scrollbar gutter so theme toggle isn’t clipped (desktop / overlay scrollbars) */
+.site-navbar .container-fluid {
+  box-sizing: border-box;
+  padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1.35rem, calc(env(safe-area-inset-right, 0px) + 0.35rem));
+}
+
+/* Mobile menu open/close — smoother than Bootstrap default (~0.35s ease) */
+@media (prefers-reduced-motion: no-preference) {
+  .site-navbar .navbar-collapse.collapsing {
+    transition: height 0.5s cubic-bezier(0.33, 1, 0.32, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-navbar .navbar-collapse.collapsing {
+    transition-duration: 0.01ms !important;
+  }
+}
+
 @media (max-width: 767.98px) {
+  /* DOM is brand → collapse → actions; reorder so top row stays brand + controls, links below */
+  .site-navbar .container-fluid {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .site-navbar .navbar-brand {
+    order: 1;
+  }
+
+  .site-navbar .site-navbar-actions {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .site-navbar .navbar-collapse {
+    order: 3;
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
   .site-navbar .navbar-nav .nav-link {
     padding-top: 0.65rem;
     padding-bottom: 0.65rem;
     min-height: 2.75rem;
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .site-navbar .navbar-collapse {
     padding-bottom: 0.35rem;
+  }
+
+  .site-navbar .navbar-collapse.show {
+    margin-top: 0.6rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .site-navbar .navbar-collapse .navbar-nav.me-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100%;
+    align-items: center;
+    text-align: center;
   }
 
   .site-navbar .navbar-toggler {
@@ -175,16 +239,16 @@ nav .navbar-brand {
 
 .case-body {
   margin: 0 0 0.65rem;
-  font-size: 1rem;
-  line-height: 1.65;
-  color: var(--color-muted);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: color-mix(in srgb, var(--color-text) 94%, var(--color-muted));
 }
 
 .case-list {
   margin: 0 0 0.85rem;
   padding-left: 1.15rem;
   color: var(--color-text);
-  line-height: 1.62;
+  line-height: var(--font-body-line-height);
 }
 
 .case-list li {
@@ -301,9 +365,69 @@ nav .navbar-brand {
   margin-bottom: 0;
 }
 
+/*
+ * Cards sit under .aboutme2 (semibold + 1.35rem) — long body copy reads muddy.
+ * Reset weight/size; use primary text color on tinted cards for contrast.
+ */
+.project-card,
+.guide-card {
+  font-weight: 400;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--color-text);
+}
+
+.project-card h3,
+.guide-card h2 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.28;
+}
+
+/* Projects / Guides — mobile: one inset (main safe area) + card; avoid nested % + Bootstrap gutter */
+@media (max-width: 767.98px) {
+  main.page-main .container-fluid:has(.centertext2new) {
+    --bs-gutter-x: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  main.page-main:has(.guide-card) .aboutme2.centertext2 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .project-card,
+  .guide-card {
+    /* Tight side padding so body copy uses the full card width */
+    padding: 0.72rem 0.5rem;
+  }
+
+  .project-card .case-list {
+    padding-left: 0.75rem;
+  }
+
+  .project-card .case-body,
+  .project-card .case-list,
+  .guide-card p {
+    word-break: normal;
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+  }
+}
+
 [data-theme="light"] .project-card,
 [data-theme="light"] .guide-card {
+  color: #0f172a;
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+}
+
+/* Guides hero blurb (still inside .aboutme2 — match card body weight) */
+main.page-main:has(.guide-card) .aboutme2.centertext2 {
+  font-weight: 400;
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--color-text);
 }
 
 @media (hover: hover) {
@@ -523,13 +647,37 @@ nav .navbar-brand {
   }
 }
 
+.philosophy-page .timeline-year {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-sans);
+  transition: color 0.35s ease;
+}
+
+.philosophy-page .timeline-item.is-intro-lit .timeline-year {
+  text-shadow: 0 0 22px color-mix(in srgb, var(--color-gold) 35%, transparent);
+}
+
+.philosophy-page .timeline-text {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line-height);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
+
 .philosophy-page__section-title {
   text-align: center;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   font-size: clamp(1.35rem, 5.2vw, 2rem);
   margin-bottom: clamp(0.85rem, 4vw, 1.875rem);
 }
 
 .philosophy-page__subsection-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
   font-size: clamp(1.1rem, 4vw, 1.75rem);
   margin-bottom: 1.25rem;
   text-align: left;
@@ -761,7 +909,7 @@ nav .navbar-brand {
 
   .interestsmain 
   {
-    font-size: 16px;
+    font-size: var(--font-ui-size);
     line-height: 1.5;
     font-family: var(--font-sans);
   }
@@ -769,8 +917,8 @@ nav .navbar-brand {
 
   .interestssub 
   {
-    font-size: 20px;
-    line-height: 1.5;
+    font-size: var(--font-body-size);
+    line-height: var(--font-body-line-height);
     font-family: var(--font-sans);
   }
 
@@ -793,8 +941,9 @@ nav .navbar-brand {
 
   .aboutme2 
   {
-    font-size: 1.35rem;
-    font-weight: 600;
+    font-size: var(--font-body-size);
+    font-weight: 400;
+    line-height: var(--font-body-line-height);
     margin-bottom: 1rem;
     font-family: var(--font-sans);
   }
@@ -1262,9 +1411,10 @@ nav .navbar-brand {
     box-sizing: border-box;
   }
 
-  .site-navbar .container-fluid {
-    padding-left: max(1rem, env(safe-area-inset-left, 0px));
-    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  /* Projects / Guides — let cards sit closer to the viewport; copy runs wider inside the card */
+  main.page-main:not(:has(.home-hero)):is(:has(.project-card), :has(.guide-card)) {
+    padding-left: max(0.45rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.45rem, env(safe-area-inset-right, 0px));
   }
 
   .av-showcase {

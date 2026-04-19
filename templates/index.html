@@ -26,14 +26,12 @@
                 0 28px 56px -16px rgba(0, 0, 0, 0.55),
                 0 0 0 1px rgba(255, 255, 255, 0.04);
         }
+        /* Inherits site --font-sans from layout; scope ensures third-party widgets don’t leak fonts */
         .home-font-scope {
-            font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-        }
-        .home-font-scope .interestssub {
-            font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+            font-family: var(--font-sans);
         }
         .home-hero .interestsmain h2 {
-            font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif !important;
+            font-family: var(--font-sans) !important;
             font-size: clamp(1.65rem, 4.2vw, 2rem);
             font-weight: 700;
             letter-spacing: -0.03em;
@@ -170,15 +168,15 @@
             padding: 0 1.5rem 0.5rem;
         }
         .home-lead__copy {
-            font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+            font-family: var(--font-sans);
         }
         .home-lead__line {
             margin: 0 auto 1.35em;
             max-width: 36rem;
             padding: 0 0.25rem;
-            font-family: inherit;
-            font-size: clamp(1.0625rem, 1.85vw, 1.1875rem);
-            line-height: 1.85;
+            font-family: var(--font-sans);
+            font-size: clamp(var(--font-body-size), 1.85vw, 1.1875rem);
+            line-height: var(--font-body-line-height);
             letter-spacing: 0.01em;
             font-weight: 400;
             color: var(--color-text);
@@ -226,31 +224,38 @@
             border-color: rgba(20, 184, 166, 0.28);
         }
         .stat-number {
-            font-size: 36px;
+            font-size: clamp(2rem, 5vw, 2.25rem);
             font-weight: 700;
             color: var(--color-teal);
             margin-bottom: 8px;
+            font-family: var(--font-sans);
         }
         .stat-label {
-            font-size: 13px;
+            font-size: 0.8125rem;
             color: var(--color-muted);
             font-weight: 500;
+            font-family: var(--font-sans);
         }
         .home-credentials {
             color: var(--color-teal);
-            font-size: 16px;
+            font-size: var(--font-ui-size);
+            font-weight: 500;
+            line-height: var(--font-body-line-height);
             margin-top: 5px;
             margin-bottom: 5px;
         }
         .home-tagline {
             color: var(--color-text);
-            font-size: 18px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            line-height: var(--font-body-line-height);
             margin-top: 10px;
             margin-bottom: 8px;
         }
         .home-email-row {
-            font-size: 15px;
+            font-size: var(--font-ui-size);
             color: var(--color-muted);
+            line-height: var(--font-body-line-height);
             margin-bottom: 15px;
         }
         .home-email-row a {
@@ -269,8 +274,8 @@
                 max-width: 300px;
             }
             .home-lead__line {
-                font-size: 1rem !important;
-                line-height: 1.65 !important;
+                font-size: var(--font-ui-size) !important;
+                line-height: var(--font-body-line-height) !important;
             }
             .home-tagline {
                 font-size: 1rem !important;
