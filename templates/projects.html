@@ -28,14 +28,14 @@
             box-shadow: 0 6px 18px rgba(20, 184, 166, 0.28);
         }
         .project-card {
-            padding: 20px;
+            padding: 22px 24px;
             border-radius: var(--radius-card, 12px);
-            background-color: rgba(20, 184, 166, 0.04);
-            border: 1px solid rgba(20, 184, 166, 0.12);
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-card-border);
         }
         @media (hover: hover) {
             .project-card:hover {
-                background-color: rgba(20, 184, 166, 0.07);
+                background-color: var(--color-card-bg-hover);
             }
         }
         .contributions-card {
@@ -47,84 +47,110 @@
                 box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
             }
         }
+        [data-theme="light"] .contributions-card:hover {
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+        }
+        .gh-stats-card {
+            background: var(--color-card-bg);
+            border: 1px solid var(--color-card-border);
+        }
+        .gh-stats-card .gh-num { color: var(--color-teal); }
+        .gh-stats-card .gh-muted { color: var(--color-muted); }
     </style>
     <main class="page-main">
         <br><br><br>
         <div class="container-fluid">
-            <h1 class="aboutme centertext1 teal">Projects</h1>
-            <br>
+            <div class="page-title-wrap">
+                <h1 class="page-title teal">Projects</h1>
+            </div>
+            <p class="case-body" style="text-align: center; max-width: 36rem; margin: 0 auto 2rem;">Selected work — backend systems, full-stack products, and this site. Each block is a short case study: context, what shipped, impact.</p>
             <div class="aboutme2 centertext2new">
                 <div class="fade-in-section project-card card-hover">
                 <h3 class="teal">PeerPrep</h3>
-                <div style="margin-bottom: 5px;"><strong class="gold">Backend Developer</strong></div>
-                <div><span class="gold">Aug 2025 - Nov 2025</span> | MongoDB | Node.js | Express | TypeScript | Mongoose</div>
+                <div style="margin-bottom: 8px;"><strong class="gold">Backend Developer</strong></div>
+                <div><span class="gold">Aug 2025 – Nov 2025</span> · MongoDB · Node.js · Express · TypeScript · Mongoose</div>
                 <br>
                 <div>
                     <a class="project-button" href="https://github.com/Wnayar/PeerPrep" target="_blank">GitHub</a>
                 </div>
-                <br>
-                <ul>
-                    <li>Built a Question Service microservice within a distributed 6-service coding platform for collaborative interview preparation</li>
-                    <li>Developed 15 REST API endpoints using Node.js, Express, and TypeScript for question retrieval, filtering, and submission</li>
-                    <li>Implemented MongoDB aggregation pipelines enabling randomized question selection and queries</li>
-                    <li>Processed the TACO dataset into 300+ curated coding interview problems using a Python data pipeline</li>
+                <p class="case-label">Context</p>
+                <p class="case-body">PeerPrep is a multi-service interview prep platform. Question flows needed a dedicated backend that could filter, randomize, and serve problems at scale.</p>
+                <p class="case-label">What I shipped</p>
+                <ul class="case-list">
+                    <li>Question Service microservice with <strong>15 REST endpoints</strong> (Node.js, Express, TypeScript)</li>
+                    <li>MongoDB <strong>aggregation pipelines</strong> for randomized selection and filtered queries</li>
+                    <li>Python pipeline ingesting the <strong>TACO</strong> dataset into <strong>300+</strong> curated interview problems</li>
                 </ul>
+                <p class="case-label">Impact</p>
+                <p class="case-body">Enabled reliable question delivery for the rest of the distributed platform — interview prep without bottlenecks on retrieval or filtering.</p>
                 </div>
                 <br><br>
                 
                 <div class="fade-in-section project-card card-hover">
                 <h3 class="teal">Aqua Vitae</h3>
-                <div style="margin-bottom: 5px;"><strong class="gold">Founder & Full-Stack Developer</strong></div>
-                <div><span class="gold">Jan 2026 - Present</span> | React | TypeScript | Tailwind CSS | Vite | Shopify | Vercel</div>
+                <div style="margin-bottom: 8px;"><strong class="gold">Founder & Full-Stack Developer</strong></div>
+                <div><span class="gold">Jan 2026 – Present</span> · React · TypeScript · Tailwind · Vite · Shopify · Vercel</div>
                 <br>
                 <div>
-                    <a class="project-button" href="https://www.aquavitaeparfums.com/" target="_blank">🚀 Live Site</a>
+                    <a class="project-button" href="https://www.aquavitaeparfums.com/" target="_blank">Live site</a>
                     <a class="project-button" href="https://github.com/Wnayar/aqua-vitae" target="_blank">GitHub</a>
                 </div>
-                <br>
-                <ul>
-                    <li>Built and launched a production e-commerce website for a fragrance brand using React and TypeScript</li>
-                    <li>Designed a modular frontend architecture with 14 reusable components, improving maintainability and development efficiency</li>
-                    <li>Implemented state management using React Context API with persistent localStorage synchronization</li>
-                    <li>Integrated Shopify checkout for secure payment processing and inventory management</li>
-                    <li>Configured Cloudflare DNS and Vercel deployment to deliver a fast and reliable production environment</li>
+                <p class="case-label">Context</p>
+                <p class="case-body">Launch a real fragrance brand online: fast storefront, trustworthy checkout, and a maintainable codebase as the business evolves.</p>
+                <p class="case-label">What I shipped</p>
+                <ul class="case-list">
+                    <li>Production <strong>e-commerce</strong> frontend (React, TypeScript, Tailwind, Vite)</li>
+                    <li><strong>14 reusable components</strong> — modular architecture for iteration</li>
+                    <li><strong>Shopify</strong> checkout, payments, and inventory hooks</li>
+                    <li>React Context + <strong>localStorage</strong> for cart/session resilience</li>
+                    <li><strong>Vercel</strong> deploy + Cloudflare DNS for reliability and speed</li>
                 </ul>
+                <p class="case-label">Impact</p>
+                <p class="case-body">Customers get a polished buying path end-to-end; you get a codebase you can extend without rewriting the storefront every month.</p>
                 </div>
                 <br><br>
                 
                 <div class="fade-in-section project-card card-hover">
                 <h3 class="teal">NUS-GroupMatch</h3>
-                <div style="margin-bottom: 5px;"><strong class="gold">Full-Stack Developer</strong></div>
-                <div><span class="gold">May 2024 - Jul 2024</span> | MongoDB | Express | React | Node.js</div>
+                <div style="margin-bottom: 8px;"><strong class="gold">Full-Stack Developer</strong></div>
+                <div><span class="gold">May 2024 – Jul 2024</span> · MongoDB · Express · React · Node.js</div>
                 <br>
                 <div>
                     <a class="project-button" href="https://github.com/Wnayar/NUS-GroupMatch" target="_blank">GitHub</a>
                 </div>
-                <br>
-                <ul>
-                    <li>Developed a full-stack MERN application enabling university students to create and discover study groups</li>
-                    <li>Built backend REST APIs using Node.js and Express with authentication and structured routing</li>
-                    <li>Designed MongoDB schemas to manage user profiles, group data, and membership relationships</li>
-                    <li>Implemented a React frontend allowing students to search, join, and manage study groups</li>
+                <p class="case-label">Context</p>
+                <p class="case-body">Students needed one place to form and join study groups without juggling chats and spreadsheets.</p>
+                <p class="case-label">What I shipped</p>
+                <ul class="case-list">
+                    <li>Full-stack <strong>MERN</strong> app — create, search, join, and manage groups</li>
+                    <li><strong>REST APIs</strong> with Express + structured routing and auth</li>
+                    <li>MongoDB schemas for <strong>users, groups, memberships</strong></li>
+                    <li>React UI for discovery and group management</li>
                 </ul>
+                <p class="case-label">Impact</p>
+                <p class="case-body">Turned “who’s studying what?” into a single workflow — less friction to find people and commit to a group.</p>
                 </div>
                 <br><br>
                 
                 <div class="fade-in-section project-card card-hover">
                 <h3 class="teal">Personal Portfolio</h3>
-                <div style="margin-bottom: 5px;"><strong class="gold">Full-Stack Developer</strong></div>
-                <div><span class="gold">Mar 2023 - May 2023</span> | Python | Flask | HTML | CSS | JavaScript</div>
+                <div style="margin-bottom: 8px;"><strong class="gold">Full-Stack Developer</strong></div>
+                <div><span class="gold">Mar 2023 – May 2023</span> · Python · Flask · HTML · CSS · JavaScript</div>
                 <br>
                 <div>
-                    <a class="project-button" href="https://williamdn.pythonanywhere.com/" target="_blank">🚀 Live Site</a>
+                    <a class="project-button" href="https://williamdn.pythonanywhere.com/" target="_blank">Live site</a>
                     <a class="project-button" href="https://github.com/Wnayar/Personal_Webpage" target="_blank">GitHub</a>
                 </div>
-                <br>
-                <ul>
-                    <li>Developed a personal portfolio website using Python and Flask with server-side routing and Jinja template inheritance for reusable layout components</li>
-                    <li>Built a responsive frontend with HTML, CSS, and JavaScript, implementing interactive UI features such as scroll animations and hover effects</li>
-                    <li>Deployed the application on PythonAnywhere, configuring WSGI and environment settings to support production hosting</li>
+                <p class="case-label">Context</p>
+                <p class="case-body">Establish an online presence with real server-rendered pages — not only static HTML — and deploy it like a production app.</p>
+                <p class="case-label">What I shipped</p>
+                <ul class="case-list">
+                    <li><strong>Flask</strong> routing + <strong>Jinja</strong> inheritance for reusable layouts</li>
+                    <li>Responsive UI (HTML, CSS, JS) with deliberate motion and hierarchy</li>
+                    <li><strong>PythonAnywhere</strong> deploy with WSGI and environment config</li>
                 </ul>
+                <p class="case-label">Impact</p>
+                <p class="case-body">First end-to-end ship: code → deploy → live URL — the same loop you still use on larger systems today.</p>
                 </div>
             </div>
         </div>
@@ -135,11 +161,11 @@
             <div class="aboutme2 centertext2new" style="text-align: center;">
                 <h3 class="teal" style="margin-bottom: 20px;">GitHub Activity</h3>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
-                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Wnayar&layout=compact&theme=dark&bg_color=0f0f0f&title_color=14b8a6&text_color=e6e6e6&border_color=1a1a1a&hide_border=false" alt="Top Languages" style="max-width: 100%; height: auto; border-radius: 8px;">
-                    <div class="contributions-card" style="background-color: rgba(20, 184, 166, 0.04); border: 1px solid rgba(20, 184, 166, 0.16); border-radius: 12px; padding: 35px 60px; max-width: 400px;">
-                        <div style="font-size: 52px; font-weight: 700; color: #14b8a6; margin-bottom: 10px; letter-spacing: -1px;">4,392</div>
-                        <div style="font-size: 16px; color: #e6e6e6; font-weight: 500;">Total Contributions</div>
-                        <div style="font-size: 13px; color: #64748b; margin-top: 8px;">Nov 2022 - Present</div>
+                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Wnayar&layout=compact&theme=dark&bg_color=0f0f0f&title_color=14b8a6&text_color=e6e6e6&border_color=1a1a1a&hide_border=false" data-github-stats="top-langs" alt="Top Languages" style="max-width: 100%; height: auto; border-radius: 8px;">
+                    <div class="contributions-card gh-stats-card" style="border-radius: 12px; padding: 35px 60px; max-width: 400px;">
+                        <div class="gh-num" style="font-size: 52px; font-weight: 700; margin-bottom: 10px; letter-spacing: -1px;">4,392</div>
+                        <div style="font-size: 16px; color: var(--color-text); font-weight: 500;">Total Contributions</div>
+                        <div class="gh-muted" style="font-size: 13px; margin-top: 8px;">Nov 2022 - Present</div>
                     </div>
                 </div>
             </div>

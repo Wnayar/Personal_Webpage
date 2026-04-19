@@ -1,6 +1,7 @@
-/* —— Design tokens —— */
+/* —— Design tokens (default: dark) —— */
 :root {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", "Source Code Pro", monospace;
   --color-bg: #0a0a0b;
   --color-text: #e2e8f0;
   --color-muted: #94a3b8;
@@ -8,8 +9,30 @@
   --color-teal-dim: rgba(20, 184, 166, 0.35);
   --color-gold: #fbbf24;
   --color-border: #1e293b;
+  --color-card-bg: rgba(20, 184, 166, 0.06);
+  --color-card-bg-hover: rgba(20, 184, 166, 0.09);
+  --color-card-border: rgba(20, 184, 166, 0.14);
   --radius-card: 12px;
   --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.35);
+  --home-lead-em: #5eead4;
+  --home-lead-highlight: #fcd34d;
+}
+
+/* Warm “paper” light mode — off-white stone, muted accents (not clinical white + neon teal). */
+[data-theme="light"] {
+  --color-bg: #e7e4df;
+  --color-text: #292524;
+  --color-muted: #78716c;
+  --color-teal: #0f766e;
+  --color-teal-dim: rgba(15, 118, 110, 0.22);
+  --color-gold: #9a3412;
+  --color-border: #c4bfba;
+  --color-card-bg: #dcdbd6;
+  --color-card-bg-hover: #d1cfca;
+  --color-card-border: #b8b4ad;
+  --shadow-soft: 0 14px 36px rgba(41, 37, 36, 0.1);
+  --home-lead-em: #115e59;
+  --home-lead-highlight: #9a3412;
 }
 
 nav .navbar-brand {
@@ -34,6 +57,89 @@ nav .navbar-brand {
   z-index: 1030;
   background: var(--color-bg) !important;
   border-bottom: 1px solid var(--color-border);
+}
+
+/* ≥44×44px touch target (WCAG 2.5.5 — mobile-friendly tap) */
+.theme-toggle {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-card-bg);
+  color: var(--color-text);
+  line-height: 1;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--color-teal);
+  background: var(--color-card-bg-hover);
+  color: var(--color-teal);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 2px;
+}
+
+.theme-toggle .theme-icon {
+  font-size: 1.15rem;
+}
+
+/* Page titles (Projects, Guides, Philosophy) */
+.page-title-wrap {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.page-title {
+  display: inline-block;
+  margin: 0 auto;
+  padding-bottom: 0.45rem;
+  border-bottom: 3px solid var(--color-teal);
+  font-size: clamp(1.85rem, 4.5vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* Case study blocks (Projects page) */
+.case-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-teal);
+  margin: 1rem 0 0.45rem;
+}
+
+.case-label:first-child {
+  margin-top: 0;
+}
+
+.case-body {
+  margin: 0 0 0.65rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-muted);
+}
+
+.case-list {
+  margin: 0 0 0.85rem;
+  padding-left: 1.15rem;
+  color: var(--color-text);
+  line-height: 1.62;
+}
+
+.case-list li {
+  margin-bottom: 0.35rem;
 }
 
 
@@ -437,17 +543,13 @@ nav .navbar-brand {
   }
 
 
-.gold
-{
-  color: #fbbf24;
+.gold {
+  color: var(--color-gold);
 }
 
-
-.teal
-{
-  color:#14b8a6;
+.teal {
+  color: var(--color-teal);
 }
-
 
 .centertext2new
 {
@@ -457,9 +559,8 @@ nav .navbar-brand {
 }
 
 
-.borderinsights
-{
- border: 1px solid #14b8a6; 
+.borderinsights {
+  border: 1px solid var(--color-teal);
 }
 
 

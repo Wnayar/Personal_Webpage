@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +19,22 @@
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..700;1,400&display=swap" rel="stylesheet">
 
         <link href="/static/style.css" rel="stylesheet">
+
+        <script>
+            (function () {
+                try {
+                    var k = "wn-site-theme";
+                    var t = sessionStorage.getItem(k);
+                    if (t !== "light" && t !== "dark") t = "dark";
+                    document.documentElement.setAttribute("data-theme", t);
+                    var nav = document.querySelector("nav.site-navbar");
+                    if (nav) {
+                        nav.classList.remove("navbar-dark", "navbar-light");
+                        nav.classList.add(t === "light" ? "navbar-light" : "navbar-dark");
+                    }
+                } catch (e) {}
+            })();
+        </script>
 
         {% block extrahead %}{% endblock %}
 
@@ -99,9 +115,6 @@
         <nav class="navbar navbar-dark navbar-expand-md site-navbar">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">William</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link {% if request.path.startswith('/projects') %}active fw-semibold{% endif %}" {% if request.path.startswith('/projects') %}aria-current="page"{% endif %} href="/projects">Projects</a></li>
@@ -109,9 +122,19 @@
                         <li class="nav-item"><a class="nav-link {% if request.path.startswith('/philosophy') %}active fw-semibold{% endif %}" {% if request.path.startswith('/philosophy') %}aria-current="page"{% endif %} href="/philosophy">Philosophy</a></li>
                     </ul>
                 </div>
+                <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                    <button type="button" class="theme-toggle" id="theme-toggle" title="Light mode" aria-label="Switch to light mode">
+                        <span class="theme-icon" data-theme-icon="light" aria-hidden="true">☀️</span>
+                        <span class="theme-icon" data-theme-icon="dark" hidden aria-hidden="true">🌙</span>
+                    </button>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
             </div>
         </nav>
         {% block main %}{% endblock %}
+        <script src="/static/theme.js"></script>
         <script>
             // Smooth scroll fade-in effect
             const fadeInSections = document.querySelectorAll('.fade-in-section');

@@ -45,7 +45,7 @@
             width: 14px;
             height: 14px;
             background-color: #14b8a6;
-            border: 2px solid #0a0a0b;
+            border: 2px solid var(--color-bg);
             border-radius: 50%;
             transform: translateX(-50%);
         }
@@ -57,7 +57,7 @@
         }
         .timeline-text {
             font-size: 16px;
-            color: #e6e6e6;
+            color: var(--color-text);
             line-height: 1.6;
         }
         @media (max-width: 768px) {
@@ -79,7 +79,9 @@
         <br><br><br>
         <div class="container-fluid">
             <div class="aboutme2 centertext2">
-                <h1 class="aboutme teal" style="margin-bottom: 20px;">Philosophy</h1>
+                <div class="page-title-wrap">
+                    <h1 class="aboutme teal page-title">Philosophy</h1>
+                </div>
                 <div>How I approach learning, building, and growing as a software engineer.</div>
             </div>
             <br><br>
