@@ -1,7 +1,7 @@
 Aqua Vitae — home page showcase (static/aqua-vitae/)
 ====================================================
 
-Current lineup (PNG) — home “Sneak peek” row; each card links to the live shop.
+Current lineup (PNG) — home “Passion project” row; each card links to the live shop.
 
   showcase-1.png — Site / online home
   showcase-2.png — Bottle / up close
