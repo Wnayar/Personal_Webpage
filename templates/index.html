@@ -257,7 +257,9 @@
             transition: color 0.3s ease;
         }
         .primary-cta {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background-color: var(--color-teal);
             border: 2px solid var(--color-teal);
             color: #0f0f0f;
@@ -290,6 +292,29 @@
             .primary-cta {
                 padding: 15px 40px;
                 font-size: 18px;
+                min-height: 2.75rem;
+            }
+        }
+        @media (max-width: 639.98px) {
+            .home-hero {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .namecard--home {
+                padding: 1.65rem 1.1rem 1.35rem !important;
+            }
+            .home-credentials {
+                font-size: clamp(0.8rem, 3.4vw, 0.95rem);
+                line-height: 1.45;
+                overflow-wrap: anywhere;
+            }
+            .home-lead {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .home-lead__line {
+                text-align: left;
+                text-wrap: pretty;
             }
         }
         @media (prefers-reduced-motion: no-preference) {
@@ -425,6 +450,91 @@
             </a>
             </div>
         </div>
+        </section>
+        <section
+            class="av-showcase fade-in-section"
+            aria-labelledby="av-showcase-title"
+        >
+            <div class="av-showcase__inner">
+                <p class="av-showcase__eyebrow">Sneak peek</p>
+                <h2 id="av-showcase-title" class="av-showcase__title">Aqua Vitae</h2>
+                <p class="av-showcase__sub">
+                    I&apos;m the founder of <strong>Aqua Vitae</strong> — a niche perfume brand where I get to pour
+                    passion and creativity into every bottle and every page. Below is a little preview of the site
+                    and the world around the fragrance; click or tap a card to open the live shop.
+                </p>
+                <div class="av-showcase__grid" role="list">
+                    <div class="av-showcase__frame" role="listitem">
+                        <a
+                            class="av-showcase__tile-link"
+                            href="https://www.aquavitaeparfums.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Open Aqua Vitae live site — site preview"
+                        >
+                            <div class="av-showcase__screen">
+                                <img
+                                    class="av-showcase__img"
+                                    src="/static/aqua-vitae/showcase-1.png"
+                                    data-fallback-name="showcase-1.png"
+                                    alt=""
+                                    width="640"
+                                    height="400"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="av-showcase__frame" role="listitem">
+                        <a
+                            class="av-showcase__tile-link"
+                            href="https://www.aquavitaeparfums.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Open Aqua Vitae live site — bottle preview"
+                        >
+                            <div class="av-showcase__screen">
+                                <img
+                                    class="av-showcase__img"
+                                    src="/static/aqua-vitae/showcase-2.png"
+                                    data-fallback-name="showcase-2.png"
+                                    alt=""
+                                    width="640"
+                                    height="400"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="av-showcase__frame" role="listitem">
+                        <a
+                            class="av-showcase__tile-link"
+                            href="https://www.aquavitaeparfums.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Open Aqua Vitae live site — world of the brand"
+                        >
+                            <div class="av-showcase__screen">
+                                <img
+                                    class="av-showcase__img"
+                                    src="/static/aqua-vitae/showcase-3.png"
+                                    data-fallback-name="showcase-3.png"
+                                    alt=""
+                                    width="640"
+                                    height="400"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <a class="av-showcase__link av-showcase__link--below" href="/projects#aqua-vitae"
+                    >Case study &amp; details →</a
+                >
+            </div>
         </section>
         <div class="stats-bar fade-in-section">
             <div class="stat-item">

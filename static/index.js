@@ -26,8 +26,42 @@ function initProfilePhoto() {
     img.addEventListener("error", markReady, { once: true });
 }
 
+function initAquaShowcaseImages() {
+    document.querySelectorAll("img.av-showcase__img").forEach(function (img) {
+        function fail() {
+            var screen = img.closest(".av-showcase__screen");
+            if (screen) {
+                screen.classList.add("av-showcase__screen--fallback");
+                if (!screen.querySelector(".av-showcase__fallback-hint")) {
+                    var hint = document.createElement("span");
+                    hint.className = "av-showcase__fallback-hint";
+                    var name =
+                        img.getAttribute("data-fallback-name") || "image";
+                    hint.textContent =
+                        "Add " +
+                        name +
+                        " to static/aqua-vitae/ (see README in that folder)";
+                    screen.appendChild(hint);
+                }
+            }
+            img.remove();
+        }
+        if (img.complete && img.naturalWidth === 0) {
+            fail();
+            return;
+        }
+        img.addEventListener("error", function () {
+            fail();
+        }, { once: true });
+    });
+}
+
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initProfilePhoto);
+    document.addEventListener("DOMContentLoaded", function () {
+        initProfilePhoto();
+        initAquaShowcaseImages();
+    });
 } else {
     initProfilePhoto();
+    initAquaShowcaseImages();
 }

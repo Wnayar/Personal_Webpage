@@ -179,7 +179,7 @@ nav .navbar-brand {
   justify-content: center;
   align-items: center;
   gap: 0.35rem 1rem;
-  margin-top: 0.75rem;
+  margin-top: 0;
   font-size: 0.95rem;
 }
 
@@ -203,13 +203,17 @@ nav .navbar-brand {
   padding: 2rem 1rem 0;
   max-width: 36rem;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
 }
 
 .site-footer-cta__copy {
   font-size: 1rem;
   line-height: 1.65;
   color: var(--color-muted);
-  margin: 0 0 0.5rem;
+  margin: 0;
   font-family: var(--font-sans);
 }
 
@@ -595,4 +599,352 @@ nav .navbar-brand {
   float:right;
   background-color: #14b8a6;
   filter: brightness(90%);
+}
+
+/* —— Home: Aqua Vitae featured showcase —— */
+#aqua-vitae {
+  scroll-margin-top: 5.5rem;
+}
+
+.av-showcase {
+  max-width: 1120px;
+  margin: 0 auto 2.5rem;
+  padding: 0 0.75rem;
+}
+
+.av-showcase__inner {
+  text-align: center;
+}
+
+.av-showcase__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 0.35rem;
+}
+
+.av-showcase__title {
+  font-size: clamp(1.35rem, 3.5vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.35rem;
+  color: var(--color-text);
+}
+
+.av-showcase__sub {
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  margin: 0 auto 1rem;
+  max-width: 30rem;
+  line-height: 1.65;
+}
+
+.av-showcase__sub strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.av-showcase__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-teal);
+  text-decoration: none;
+  margin-bottom: 1.75rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.av-showcase__link--below {
+  margin-top: 1.35rem;
+  margin-bottom: 0;
+}
+
+.av-showcase__tile-link {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100%;
+  margin: 0;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 16px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.av-showcase__tile-link:focus-visible {
+  outline: 2px solid var(--color-teal);
+  outline-offset: 3px;
+}
+
+.av-showcase__link:hover {
+  color: var(--color-text);
+  transform: translateX(3px);
+}
+
+.av-showcase__grid {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0.75rem;
+  padding: 0.35rem 0 0.65rem;
+  margin: 0 -0.25rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 900px) {
+  .av-showcase__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.1rem;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.av-showcase__frame {
+  margin: 0;
+  flex: 0 0 min(86vw, 340px);
+  scroll-snap-align: center;
+  text-align: center;
+  border-radius: 18px;
+  padding: 2px;
+  background: linear-gradient(
+    125deg,
+    rgba(20, 184, 166, 0.45) 0%,
+    rgba(251, 191, 36, 0.22) 45%,
+    rgba(20, 184, 166, 0.38) 100%
+  );
+  background-size: 220% 220%;
+  box-shadow: var(--shadow-soft);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in-section.is-visible .av-showcase__frame {
+    animation: avBorderDrift 10s ease-in-out infinite;
+  }
+}
+
+@keyframes avBorderDrift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .av-showcase__frame {
+    background: linear-gradient(
+      125deg,
+      rgba(20, 184, 166, 0.35),
+      rgba(251, 191, 36, 0.15),
+      rgba(20, 184, 166, 0.3)
+    );
+    background-size: 100% 100%;
+  }
+
+  .fade-in-section.is-visible .av-showcase__frame {
+    animation: none !important;
+  }
+}
+
+.av-showcase__screen {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: var(--color-bg);
+}
+
+.av-showcase__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(1.01);
+  transition: transform 0.5s ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .av-showcase__tile-link:hover .av-showcase__img {
+    transform: scale(1.04);
+  }
+}
+
+.av-showcase__screen--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.av-showcase__screen--fallback::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    -45deg,
+    rgba(20, 184, 166, 0.14),
+    rgba(10, 10, 12, 0.96),
+    rgba(251, 191, 36, 0.1),
+    rgba(20, 184, 166, 0.16)
+  );
+  background-size: 400% 400%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in-section.is-visible .av-showcase__screen--fallback::after {
+    animation: avMesh 14s ease-in-out infinite;
+  }
+}
+
+@keyframes avMesh {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.av-showcase__fallback-hint {
+  position: relative;
+  z-index: 1;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  padding: 0 1rem;
+  line-height: 1.4;
+  max-width: 11rem;
+  pointer-events: none;
+}
+
+.av-showcase .av-showcase__frame {
+  opacity: 0;
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-in-section.is-visible .av-showcase__frame:nth-child(1) {
+  opacity: 1;
+  transition-delay: 0.06s;
+}
+.fade-in-section.is-visible .av-showcase__frame:nth-child(2) {
+  opacity: 1;
+  transition-delay: 0.14s;
+}
+.fade-in-section.is-visible .av-showcase__frame:nth-child(3) {
+  opacity: 1;
+  transition-delay: 0.22s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .av-showcase .av-showcase__frame {
+    opacity: 1;
+    transition: none;
+  }
+}
+
+[data-theme="light"] .av-showcase__frame {
+  box-shadow: 0 14px 36px rgba(41, 37, 36, 0.11);
+}
+
+[data-theme="light"] .av-showcase__link:hover {
+  color: var(--color-teal);
+}
+
+/* Small screens: safe areas + readable columns (no double horizontal pad on body — keeps nav full-width) */
+@media (max-width: 639.98px) {
+  .layoutbody {
+    padding-bottom: max(0.35rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Index has full-bleed sections; inner wrappers already pad. Other pages get a safe inset without doubling Bootstrap gutters. */
+  main.page-main:has(.home-hero) {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+  }
+
+  main.page-main:not(:has(.home-hero)) {
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+    box-sizing: border-box;
+  }
+
+  .site-navbar .container-fluid {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  .av-showcase {
+    margin-bottom: 2rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .av-showcase__inner {
+    text-align: left;
+  }
+
+  .av-showcase__eyebrow,
+  .av-showcase__title {
+    text-align: center;
+  }
+
+  .av-showcase__sub {
+    text-align: left;
+    max-width: none;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  .av-showcase__link--below {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.35rem 0.5rem;
+    box-sizing: border-box;
+    margin-top: 1.25rem;
+  }
+
+  /* Edge-to-edge horizontal scroll inside padded section */
+  .av-showcase__grid {
+    overscroll-behavior-x: contain;
+    gap: 0.75rem;
+    padding-top: 0.45rem;
+    padding-bottom: 0.85rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    scroll-padding-inline: 1rem;
+  }
+
+  .av-showcase__frame {
+    flex: 0 0 min(88vw, 380px);
+  }
+
+  .av-showcase__tile-link {
+    touch-action: manipulation;
+    border-radius: 14px;
+  }
+
+  .av-showcase__screen {
+    border-radius: 14px;
+  }
 }
