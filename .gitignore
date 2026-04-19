@@ -8,6 +8,7 @@ __pycache__/
 # Virtual Environment
 venv/
 ven/
+.venv-pdf/
 env/
 ENV/
 
@@ -27,6 +28,8 @@ instance/
 .DS_Store
 Thumbs.db
 
-# Personal files
+# Personal files — never commit resumes or local exports (keep them out of the repo)
 *.pdf
 *.docx
+**/resume.pdf
+**/Resume.pdf

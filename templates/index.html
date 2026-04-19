@@ -67,9 +67,11 @@
         }
         .home-hero .links a:hover {
             transform: translateY(-4px);
-            background: rgba(20, 184, 166, 0.1);
-            border-color: rgba(20, 184, 166, 0.4);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+            background: color-mix(in srgb, var(--color-gold) 16%, transparent);
+            border-color: color-mix(in srgb, var(--color-gold) 52%, transparent);
+            box-shadow:
+                0 12px 28px rgba(0, 0, 0, 0.42),
+                0 0 22px color-mix(in srgb, var(--color-gold) 22%, transparent);
         }
         .home-hero .links a img {
             transition: transform 0.25s ease;
@@ -256,29 +258,6 @@
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        .primary-cta {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--color-teal);
-            border: 2px solid var(--color-teal);
-            color: #0f0f0f;
-            padding: 18px 50px;
-            font-size: 20px;
-            font-weight: 700;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: 0 4px 15px color-mix(in srgb, var(--color-teal) 45%, transparent);
-            margin: 20px 0;
-        }
-        .primary-cta:hover {
-            filter: brightness(1.06);
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 28px color-mix(in srgb, var(--color-teal) 38%, transparent);
-        }
         @media (max-width: 768px) {
             .stats-bar {
                 flex-direction: column;
@@ -288,11 +267,6 @@
             .stat-item {
                 width: 90%;
                 max-width: 300px;
-            }
-            .primary-cta {
-                padding: 15px 40px;
-                font-size: 18px;
-                min-height: 2.75rem;
             }
         }
         @media (max-width: 639.98px) {
@@ -383,9 +357,6 @@
         [data-theme="light"] .home-lead__rule {
             opacity: 0.55;
         }
-        [data-theme="light"] .primary-cta {
-            color: #fafaf9;
-        }
         [data-theme="light"] .home-hero .profile-photo-wrap {
             background: radial-gradient(
                 circle at 40% 35%,
@@ -404,9 +375,11 @@
             border-color: rgba(15, 118, 110, 0.22);
         }
         [data-theme="light"] .home-hero .links a:hover {
-            background: rgba(15, 118, 110, 0.1);
-            border-color: rgba(15, 118, 110, 0.38);
-            box-shadow: 0 10px 22px rgba(41, 37, 36, 0.1);
+            background: color-mix(in srgb, var(--color-gold) 22%, transparent);
+            border-color: color-mix(in srgb, var(--color-gold) 48%, transparent);
+            box-shadow:
+                0 10px 22px rgba(41, 37, 36, 0.12),
+                0 0 18px color-mix(in srgb, var(--color-gold) 18%, transparent);
         }
     </style>
     <main class="page-main">
@@ -419,7 +392,7 @@
                 </div>
                 <img id="profile" src="/static/profile_picture_black.png" alt="William Nayar" width="200" height="200" loading="eager" decoding="async">
             </div>
-            <p class="home-signature home-entrance home-entrance--0">~/ship · measure · improve</p>
+            <p class="home-signature home-entrance home-entrance--0">live · learn · grow</p>
             <noscript>
                 <style>
                     .profile-photo-wrap #profile { opacity: 1 !important; }
@@ -459,9 +432,10 @@
                 <p class="av-showcase__eyebrow">Sneak peek</p>
                 <h2 id="av-showcase-title" class="av-showcase__title">Aqua Vitae</h2>
                 <p class="av-showcase__sub">
-                    I&apos;m the founder of <strong>Aqua Vitae</strong> — a niche perfume brand where I get to pour
-                    passion and creativity into every bottle and every page. Below is a little preview of the site
-                    and the world around the fragrance; click or tap a card to open the live shop.
+                    <strong>Aqua Vitae</strong> is my niche perfume brand — passion and creativity in every fragrance,
+                    and the same attention in how it shows up online. The previews below are straight from the live site:
+                    <strong>tap any card</strong> to open the shop in a new tab. For how I built it as code, use
+                    <a class="av-showcase__inline-link" href="/projects#aqua-vitae">the case study</a>.
                 </p>
                 <div class="av-showcase__grid" role="list">
                     <div class="av-showcase__frame" role="listitem">
@@ -555,8 +529,17 @@
             </div>
         </div>
         <br><br>
-        <div class="fade-in-section" style="text-align: center;">
-            <a href="/projects" class="primary-cta">View My Projects →</a>
+        <div class="fade-in-section home-projects-cta-wrap">
+            <a href="/projects" class="home-projects-cta">
+                <span class="home-projects-cta__sheen" aria-hidden="true"></span>
+                <span class="home-projects-cta__inner">
+                    <span class="home-projects-cta__eyebrow">Selected work</span>
+                    <span class="home-projects-cta__title">View My Projects</span>
+                </span>
+                <span class="home-projects-cta__arrow" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </span>
+            </a>
         </div>
         <br>
         <div class="divborder"></div>
