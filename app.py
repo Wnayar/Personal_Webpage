@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, redirect, render_template, url_for
 from flask_session import Session
 
 # Configure application
@@ -35,9 +35,14 @@ def insights_redirect():
     return render_template("guides.html")
 
 
+@app.route("/philosophy")
+def philosophy():
+    return render_template("philosophy.html")
+
+
 @app.route("/motivation")
-def motivation():
-    return render_template("motivation.html")
+def motivation_redirect():
+    return redirect(url_for("philosophy"), code=301)
 
 
 # the following below is to configure to host on pythonanywhere

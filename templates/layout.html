@@ -14,7 +14,13 @@
         <!-- https://favicon.io/emoji-favicons/bow-and-arrow -->
         <link href="/static/favicon.ico" rel="icon">
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..700;1,400&display=swap" rel="stylesheet">
+
         <link href="/static/style.css" rel="stylesheet">
+
+        {% block extrahead %}{% endblock %}
 
         <!-- https://github.com/mattboldt/typed.js/ -->
         <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
@@ -30,10 +36,10 @@
             .nav-link:hover {
                 color: #14b8a6 !important;
             }
-            .navbar-brand span {
+            .navbar-brand {
                 transition: color 0.3s ease;
             }
-            .navbar-brand:hover span {
+            .navbar-brand:hover {
                 color: #14b8a6 !important;
             }
             /* Global link hover effects */
@@ -44,15 +50,11 @@
                 color: #fde68a !important;
                 text-decoration: underline;
             }
-            a:not(.gold):not(.nav-link):not(.navbar-brand):not(.explore-button):hover {
-                opacity: 0.8;
-                transform: translateY(-1px);
-            }
-            /* Smooth fade-in animations */
+            /* Motion limited to interactive controls; body links stay stable */
             .fade-in-section {
                 opacity: 0;
-                transform: translateY(20px);
-                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+                transform: translateY(12px);
+                transition: opacity 0.45s ease-out, transform 0.45s ease-out;
             }
             .fade-in-section.is-visible {
                 opacity: 1;
@@ -94,17 +96,17 @@
         <title>William Nayar {% block title %}{% endblock %} </title>
     </head>
     <body class="layoutbody">
-        <nav class="navbar navbar-dark navbar-expand-md">
+        <nav class="navbar navbar-dark navbar-expand-md site-navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"><span>W</span><span>I</span><span>L</span><span>L</span><span>-</span><span>I</span><span>-</span><span>A</span><span>M</span></a>
+                <a class="navbar-brand" href="/">William</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/projects">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/guides">Guides</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/motivation">Philosophy</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.path.startswith('/projects') %}active fw-semibold{% endif %}" {% if request.path.startswith('/projects') %}aria-current="page"{% endif %} href="/projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.path.startswith('/guides') %}active fw-semibold{% endif %}" {% if request.path.startswith('/guides') %}aria-current="page"{% endif %} href="/guides">Guides</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.path.startswith('/philosophy') %}active fw-semibold{% endif %}" {% if request.path.startswith('/philosophy') %}aria-current="page"{% endif %} href="/philosophy">Philosophy</a></li>
                     </ul>
                 </div>
             </div>

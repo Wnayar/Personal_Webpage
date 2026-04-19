@@ -1,75 +1,120 @@
-/* size of text webpage home */
-nav .navbar-brand
-{
-    font-size: xx-large;
+/* —— Design tokens —— */
+:root {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-bg: #0a0a0b;
+  --color-text: #e2e8f0;
+  --color-muted: #94a3b8;
+  --color-teal: #14b8a6;
+  --color-teal-dim: rgba(20, 184, 166, 0.35);
+  --color-gold: #fbbf24;
+  --color-border: #1e293b;
+  --radius-card: 12px;
+  --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+nav .navbar-brand {
+    font-size: clamp(1.25rem, 3vw, 1.45rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.layoutbody {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: var(--color-bg) !important;
+  border-bottom: 1px solid var(--color-border);
 }
 
 
-/* colors for webpage home*/
-nav .navbar-brand span:nth-child(1) 
-{
-    color: #14b8a6; 
-}
-  
-nav .navbar-brand span:nth-child(2) 
-{
-    color: #14b8a6; 
-}
-  
-nav .navbar-brand span:nth-child(3) 
-{
-    color: #2dd4bf; 
-}
-  
-nav .navbar-brand span:nth-child(4) 
-{
-    color: #5eead4; 
-}
-  
-nav .navbar-brand span:nth-child(5) 
-{
-    color: #f59e0b; 
-}
-  
-nav .navbar-brand span:nth-child(6) 
-{
-    color: #fbbf24; 
-}
-  
-nav .navbar-brand span:nth-child(7) 
-{
-    color: #fcd34d; 
-
-}
-  
-nav .navbar-brand span:nth-child(8) 
-{
-    color: #fbbf24; 
-
-}
-  
-nav .navbar-brand span:nth-child(9) 
-{
-    color: #f59e0b; 
+.divborder {
+  border: 1px solid var(--color-border);
 }
 
-
-.layoutbody
-{
-  background-color: #0f0f0f;  
-  color:#e6e6e6;
+/* Full-opacity main column (avoid muddy 87% overlay) */
+.page-main {
+  opacity: 1;
 }
 
-
-.divborder
-{
-  border:1px solid #1a1a1a;
+.opacity {
+  opacity: 1;
 }
 
+.navbar .nav-link.active {
+  color: var(--color-teal) !important;
+}
 
-.opacity
-{
-  opacity: 87%;
+.card-hover {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+@media (hover: hover) {
+  .card-hover:hover {
+    transform: translateY(-3px);
+    border-color: rgba(20, 184, 166, 0.35) !important;
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+/* Compact footer navigation (shared) */
+.site-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.site-footer-links a {
+  color: var(--color-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-footer-links a:hover {
+  color: var(--color-teal);
+}
+
+.site-footer-links .sep {
+  color: var(--color-border);
+  user-select: none;
+}
+
+.site-footer-cta {
+  text-align: center;
+  padding: 2rem 1rem 0;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.site-footer-cta__copy {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-muted);
+  margin: 0 0 0.5rem;
+  font-family: var(--font-sans);
+}
+
+.site-footer-cta__mail {
+  color: var(--color-teal);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.site-footer-cta__mail:hover {
+  color: #5eead4;
 }
 
 
@@ -265,8 +310,8 @@ nav .navbar-brand span:nth-child(9)
     align-items: center;
     justify-content: center;
     padding: 20px;
-    color: #e6e6e6;
-    font-family: Arial, sans-serif;
+    color: var(--color-text);
+    font-family: var(--font-sans);
     margin: 0 auto;
     text-align: center;
   }
@@ -301,7 +346,7 @@ nav .navbar-brand span:nth-child(9)
   {
     font-size: 16px;
     line-height: 1.5;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-sans);
   }
 
 
@@ -309,7 +354,7 @@ nav .navbar-brand span:nth-child(9)
   {
     font-size: 20px;
     line-height: 1.5;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-sans);
   }
 
 
@@ -317,69 +362,63 @@ nav .navbar-brand span:nth-child(9)
   {
     font-size: 18px;
     line-height: 1.5;
-    color:#14b8a6;
-    font-family: 'Times New Roman', Times, serif;
+    color: var(--color-teal);
+    font-family: var(--font-sans);
     font-style: italic;
   }
 
 
   .aboutme
   {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-sans);
   }
 
 
   .aboutme2 
   {
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-family: var(--font-sans);
   }
 
   .copyright
   {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: var(--font-sans);
+    color: var(--color-muted);
+    font-size: 0.875rem;
   }
 
   .centertext1
   {
     text-align: center;
-    padding-right: 62%; 
+    padding-right: 0;
+    padding-left: 0;
   }
 
 
-  .centertext1motivation
+  .centertext1philosophy
   {
     text-align: center;
-    padding-right: 61%; 
+    padding-right: 61%;
   }
-
 
   .centertext1new
   {
     text-align: center;
-    padding-right: 61%; 
+    padding-right: 61%;
   }
 
-
-  .centertext1motivation
+  .centertext1philosophynew
   {
     text-align: center;
-    padding-right: 61%; 
+    padding-right: 54%;
   }
 
-
-  .centertext1motivationnew
+  .centertext1philosophynewest
   {
     text-align: center;
-    padding-right: 54%; 
-  }
-
-
-  .centertext1motivationnewest
-  {
-    text-align: center;
-    padding-right: 63%; 
+    padding-right: 63%;
   }
 
   
@@ -392,9 +431,9 @@ nav .navbar-brand span:nth-child(9)
 
   .centertext2
   {
-    line-height: 160%;
-    padding-left: 15%;
-    padding-right:15%; 
+    line-height: 1.7;
+    padding-left: 12%;
+    padding-right: 12%;
   }
 
 
@@ -412,9 +451,9 @@ nav .navbar-brand span:nth-child(9)
 
 .centertext2new
 {
-  line-height: 160%;
-  padding-left: 17%;
-  padding-right:17%; 
+  line-height: 1.65;
+  padding-left: 12%;
+  padding-right: 12%;
 }
 
 
@@ -431,7 +470,7 @@ nav .navbar-brand span:nth-child(9)
 }
 
 
-.motivationvideos
+.philosophyvideos
 {
     width: 100%;
     height: auto;

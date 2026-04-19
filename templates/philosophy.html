@@ -23,8 +23,8 @@
             position: relative;
             margin-bottom: 60px;
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(10px);
+            transition: opacity 0.45s ease-out, transform 0.45s ease-out;
         }
         .timeline-item.is-visible {
             opacity: 1;
@@ -42,13 +42,12 @@
             position: absolute;
             left: 50%;
             top: 10px;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background-color: #14b8a6;
-            border: 3px solid #0f0f0f;
+            border: 2px solid #0a0a0b;
             border-radius: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 0 20px rgba(20, 184, 166, 0.6);
         }
         .timeline-year {
             font-size: 18px;
@@ -76,7 +75,7 @@
             }
         }
     </style>
-    <div class="opacity">
+    <main class="page-main">
         <br><br><br>
         <div class="container-fluid">
             <div class="aboutme2 centertext2">
@@ -93,35 +92,49 @@
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-year">Jan 2023</div>
-                        <div class="timeline-text"><strong>Harvard CS50</strong> - Started my coding journey. Learned C, Python, algorithms, and data structures.</div>
+                        <div class="timeline-text"><strong>Harvard CS50</strong> — Started my coding journey with C, Python, algorithms, and data structures.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Mar 2023</div>
+                        <div class="timeline-text"><strong>Personal portfolio</strong> — Built my first serious web app with Python and Flask: server-side routing, Jinja inheritance, and a responsive HTML/CSS/JavaScript front end. Deployed on PythonAnywhere with WSGI for production hosting.</div>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-year">Aug 2023</div>
-                        <div class="timeline-text"><strong>National University of Singapore</strong> - Began Computer Science degree, specializing in Software Engineering.</div>
+                        <div class="timeline-text"><strong>National University of Singapore</strong> — Began Computer Science, focusing on software engineering and systems that scale.</div>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-year">May 2024</div>
-                        <div class="timeline-text"><strong>NUS-GroupMatch</strong> - Built my first full-stack MERN application with authentication and MongoDB.</div>
+                        <div class="timeline-text"><strong>NUS-GroupMatch</strong> — Full-stack MERN app (MongoDB, Express, React, Node.js): auth, REST APIs, and schemas for users, groups, and memberships.</div>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-year">Aug 2025</div>
-                        <div class="timeline-text"><strong>PeerPrep Backend</strong> - Developed microservices architecture with 15 REST API endpoints and MongoDB aggregation.</div>
+                        <div class="timeline-text"><strong>PeerPrep</strong> — Backend developer on a distributed platform: Node.js, TypeScript, Express, MongoDB aggregation pipelines, and 15 REST API endpoints for question flows (through Nov 2025).</div>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <div class="timeline-year">Jan 2026</div>
-                        <div class="timeline-text"><strong>Founded Aqua Vitae</strong> - Launched production e-commerce site with React, TypeScript, and Shopify integration.</div>
+                        <div class="timeline-text"><strong>Aqua Vitae</strong> — Founded and shipped a production e-commerce site: React, TypeScript, Tailwind, Vite, Shopify checkout, deployed on Vercel—building scalable backend and full-stack experiences alongside my degree.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">11 May 2026</div>
+                        <div class="timeline-text"><strong>Orca Slicer</strong> — Software engineering internship begins. I join the team building product and tooling used by makers and the 3D printing community worldwide.</div>
                     </div>
                 </div>
             </div>
@@ -130,49 +143,22 @@
                 <h3 class="teal" style="font-size: 28px; margin-bottom: 20px;">Kaizen: Continuous Improvement</h3>
                 <p><span class="gold">Kaizen</span> is a Japanese philosophy meaning "change for better." Small, incremental changes compound into remarkable results over time. <span class="gold">I aim to be 1% better than yesterday.</span></p>
                 <br>
-                <p><span class="gold">I love learning and building</span>. Every problem I solve, every project I ship teaches me something valuable. This philosophy took me from barely writing a for loop in 2023 to <span class="gold">founding and developing Aqua Vitae</span> and building production applications.</p>
+                <p><span class="gold">I love learning and building</span>. Every problem I solve, every project I ship teaches me something valuable. This philosophy took me from barely writing a for loop in 2023 to <span class="gold">founding Aqua Vitae</span>, shipping backends and full-stack apps with <span class="gold">Node.js, TypeScript, MongoDB, and PostgreSQL</span>, and stepping into my next chapter as a software engineering intern at <span class="gold">Orca Slicer</span> (from 11 May 2026).</p>
                 <br>
                 <p><span class="gold">The goal isn't perfection. The goal is progress.</span></p>
             </div>
         </div>
-        <br><br><br>
         <div class="divborder"></div>
-        <br><br>
-        <style>
-            .explore-button {
-                background-color: #14b8a6;
-                border: 2px solid #14b8a6;
-                color: #0f0f0f;
-                padding: 15px 45px;
-                font-size: 18px;
-                font-weight: 600;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                text-decoration: none;
-                display: inline-block;
-                box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);
-            }
-            .explore-button:hover {
-                background-color: #0d9488;
-                border-color: #0d9488;
-                color: #ffffff;
-                transform: translateY(-3px);
-                box-shadow: 0 6px 16px rgba(20, 184, 166, 0.5);
-            }
-        </style>
-        <div class="container-fluid" style="text-align: center;">
-            <h2 class="aboutme2" style="margin-bottom: 20px;">Want to see more?</h2>
-            <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 0 auto;">
-                <a href="/" class="explore-button">Home →</a>
-                <a href="/projects" class="explore-button">Projects →</a>
-                <a href="/guides" class="explore-button">Guides →</a>
-            </div>
+        <div class="container-fluid fade-in-section site-footer-cta">
+            <p class="site-footer-cta__copy">Let's connect — <a href="mailto:wnayar98@gmail.com" class="site-footer-cta__mail">wnayar98@gmail.com</a></p>
+            <nav class="site-footer-links" aria-label="Site">
+                <a href="/">Home</a><span class="sep">·</span><a href="/projects">Projects</a><span class="sep">·</span><a href="/guides">Guides</a>
+            </nav>
         </div>
-        <br><br><br>
+        <br><br>
         <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
         <br><br>
-    </div>
+    </main>
     <script>
         // Timeline animation
         const timelineItems = document.querySelectorAll('.timeline-item');

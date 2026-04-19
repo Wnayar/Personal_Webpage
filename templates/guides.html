@@ -13,26 +13,11 @@
             padding-right: 15%;
         }
         .guide-card {
-            background-color: rgba(20, 184, 166, 0.03);
-            border: 1px solid rgba(20, 184, 166, 0.2);
-            border-radius: 10px;
+            background-color: rgba(20, 184, 166, 0.04);
+            border: 1px solid rgba(20, 184, 166, 0.14);
+            border-radius: var(--radius-card, 12px);
             padding: 25px;
             margin-bottom: 30px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-        /* Only enable tilt on desktop */
-        @media (min-width: 769px) {
-            .guide-card:hover {
-                transform: perspective(1000px) rotateX(2deg) translateY(-5px);
-                background-color: rgba(20, 184, 166, 0.08);
-                box-shadow: 0 10px 30px rgba(20, 184, 166, 0.15);
-            }
-        }
-        /* Simple highlight on mobile */
-        @media (max-width: 768px) {
-            .guide-card:active {
-                background-color: rgba(20, 184, 166, 0.08);
-            }
         }
         .guide-link {
             display: inline-block;
@@ -50,11 +35,11 @@
         .guide-link:hover {
             background-color: #0d9488;
             color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.5);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(20, 184, 166, 0.35);
         }
     </style>
-    <div class="opacity">
+    <main class="page-main">
         <br><br><br>
         <div class="container-fluid">
             <div class="aboutme2 centertext2">
@@ -63,7 +48,7 @@
             </div>
             <br><br>
             <div class="aboutme2 centertext2new">
-            <div class="fade-in-section guide-card">
+            <div class="fade-in-section guide-card card-hover">
                 <h2 class="teal">Getting Started with CS50</h2>
                 <div style="color: #fbbf24; font-size: 15px; margin-top: 8px; margin-bottom: 15px; font-weight: 600;">Beginner's Guide</div>
                 <p>My journey into computer science began with Harvard's CS50: Introduction to Computer Science in early 2023. In fact, this very website was built as my CS50 Final Project. That foundation launched me into building production applications like Aqua Vitae, working with microservices architectures in PeerPrep, and developing full-stack MERN applications.</p>
@@ -71,7 +56,7 @@
                 <p>The course was challenging at first—the jump from lectures to problem sets is significant—but documentation, AI tools, and online communities become your best resources. Don't give up! By week 5, programming will start to feel natural. From there, you can build real projects and continue growing your skills, just like I did.</p>
                 <a class="guide-link" href="https://pll.harvard.edu/course/cs50-introduction-computer-science?delta=0" target="_blank">View CS50 Course →</a>
             </div>
-            <div class="fade-in-section guide-card">
+            <div class="fade-in-section guide-card card-hover">
                 <h2 class="teal">Local Development & Git/GitHub Setup</h2>
                 <div style="color: #fbbf24; font-size: 15px; margin-top: 8px; margin-bottom: 15px; font-weight: 600;">Developer Tools Guide</div>
                 <p>Throughout CS50, students code in Codespaces—a virtual machine with everything pre-configured. While great for beginners, I highly encourage developing your final project locally on your own machine. It offers a truly rich learning experience.</p>
@@ -85,42 +70,15 @@
             </div>
             </div>
         </div>
-        <br><br>
         <div class="divborder"></div>
-        <br>
-        <style>
-            .explore-button {
-                background-color: #14b8a6;
-                border: 2px solid #14b8a6;
-                color: #0f0f0f;
-                padding: 15px 45px;
-                font-size: 18px;
-                font-weight: 600;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                text-decoration: none;
-                display: inline-block;
-                box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);
-            }
-            .explore-button:hover {
-                background-color: #0d9488;
-                border-color: #0d9488;
-                color: #ffffff;
-                transform: translateY(-3px);
-                box-shadow: 0 6px 16px rgba(20, 184, 166, 0.5);
-            }
-        </style>
-        <div class="container-fluid" style="text-align: center;">
-            <h2 class="aboutme2" style="margin-bottom: 20px;">Want to see more?</h2>
-            <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 0 auto;">
-                <a href="/" class="explore-button">Home →</a>
-                <a href="/projects" class="explore-button">Projects →</a>
-                <a href="/motivation" class="explore-button">Philosophy →</a>
-            </div>
+        <div class="container-fluid fade-in-section site-footer-cta">
+            <p class="site-footer-cta__copy">Questions? — <a href="mailto:wnayar98@gmail.com" class="site-footer-cta__mail">wnayar98@gmail.com</a></p>
+            <nav class="site-footer-links" aria-label="Site">
+                <a href="/">Home</a><span class="sep">·</span><a href="/projects">Projects</a><span class="sep">·</span><a href="/philosophy">Philosophy</a>
+            </nav>
         </div>
-        <br><br><br>
+        <br><br>
         <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
         <br><br>
-    </div>
+    </main>
 {% endblock %}

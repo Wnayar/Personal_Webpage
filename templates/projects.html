@@ -24,46 +24,37 @@
         .project-button:hover {
             background-color: #14b8a6;
             color: #0f0f0f;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(20, 184, 166, 0.28);
         }
-        /* Project card tilt effect */
         .project-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
             padding: 20px;
-            border-radius: 8px;
-            background-color: rgba(20, 184, 166, 0.03);
+            border-radius: var(--radius-card, 12px);
+            background-color: rgba(20, 184, 166, 0.04);
+            border: 1px solid rgba(20, 184, 166, 0.12);
         }
-        /* Only enable tilt on desktop */
-        @media (min-width: 769px) {
+        @media (hover: hover) {
             .project-card:hover {
-                transform: perspective(1000px) rotateX(2deg) translateY(-5px);
-                background-color: rgba(20, 184, 166, 0.08);
-                box-shadow: 0 10px 30px rgba(20, 184, 166, 0.15);
+                background-color: rgba(20, 184, 166, 0.07);
             }
         }
-        /* Simple highlight on mobile */
-        @media (max-width: 768px) {
-            .project-card:active {
-                background-color: rgba(20, 184, 166, 0.08);
-            }
-        }
-        /* Contributions card hover effect */
         .contributions-card {
-            transition: all 0.4s ease;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
-        .contributions-card:hover {
-            box-shadow: 0 0 40px rgba(20, 184, 166, 0.4), 0 0 80px rgba(20, 184, 166, 0.2) !important;
-            border-color: rgba(20, 184, 166, 0.5);
+        @media (hover: hover) {
+            .contributions-card:hover {
+                border-color: rgba(20, 184, 166, 0.35);
+                box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+            }
         }
     </style>
-    <div class="opacity">
+    <main class="page-main">
         <br><br><br>
         <div class="container-fluid">
             <h1 class="aboutme centertext1 teal">Projects</h1>
             <br>
             <div class="aboutme2 centertext2new">
-                <div class="fade-in-section project-card">
+                <div class="fade-in-section project-card card-hover">
                 <h3 class="teal">PeerPrep</h3>
                 <div style="margin-bottom: 5px;"><strong class="gold">Backend Developer</strong></div>
                 <div><span class="gold">Aug 2025 - Nov 2025</span> | MongoDB | Node.js | Express | TypeScript | Mongoose</div>
@@ -81,7 +72,7 @@
                 </div>
                 <br><br>
                 
-                <div class="fade-in-section project-card">
+                <div class="fade-in-section project-card card-hover">
                 <h3 class="teal">Aqua Vitae</h3>
                 <div style="margin-bottom: 5px;"><strong class="gold">Founder & Full-Stack Developer</strong></div>
                 <div><span class="gold">Jan 2026 - Present</span> | React | TypeScript | Tailwind CSS | Vite | Shopify | Vercel</div>
@@ -101,7 +92,7 @@
                 </div>
                 <br><br>
                 
-                <div class="fade-in-section project-card">
+                <div class="fade-in-section project-card card-hover">
                 <h3 class="teal">NUS-GroupMatch</h3>
                 <div style="margin-bottom: 5px;"><strong class="gold">Full-Stack Developer</strong></div>
                 <div><span class="gold">May 2024 - Jul 2024</span> | MongoDB | Express | React | Node.js</div>
@@ -119,7 +110,7 @@
                 </div>
                 <br><br>
                 
-                <div class="fade-in-section project-card">
+                <div class="fade-in-section project-card card-hover">
                 <h3 class="teal">Personal Portfolio</h3>
                 <div style="margin-bottom: 5px;"><strong class="gold">Full-Stack Developer</strong></div>
                 <div><span class="gold">Mar 2023 - May 2023</span> | Python | Flask | HTML | CSS | JavaScript</div>
@@ -130,10 +121,9 @@
                 </div>
                 <br>
                 <ul>
-                    <li>Developed a personal portfolio website using Flask with server-side routing and dynamic templates</li>
-                    <li>Implemented backend request handling and session management</li>
-                    <li>Built a responsive frontend using HTML, CSS, JavaScript, and Jinja templates</li>
-                    <li>Deployed the application on PythonAnywhere</li>
+                    <li>Developed a personal portfolio website using Python and Flask with server-side routing and Jinja template inheritance for reusable layout components</li>
+                    <li>Built a responsive frontend with HTML, CSS, and JavaScript, implementing interactive UI features such as scroll animations and hover effects</li>
+                    <li>Deployed the application on PythonAnywhere, configuring WSGI and environment settings to support production hosting</li>
                 </ul>
                 </div>
             </div>
@@ -146,7 +136,7 @@
                 <h3 class="teal" style="margin-bottom: 20px;">GitHub Activity</h3>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
                     <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Wnayar&layout=compact&theme=dark&bg_color=0f0f0f&title_color=14b8a6&text_color=e6e6e6&border_color=1a1a1a&hide_border=false" alt="Top Languages" style="max-width: 100%; height: auto; border-radius: 8px;">
-                    <div class="contributions-card" style="background-color: rgba(20, 184, 166, 0.03); border: 1px solid rgba(20, 184, 166, 0.2); border-radius: 10px; padding: 35px 60px; max-width: 400px; box-shadow: 0 2px 10px rgba(20, 184, 166, 0.08);">
+                    <div class="contributions-card" style="background-color: rgba(20, 184, 166, 0.04); border: 1px solid rgba(20, 184, 166, 0.16); border-radius: 12px; padding: 35px 60px; max-width: 400px;">
                         <div style="font-size: 52px; font-weight: 700; color: #14b8a6; margin-bottom: 10px; letter-spacing: -1px;">4,392</div>
                         <div style="font-size: 16px; color: #e6e6e6; font-weight: 500;">Total Contributions</div>
                         <div style="font-size: 13px; color: #64748b; margin-top: 8px;">Nov 2022 - Present</div>
@@ -211,42 +201,15 @@
         <div class="container-fluid fade-in-section" style="text-align: center;">
             <a class="project-button" href="https://github.com/Wnayar" target="_blank" style="font-size: 18px; padding: 14px 35px;">View All Projects on GitHub →</a>
         </div>
-        <br><br>
         <div class="divborder"></div>
-        <br>
-        <style>
-            .explore-button {
-                background-color: #14b8a6;
-                border: 2px solid #14b8a6;
-                color: #0f0f0f;
-                padding: 15px 45px;
-                font-size: 18px;
-                font-weight: 600;
-                border-radius: 8px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                text-decoration: none;
-                display: inline-block;
-                box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);
-            }
-            .explore-button:hover {
-                background-color: #0d9488;
-                border-color: #0d9488;
-                color: #ffffff;
-                transform: translateY(-3px);
-                box-shadow: 0 6px 16px rgba(20, 184, 166, 0.5);
-            }
-        </style>
-        <div class="container-fluid" style="text-align: center;">
-            <h2 class="aboutme2" style="margin-bottom: 20px;">Want to see more?</h2>
-            <div style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin: 0 auto;">
-                <a href="/" class="explore-button">Home →</a>
-                <a href="/guides" class="explore-button">Guides →</a>
-                <a href="/motivation" class="explore-button">Philosophy →</a>
-            </div>
+        <div class="container-fluid fade-in-section site-footer-cta">
+            <p class="site-footer-cta__copy">Open to collaborations — <a href="mailto:wnayar98@gmail.com" class="site-footer-cta__mail">wnayar98@gmail.com</a></p>
+            <nav class="site-footer-links" aria-label="Site">
+                <a href="/">Home</a><span class="sep">·</span><a href="/guides">Guides</a><span class="sep">·</span><a href="/philosophy">Philosophy</a>
+            </nav>
         </div>
-        <br><br><br>
+        <br><br>
         <P class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></P>
         <br><br>
-    </div>
+    </main>
 {% endblock %}

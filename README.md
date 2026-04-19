@@ -75,7 +75,7 @@ Personal_Webpage/
     ├── index.html        # Homepage with stats and intro
     ├── projects.html     # Projects showcase with GitHub activity
     ├── guides.html       # Developer guides and resources
-    └── motivation.html   # Philosophy page with timeline
+    └── philosophy.html   # Philosophy page with timeline
 ```
 
 ## Local Development
