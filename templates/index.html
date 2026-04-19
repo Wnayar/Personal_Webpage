@@ -43,53 +43,66 @@
         [data-theme="light"] .home-hero .interestsmain h2 {
             color: var(--color-text);
         }
+        /* Socials: logos only; override global .links { width: 150px } from style.css */
         .home-hero .links {
             display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 1.35rem;
             width: auto;
             max-width: none;
-            margin-bottom: 0;
+            margin: 0 auto;
+            padding: 0;
+            border: none;
+            background: none;
+            box-shadow: none;
+            -webkit-tap-highlight-color: transparent;
         }
         .home-hero .links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(20, 184, 166, 0.16);
-            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-        }
-        .home-hero .links a:hover {
-            transform: translateY(-4px);
-            background: color-mix(in srgb, var(--color-gold) 16%, transparent);
-            border-color: color-mix(in srgb, var(--color-gold) 52%, transparent);
-            box-shadow:
-                0 12px 28px rgba(0, 0, 0, 0.42),
-                0 0 22px color-mix(in srgb, var(--color-gold) 22%, transparent);
+            padding: 0.35rem;
+            margin: 0;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
+            line-height: 0;
         }
         .home-hero .links a img {
-            transition: transform 0.25s ease;
-            filter: none;
-        }
-        .home-hero .links a:hover img {
-            transform: scale(1.06);
-            filter: none;
-            box-shadow: none;
-        }
-        .home-hero .links img {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            object-fit: contain;
-        }
-        .home-hero .links img.social-icon--instagram {
+            display: block;
             width: 28px;
             height: 28px;
-            border-radius: 22%;
+            object-fit: contain;
+            border: none;
+            border-radius: 0;
+            transform: scale(1);
+            transition: transform 0.38s cubic-bezier(0.33, 1, 0.32, 1);
+        }
+        .home-hero .links img.social-icon--instagram {
+            width: 30px;
+            height: 30px;
+        }
+        @media (hover: hover) {
+            .home-hero .links a:hover img {
+                transform: scale(1.14);
+            }
+        }
+        .home-hero .links a:focus-visible {
+            outline: 2px solid var(--color-teal);
+            outline-offset: 4px;
+            border-radius: 2px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .home-hero .links a img {
+                transition: none;
+            }
+            .home-hero .links a:hover img {
+                transform: scale(1);
+            }
         }
         .home-hero .profile-photo-wrap {
             position: relative;
@@ -398,17 +411,6 @@
                 0 0 0 6px rgba(15, 118, 110, 0.22),
                 0 16px 36px rgba(15, 23, 42, 0.1),
                 inset 0 0 0 1px rgba(15, 118, 110, 0.12);
-        }
-        [data-theme="light"] .home-hero .links a {
-            background: rgba(15, 23, 42, 0.05);
-            border-color: rgba(15, 118, 110, 0.22);
-        }
-        [data-theme="light"] .home-hero .links a:hover {
-            background: color-mix(in srgb, var(--color-gold) 22%, transparent);
-            border-color: color-mix(in srgb, var(--color-gold) 48%, transparent);
-            box-shadow:
-                0 10px 22px rgba(15, 23, 42, 0.1),
-                0 0 18px color-mix(in srgb, var(--color-gold) 18%, transparent);
         }
     </style>
     <main class="page-main">
