@@ -18,26 +18,26 @@
   --home-lead-highlight: #fcd34d;
 }
 
-/* Warm “paper” light mode — off-white stone, muted accents (not clinical white + neon teal). */
+/* Light mode — cool slate neutrals + teal; amber accents (not brown/stone rust). */
 html {
   overflow-x: clip;
   -webkit-text-size-adjust: 100%;
 }
 
 [data-theme="light"] {
-  --color-bg: #e7e4df;
-  --color-text: #292524;
-  --color-muted: #78716c;
+  --color-bg: #f8fafc;
+  --color-text: #1e293b;
+  --color-muted: #64748b;
   --color-teal: #0f766e;
-  --color-teal-dim: rgba(15, 118, 110, 0.22);
-  --color-gold: #9a3412;
-  --color-border: #c4bfba;
-  --color-card-bg: #dcdbd6;
-  --color-card-bg-hover: #d1cfca;
-  --color-card-border: #b8b4ad;
-  --shadow-soft: 0 14px 36px rgba(41, 37, 36, 0.1);
-  --home-lead-em: #115e59;
-  --home-lead-highlight: #9a3412;
+  --color-teal-dim: rgba(15, 118, 110, 0.2);
+  --color-gold: #b45309;
+  --color-border: #e2e8f0;
+  --color-card-bg: #f1f5f9;
+  --color-card-bg-hover: #e2e8f0;
+  --color-card-border: #cbd5e1;
+  --shadow-soft: 0 14px 36px rgba(15, 23, 42, 0.08);
+  --home-lead-em: #0f766e;
+  --home-lead-highlight: #b45309;
 }
 
 nav .navbar-brand {
@@ -133,6 +133,30 @@ nav .navbar-brand {
   font-size: clamp(1.85rem, 4.5vw, 2.35rem);
   font-weight: 700;
   letter-spacing: -0.03em;
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: clamp(1.45rem, 5.2vw, 1.85rem);
+  }
+
+  .site-footer-cta__copy {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .case-list {
+    font-size: 1rem;
+  }
+
+  .av-showcase__title {
+    font-size: clamp(1.15rem, 4vw, 1.45rem);
+  }
+
+  .av-showcase__link,
+  .av-showcase__link--below {
+    font-size: 1rem;
+  }
 }
 
 /* Case study blocks (Projects page) */
@@ -279,7 +303,7 @@ nav .navbar-brand {
 
 [data-theme="light"] .project-card,
 [data-theme="light"] .guide-card {
-  box-shadow: 0 12px 32px rgba(41, 37, 36, 0.07);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
 }
 
 @media (hover: hover) {
@@ -335,7 +359,7 @@ nav .navbar-brand {
 }
 
 [data-theme="light"] .contributions-card:hover {
-  box-shadow: 0 14px 36px rgba(41, 37, 36, 0.1);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.09);
 }
 
 .gh-stats-card {
@@ -1212,7 +1236,7 @@ nav .navbar-brand {
 }
 
 [data-theme="light"] .av-showcase__frame {
-  box-shadow: 0 14px 36px rgba(41, 37, 36, 0.11);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.09);
 }
 
 [data-theme="light"] .av-showcase__link:hover {
@@ -1480,60 +1504,50 @@ nav .navbar-brand {
   }
 }
 
+/* Light: outline + white surface (matches project buttons); dark pill looked muddy on slate bg */
 [data-theme="light"] .home-projects-cta {
-  color: #fafaf9;
-  background:
-    linear-gradient(165deg, rgba(255, 255, 255, 0.18) 0%, transparent 40%) padding-box,
-    linear-gradient(160deg, var(--color-teal) 0%, color-mix(in srgb, var(--color-teal) 78%, #0f3d38) 100%) padding-box,
-    linear-gradient(
-      125deg,
-      color-mix(in srgb, var(--color-teal) 90%, #0a3d38),
-      color-mix(in srgb, var(--color-gold) 55%, #0f766e) 50%,
-      color-mix(in srgb, var(--color-teal) 85%, #134e4a) 100%
-    ) border-box;
-  background-clip: padding-box, padding-box, border-box;
-  background-origin: padding-box, padding-box, border-box;
+  color: var(--color-teal);
+  background: #ffffff;
+  background-clip: border-box;
+  border: 2px solid var(--color-teal);
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.28) inset,
-    0 -1px 0 rgba(0, 0, 0, 0.12) inset,
-    0 14px 34px -12px rgba(41, 37, 36, 0.28),
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    0 0 48px -20px color-mix(in srgb, var(--color-teal) 35%, transparent);
+    0 1px 0 rgba(255, 255, 255, 1) inset,
+    0 6px 20px rgba(15, 23, 42, 0.06),
+    0 12px 32px -10px rgba(15, 118, 110, 0.12);
+}
+
+[data-theme="light"] .home-projects-cta .home-projects-cta__sheen {
+  display: none;
 }
 
 [data-theme="light"] .home-projects-cta__eyebrow {
-  color: rgba(250, 250, 249, 0.75);
+  color: var(--color-muted);
 }
 
 [data-theme="light"] .home-projects-cta__arrow {
-  background: rgba(255, 255, 255, 0.2);
-  color: #fafaf9;
+  background: color-mix(in srgb, var(--color-teal) 14%, var(--color-bg));
+  color: var(--color-teal);
 }
 
 [data-theme="light"] .home-projects-cta:hover {
   color: #fafaf9;
-  background:
-    linear-gradient(170deg, rgba(255, 255, 255, 0.14) 0%, transparent 45%) padding-box,
-    linear-gradient(
-      150deg,
-      color-mix(in srgb, var(--color-teal) 88%, #064e3b) 0%,
-      color-mix(in srgb, var(--color-teal) 62%, #115e59) 100%
-    ) padding-box,
-    linear-gradient(
-      118deg,
-      color-mix(in srgb, var(--color-gold) 70%, #78350f),
-      color-mix(in srgb, var(--color-teal) 82%, #115e59) 52%,
-      color-mix(in srgb, var(--color-gold) 45%, var(--color-teal)) 100%
-    ) border-box;
-  background-clip: padding-box, padding-box, border-box;
-  background-origin: padding-box, padding-box, border-box;
+  background: linear-gradient(
+    155deg,
+    var(--color-teal) 0%,
+    color-mix(in srgb, var(--color-teal) 82%, #115e59) 100%
+  );
+  border-color: color-mix(in srgb, var(--color-teal) 92%, #134e4a);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.22) inset,
-    0 18px 42px -10px rgba(41, 37, 36, 0.32),
-    0 0 0 1px color-mix(in srgb, var(--color-gold) 22%, transparent),
-    0 0 56px -14px color-mix(in srgb, var(--color-teal) 30%, transparent);
+    0 14px 36px -8px rgba(15, 118, 110, 0.35),
+    0 4px 14px rgba(15, 23, 42, 0.08);
 }
 
 [data-theme="light"] .home-projects-cta:hover .home-projects-cta__eyebrow {
   color: rgba(250, 250, 249, 0.88);
+}
+
+[data-theme="light"] .home-projects-cta:hover .home-projects-cta__arrow {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fafaf9;
 }

@@ -268,6 +268,30 @@
                 width: 90%;
                 max-width: 300px;
             }
+            .home-lead__line {
+                font-size: 1rem !important;
+                line-height: 1.65 !important;
+            }
+            .home-tagline {
+                font-size: 1rem !important;
+                line-height: 1.55 !important;
+            }
+            .home-email-row {
+                font-size: 1rem !important;
+            }
+            .stat-number {
+                font-size: clamp(1.65rem, 7vw, 2rem) !important;
+            }
+            .stat-label {
+                font-size: 0.8125rem !important;
+            }
+            .home-hero .interestsmain h2 {
+                font-size: clamp(1.35rem, 5vw, 1.65rem) !important;
+            }
+            .av-showcase__sub {
+                font-size: 1rem !important;
+                line-height: 1.65 !important;
+            }
         }
         @media (max-width: 639.98px) {
             .home-hero {
@@ -331,18 +355,18 @@
         [data-theme="light"] .namecard--home {
             background: linear-gradient(
                 155deg,
-                #f5f2ed 0%,
-                #ebe7e1 52%,
-                #e5e1db 100%
+                #f8fafc 0%,
+                #f1f5f9 52%,
+                #e2e8f0 100%
             );
             border-color: var(--color-border);
             box-shadow:
-                0 1px 0 rgba(255, 255, 255, 0.65) inset,
-                0 22px 44px rgba(41, 37, 36, 0.09);
+                0 1px 0 rgba(255, 255, 255, 0.9) inset,
+                0 22px 44px rgba(15, 23, 42, 0.07);
         }
         [data-theme="light"] .stat-item:hover {
             border-color: rgba(15, 118, 110, 0.38);
-            box-shadow: 0 8px 22px rgba(41, 37, 36, 0.08);
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
         }
         [data-theme="light"] .stat-item {
             background: var(--color-card-bg);
@@ -361,24 +385,24 @@
             background: radial-gradient(
                 circle at 40% 35%,
                 rgba(15, 118, 110, 0.08) 0%,
-                rgba(231, 228, 223, 0.96) 55%,
-                #dcd9d4 100%
+                rgba(248, 250, 252, 0.98) 55%,
+                #e2e8f0 100%
             );
             box-shadow:
                 0 0 0 3px var(--color-bg),
                 0 0 0 6px rgba(15, 118, 110, 0.22),
-                0 16px 36px rgba(41, 37, 36, 0.12),
+                0 16px 36px rgba(15, 23, 42, 0.1),
                 inset 0 0 0 1px rgba(15, 118, 110, 0.12);
         }
         [data-theme="light"] .home-hero .links a {
-            background: rgba(41, 37, 36, 0.06);
+            background: rgba(15, 23, 42, 0.05);
             border-color: rgba(15, 118, 110, 0.22);
         }
         [data-theme="light"] .home-hero .links a:hover {
             background: color-mix(in srgb, var(--color-gold) 22%, transparent);
             border-color: color-mix(in srgb, var(--color-gold) 48%, transparent);
             box-shadow:
-                0 10px 22px rgba(41, 37, 36, 0.12),
+                0 10px 22px rgba(15, 23, 42, 0.1),
                 0 0 18px color-mix(in srgb, var(--color-gold) 18%, transparent);
         }
     </style>

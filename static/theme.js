@@ -45,9 +45,9 @@
     try {
       var u = new URL(el.src, window.location.origin);
       if (theme === "light") {
-        u.searchParams.set("bg_color", "e7e4df");
-        u.searchParams.set("border_color", "c4bfba");
-        u.searchParams.set("text_color", "292524");
+        u.searchParams.set("bg_color", "f8fafc");
+        u.searchParams.set("border_color", "cbd5e1");
+        u.searchParams.set("text_color", "1e293b");
         u.searchParams.set("title_color", "0f766e");
         u.searchParams.delete("theme");
       } else {
