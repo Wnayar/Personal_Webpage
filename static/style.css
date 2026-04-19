@@ -1062,14 +1062,72 @@ nav .navbar-brand {
   background: var(--color-bg);
 }
 
+.av-showcase__loader {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--color-bg) 92%, var(--color-teal) 3%);
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+  pointer-events: none;
+}
+
+.av-showcase__screen.is-loaded .av-showcase__loader {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.av-showcase__screen--fallback .av-showcase__loader {
+  display: none;
+}
+
+.av-showcase__loader-ring {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid var(--color-teal-dim);
+  border-top-color: var(--color-teal);
+  animation: av-showcase-spin 0.75s linear infinite;
+}
+
+@keyframes av-showcase-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .av-showcase__loader {
+    display: none !important;
+  }
+
+  .av-showcase__screen .av-showcase__img {
+    opacity: 1 !important;
+    transition: none;
+  }
+}
+
 .av-showcase__img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top center;
   transform: scale(1.01);
-  transition: transform 0.5s ease;
+  opacity: 0;
+  transition:
+    opacity 0.45s ease,
+    transform 0.5s ease;
+}
+
+.av-showcase__screen.is-loaded .av-showcase__img {
+  opacity: 1;
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {

@@ -27,9 +27,18 @@ function initProfilePhoto() {
 }
 
 function initAquaShowcaseImages() {
+    var reduced =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     document.querySelectorAll("img.av-showcase__img").forEach(function (img) {
+        var screen = img.closest(".av-showcase__screen");
+
+        function markLoaded() {
+            if (screen) screen.classList.add("is-loaded");
+        }
+
         function fail() {
-            var screen = img.closest(".av-showcase__screen");
             if (screen) {
                 screen.classList.add("av-showcase__screen--fallback");
                 if (!screen.querySelector(".av-showcase__fallback-hint")) {
@@ -46,13 +55,30 @@ function initAquaShowcaseImages() {
             }
             img.remove();
         }
+
+        if (reduced) {
+            markLoaded();
+        }
+
         if (img.complete && img.naturalWidth === 0) {
             fail();
             return;
         }
-        img.addEventListener("error", function () {
-            fail();
-        }, { once: true });
+
+        img.addEventListener(
+            "error",
+            function () {
+                fail();
+            },
+            { once: true }
+        );
+
+        if (img.complete && img.naturalWidth > 0) {
+            markLoaded();
+            return;
+        }
+
+        img.addEventListener("load", markLoaded, { once: true });
     });
 }
 
