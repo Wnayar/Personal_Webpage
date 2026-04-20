@@ -1,6 +1,31 @@
 {% extends "layout.html" %}
 
+{% macro home_meta_description() %}William Nayar — NUS computer science, Aqua Vitae founder, incoming software engineer. Portfolio, programming guides, and project write-ups.{% endmacro %}
+
 {% block title %}
+{% endblock %}
+
+{% block meta_description %}{{ home_meta_description() }}{% endblock %}
+{% block og_description %}{{ home_meta_description() }}{% endblock %}
+
+{% block extrahead %}
+    <script type="application/ld+json">
+{{ {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "William Nayar",
+    "url": canonical_url,
+    "image": absolute_static("profile_picture_black.png"),
+    "email": "wnayar98@gmail.com",
+    "jobTitle": "Software engineer",
+    "description": "CS @ NUS | Founder @ Aqua Vitae | Incoming SWE @ Orca Slicer",
+    "sameAs": [
+        "https://sg.linkedin.com/in/william-nayar",
+        "https://github.com/Wnayar",
+        "https://www.instagram.com/william_d.n/",
+    ],
+}|tojson }}
+    </script>
 {% endblock %}
 
 {% block main %}
