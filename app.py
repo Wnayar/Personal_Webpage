@@ -55,7 +55,11 @@ def sitemap_xml():
         lines.append(f"    <priority>{priority}</priority>")
         lines.append("  </url>")
     lines.append("</urlset>")
-    return Response("\n".join(lines), mimetype="application/xml")
+    return Response(
+        "\n".join(lines),
+        mimetype="application/xml; charset=utf-8",
+        headers={"Cache-Control": "public, max-age=3600"},
+    )
 
 
 @app.route("/")
