@@ -2,7 +2,6 @@ import os
 from datetime import datetime, timezone
 
 from flask import Flask, redirect, render_template, request, Response, url_for
-from flask_session import Session
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 # Configure application
@@ -28,12 +27,6 @@ def _sitemap_lastmod() -> str:
     if override:
         return override
     return datetime.now(timezone.utc).date().isoformat()
-
-# Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
-
 
 def _canonical_base() -> str:
     """Root URL of the public site, e.g. https://example.com (no trailing slash)."""
@@ -78,7 +71,11 @@ def _redirect_trailing_slashes():
 def robots_txt():
     sitemap_url = _absolute_url("/sitemap.xml")
     body = f"User-agent: *\nAllow: /\n\nSitemap: {sitemap_url}\n"
-    return Response(body, mimetype="text/plain")
+    return Response(
+        body,
+        mimetype="text/plain; charset=utf-8",
+        headers={"Cache-Control": "public, max-age=3600"},
+    )
 
 
 @app.route("/sitemap.xml")
