@@ -1,4 +1,5 @@
 import os
+from datetime import datetime, timezone
 
 from flask import Flask, redirect, render_template, request, Response, url_for
 from flask_session import Session
@@ -21,8 +22,12 @@ app.wsgi_app = ProxyFix(
 #   CANONICAL_BASE_URL=https://youruser.pythonanywhere.com
 # or your custom domain, with no trailing slash.
 #
-# Update when page content changes meaningfully (drives sitemap <lastmod> when env unset):
-SITEMAP_LASTMOD = os.environ.get("SITEMAP_LASTMOD", "2026-04-25").strip() or "2026-04-25"
+def _sitemap_lastmod() -> str:
+    """W3C date (YYYY-MM-DD) for sitemap; avoid hard-coded future dates."""
+    override = (os.environ.get("SITEMAP_LASTMOD") or "").strip()
+    if override:
+        return override
+    return datetime.now(timezone.utc).date().isoformat()
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
@@ -92,7 +97,7 @@ def sitemap_xml():
     for loc, changefreq, priority in routes:
         lines.append("  <url>")
         lines.append(f"    <loc>{_absolute_url(loc)}</loc>")
-        lines.append(f"    <lastmod>{SITEMAP_LASTMOD}</lastmod>")
+        lines.append(f"    <lastmod>{_sitemap_lastmod()}</lastmod>")
         lines.append(f"    <changefreq>{changefreq}</changefreq>")
         lines.append(f"    <priority>{priority}</priority>")
         lines.append("  </url>")
