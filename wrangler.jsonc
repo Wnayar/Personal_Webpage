@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers config — serves the static build as an assets-only Worker.
+  // Build step (python freeze.py) produces ./dist; `wrangler deploy` uploads it.
+  "name": "personal-webpage",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    // Folder produced by freeze.py. Clean URLs (/projects -> projects.html) and
+    // the _redirects file inside dist/ are handled automatically by Workers Assets.
+    "directory": "./dist"
+  }
+}
