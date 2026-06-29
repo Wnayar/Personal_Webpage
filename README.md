@@ -1,121 +1,106 @@
-# Personal Portfolio Website
+# William Nayar — Personal Website
 
-A full-stack personal portfolio website built with Flask, showcasing my projects, technical skills, and professional journey.
+Personal portfolio and writing of William Nayar (CS @ NUS, founder of Aqua Vitae).
+Authored as a small Flask app and **shipped as a static site** on Cloudflare Pages.
 
-**Live Site:** https://williamdn.pythonanywhere.com/
+**Live site:** https://williamnayar.com
 
-## Overview
+## How it works
 
-This is a responsive, modern personal portfolio website featuring:
-- Project showcase with detailed technical descriptions and live demos
-- Guides and resources for aspiring developers
-- Interactive UI elements with scroll animations and hover effects
-- GitHub activity integration and technical skills visualization
-- Mobile-responsive design optimized for all devices
-- Clean, professional aesthetic with teal and gold accent colors
+The site has no database, forms, or logins — every route renders a fixed page.
+So Flask is used as a **static-site generator**: `freeze.py` renders each route to
+plain HTML in a `dist/` folder, which Cloudflare Pages serves from its global CDN.
 
-## Tech Stack
+```
+templates/ + static/  ──(freeze.py)──▶  dist/  ──(Cloudflare Pages)──▶  williamnayar.com
+```
 
-**Backend:**
-- Python
-- Flask (web framework)
-- Jinja2 (templating)
-- Flask-Session
+This keeps the authoring ergonomics of Jinja templates (shared layout, SEO helpers,
+one source of truth for canonical URLs) while deploying as fast, cache-friendly static
+files — no Python server in production.
 
-**Frontend:**
-- HTML5
-- CSS3
-- JavaScript
-- Bootstrap 5
-- Typed.js (dynamic text animations)
+## Tech stack
 
-**Deployment:**
-- PythonAnywhere (hosting)
-- Git/GitHub (version control)
+| Area | Tools |
+| --- | --- |
+| Authoring | Python, Flask, Jinja2 |
+| Build | `freeze.py` (Flask test client → static HTML) |
+| Frontend | HTML5, CSS3, vanilla JS, Bootstrap 5, Typed.js |
+| Fonts/UI | Plus Jakarta Sans, light/dark theme toggle |
+| Hosting | Cloudflare Pages (static, free TLS, global CDN) |
+| Domain | Cloudflare Registrar — `williamnayar.com` |
 
-## Key Features
-
-### Projects Page
-Detailed breakdown of my technical projects including:
-- PeerPrep (Node.js microservices backend with 15 REST API endpoints)
-- Aqua Vitae (React/TypeScript e-commerce site with Shopify integration)
-- NUS-GroupMatch (MERN stack study group platform)
-- Personal Portfolio (this Flask website)
-
-Each project includes role, tech stack, detailed bullet points, and links to live sites and GitHub repositories.
-
-### Guides Section
-Resources and tutorials covering:
-- Getting started with Harvard's CS50
-- Local development environment setup
-- Git and GitHub workflows for beginners
-
-### Interactive Elements
-- Scroll-triggered fade-in animations
-- Project card tilt effects on hover (desktop)
-- GitHub activity widgets (Top Languages, Total Contributions)
-- Technical skills badges with logos
-- Smooth hover animations throughout
-- Sticky frosted glass navbar
-- Animated timeline on Philosophy page
-
-## Project Structure
+## Project structure
 
 ```
 Personal_Webpage/
-├── app.py                 # Flask application and routing
-├── requirements.txt       # Python dependencies
-├── static/
-│   ├── style.css         # Global styling
-│   ├── index.js          # Homepage interactions
-│   ├── insights.js       # Guide interactions
-│   └── [images]          # Profile picture and social icons
-└── templates/
-    ├── layout.html       # Base template with navbar and global styles
-    ├── index.html        # Homepage with stats and intro
-    ├── projects.html     # Projects showcase with GitHub activity
-    ├── guides.html       # Developer guides and resources
-    └── philosophy.html   # Philosophy page with timeline
+├── app.py              # Flask routes + SEO helpers (canonical URLs, sitemap, robots, redirects)
+├── freeze.py           # Renders the app to a static dist/ folder for deployment
+├── _redirects          # Cloudflare Pages 301s for legacy paths (/blogs, /insights, /motivation)
+├── requirements.txt    # Python dependency (Flask, pinned)
+├── .python-version     # Pins Python for reproducible Cloudflare builds
+├── templates/
+│   ├── layout.html     # Base template: <head>, navbar, SEO meta, theme bootstrap
+│   ├── index.html      # Home — hero, Aqua Vitae showcase, stats
+│   ├── projects.html   # Project case studies
+│   ├── guides.html     # Developer guides
+│   └── philosophy.html # Philosophy page with timeline
+└── static/
+    ├── style.css       # Global styling (teal/gold accents, light + dark themes)
+    ├── theme.js        # Light/dark theme toggle
+    ├── site-nav.js     # Navbar behavior
+    ├── index.js        # Home interactions
+    ├── insights.js     # Guides interactions
+    ├── *.png / *.svg   # Profile photo, favicon, social icons
+    └── aqua-vitae/     # Home-page showcase screenshots (see README.txt there)
 ```
 
-## Local Development
+## Local development
 
-1. Clone the repository:
 ```bash
-git clone https://github.com/Wnayar/Personal_Webpage.git
-cd Personal_Webpage
-```
-
-2. Create and activate virtual environment:
-```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
+python3 -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+python app.py                    # dev server at http://127.0.0.1:5000
 ```
 
-4. Run the application:
+## Build the static site
+
 ```bash
-python app.py
+# Bakes the public base URL into every canonical/OG/sitemap link.
+# Defaults to https://williamnayar.com if CANONICAL_BASE_URL is unset.
+CANONICAL_BASE_URL=https://williamnayar.com python freeze.py
 ```
 
-5. Visit `http://127.0.0.1:5000` in your browser
+```powershell
+# PowerShell
+$env:CANONICAL_BASE_URL = "https://williamnayar.com"; python freeze.py
+```
 
-## Design Philosophy
+Output goes to `dist/` (git-ignored): the four pages plus `robots.txt`, `sitemap.xml`,
+the copied `static/` assets, and `_redirects`.
 
-- **Recruiter-Focused:** Clear project descriptions, prominent contact info, and professional presentation
-- **Content-First:** Technical depth without overwhelming complexity
-- **Responsive:** Optimized mobile experience with adjusted padding and font sizes
-- **Interactive:** Subtle animations and hover effects that enhance without distracting
-- **Fast:** Minimal dependencies, quick load times, smooth navigation
-- **Modern:** Teal and gold color scheme with frosted glass navbar and card-based layouts
+## Deployment (Cloudflare Pages)
 
-## About This Project
+Connect the GitHub repo to a Cloudflare Pages project and set:
 
-Originally created as my CS50 final project in 2023, this website has evolved into a professional portfolio showcasing my growth as a software engineer. The site demonstrates full-stack development skills, clean code practices, and attention to user experience.
+| Setting | Value |
+| --- | --- |
+| Build command | `pip install -r requirements.txt && python freeze.py` |
+| Build output directory | `dist` |
+| Environment variable | `CANONICAL_BASE_URL=https://williamnayar.com` *(optional — it's the default)* |
+| Python version | from `.python-version` (override with `PYTHON_VERSION` if the build can't find it) |
+
+Then add `williamnayar.com` (and `www`) under **Custom domains**; TLS is automatic.
+Every push to `main` triggers a rebuild and redeploy.
+
+## SEO
+
+- **Canonical URLs, Open Graph, and JSON-LD** (`Person` schema) are generated per page
+  from `CANONICAL_BASE_URL`, so they always match the live domain.
+- **`sitemap.xml`** lists the four public pages; **`robots.txt`** points crawlers to it.
+- **`_redirects`** keeps legacy paths alive as 301s so existing links and search signals
+  carry over.
 
 ## Contact
 
@@ -125,4 +110,5 @@ Originally created as my CS50 final project in 2023, this website has evolved in
 
 ---
 
-Built with Flask and deployed on PythonAnywhere.
+Originally built as a CS50 final project in 2023; since rebuilt into a static,
+CDN-hosted personal site.
