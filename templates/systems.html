@@ -67,8 +67,7 @@
 
         <nav class="sys__toc" aria-label="DeepCS contents">
             <a href="#deepcs-architecture"><b>01</b> Architecture</a>
-            <a href="#bucket-lab"><b>02</b> The gateway race</a>
-            <a href="#crdt-lab"><b>03</b> Convergence</a>
+            <a href="#crdt-lab"><b>02</b> Live sync</a>
         </nav>
 
         <!-- ---------- LAB: topology ---------- -->
@@ -85,6 +84,7 @@
             <div class="panel ticked">
                 <div class="panel__bar">
                     <span class="panel__bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="panel__try"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="m9 9 5 12 1.8-5.2L21 14z"/><path d="M7.2 2.2 8 5M5 5l2.5 1.2M2.2 7.2 5 8"/></svg>Try it</span>
                     deepcs · architecture
                     <span class="panel__bar-right">designed, not deployed</span>
                 </div>
@@ -130,78 +130,10 @@
             
         </div>
 
-        <!-- ---------- LAB: token bucket ---------- -->
-        <div class="lab" id="bucket-lab">
-            <div class="lab__head">
-                <span class="lab__num">02</span>
-                <h3 class="lab__title">The race I built a gateway to understand</h3>
-                <span class="lab__hint">a simulation, running in your browser</span>
-            </div>
-            <p class="lab__intro">
-                Two servers share one budget of requests. Switch to <strong>read-then-write</strong> and hit burst
-                to watch them both let a request through that only one of them could pay for.
-            </p>
-
-            <div class="panel">
-                <div class="panel__bar">
-                    <span class="panel__bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                    token bucket · one bucket, two instances
-                    <span class="panel__bar-right">capacity 10 · refill 2/s</span>
-                </div>
-                <div class="bucket">
-                    <div class="bucket__viz">
-                        <div class="ctl-row" style="margin-bottom:var(--s-5)">
-                            <div class="seg seg--danger">
-                                <button type="button" data-mode="atomic" aria-pressed="true">Lua script (atomic)</button>
-                                <button type="button" data-mode="racy" aria-pressed="false">read-then-write</button>
-                            </div>
-                        </div>
-
-                        <div class="bucket__instances">
-                            <div class="gwbox" data-gw="A">
-                                <div class="gwbox__name">gateway instance A</div>
-                                <div class="gwbox__read" data-read>·</div>
-                            </div>
-                            <div class="gwbox" data-gw="B">
-                                <div class="gwbox__name">gateway instance B</div>
-                                <div class="gwbox__read" data-read>·</div>
-                            </div>
-                        </div>
-
-                        <div class="bucket__tank" data-tank></div>
-                        <div class="bucket__tank-label">
-                            <span>shared bucket in Redis</span>
-                            <span data-tokens>10 / 10</span>
-                        </div>
-
-                        <div class="ctl-row" style="margin-bottom:var(--s-5)">
-                            <button type="button" class="btn btn--sm" data-burst>Burst: 2 at once</button>
-                            <button type="button" class="btn btn--sm" data-single>Single request</button>
-                            <button type="button" class="btn btn--sm" data-auto aria-pressed="false">Run traffic</button>
-                            <button type="button" class="btn btn--sm btn--ghost" data-reset>Reset</button>
-                        </div>
-
-                        <div class="bucket__stats">
-                            <div class="stat"><div class="stat__num" data-stat-admitted>0</div><div class="stat__label">admitted</div></div>
-                            <div class="stat"><div class="stat__num is-good" data-stat-over>0</div><div class="stat__label">over-admitted</div></div>
-                            <div class="stat"><div class="stat__num" data-stat-rejected>0</div><div class="stat__label">429s</div></div>
-                        </div>
-                    </div>
-
-                    <div class="bucket__log-pane">
-                        <span class="ctl-label" style="display:block;margin-bottom:var(--s-3)">Interleaving</span>
-                        <div class="logview" data-log></div>
-                    </div>
-                </div>
-            </div>
-
-            
-        </div>
-
         <!-- ---------- LAB: CRDT ---------- -->
         <div class="lab" id="crdt-lab">
             <div class="lab__head">
-                <span class="lab__num">03</span>
+                <span class="lab__num">02</span>
                 <h3 class="lab__title">Two people, two servers, one document</h3>
                 <span class="lab__hint">a real CRDT, running in this page</span>
             </div>
@@ -213,6 +145,7 @@
             <div class="panel">
                 <div class="panel__bar">
                     <span class="panel__bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="panel__try"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="m9 9 5 12 1.8-5.2L21 14z"/><path d="M7.2 2.2 8 5M5 5l2.5 1.2M2.2 7.2 5 8"/></svg>Try it</span>
                     collab · session s42
                     <span class="panel__bar-right">RGA implemented in this page</span>
                 </div>
@@ -263,7 +196,8 @@
 
         <!-- ---------- ADRs ---------- -->
         <p class="lab__intro" style="margin-top:var(--s-8)">
-            Nine architecture decision records live in
+            There is more in the repo than fits here: an atomic rate limiter, a replayable event log, and the
+            reasoning behind every service boundary. Nine architecture decision records live in
             <a href="https://github.com/Wnayar/deepcs/blob/main/DESIGN.md" target="_blank" rel="noopener">DESIGN.md</a>,
             including why I built the gateway instead of using Kong, and why auth is the one thing I paid for.
         </p>
@@ -326,6 +260,7 @@
             <div class="panel">
                 <div class="panel__bar">
                     <span class="panel__bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="panel__try"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="m9 9 5 12 1.8-5.2L21 14z"/><path d="M7.2 2.2 8 5M5 5l2.5 1.2M2.2 7.2 5 8"/></svg>Try it</span>
                     recall · sample index
                     <span class="panel__bar-right" data-ir-stats></span>
                 </div>
@@ -436,6 +371,7 @@
             <div class="panel">
                 <div class="panel__bar">
                     <span class="panel__bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="panel__try"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="m9 9 5 12 1.8-5.2L21 14z"/><path d="M7.2 2.2 8 5M5 5l2.5 1.2M2.2 7.2 5 8"/></svg>Try it</span>
                     airlock · pre-install gate
                     <span class="panel__bar-right">enforced as a hook</span>
                 </div>
@@ -494,7 +430,6 @@
 
 {% block scripts %}
 <script src="{{ asset('js/topology.js') }}" defer></script>
-<script src="{{ asset('js/bucket.js') }}" defer></script>
 <script src="{{ asset('js/crdt.js') }}" defer></script>
 <script src="{{ asset('js/bm25.js') }}" defer></script>
 <script src="{{ asset('js/gate.js') }}" defer></script>

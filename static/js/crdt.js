@@ -235,11 +235,51 @@
 
   function bind(pane) {
     var ed = pane.editor;
-    ed.setAttribute("tabindex", "0");
     ed.setAttribute("role", "textbox");
     ed.setAttribute("aria-multiline", "true");
 
-    ed.addEventListener("keydown", function (e) {
+    /* The visible editor is a div we render ourselves, and a div gives a phone
+       nothing to open a keyboard for. A real (but invisible) textarea sits
+       behind it, takes focus on tap, and is where key events actually land. */
+    var keyer = document.createElement("textarea");
+    keyer.className = "editor__keyer";
+    keyer.setAttribute("aria-label", pane.side === "a" ? "User A editor input" : "User B editor input");
+    keyer.setAttribute("autocomplete", "off");
+    keyer.setAttribute("autocapitalize", "off");
+    keyer.setAttribute("autocorrect", "off");
+    keyer.setAttribute("spellcheck", "false");
+    ed.parentNode.insertBefore(keyer, ed.nextSibling);
+    pane.keyer = keyer;
+
+    var focusKeyer = function () {
+      keyer.focus({ preventScroll: true });
+    };
+    ed.addEventListener("pointerdown", focusKeyer);
+    ed.addEventListener("click", focusKeyer);
+
+    keyer.addEventListener("focus", function () {
+      ed.classList.add("is-focused");
+    });
+    keyer.addEventListener("blur", function () {
+      ed.classList.remove("is-focused");
+    });
+
+    /* Android keyboards frequently report keydown as "Unidentified" and only
+       deliver the character through input, so handle both and clear after. */
+    keyer.addEventListener("input", function () {
+      var text = keyer.value;
+      keyer.value = "";
+      if (!text) return;
+      for (var i = 0; i < text.length; i++) {
+        var op = pane.replica.localInsert(pane.caret, text[i]);
+        pane.caret += 1;
+        publish(pane.side, op);
+      }
+      render(pane);
+      updateStatus();
+    });
+
+    keyer.addEventListener("keydown", function (e) {
       if (e.ctrlKey || e.metaKey || e.altKey) return;
 
       var vis = pane.replica.visible();
@@ -263,10 +303,6 @@
         var nl = pane.replica.localInsert(pane.caret, "\n");
         pane.caret += 1;
         publish(pane.side, nl);
-      } else if (e.key.length === 1) {
-        var ins = pane.replica.localInsert(pane.caret, e.key);
-        pane.caret += 1;
-        publish(pane.side, ins);
       } else {
         handled = false;
       }
@@ -280,6 +316,7 @@
 
     /* Click to place the caret. */
     ed.addEventListener("mousedown", function (e) {
+      keyer.focus({ preventScroll: true });
       var span = e.target.closest(".editor__char");
       if (span) {
         var i = parseInt(span.getAttribute("data-i"), 10);

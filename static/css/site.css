@@ -838,6 +838,10 @@ kbd {
   align-items: center;
 }
 
+.hero__inner > * {
+  min-width: 0;
+}
+
 @media (max-width: 940px) {
   .hero__inner {
     grid-template-columns: 1fr;
@@ -848,6 +852,8 @@ kbd {
 .hero__status {
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
+  max-width: 100%;
   gap: 0.6rem;
   padding: 0.35rem 0.85rem 0.35rem 0.7rem;
   margin-bottom: 1.5rem;
@@ -956,14 +962,15 @@ kbd {
 /* Hero visual */
 .hero__visual {
   position: relative;
+  min-width: 0;
   aspect-ratio: 1 / 0.86;
   min-height: 300px;
 }
 
 @media (max-width: 940px) {
   .hero__visual {
-    min-height: 270px;
-    aspect-ratio: 1 / 0.62;
+    min-height: 240px;
+    aspect-ratio: auto;
   }
 }
 
@@ -979,6 +986,9 @@ kbd {
   left: 0;
   right: 0;
   bottom: 0;
+  /* It is a <p>, so it inherits the global prose measure. Absolutely
+     positioned with a narrower max-width it pins left instead of centring. */
+  max-width: none;
   text-align: center;
   font-family: var(--font-mono);
   font-size: 0.68rem;
@@ -1533,4 +1543,11 @@ kbd {
   .rail__track {
     animation: none;
   }
+}
+
+/* Keeps the arrow beside the label instead of dropping to its own line when
+   the pill wraps on a narrow screen. */
+.hero__status-text {
+  flex: 1 1 auto;
+  min-width: 0;
 }
