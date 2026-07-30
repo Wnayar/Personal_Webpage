@@ -23,10 +23,10 @@
   };
 
   var LANES = [
-    { key: "run", icon: SVG.box, name: "Daytona", role: "runs it", detail: "disposable sandbox, honeytokens planted" },
-    { key: "read", icon: SVG.read, name: "Nosana", role: "reads it", detail: "GPU static read of the whole source" },
-    { key: "match", icon: SVG.match, name: "Doubleword", role: "matches it", detail: "embed + cosine against known malware" },
-    { key: "rep", icon: SVG.globe, name: "Oxylabs", role: "checks it", detail: "live web + registry reputation" }
+    { key: "run", icon: SVG.box, name: "Daytona", role: "runs it", detail: "runs it in a throwaway sandbox" },
+    { key: "read", icon: SVG.read, name: "Nosana", role: "reads it", detail: "reads the whole source" },
+    { key: "match", icon: SVG.match, name: "Doubleword", role: "matches it", detail: "compares against known malware" },
+    { key: "rep", icon: SVG.globe, name: "Oxylabs", role: "checks it", detail: "checks its reputation" }
   ];
 
   var CASES = {
@@ -34,12 +34,12 @@
       pkg: "python-pillow",
       verdict: "block",
       lanes: {
-        run: { text: "read ~/.aws/credentials, ~/.env · connected to 45.11.87.9", hit: true },
-        read: { text: "credential exfiltration on install · risk 10/10", hit: true },
-        match: { text: "close match to a known stealer family", hit: true },
-        rep: { text: "not published on PyPI · name mimics 'pillow'", hit: true }
+        run: { text: "read ~/.aws/credentials, called out to 45.11.87.9", hit: true },
+        read: { text: "steals credentials on install, risk 10/10", hit: true },
+        match: { text: "matches a known stealer", hit: true },
+        rep: { text: "not on PyPI, mimics 'pillow'", hit: true }
       },
-      tier: "Three tripwires fired. A honeytoken read, an outbound connection to a non-registry host, and a shell spawn are never acceptable during an install. That's a plain if-statement, decided before any model is consulted.",
+      tier: "Three hard rules were broken. Reading planted credentials, calling an unknown server, or opening a shell during an install is never allowed. Plain code decides this, before any model is asked.",
       /* Verbatim from the Airlock README. */
       terminal: [
         { t: "$ ", c: "t-prompt" },
@@ -67,12 +67,12 @@
       pkg: "requests",
       verdict: "safe",
       lanes: {
-        run: { text: "no honeytoken reads · no outbound to unknown hosts", hit: false },
-        read: { text: "nothing matching exfiltration or C2 patterns", hit: false },
-        match: { text: "no similarity to the known-malware corpus", hit: false },
-        rep: { text: "published, widely used, no advisories", hit: false }
+        run: { text: "touched nothing it should not", hit: false },
+        read: { text: "nothing suspicious in the code", hit: false },
+        match: { text: "no match against known malware", hit: false },
+        rep: { text: "published and widely used", hit: false }
       },
-      tier: "No tripwire fired, so the evidence goes to the judge for the gray zone. ai& can only ever make the gate stricter. It cannot overrule a tripwire and turn a BLOCK into a SAFE.",
+      tier: "No hard rule was broken, so the unclear call goes to the judge. It can only ever make the gate stricter, never looser.",
       terminal: [
         { t: "$ ", c: "t-prompt" },
         { t: "pip install requests\n", c: "" },
@@ -129,7 +129,7 @@
     verdictEl.className = "verdict";
     verdictEl.textContent = "waiting for an install";
     if (hintEl) hintEl.classList.remove("is-hidden");
-    tierEl.innerHTML = "<b>Tier 1 · deterministic tripwires.</b> Plain code, no model. Reading a planted honeytoken, connecting out to a non-registry host, or spawning a shell during an install triggers an instant block on its own.";
+    tierEl.innerHTML = "<b>Hard rules first.</b> Some things are never allowed during an install, and plain code blocks them before any model is asked.";
     termEl.innerHTML = "";
   }
 
@@ -234,6 +234,12 @@
   runBtns.forEach(function (btn) {
     btn.addEventListener("click", function () {
       run(btn.getAttribute("data-case"));
+      /* The verdict sits well below the buttons on a narrow screen. */
+      if (window.matchMedia("(max-width: 900px)").matches && verdictEl.scrollIntoView) {
+        setTimeout(function () {
+          verdictEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 400);
+      }
     });
   });
 

@@ -16,39 +16,39 @@
   var CORPUS = [
     {
       src: "Computer networks",
-      text: "TCP establishes a connection with a three-way handshake. The client sends a SYN segment with an initial sequence number, the server replies SYN-ACK acknowledging it and sending its own, and the client returns a final ACK. Only then may data flow."
+      text: "TCP opens a connection with a three-way handshake: the client sends SYN, the server replies SYN-ACK, the client answers ACK. Only then can data flow."
     },
     {
       src: "Computer networks",
-      text: "TCP congestion control keeps a congestion window. Slow start doubles the window each round trip until a threshold, then congestion avoidance grows it linearly. A triple duplicate ACK triggers fast retransmit and halves the window."
+      text: "TCP congestion control keeps a window. Slow start doubles it each round trip, then it grows linearly. Three duplicate ACKs halve it and trigger a fast retransmit."
     },
     {
       src: "Operating systems",
-      text: "A deadlock requires four conditions to hold at once: mutual exclusion, hold and wait, no preemption, and circular wait. Break any one of them and deadlock becomes impossible. Detection instead allows deadlock and recovers afterwards."
+      text: "A deadlock needs four conditions at once: mutual exclusion, hold and wait, no preemption, and circular wait. Break any one and deadlock becomes impossible."
     },
     {
       src: "Operating systems",
-      text: "Virtual memory maps pages to frames through a page table. A page fault traps to the kernel, which fetches the page from disk and updates the mapping. A translation lookaside buffer caches recent translations to avoid walking the table every access."
+      text: "Virtual memory maps pages to frames through a page table. A page fault traps to the kernel, which fetches the page from disk. A TLB caches recent translations."
     },
     {
       src: "Databases",
-      text: "A B-tree index keeps keys sorted so a lookup costs a logarithmic number of node reads instead of scanning every row. It stays balanced under insertion by splitting full nodes, which is why range queries and ordered scans both stay cheap."
+      text: "A B-tree index keeps keys sorted, so a lookup reads a handful of nodes instead of scanning every row. It stays balanced by splitting full nodes."
     },
     {
       src: "Databases",
-      text: "A transaction is atomic, consistent, isolated and durable. Isolation levels trade correctness against concurrency: read committed permits non-repeatable reads, while serializable forbids them at the cost of more blocking and more aborts."
+      text: "A transaction is atomic, consistent, isolated and durable. Isolation levels trade correctness for concurrency: serializable is safest but blocks and aborts more."
     },
     {
       src: "Distributed systems",
-      text: "The CAP theorem says a partitioned distributed system must choose between consistency and availability. During a network partition a system either refuses writes to stay consistent or accepts them and reconciles conflicting versions later."
+      text: "During a network partition a distributed system must choose: refuse writes and stay consistent, or accept them and reconcile the conflicts later."
     },
     {
       src: "Distributed systems",
-      text: "Consistent hashing maps both keys and nodes onto a ring so that adding or removing a node moves only the keys in one arc, rather than remapping everything. Virtual nodes spread each physical node across the ring to even out load."
+      text: "Consistent hashing puts keys and nodes on a ring, so adding a node moves only one arc of keys instead of remapping everything."
     },
     {
       src: "Data structures",
-      text: "A binary heap stores a complete tree in an array so the parent of index i sits at i divided by two. Push and pop cost logarithmic time, which makes it the standard structure for a priority queue and for selecting the top k elements."
+      text: "A binary heap stores a tree in an array, so push and pop stay cheap. It is the usual way to keep the top k of something."
     }
   ];
 
@@ -193,7 +193,7 @@
       : "None of those words appear anywhere in the notes.";
 
     /* Results, or the refusal the build plan specifies. */
-    var top = scores.slice(0, 3);
+    var top = scores.slice(0, 2);
 
     if (!top.length || top[0].score < REFUSE_BELOW) {
       results.innerHTML =

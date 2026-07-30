@@ -2357,3 +2357,110 @@ input[type="range"]::-moz-range-thumb {
 .topo__controls[hidden] {
   display: none;
 }
+
+.topo__inspect-empty {
+  margin: 0;
+  max-width: none;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  color: var(--muted);
+}
+
+/* ---- Mobile: put the controls where the diagram is ---------------------- */
+@media (max-width: 1000px) {
+  .topo__side {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Caption and playback controls sit directly under the diagram, so the
+     step can be read and paused without scrolling past everything else. */
+  .topo__caption {
+    order: 1;
+  }
+
+  .topo__scenarios {
+    order: 2;
+  }
+
+  .topo__inspect {
+    order: 3;
+    min-height: 0;
+  }
+
+  .topo__caption {
+    position: sticky;
+    top: calc(var(--nav-h) + 44px);
+    z-index: 5;
+    background: color-mix(in srgb, var(--bg-deep) 94%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .topo__controls {
+    gap: var(--s-1);
+  }
+
+  .topo__ctrl {
+    min-height: 36px;
+  }
+}
+
+/* ---- Mobile: keep the Airlock terminal from running off the page -------- */
+@media (max-width: 900px) {
+  .term-window {
+    min-height: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 0.72rem;
+  }
+
+  .gate__hint {
+    position: static;
+    inset: auto;
+    margin-top: var(--s-3);
+  }
+
+  .gate__flow,
+  .gate__term {
+    padding: var(--s-4);
+  }
+
+  .lane {
+    padding: var(--s-3);
+  }
+
+  .tier {
+    font-size: var(--fs-xs);
+  }
+}
+
+@media (max-width: 900px) {
+  /* Four lanes were 134px each because the text wrapped three times. */
+  .lane {
+    gap: var(--s-2);
+    padding: var(--s-2) var(--s-3);
+  }
+
+  .lane__icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .lane__name {
+    font-size: 0.78rem;
+  }
+
+  .lane__result {
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
+
+  .gate__lanes {
+    gap: var(--s-2);
+  }
+
+  .term-window {
+    max-height: 240px;
+  }
+}

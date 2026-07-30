@@ -322,7 +322,8 @@
     nodeEls[n.id] = g;
 
     var select = function () {
-      selectNode(n.id);
+      if (selected === n.id) deselectNode();
+      else selectNode(n.id);
     };
     g.addEventListener("click", select);
     g.addEventListener("mouseenter", function () {
@@ -331,7 +332,7 @@
     g.addEventListener("mouseleave", function () {
       if (!scenarioActive()) clearHighlight();
     });
-    g.addEventListener("focus", select);
+
     g.addEventListener("keydown", function (ev) {
       if (ev.key === "Enter" || ev.key === " ") {
         ev.preventDefault();
@@ -449,6 +450,17 @@
 
   var inspect = document.getElementById("topo-inspect");
   var selected = null;
+  var EMPTY_INSPECT =
+    '<p class="topo__inspect-empty">Tap a service to see what it owns. Tap it again to close.</p>';
+
+  function deselectNode() {
+    selected = null;
+    Object.keys(nodeEls).forEach(function (k) {
+      nodeEls[k].classList.remove("is-sel");
+    });
+    inspect.innerHTML = EMPTY_INSPECT;
+    if (!scenarioActive()) clearHighlight();
+  }
 
   function selectNode(id) {
     selected = id;
@@ -664,7 +676,7 @@
     });
   }
 
-  /* Start on the gateway so the inspector is never empty. */
-  selectNode("gw");
+  /* Start empty, with an instruction, rather than pinned to one node. */
+  inspect.innerHTML = EMPTY_INSPECT;
   clearHighlight();
 })();

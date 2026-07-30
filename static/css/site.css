@@ -1551,3 +1551,41 @@ kbd {
   flex: 1 1 auto;
   min-width: 0;
 }
+
+/* Each fact links to wherever the detail actually lives. */
+.facts li {
+  padding: 0;
+}
+
+.facts li a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.2rem var(--s-4);
+  padding: var(--s-4) var(--s-5);
+  color: inherit;
+}
+
+.facts li a b {
+  grid-column: 1;
+}
+
+.facts li a span {
+  grid-column: 1;
+}
+
+.facts li a svg {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  color: var(--faint);
+  transition: color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.facts li:hover a svg {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+
+.facts li:hover b {
+  color: var(--accent);
+}
