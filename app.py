@@ -1,7 +1,7 @@
 import os
 from datetime import datetime, timezone
 
-from flask import Flask, redirect, render_template, request, Response, url_for
+from flask import Flask, redirect, render_template, request, Response
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 # Configure application
@@ -83,9 +83,8 @@ def sitemap_xml():
     """Helps search engines discover public HTML routes."""
     routes = (
         ("/", "weekly", "1.0"),
-        ("/projects", "monthly", "0.8"),
-        ("/guides", "monthly", "0.7"),
-        ("/philosophy", "monthly", "0.7"),
+        ("/systems", "weekly", "0.9"),
+        ("/about", "monthly", "0.7"),
     )
     lines = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -111,34 +110,36 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/systems")
+def systems():
+    return render_template("systems.html")
+
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+# Retired routes. The static deploy serves these from _redirects; the Flask
+# versions keep local dev and any non-Pages host behaving identically.
+_RETIRED = {
+    "/projects": "/systems",
+    "/guides": "/",
+    "/blogs": "/",
+    "/insights": "/",
+    "/philosophy": "/about",
+    "/motivation": "/about",
+}
+
+
 @app.route("/projects")
-def projects():
-    return render_template("projects.html")
-
-
 @app.route("/guides")
-def guides():
-    return render_template("guides.html")
-
-
 @app.route("/blogs")
-def blogs_redirect():
-    return redirect(_absolute_url("/guides"), code=301)
-
-
 @app.route("/insights")
-def insights_redirect():
-    return redirect(_absolute_url("/guides"), code=301)
-
-
 @app.route("/philosophy")
-def philosophy():
-    return render_template("philosophy.html")
-
-
 @app.route("/motivation")
-def motivation_redirect():
-    return redirect(url_for("philosophy"), code=301)
+def retired_redirect():
+    return redirect(_absolute_url(_RETIRED[request.path]), code=301)
 
 
 # the following below is to configure to host on pythonanywhere

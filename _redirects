@@ -1,5 +1,8 @@
 # Cloudflare Pages redirects — preserve old paths (301 = permanent, passes SEO).
-# These mirror the redirect routes that app.py used to serve.
-/blogs        /guides       301
-/insights     /guides       301
-/motivation   /philosophy   301
+# These mirror the retired routes in app.py.
+/projects     /systems      301
+/guides       /             301
+/blogs        /             301
+/insights     /             301
+/philosophy   /about        301
+/motivation   /about        301

@@ -24,12 +24,11 @@ ROOT = Path(__file__).resolve().parent
 DIST = ROOT / "dist"
 
 # Each rendered route -> its output file (relative to dist/). Cloudflare Pages
-# serves "/projects" from projects.html automatically, matching our canonical URLs.
+# serves "/systems" from systems.html automatically, matching our canonical URLs.
 PAGES = {
     "/": "index.html",
-    "/projects": "projects.html",
-    "/guides": "guides.html",
-    "/philosophy": "philosophy.html",
+    "/systems": "systems.html",
+    "/about": "about.html",
     "/robots.txt": "robots.txt",
     "/sitemap.xml": "sitemap.xml",
 }

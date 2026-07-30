@@ -1,179 +1,114 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        {% set _default_meta = "William Nayar — Software engineer and NUS CS. Portfolio, coding guides, projects (including Aqua Vitae), and writing." %}
-        <meta name="description" content="{% block meta_description %}{{ _default_meta }}{% endblock %}">
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-        <meta name="google-site-verification" content="lL632B8-tNJC8M56GPNNgdphLKLm4ni7_yQzqSJJF1g">
-        <link rel="canonical" href="{{ canonical_url }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="{{ canonical_url }}">
-        <meta property="og:title" content="{% block social_title %}William Nayar{% endblock %}">
-        <meta property="og:description" content="{% block og_description %}{{ _default_meta }}{% endblock %}">
-        <meta property="og:image" content="{% block og_image %}{{ absolute_static('profile_picture_black.png') }}{% endblock %}">
-        <meta property="og:locale" content="en_SG">
-        <meta name="twitter:card" content="summary_large_image">
+    {% set _default_meta = "William Nayar — final-year CS at NUS building backend and distributed systems. Design docs, architecture, and interactive write-ups for DeepCS, Recall and Airlock." %}
+    <title>{% block title %}William Nayar — Backend &amp; distributed systems{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ _default_meta }}{% endblock %}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="google-site-verification" content="lL632B8-tNJC8M56GPNNgdphLKLm4ni7_yQzqSJJF1g">
+    <link rel="canonical" href="{{ canonical_url }}">
 
-        <!-- https://getbootstrap.com/docs/5.3/getting-started/introduction/ -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-        
-        <link href="/static/favicon.ico" rel="icon" sizes="32x32">
-        <link href="/static/favicon-192.png" rel="icon" sizes="192x192" type="image/png">
-        <link href="/static/favicon-192.png" rel="apple-touch-icon">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:title" content="{% block social_title %}William Nayar — Backend &amp; distributed systems{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ _default_meta }}{% endblock %}">
+    <meta property="og:image" content="{{ absolute_static('profile_picture_black.png') }}">
+    <meta property="og:locale" content="en_SG">
+    <meta name="twitter:card" content="summary_large_image">
 
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..700;1,400&display=swap" rel="stylesheet">
+    <link href="/static/favicon.ico" rel="icon" sizes="32x32">
+    <link href="/static/favicon-192.png" rel="icon" sizes="192x192" type="image/png">
+    <link href="/static/favicon-192.png" rel="apple-touch-icon">
+    <meta name="theme-color" content="#06070a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#fbfcfd" media="(prefers-color-scheme: light)">
 
-        <link href="/static/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-        <script>
-            (function () {
-                try {
-                    var k = "wn-site-theme";
-                    var t = sessionStorage.getItem(k);
-                    if (t !== "light" && t !== "dark") t = "dark";
-                    document.documentElement.setAttribute("data-theme", t);
-                    var nav = document.querySelector("nav.site-navbar");
-                    if (nav) {
-                        nav.classList.remove("navbar-dark", "navbar-light");
-                        nav.classList.add(t === "light" ? "navbar-light" : "navbar-dark");
-                    }
-                } catch (e) {}
-            })();
-        </script>
+    <link href="/static/css/site.css" rel="stylesheet">
+    <link href="/static/css/labs.css" rel="stylesheet">
 
-        {% block extrahead %}{% endblock %}
-
-        <!-- https://github.com/mattboldt/typed.js/ -->
-        <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-
-        <style>
-            /* Smooth scroll behavior */
-            html {
-                scroll-behavior: smooth;
-            }
-            .nav-link {
-                transition: color 0.3s ease;
-            }
-            .nav-link:hover {
-                color: #14b8a6 !important;
-            }
-            .navbar-brand {
-                transition: color 0.3s ease;
-            }
-            .navbar-brand:hover {
-                color: #14b8a6 !important;
-            }
-            /* Global link hover effects */
-            a {
-                transition: all 0.3s ease;
-            }
-            a.gold:hover {
-                color: #fde68a !important;
-                text-decoration: underline;
-            }
-            /* Motion limited to interactive controls; body links stay stable */
-            .fade-in-section {
-                opacity: 0;
-                transform: translateY(12px);
-                transition: opacity 0.45s ease-out, transform 0.45s ease-out;
-            }
-            .fade-in-section.is-visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            /* Button click feedback */
-            .explore-button:active, .project-button:active, .buttoninsights:active {
-                transform: scale(0.97) !important;
-                transition: transform 0.1s ease;
-            }
-            /* Mobile responsive padding */
-            /* Mobile body copy ≈ Projects intro (.case-body): 1rem / comfortable line-height */
-            @media (max-width: 768px) {
-                .centertext2, .blog-content {
-                    padding-left: 5% !important;
-                    padding-right: 5% !important;
-                    font-size: 1rem !important;
-                    line-height: 1.65 !important;
+    <script>
+        // Set the theme before first paint so there is no flash of the wrong one.
+        // Dark is the design's home key; light is opt-in via the toggle.
+        (function () {
+            // Scroll-reveal hides content until JS shows it, so gate those styles
+            // on this class. Without JS the page renders fully visible instead of blank.
+            document.documentElement.classList.add("js");
+            try {
+                var saved = localStorage.getItem("wn-theme");
+                if (saved === "light" || saved === "dark") {
+                    document.documentElement.setAttribute("data-theme", saved);
                 }
-                .guide-card {
-                    font-size: 1rem !important;
-                    line-height: 1.65 !important;
-                }
-                .centertext2new {
-                    padding-left: 0 !important;
-                    padding-right: 0 !important;
-                    font-size: 1rem !important;
-                    line-height: 1.65 !important;
-                }
-                .centertext1, .centertext1new {
-                    padding-left: 5% !important;
-                    padding-right: 5% !important;
-                    text-align: left !important;
-                }
-                .centertext2new li {
-                    margin-left: 0 !important;
-                    padding-left: 0 !important;
-                    list-style-position: inside;
-                }
-                .aboutme2 h2, .aboutme2 h3 {
-                    font-size: 1.125rem !important;
-                    line-height: 1.35 !important;
-                }
-            }
-        </style>
+            } catch (e) {}
+        })();
+    </script>
 
-        <title>William Nayar{% block title %}{% endblock %}</title>
-    </head>
-    <body class="layoutbody">
-        <nav class="navbar navbar-dark navbar-expand-md site-navbar">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">William</a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link {% if request.path.startswith('/projects') %}active fw-semibold{% endif %}" {% if request.path.startswith('/projects') %}aria-current="page"{% endif %} href="/projects">Projects</a></li>
-                        <li class="nav-item"><a class="nav-link {% if request.path.startswith('/guides') %}active fw-semibold{% endif %}" {% if request.path.startswith('/guides') %}aria-current="page"{% endif %} href="/guides">Guides</a></li>
-                        <li class="nav-item"><a class="nav-link {% if request.path.startswith('/philosophy') %}active fw-semibold{% endif %}" {% if request.path.startswith('/philosophy') %}aria-current="page"{% endif %} href="/philosophy">Philosophy</a></li>
-                    </ul>
-                </div>
-                <div class="site-navbar-actions d-flex align-items-center gap-2 flex-shrink-0">
-                    <button type="button" class="theme-toggle" id="theme-toggle" title="Light mode" aria-label="Switch to light mode">
-                        <span class="theme-icon" data-theme-icon="light" aria-hidden="true">☀️</span>
-                        <span class="theme-icon" data-theme-icon="dark" hidden aria-hidden="true">🌙</span>
-                    </button>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
+    {% block extrahead %}{% endblock %}
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="nav" id="site-nav">
+        <div class="nav__inner">
+            <a class="nav__brand" href="/">
+                <svg class="nav__mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                    <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-opacity=".18" stroke-width="1.5"/>
+                    <g class="nav__mark-ring">
+                        <circle cx="16" cy="3" r="2.4" fill="#2dd4bf"/>
+                        <circle cx="27.3" cy="22.5" r="1.8" fill="#2dd4bf" fill-opacity=".55"/>
+                        <circle cx="4.7" cy="22.5" r="1.8" fill="#fbbf24" fill-opacity=".55"/>
+                    </g>
+                    <circle cx="16" cy="16" r="3.4" fill="currentColor" fill-opacity=".9"/>
+                </svg>
+                <span>William Nayar</span>
+            </a>
+
+            <nav class="nav__links" id="nav-links" aria-label="Primary">
+                <a class="nav__link {% if request.path == '/' %}is-active{% endif %}" href="/">Home</a>
+                <a class="nav__link {% if request.path.startswith('/systems') %}is-active{% endif %}" href="/systems">Systems</a>
+                <a class="nav__link {% if request.path.startswith('/about') %}is-active{% endif %}" href="/about">About</a>
+                <a class="nav__link" href="https://github.com/Wnayar" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+            </nav>
+
+            <div class="nav__actions">
+                <button type="button" class="icon-btn theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">
+                    <svg data-icon="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    <svg data-icon="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
+                </button>
+                <button type="button" class="icon-btn nav__burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                </button>
             </div>
-        </nav>
+        </div>
+    </header>
+
+    <main id="main">
         {% block main %}{% endblock %}
-        <script src="/static/theme.js"></script>
-        <script src="/static/site-nav.js"></script>
-        <script>
-            // Smooth scroll fade-in effect
-            const fadeInSections = document.querySelectorAll('.fade-in-section');
-            
-            const fadeInObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            
-            fadeInSections.forEach(section => {
-                fadeInObserver.observe(section);
-            });
-        </script>
-    </body>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap footer__inner">
+            <div>
+                <div class="footer__links">
+                    <a href="/">Home</a>
+                    <a href="/systems">Systems</a>
+                    <a href="/about">About</a>
+                    <a href="https://github.com/Wnayar" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/william-nayar/" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="mailto:wnayar98@gmail.com">Email</a>
+                </div>
+                <p class="footer__mono" style="margin-top:.75rem">Singapore · open to a 6-month SWE internship from early 2027</p>
+            </div>
+            <p class="footer__mono">© <span id="year">2026</span> William Nayar — built with Flask, frozen to static, served from Cloudflare</p>
+        </div>
+    </footer>
+
+    <script src="/static/js/core.js" defer></script>
+    {% block scripts %}{% endblock %}
+</body>
 </html>

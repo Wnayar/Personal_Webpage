@@ -1,6 +1,6 @@
 # William Nayar — Personal Website
 
-Personal portfolio and writing of William Nayar (CS @ NUS, founder of Aqua Vitae).
+Personal site of William Nayar (final-year CS at NUS — backend and distributed systems).
 Authored as a small Flask app and **shipped as a static site** on Cloudflare Pages.
 
 **Live site:** https://williamnayar.com
@@ -15,9 +15,21 @@ plain HTML in a `dist/` folder, which Cloudflare Pages serves from its global CD
 templates/ + static/  ──(freeze.py)──▶  dist/  ──(Cloudflare Pages)──▶  williamnayar.com
 ```
 
-This keeps the authoring ergonomics of Jinja templates (shared layout, SEO helpers,
-one source of truth for canonical URLs) while deploying as fast, cache-friendly static
-files — no Python server in production.
+No Python runs in production, so hosting is free and there is nothing to scale.
+Everything interactive on the site is client-side JavaScript with no network calls.
+
+## The interactive pieces, and what they actually are
+
+The `/systems` page carries four labs. Each is labelled on the page, because a
+demo that implies more than it is would undercut the point of the site:
+
+| Lab | What it really is |
+| --- | --- |
+| DeepCS topology | A rendering of the architecture in DeepCS's `DESIGN.md`, with the request paths it describes. Not connected to a deployment. |
+| Token bucket race | A browser simulation of the lost update in ADR-08 — read-then-write vs. an atomic script. |
+| CRDT convergence | A real (simplified RGA) CRDT implemented in `crdt.js`. Convergence is genuinely computed. DeepCS itself uses Yjs. |
+| BM25 search | Real BM25 scoring over a 9-chunk sample corpus, computed in `bm25.js`. Recall implements this in Go. |
+| Airlock gate | A replay of the real recorded verdict output from the Airlock repo. |
 
 ## Tech stack
 
@@ -25,8 +37,8 @@ files — no Python server in production.
 | --- | --- |
 | Authoring | Python, Flask, Jinja2 |
 | Build | `freeze.py` (Flask test client → static HTML) |
-| Frontend | HTML5, CSS3, vanilla JS, Bootstrap 5, Typed.js |
-| Fonts/UI | Plus Jakarta Sans, light/dark theme toggle |
+| Frontend | HTML5, hand-written CSS, vanilla JS — no framework, no CDN scripts |
+| Fonts/UI | Plus Jakarta Sans + JetBrains Mono, dark-first with a light theme toggle |
 | Hosting | Cloudflare Pages (static, free TLS, global CDN) |
 | Domain | Cloudflare Registrar — `williamnayar.com` |
 
@@ -36,23 +48,26 @@ files — no Python server in production.
 Personal_Webpage/
 ├── app.py              # Flask routes + SEO helpers (canonical URLs, sitemap, robots, redirects)
 ├── freeze.py           # Renders the app to a static dist/ folder for deployment
-├── _redirects          # Cloudflare Pages 301s for legacy paths (/blogs, /insights, /motivation)
+├── _redirects          # Cloudflare Pages 301s for retired paths
 ├── requirements.txt    # Python dependency (Flask, pinned)
 ├── .python-version     # Pins Python for reproducible Cloudflare builds
 ├── templates/
-│   ├── layout.html     # Base template: <head>, navbar, SEO meta, theme bootstrap
-│   ├── index.html      # Home — hero, Aqua Vitae showcase, stats
-│   ├── projects.html   # Project case studies
-│   ├── guides.html     # Developer guides
-│   └── philosophy.html # Philosophy page with timeline
+│   ├── layout.html     # Base template: <head>, nav, SEO meta, theme bootstrap
+│   ├── index.html      # Home — hero, the three systems, build-vs-buy, signals
+│   ├── systems.html    # Deep dives: DeepCS, Recall, Airlock + the four labs
+│   └── about.html      # Background, timeline, teaching, skills, contact
 └── static/
-    ├── style.css       # Global styling (teal/gold accents, light + dark themes)
-    ├── theme.js        # Light/dark theme toggle
-    ├── site-nav.js     # Navbar behavior
-    ├── index.js        # Home interactions
-    ├── insights.js     # Guides interactions
-    ├── *.png / *.svg   # Profile photo, favicon, social icons
-    └── aqua-vitae/     # Home-page showcase screenshots (see README.txt there)
+    ├── css/
+    │   ├── site.css    # Design system: tokens, layout, nav, cards, both themes
+    │   └── labs.css    # The interactive labs + /systems and /about furniture
+    ├── js/
+    │   ├── core.js     # Theme, nav, scroll reveal, hero + card canvases
+    │   ├── topology.js # DeepCS architecture SVG + scenario player
+    │   ├── bucket.js   # Token bucket lost-update simulation
+    │   ├── crdt.js     # RGA CRDT + simulated pub/sub channel
+    │   ├── bm25.js     # Inverted index + BM25 over the sample corpus
+    │   └── gate.js     # Airlock run→read→judge replay
+    └── profile_picture_black.png, favicon.ico, favicon-192.png
 ```
 
 ## Local development
@@ -77,8 +92,11 @@ CANONICAL_BASE_URL=https://williamnayar.com python freeze.py
 $env:CANONICAL_BASE_URL = "https://williamnayar.com"; python freeze.py
 ```
 
-Output goes to `dist/` (git-ignored): the four pages plus `robots.txt`, `sitemap.xml`,
-the copied `static/` assets, and `_redirects`.
+Output goes to `dist/` (git-ignored): the three pages plus `robots.txt`,
+`sitemap.xml`, the copied `static/` assets, and `_redirects`.
+
+To preview the build exactly as Cloudflare serves it (extensionless URLs like
+`/systems`), serve `dist/` with a static server that falls back to `<path>.html`.
 
 ## Deployment (Cloudflare Pages)
 
@@ -98,14 +116,30 @@ Every push to `main` triggers a rebuild and redeploy.
 
 - **Canonical URLs, Open Graph, and JSON-LD** (`Person` schema) are generated per page
   from `CANONICAL_BASE_URL`, so they always match the live domain.
-- **`sitemap.xml`** lists the four public pages; **`robots.txt`** points crawlers to it.
-- **`_redirects`** keeps legacy paths alive as 301s so existing links and search signals
-  carry over.
+- **`sitemap.xml`** lists the three public pages; **`robots.txt`** points crawlers to it.
+- **`_redirects`** keeps retired paths alive as 301s so existing links and search
+  signals carry over:
+
+  | Old path | Now |
+  | --- | --- |
+  | `/projects` | `/systems` |
+  | `/guides`, `/blogs`, `/insights` | `/` |
+  | `/philosophy`, `/motivation` | `/about` |
+
+## Accessibility & performance notes
+
+- No CSS or JS frameworks and no CDN scripts — only the two stylesheets, six small
+  scripts, and Google Fonts.
+- Scroll-reveal styles are gated behind a `.js` class on `<html>`, so with scripts
+  blocked the page renders fully visible instead of blank.
+- Every animation is disabled under `prefers-reduced-motion`, and canvas loops only
+  run while their canvas is on screen and the tab is visible.
+- The topology diagram is keyboard-navigable; each service is a focusable control.
 
 ## Contact
 
 - **Email:** wnayar98@gmail.com
-- **LinkedIn:** [linkedin.com/in/william-nayar](https://sg.linkedin.com/in/william-nayar)
+- **LinkedIn:** [linkedin.com/in/william-nayar](https://www.linkedin.com/in/william-nayar/)
 - **GitHub:** [github.com/Wnayar](https://github.com/Wnayar)
 
 ---

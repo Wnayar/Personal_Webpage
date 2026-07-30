@@ -1,15 +1,9 @@
 {% extends "layout.html" %}
 
-{% macro home_meta_description() %}William Nayar — NUS computer science, Aqua Vitae founder, incoming software engineer. Portfolio, programming guides, and project write-ups.{% endmacro %}
-
-{% block title %}
-{% endblock %}
-
-{% block meta_description %}{{ home_meta_description() }}{% endblock %}
-{% block og_description %}{{ home_meta_description() }}{% endblock %}
+{% block title %}William Nayar — Backend &amp; distributed systems{% endblock %}
 
 {% block extrahead %}
-    <script type="application/ld+json">
+<script type="application/ld+json">
 {{ {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -18,606 +12,327 @@
     "image": absolute_static("profile_picture_black.png"),
     "email": "wnayar98@gmail.com",
     "jobTitle": "Software engineer",
-    "description": "CS @ NUS | Founder @ Aqua Vitae",
-    "sameAs": [
-        "https://sg.linkedin.com/in/william-nayar",
-        "https://github.com/Wnayar",
-        "https://www.instagram.com/william_d.n/",
+    "description": "Final-year Computer Science at NUS. Backend and distributed systems.",
+    "affiliation": {"@type": "CollegeOrUniversity", "name": "National University of Singapore"},
+    "address": {"@type": "PostalAddress", "addressLocality": "Singapore"},
+    "knowsAbout": [
+        "Distributed systems", "Backend engineering", "Microservices",
+        "CRDTs", "Information retrieval", "Go", "TypeScript", "PostgreSQL", "Redis"
     ],
+    "sameAs": [
+        "https://www.linkedin.com/in/william-nayar/",
+        "https://github.com/Wnayar"
+    ]
 }|tojson }}
-    </script>
+</script>
 {% endblock %}
 
 {% block main %}
-    <script src="/static/index.js"></script>
-    <style>
-        .home-hero {
-            position: relative;
-            max-width: 520px;
-            margin: 0 auto 2.25rem;
-            padding: 0 0.75rem;
-        }
-        .namecard--home {
-            position: relative;
-            z-index: 1;
-            max-width: 440px !important;
-            padding: 2.25rem 1.85rem 1.85rem !important;
-            border-radius: 24px;
-            background: linear-gradient(155deg, rgba(22, 28, 28, 0.92) 0%, rgba(10, 10, 12, 0.97) 55%, rgba(14, 18, 18, 0.95) 100%);
-            border: 1px solid rgba(20, 184, 166, 0.22);
-            box-shadow:
-                0 1px 0 rgba(255, 255, 255, 0.06) inset,
-                0 -20px 50px rgba(0, 0, 0, 0.35) inset,
-                0 28px 56px -16px rgba(0, 0, 0, 0.55),
-                0 0 0 1px rgba(255, 255, 255, 0.04);
-        }
-        /* Inherits site --font-sans from layout; scope ensures third-party widgets don’t leak fonts */
-        .home-font-scope {
-            font-family: var(--font-sans);
-        }
-        .home-hero .interestsmain h1 {
-            font-family: var(--font-sans) !important;
-            font-size: clamp(1.65rem, 4.2vw, 2rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin: 0;
-            color: #f8fafc;
-            text-shadow: none;
-            line-height: 1.15;
-        }
-        [data-theme="light"] .home-hero .interestsmain h1 {
-            color: var(--color-text);
-        }
-        /* Socials: logos only; override global .links { width: 150px } from style.css */
-        .home-hero .links {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: center;
-            align-items: center;
-            gap: 1.35rem;
-            width: auto;
-            max-width: none;
-            margin: 0 auto;
-            padding: 0;
-            border: none;
-            background: none;
-            box-shadow: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .home-hero .links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.35rem;
-            margin: 0;
-            border: none;
-            background: transparent;
-            box-shadow: none;
-            border-radius: 0;
-            line-height: 0;
-        }
-        .home-hero .links a img {
-            display: block;
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-            border: none;
-            border-radius: 0;
-            transform: scale(1);
-            transition: transform 0.38s cubic-bezier(0.33, 1, 0.32, 1);
-        }
-        .home-hero .links img.social-icon--instagram {
-            width: 30px;
-            height: 30px;
-        }
-        @media (hover: hover) {
-            .home-hero .links a:hover img {
-                transform: scale(1.14);
-            }
-        }
-        .home-hero .links a:focus-visible {
-            outline: 2px solid var(--color-teal);
-            outline-offset: 4px;
-            border-radius: 2px;
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .home-hero .links a img {
-                transition: none;
-            }
-            .home-hero .links a:hover img {
-                transform: scale(1);
-            }
-        }
-        .home-hero .profile-photo-wrap {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 20px auto;
-            border-radius: 50%;
-            overflow: hidden;
-            background: radial-gradient(circle at 40% 35%, rgba(20, 184, 166, 0.14) 0%, rgba(15, 15, 15, 0.96) 55%, #0f0f0f 100%);
-            box-shadow:
-                0 0 0 3px #0a0a0a,
-                0 0 0 6px rgba(20, 184, 166, 0.28),
-                0 0 0 7px rgba(251, 191, 36, 0.1),
-                0 18px 40px rgba(0, 0, 0, 0.45),
-                inset 0 0 0 1px rgba(20, 184, 166, 0.15);
-        }
-        .profile-photo-wrap #profile {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            margin-bottom: 0;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.55s ease;
-        }
-        .profile-photo-wrap.is-loaded #profile {
-            opacity: 1;
-        }
-        .profile-loader {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-        .profile-photo-wrap.is-loaded .profile-loader {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .profile-loader-ring {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            border: 3px solid var(--color-teal-dim);
-            border-top-color: var(--color-teal);
-            animation: profile-spin 0.75s linear infinite;
-        }
-        @keyframes profile-spin {
-            to { transform: rotate(360deg); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .profile-loader {
-                display: none !important;
-            }
-            .profile-photo-wrap #profile {
-                opacity: 1 !important;
-                transition: none;
-            }
-        }
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 0;
-            margin-top: 0.25rem;
-        }
-        .home-lead {
-            max-width: 38rem;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 1.5rem 0.5rem;
-        }
-        .home-lead__copy {
-            font-family: var(--font-sans);
-        }
-        .home-lead__line {
-            margin: 0 auto 1.35em;
-            max-width: 36rem;
-            padding: 0 0.25rem;
-            font-family: var(--font-sans);
-            font-size: clamp(var(--font-body-size), 1.85vw, 1.1875rem);
-            line-height: var(--font-body-line-height);
-            letter-spacing: 0.01em;
-            font-weight: 400;
-            color: var(--color-text);
-            text-align: center;
-            text-wrap: balance;
-        }
-        .home-lead__line:last-child {
-            margin-bottom: 0;
-        }
-        .home-lead .lead-em {
-            color: var(--home-lead-em);
-            font-weight: 600;
-        }
-        .home-lead .lead-highlight {
-            color: var(--home-lead-highlight);
-            font-weight: 600;
-        }
-        .home-lead__rule {
-            width: 72px;
-            height: 3px;
-            margin: 0 auto 1.65rem;
-            border-radius: 999px;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                var(--color-teal) 35%,
-                var(--color-gold) 65%,
-                transparent
-            );
-            opacity: 0.85;
-        }
-        .stat-item {
-            text-align: center;
-            padding: 20px 30px;
-            background-color: var(--color-card-bg);
-            border: 1px solid var(--color-card-border);
-            border-radius: 10px;
-            min-width: 180px;
-            transition: all 0.3s ease;
-        }
-        .stat-item:hover {
-            transform: translateY(-2px);
-            background-color: var(--color-card-bg-hover);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-            border-color: rgba(20, 184, 166, 0.28);
-        }
-        .stat-number {
-            font-size: clamp(2rem, 5vw, 2.25rem);
-            font-weight: 700;
-            color: var(--color-teal);
-            margin-bottom: 8px;
-            font-family: var(--font-sans);
-        }
-        .stat-label {
-            font-size: 0.8125rem;
-            color: var(--color-muted);
-            font-weight: 500;
-            font-family: var(--font-sans);
-        }
-        .home-credentials {
-            color: var(--color-teal);
-            font-size: var(--font-ui-size);
-            font-weight: 500;
-            line-height: var(--font-body-line-height);
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-        .home-tagline {
-            color: var(--color-text);
-            font-size: 1.125rem;
-            font-weight: 600;
-            line-height: var(--font-body-line-height);
-            margin-top: 10px;
-            margin-bottom: 8px;
-        }
-        .home-email-row {
-            font-size: var(--font-ui-size);
-            color: var(--color-muted);
-            line-height: var(--font-body-line-height);
-            margin-bottom: 15px;
-        }
-        .home-email-row a {
-            color: var(--color-teal);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        @media (max-width: 768px) {
-            .stats-bar {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-            .stat-item {
-                width: 90%;
-                max-width: 300px;
-            }
-            .home-lead__line {
-                font-size: var(--font-ui-size) !important;
-                line-height: var(--font-body-line-height) !important;
-            }
-            .home-tagline {
-                font-size: 1rem !important;
-                line-height: 1.55 !important;
-            }
-            .home-email-row {
-                font-size: 1rem !important;
-            }
-            .stat-number {
-                font-size: clamp(1.65rem, 7vw, 2rem) !important;
-            }
-            .stat-label {
-                font-size: 0.8125rem !important;
-            }
-            .home-hero .interestsmain h1 {
-                font-size: clamp(1.35rem, 5vw, 1.65rem) !important;
-            }
-            .av-showcase__sub {
-                font-size: 1rem !important;
-                line-height: 1.65 !important;
-            }
-        }
-        @media (max-width: 639.98px) {
-            .home-hero {
-                padding-left: 0;
-                padding-right: 0;
-            }
-            .namecard--home {
-                padding: 1.65rem 1.1rem 1.35rem !important;
-            }
-            .home-credentials {
-                font-size: clamp(0.8rem, 3.4vw, 0.95rem);
-                line-height: 1.45;
-                overflow-wrap: anywhere;
-            }
-            .home-lead {
-                padding-left: 0;
-                padding-right: 0;
-            }
-            .home-lead__line {
-                text-align: left;
-                text-wrap: pretty;
-            }
-        }
-        @media (prefers-reduced-motion: no-preference) {
-            .home-entrance {
-                opacity: 0;
-                animation: homeHeroIn 0.62s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            }
-            .home-entrance--0 { animation-delay: 0.05s; }
-            .home-entrance--1 { animation-delay: 0.12s; }
-            .home-entrance--2 { animation-delay: 0.2s; }
-            .home-entrance--3 { animation-delay: 0.28s; }
-            .home-entrance--4 { animation-delay: 0.36s; }
-            .home-entrance--5 { animation-delay: 0.44s; }
-        }
-        @keyframes homeHeroIn {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .home-entrance {
-                opacity: 1 !important;
-                animation: none !important;
-            }
-        }
-        .home-signature {
-            font-family: var(--font-mono, ui-monospace, monospace);
-            font-size: 0.78rem;
-            color: var(--color-muted);
-            letter-spacing: 0.06em;
-            text-align: center;
-            margin: 0 0 0.35rem;
-            opacity: 0.92;
-        }
-        [data-theme="light"] .namecard--home {
-            background: linear-gradient(
-                155deg,
-                #f8fafc 0%,
-                #f1f5f9 52%,
-                #e2e8f0 100%
-            );
-            border-color: var(--color-border);
-            box-shadow:
-                0 1px 0 rgba(255, 255, 255, 0.9) inset,
-                0 22px 44px rgba(15, 23, 42, 0.07);
-        }
-        [data-theme="light"] .stat-item:hover {
-            border-color: rgba(15, 118, 110, 0.38);
-            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
-        }
-        [data-theme="light"] .stat-item {
-            background: var(--color-card-bg);
-            border-color: var(--color-card-border);
-        }
-        [data-theme="light"] .stat-label {
-            color: var(--color-muted);
-        }
-        [data-theme="light"] .home-lead__line {
-            color: var(--color-text);
-        }
-        [data-theme="light"] .home-lead__rule {
-            opacity: 0.55;
-        }
-        [data-theme="light"] .home-hero .profile-photo-wrap {
-            background: radial-gradient(
-                circle at 40% 35%,
-                rgba(15, 118, 110, 0.08) 0%,
-                rgba(248, 250, 252, 0.98) 55%,
-                #e2e8f0 100%
-            );
-            box-shadow:
-                0 0 0 3px var(--color-bg),
-                0 0 0 6px rgba(15, 118, 110, 0.22),
-                0 16px 36px rgba(15, 23, 42, 0.1),
-                inset 0 0 0 1px rgba(15, 118, 110, 0.12);
-        }
-    </style>
-    <main class="page-main">
-        <br>
-        <section class="home-hero">
-        <div class="namecard namecard--home home-font-scope">
-            <div class="profile-photo-wrap">
-                <div class="profile-loader" aria-hidden="true">
-                    <div class="profile-loader-ring"></div>
-                </div>
-                <img id="profile" src="/static/profile_picture_black.png" alt="William Nayar" width="200" height="200" loading="eager" decoding="async">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+    <div class="hero__grid-bg" aria-hidden="true"></div>
+    <div class="wrap hero__inner">
+        <div>
+            <p class="hero__status">
+                <span class="hero__status-dot" aria-hidden="true"></span>
+                Open to a 6-month SWE internship · from early 2027
+            </p>
+
+            <h1 class="h-display">William Nayar</h1>
+
+            <p class="hero__role" data-typewriter='["backend &amp; distributed systems","six services, one gateway, no shared tables","CRDTs, event logs, and the races underneath","build what has a hard problem inside it"]'>
+                <span class="hero__role-text"></span><span class="hero__caret" aria-hidden="true"></span>
+            </p>
+
+            <p class="lede hero__lede">
+                Final-year Computer Science at NUS, specialising in Software Engineering.
+                I build backend systems and care about <strong>where work belongs in a system</strong> —
+                which boundary owns it, what races underneath it, and what it costs when it fails.
+            </p>
+
+            <div class="btn-row hero__actions">
+                <a class="btn btn--primary" href="/systems">
+                    Read the systems
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </a>
+                <a class="btn" href="/about">About &amp; background</a>
             </div>
-            <p class="home-signature home-entrance home-entrance--0">live · learn · grow</p>
-            <noscript>
-                <style>
-                    .profile-photo-wrap #profile { opacity: 1 !important; }
-                    .profile-loader { display: none !important; }
-                </style>
-            </noscript>
-            <div class="interestsmain teal home-entrance home-entrance--1">
-                <h1>William Nayar</h1>
-            </div>
-            <p class="interestssub home-credentials home-entrance home-entrance--2">
-                CS @ NUS | Founder @ Aqua Vitae
-            </p>
-            <p class="interestssub home-tagline home-entrance home-entrance--3">
-                I love solving hard problems
-            </p>
-            <p class="home-email-row home-entrance home-entrance--4">
-                <a href="mailto:wnayar98@gmail.com">wnayar98@gmail.com</a>
-            </p>
-            <div class="links home-entrance home-entrance--5">
-            <a href="https://sg.linkedin.com/in/william-nayar" target="_blank">
-                <img src="/static/linkedin.png" alt="LinkedIn">
-            </a>
-            <a href="https://github.com/Wnayar" target="_blank">
-                <img src="/static/github.png" alt="GitHub">
-            </a>
-            <a href="https://www.instagram.com/william_d.n/" target="_blank" rel="noopener noreferrer" aria-label="Instagram — @william_d.n">
-                <img class="social-icon--instagram" src="/static/instagram.svg" alt="" width="28" height="28" decoding="async">
-            </a>
+
+            <div class="hero__meta">
+                <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    NUS Computer Science
+                </span>
+                <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Singapore
+                </span>
+                <span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+                    Teaching CS3219 from Aug 2026
+                </span>
             </div>
         </div>
-        </section>
-        <section
-            class="av-showcase fade-in-section"
-            aria-labelledby="av-showcase-title"
-        >
-            <div class="av-showcase__inner">
-                <p class="av-showcase__eyebrow">Passion project</p>
-                <h2 id="av-showcase-title" class="av-showcase__title">Aqua Vitae</h2>
-                <p class="av-showcase__sub">
-                    <strong>Aqua Vitae</strong> is my niche perfume brand, with passion and creativity in every fragrance,
-                    and the same attention in how it shows up online. The previews below are straight from the live site:
-                    <strong>tap any card</strong> to open the shop in a new tab.
-                    For stack, tooling, deployment, and what shipped,
-                    <a class="av-showcase__inline-link" href="/projects#aqua-vitae">see the write-up on Projects</a>.
+
+        <div class="hero__visual" aria-hidden="true">
+            <canvas class="hero__canvas" id="hero-canvas"></canvas>
+            <p class="hero__visual-label">request path · illustrative</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<div class="rail" aria-hidden="true">
+    <div class="rail__track">
+        {% for _ in range(2) %}
+        <span class="rail__item"><i></i><b>Go</b> · from-scratch inverted index</span>
+        <span class="rail__item"><i></i><b>TypeScript</b> · Fastify across six services</span>
+        <span class="rail__item"><i></i><b>PostgreSQL</b> · schema per service, one role each</span>
+        <span class="rail__item"><i></i><b>Redis</b> · streams, pub/sub, Lua</span>
+        <span class="rail__item"><i></i><b>Yjs</b> · CRDT convergence</span>
+        <span class="rail__item"><i></i><b>Cloud Run</b> · scale to zero</span>
+        <span class="rail__item"><i></i><b>Docker</b> · dev/prod parity</span>
+        <span class="rail__item"><i></i><b>Python</b> · sandboxed detonation</span>
+        <span class="rail__item"><i></i><b>k6</b> · p95, never the average</span>
+        <span class="rail__item"><i></i><b>Terraform</b> · second pass, not first</span>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- ===================== SYSTEMS ===================== -->
+<section class="section" id="work">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <p class="eyebrow">Selected systems</p>
+            <h2 class="h1">Three systems, and the honest status of each</h2>
+            <p class="lede">
+                Every project below carries a status chip. <strong>Shipped</strong> means it runs and other people have used it.
+                <strong>In build</strong> means the design is locked and the code is going in. <strong>Designed</strong> means the doc
+                exists and the code does not — yet. Nothing here is dressed up as further along than it is.
+            </p>
+        </div>
+
+        <div class="systems-grid">
+            <!-- DeepCS -->
+            <article class="syscard reveal" data-delay="1">
+                <div class="syscard__top">
+                    <h3 class="syscard__name">DeepCS</h3>
+                    <span class="chip chip--building syscard__chip"><i class="chip__dot"></i>In build</span>
+                </div>
+                <div class="syscard__viz"><canvas data-card-viz="deepcs"></canvas></div>
+                <p class="syscard__desc">
+                    A CS-fundamentals question bank where two people solve the same question together in real time.
+                    Six independently deployable services behind a gateway I'm writing rather than buying.
                 </p>
-                <div class="av-showcase__grid" role="list">
-                    <div class="av-showcase__frame" role="listitem">
-                        <a
-                            class="av-showcase__tile-link"
-                            href="https://www.aquavitaeparfums.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Open Aqua Vitae live site — site preview"
-                        >
-                            <div class="av-showcase__screen">
-                                <div class="av-showcase__loader" aria-hidden="true">
-                                    <div class="av-showcase__loader-ring"></div>
-                                </div>
-                                <img
-                                    class="av-showcase__img"
-                                    src="/static/aqua-vitae/showcase-1.png"
-                                    data-fallback-name="showcase-1.png"
-                                    alt=""
-                                    width="640"
-                                    height="400"
-                                    loading="lazy"
-                                    decoding="async"
-                                />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="av-showcase__frame" role="listitem">
-                        <a
-                            class="av-showcase__tile-link"
-                            href="https://www.aquavitaeparfums.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Open Aqua Vitae live site — bottle preview"
-                        >
-                            <div class="av-showcase__screen">
-                                <div class="av-showcase__loader" aria-hidden="true">
-                                    <div class="av-showcase__loader-ring"></div>
-                                </div>
-                                <img
-                                    class="av-showcase__img"
-                                    src="/static/aqua-vitae/showcase-2.png"
-                                    data-fallback-name="showcase-2.png"
-                                    alt=""
-                                    width="640"
-                                    height="400"
-                                    loading="lazy"
-                                    decoding="async"
-                                />
-                            </div>
-                        </a>
-                    </div>
-                    <div class="av-showcase__frame" role="listitem">
-                        <a
-                            class="av-showcase__tile-link"
-                            href="https://www.aquavitaeparfums.com/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Open Aqua Vitae live site — world of the brand"
-                        >
-                            <div class="av-showcase__screen">
-                                <div class="av-showcase__loader" aria-hidden="true">
-                                    <div class="av-showcase__loader-ring"></div>
-                                </div>
-                                <img
-                                    class="av-showcase__img"
-                                    src="/static/aqua-vitae/showcase-3.png"
-                                    data-fallback-name="showcase-3.png"
-                                    alt=""
-                                    width="640"
-                                    height="400"
-                                    loading="lazy"
-                                    decoding="async"
-                                />
-                            </div>
-                        </a>
-                    </div>
+                <ul class="syscard__facts">
+                    <li><b>hard part</b><span>CRDT sync across instances that share no memory</span></li>
+                    <li><b>doc</b><span>9 ADRs; every build-vs-buy call tagged</span></li>
+                    <li><b>status</b><span>design locked, building now</span></li>
+                </ul>
+                <div class="syscard__stack">
+                    <span class="tag">TypeScript</span><span class="tag">Fastify</span><span class="tag">Yjs</span>
+                    <span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Cloud Run</span>
                 </div>
-                <a class="av-showcase__link av-showcase__link--below" href="/projects#aqua-vitae"
-                    >Write-up &amp; details →</a
-                >
+                <div class="syscard__foot">
+                    <a class="btn btn--sm" href="/systems#deepcs">Architecture &amp; demos</a>
+                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/deepcs" target="_blank" rel="noopener">Design doc ↗</a>
+                </div>
+            </article>
+
+            <!-- Recall -->
+            <article class="syscard reveal" data-delay="2">
+                <div class="syscard__top">
+                    <h3 class="syscard__name">Recall</h3>
+                    <span class="chip chip--designed syscard__chip"><i class="chip__dot"></i>Designed</span>
+                </div>
+                <div class="syscard__viz"><canvas data-card-viz="recall"></canvas></div>
+                <p class="syscard__desc">
+                    A search engine over my school notes that answers questions with citations — and refuses when
+                    retrieval confidence is low. Inverted index, BM25 and hybrid retrieval written from scratch in Go.
+                </p>
+                <ul class="syscard__facts">
+                    <li><b>why</b><span>the index <em>is</em> the point — no search library</span></li>
+                    <li><b>scale</b><span>sharding + scatter-gather on the roadmap</span></li>
+                    <li><b>status</b><span>build plan written, code not started</span></li>
+                </ul>
+                <div class="syscard__stack">
+                    <span class="tag">Go</span><span class="tag">BM25</span><span class="tag">Python</span>
+                    <span class="tag">Docker</span><span class="tag">RAG</span>
+                </div>
+                <div class="syscard__foot">
+                    <a class="btn btn--sm" href="/systems#recall">How retrieval works</a>
+                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/recall" target="_blank" rel="noopener">Build plan ↗</a>
+                </div>
+            </article>
+
+            <!-- Airlock -->
+            <article class="syscard reveal" data-delay="3">
+                <div class="syscard__top">
+                    <h3 class="syscard__name">Airlock</h3>
+                    <span class="chip chip--shipped syscard__chip"><i class="chip__dot"></i>Shipped</span>
+                </div>
+                <div class="syscard__viz"><canvas data-card-viz="airlock"></canvas></div>
+                <p class="syscard__desc">
+                    A safety gate for AI agents: every package an agent installs is detonated in a disposable sandbox
+                    first. Won 1st place at the Daytona HackSprint, built in a five-hour window.
+                </p>
+                <ul class="syscard__facts">
+                    <li><b>result</b><span>1st place · NUS Singapore · Jul 2026</span></li>
+                    <li><b>design</b><span>tripwires in plain code; the model can only tighten</span></li>
+                    <li><b>status</b><span>working code, real recorded output</span></li>
+                </ul>
+                <div class="syscard__stack">
+                    <span class="tag">Python</span><span class="tag">Daytona</span><span class="tag">Sandboxing</span>
+                    <span class="tag">Static analysis</span><span class="tag">LLM judge</span>
+                </div>
+                <div class="syscard__foot">
+                    <a class="btn btn--sm" href="/systems#airlock">Watch the gate</a>
+                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/airlock" target="_blank" rel="noopener">Repo ↗</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<hr class="rule">
+
+<!-- ===================== DOCTRINE ===================== -->
+<section class="section">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <p class="eyebrow">How I decide</p>
+            <h2 class="h1">Build what has a hard problem inside it. Buy what is risk without insight.</h2>
+            <p class="lede">
+                Every non-obvious decision in the DeepCS design doc carries one of three tags. The same test produces
+                opposite answers in different places — and that consistency is the point.
+            </p>
+        </div>
+
+        <div class="doctrine">
+            <div class="doctrine__card doctrine__card--bought reveal" data-delay="1">
+                <span class="doctrine__tag">[bought]</span>
+                <p>
+                    Deliberately not built. There's no interesting problem inside it, so paying for it is the correct
+                    engineering call, not a shortcut. <strong>Auth is bought</strong> — identity is security-critical and
+                    fully solved, and Google's key rotation beats anything I'd hand-roll.
+                </p>
             </div>
-        </section>
-        <div class="stats-bar fade-in-section">
-            <div class="stat-item">
-                <div class="stat-number">4,392</div>
-                <div class="stat-label">GitHub Contributions</div>
+            <div class="doctrine__card doctrine__card--built reveal" data-delay="2">
+                <span class="doctrine__tag">[built · learning]</span>
+                <p>
+                    A mature off-the-shelf option exists and is what I'd use commercially. Built here because the problem
+                    underneath is one I wanted to hit directly. <strong>The gateway is built</strong> — Kong would fix its
+                    rate-limiter race on my behalf, and that race is the whole lesson.
+                </p>
             </div>
-            <div class="stat-item">
-                <div class="stat-number">2026</div>
-                <div class="stat-label">Founder</div>
+            <div class="doctrine__card doctrine__card--detour reveal" data-delay="3">
+                <span class="doctrine__tag">[detour · learning]</span>
+                <p>
+                    Built, run, then deliberately <em>not</em> kept in production. <strong>Kubernetes is a detour</strong> —
+                    stood up on GKE beside the live deploy, demonstrated, then deleted, because an always-on cluster
+                    breaks the cost ceiling the whole design is shaped by.
+                </p>
             </div>
         </div>
-        <br>
-        <div class="container-fluid home-lead fade-in-section">
-            <div class="home-lead__rule" aria-hidden="true"></div>
-            <div class="home-lead__copy">
-                <p class="home-lead__line">Building scalable backend &amp; full-stack apps with <span class="lead-em">Node.js</span>, <span class="lead-em">TypeScript</span>, <span class="lead-em">MongoDB</span>, and <span class="lead-em">PostgreSQL</span>.</p>
-                <p class="home-lead__line">Currently developing <span class="lead-highlight">Aqua Vitae</span>, a production e-commerce platform, while studying Computer Science at <span class="lead-highlight">NUS</span>.</p>
+
+        <blockquote class="pullquote reveal">
+            The failure mode this doc is written to prevent isn't picking a wrong tool; it's
+            <b>spending three weeks on infrastructure and one on the only part that's hard.</b>
+            <cite>— DeepCS DESIGN.md, closing note</cite>
+        </blockquote>
+    </div>
+</section>
+
+<hr class="rule">
+
+<!-- ===================== SIGNALS ===================== -->
+<section class="section">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <p class="eyebrow">Signals</p>
+            <h2 class="h1">Outside my own repos</h2>
+        </div>
+
+        <div class="signals">
+            <div class="signal reveal" data-delay="1">
+                <span class="signal__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M6 3h12v6a6 6 0 0 1-12 0z"/><path d="M12 15v6M9 21h6"/></svg></span>
+                <h3>1st place, Daytona HackSprint</h3>
+                <p>AI Builders at NUS, July 2026, for Airlock. A teammate and I shaped the concept and the system design.</p>
+            </div>
+            <div class="signal reveal" data-delay="2">
+                <span class="signal__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
+                <h3>Certificate of Distinction</h3>
+                <p>Software Engineering focus area, NUS School of Computing.</p>
+            </div>
+            <div class="signal reveal" data-delay="3">
+                <span class="signal__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg></span>
+                <h3>Merged open-source PRs</h3>
+                <p>In <a href="https://github.com/Automattic/mongoose" target="_blank" rel="noopener">Automattic/mongoose</a> and <a href="https://github.com/redis/node-redis" target="_blank" rel="noopener">redis/node-redis</a> — gaps found by reading the source, not by working off issue labels.</p>
+            </div>
+            <div class="signal reveal" data-delay="4">
+                <span class="signal__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7l10-4 10 4-10 4z"/><path d="M6 10v5c3 2.5 9 2.5 12 0v-5"/></svg></span>
+                <h3>Teaching CS3219 at NUS</h3>
+                <p>Academic tutor for Software Engineering Principles and Patterns, Aug–Dec 2026. Microservices-based — students make real boundary and deployment calls.</p>
             </div>
         </div>
-        <br><br>
-        <div class="fade-in-section home-projects-cta-wrap">
-            <a href="/projects" class="home-projects-cta">
-                <span class="home-projects-cta__sheen" aria-hidden="true"></span>
-                <span class="home-projects-cta__inner">
-                    <span class="home-projects-cta__eyebrow">Selected work</span>
-                    <span class="home-projects-cta__title">View My Projects</span>
-                </span>
-                <span class="home-projects-cta__arrow" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
-                </span>
-            </a>
+    </div>
+</section>
+
+<hr class="rule">
+
+<!-- ===================== ALSO SHIPPED ===================== -->
+<section class="section">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <p class="eyebrow">Also shipped</p>
+            <h2 class="h1">Earlier work</h2>
+            <p class="lede">Product and full-stack work from before the systems focus. Kept short on purpose.</p>
         </div>
-        <br>
-        <div class="divborder"></div>
-        <br>
-        <div class="container-fluid fade-in-section site-footer-cta">
-            <p class="site-footer-cta__copy">Open to collaborations and interesting problems — <a href="mailto:wnayar98@gmail.com" class="site-footer-cta__mail">wnayar98@gmail.com</a></p>
-            <nav class="site-footer-links" aria-label="Site">
-                <a href="/projects">Projects</a><span class="sep">·</span><a href="/guides">Guides</a><span class="sep">·</span><a href="/philosophy">Philosophy</a>
-            </nav>
+
+        <ul class="also reveal">
+            <li class="also__row">
+                <div class="also__name">Aqua Vitae <span>2026 · own venture</span></div>
+                <p class="also__what">Sole engineer for a fragrance brand: React/TypeScript storefront, Supabase Postgres behind it, and a Shopify-hosted checkout to keep payments and PCI scope off my own stack.</p>
+                <div class="also__links">
+                    <a href="https://www.aquavitaeparfums.com/" target="_blank" rel="noopener">site ↗</a>
+                </div>
+            </li>
+            <li class="also__row">
+                <div class="also__name">PeerPrep <span>2025 · NUS CS3219</span></div>
+                <p class="also__what">Owned the Question Service inside a 6-service architecture. Moved randomised selection into MongoDB aggregation pipelines instead of the application layer; 35 tests across CRUD and the pipelines.</p>
+                <div class="also__links">
+                    <a href="https://github.com/Wnayar/PeerPrep" target="_blank" rel="noopener">repo ↗</a>
+                </div>
+            </li>
+            <li class="also__row">
+                <div class="also__name">GroupMatch <span>2024 · NUS Orbital</span></div>
+                <p class="also__what">Apollo 11 (Advanced). MERN study-group platform matched on live NUSMods course data — parsing 20–50+ timetable entries per module into something searchable.</p>
+                <div class="also__links">
+                    <a href="https://github.com/Wnayar/NUS-GroupMatch" target="_blank" rel="noopener">repo ↗</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="section section--tight">
+    <div class="wrap">
+        <div class="cta reveal">
+            <p class="eyebrow" style="justify-content:center">Get in touch</p>
+            <h2 class="h1">Looking for a 6-month SWE internship, early 2027</h2>
+            <p class="lede">
+                Backend, distributed systems, infrastructure. If you have a problem with a real concurrency or
+                boundary question inside it, I'd like to hear about it.
+            </p>
+            <div class="btn-row">
+                <a class="btn btn--primary" href="mailto:wnayar98@gmail.com">wnayar98@gmail.com</a>
+                <a class="btn" href="https://www.linkedin.com/in/william-nayar/" target="_blank" rel="noopener">LinkedIn ↗</a>
+                <a class="btn" href="https://github.com/Wnayar" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
         </div>
-        <br><br>
-        <p class="centertextsimple copyright">Copyright &#169; <span>William Nayar</span></p>
-        <br><br>
-    </main>
-  {% endblock %}
+    </div>
+</section>
+
+{% endblock %}
