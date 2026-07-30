@@ -1,5 +1,7 @@
+import hashlib
 import os
 from datetime import datetime, timezone
+from pathlib import Path
 
 from flask import Flask, redirect, render_template, request, Response
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -43,6 +45,30 @@ def _absolute_url(path: str) -> str:
     return _canonical_base() + path
 
 
+_STATIC_DIR = Path(__file__).resolve().parent / "static"
+_asset_hashes: dict[str, str] = {}
+
+
+def _asset(rel: str) -> str:
+    """Static URL with a content hash appended, e.g. /static/css/site.css?v=a1b2c3d4.
+
+    Without this, a visitor can hold a cached stylesheet for as long as its
+    max-age (4 hours on Cloudflare Pages) while receiving freshly deployed HTML.
+    New markup against an old stylesheet renders as an unstyled page. The hash
+    changes whenever the file does, so that mismatch cannot happen.
+    """
+    rel = rel.lstrip("/")
+    if rel not in _asset_hashes:
+        f = _STATIC_DIR / rel
+        try:
+            digest = hashlib.sha256(f.read_bytes()).hexdigest()[:10]
+        except OSError:
+            digest = ""
+        _asset_hashes[rel] = digest
+    digest = _asset_hashes[rel]
+    return f"/static/{rel}" + (f"?v={digest}" if digest else "")
+
+
 @app.context_processor
 def inject_seo_helpers():
     path = request.path or "/"
@@ -50,6 +76,7 @@ def inject_seo_helpers():
     return {
         "canonical_url": canonical,
         "absolute_static": lambda rel: _absolute_url(f"/static/{rel.lstrip('/')}"),
+        "asset": _asset,
     }
 
 

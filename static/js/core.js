@@ -264,10 +264,10 @@
         return pad + n.y * (h - pad * 2);
       };
 
-      var cTeal = themeColor("--teal", "#2dd4bf");
-      var cBorder = themeColor("--border-strong", "#2a3140");
-      var cAmber = themeColor("--amber", "#fbbf24");
-      var cMuted = themeColor("--faint", "#59616f");
+      var cTeal = themeColor("--accent", "#4493f8");
+      var cBorder = themeColor("--border-strong", "#46617f");
+      var cAmber = themeColor("--amber", "#d29922");
+      var cMuted = themeColor("--faint", "#7f93aa");
 
       ctx.clearRect(0, 0, w, h);
 
@@ -317,7 +317,7 @@
 
         var g = ctx.createRadialGradient(x, y, 0, x, y, 9);
         g.addColorStop(0, cTeal);
-        g.addColorStop(1, "rgba(45,212,191,0)");
+        g.addColorStop(1, "rgba(68,147,248,0)");
         ctx.fillStyle = g;
         ctx.globalAlpha = 0.85;
         ctx.beginPath();
@@ -374,7 +374,7 @@
           ctx.font = '9px ui-monospace, "JetBrains Mono", monospace';
           ctx.textAlign = "center";
           ctx.textBaseline = "top";
-          ctx.fillText(n.label, x, y + n.r + 6);
+          ctx.fillText(n.label, x, y + n.r + 10);
         }
       });
 
@@ -393,9 +393,9 @@
       var h = canvas.__h;
       if (!w || !h) return;
 
-      var teal = themeColor("--teal", "#2dd4bf");
-      var amber = themeColor("--amber", "#fbbf24");
-      var border = themeColor("--border-strong", "#2a3140");
+      var teal = themeColor("--accent", "#4493f8");
+      var amber = themeColor("--amber", "#d29922");
+      var border = themeColor("--border-strong", "#46617f");
       var t = reduced ? 0 : time / 1000;
 
       c.clearRect(0, 0, w, h);
@@ -494,7 +494,7 @@
           var blocked = i === 1;
           var travel = blocked ? Math.min(ph, 0.52) : ph;
           var x = travel * w;
-          var col = blocked && ph > 0.5 ? themeColor("--red", "#f87171") : teal;
+          var col = blocked && ph > 0.5 ? themeColor("--red", "#f85149") : teal;
           c.fillStyle = col;
           c.globalAlpha = blocked && ph > 0.5 ? 0.55 + Math.sin(t * 9) * 0.3 : 0.9;
           c.fillRect(x - 5, h / 2 - 5, 10, 10);

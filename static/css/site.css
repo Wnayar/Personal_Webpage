@@ -12,36 +12,38 @@
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Cascadia Code", monospace,
     "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
 
-  /* Surfaces climb away from the page background as elevation rises. */
-  --bg: #06070a;
-  --bg-deep: #040507;
-  --surface: #0c0e13;
-  --surface-2: #11141b;
-  --surface-3: #171b24;
-  --border: #2f3542;        /* ~1.7:1, a card edge you can actually see */
-  --border-strong: #454c5a; /* ~2.3:1 for controls and dividers */
+  /* Palette taken from the banner on my GitHub profile: deep navy surfaces,
+     GitHub blue as the accent, purple as the secondary. Every value below is
+     measured against --bg rather than eyeballed. */
+  --bg: #0a1018;
+  --bg-deep: #070c12;
+  --surface: #0c1320;
+  --surface-2: #111b2e;
+  --surface-3: #16233a;
+  --border: #2b3d54;        /* 1.73:1, a card edge you can actually see */
+  --border-strong: #46617f; /* 2.98:1 for controls and dividers */
 
-  --text: #e7ecf3;      /* 16.97:1 */
-  --text-2: #c4ccdd;    /* 12.50:1, APCA Lc 75 = the floor for body copy */
-  --muted: #abb2c1;     /*  9.47:1, Lc 60, non-body content */
-  --faint: #9096a2;     /*  6.78:1, was 3.23:1 and failed AA outright */
+  --text: #edf3fc;      /* 17.11:1 */
+  --text-2: #aec9ee;    /* 11.26:1, body copy */
+  --muted: #93a9c0;     /*  7.89:1, secondary */
+  --faint: #7f93aa;     /*  6.05:1, labels; still clears AA */
 
-  --teal: #2dd4bf;
-  --teal-bright: #5eead4;
-  --teal-deep: #0d9488;
-  --amber: #fbbf24;
-  --amber-deep: #d97706;
-  --red: #f87171;
-  --violet: #a78bfa;
-  --blue: #60a5fa;
-  --green: #4ade80;
+  --accent: #4493f8;        /* GitHub blue, straight from the banner */
+  --accent-bright: #79b8ff;
+  --accent-deep: #1f6feb;
+  --violet: #a371f7;        /* the banner's secondary */
+  --amber: #d29922;
+  --amber-deep: #9e6a03;
+  --red: #f85149;
+  --blue: #79b8ff;
+  --green: #3fb950;
 
-  --glow-teal: rgba(45, 212, 191, 0.35);
-  --wash-teal: rgba(45, 212, 191, 0.08);
-  --wash-amber: rgba(251, 191, 36, 0.09);
-  --wash-red: rgba(248, 113, 113, 0.09);
+  --glow-accent: rgba(68, 147, 248, 0.35);
+  --wash-accent: rgba(68, 147, 248, 0.1);
+  --wash-amber: rgba(210, 153, 34, 0.12);
+  --wash-red: rgba(248, 81, 73, 0.1);
 
-  --grid-line: rgba(148, 163, 184, 0.045);
+  --grid-line: rgba(174, 201, 238, 0.05);
 
   /* --- Type scale -------------------------------------------------------
      Few, clearly separated steps. The previous system had five sizes packed
@@ -109,35 +111,36 @@
 }
 
 [data-theme="light"] {
-  --bg: #fbfcfd;
-  --bg-deep: #f1f4f8;
+  /* GitHub's light palette, so the two themes are siblings. */
+  --bg: #ffffff;
+  --bg-deep: #f6f8fa;
   --surface: #ffffff;
-  --surface-2: #f6f8fb;
-  --surface-3: #eef2f7;
-  --border: #d5dde7;
-  --border-strong: #b3c0cf;
+  --surface-2: #f6f8fa;
+  --surface-3: #eaeef2;
+  --border: #d1d9e0;
+  --border-strong: #9aa5b1;
 
-  --text: #101725;
-  --text-2: #3a465a;
-  --muted: #64707f;
-  --faint: #8b96a5;
+  --text: #1f2328;
+  --text-2: #424a53;
+  --muted: #59636e;
+  --faint: #6e7781;
 
-  --teal: #0f766e;
-  --teal-bright: #0d9488;
-  --teal-deep: #115e59;
-  --amber: #b45309;
-  --amber-deep: #92400e;
-  --red: #be123c;
-  --violet: #6d28d9;
-  --blue: #1d4ed8;
-  --green: #15803d;
+  --accent: #0969da;
+  --accent-bright: #0550ae;
+  --accent-deep: #0550ae;
+  --violet: #8250df;
+  --amber: #9a6700;
+  --amber-deep: #7d4e00;
+  --red: #cf222e;
+  --blue: #0969da;
+  --green: #1a7f37;
 
-  --glow-teal: rgba(15, 118, 110, 0.22);
-  --wash-teal: rgba(15, 118, 110, 0.07);
-  --wash-amber: rgba(180, 83, 9, 0.08);
-  --wash-red: rgba(190, 18, 60, 0.07);
+  --glow-accent: rgba(9, 105, 218, 0.22);
+  --wash-accent: rgba(9, 105, 218, 0.07);
+  --wash-amber: rgba(154, 103, 0, 0.08);
+  --wash-red: rgba(207, 34, 46, 0.07);
 
-  --grid-line: rgba(15, 23, 42, 0.045);
+  --grid-line: rgba(31, 35, 40, 0.05);
 
   --shadow-1: 0 1px 2px rgba(15, 23, 42, 0.06);
   --shadow-2: 0 12px 28px -10px rgba(15, 23, 42, 0.16);
@@ -202,13 +205,13 @@ p:last-child {
 }
 
 a {
-  color: var(--teal);
+  color: var(--accent);
   text-decoration: none;
   transition: color 0.2s var(--ease);
 }
 
 a:hover {
-  color: var(--teal-bright);
+  color: var(--accent-bright);
 }
 
 img,
@@ -235,13 +238,13 @@ kbd {
 }
 
 :focus-visible {
-  outline: 2px solid var(--teal);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 3px;
 }
 
 ::selection {
-  background: var(--glow-teal);
+  background: var(--glow-accent);
   color: var(--text);
 }
 
@@ -263,8 +266,8 @@ kbd {
   left: 1rem;
   z-index: 200;
   padding: 0.65rem 1.1rem;
-  background: var(--teal);
-  color: #04131a;
+  background: var(--accent);
+  color: #ffffff;
   border-radius: var(--r-sm);
   font-weight: 600;
 }
@@ -393,7 +396,7 @@ kbd {
 }
 
 .nav__link.is-active {
-  color: var(--teal);
+  color: var(--accent);
 }
 
 .nav__link.is-active::after {
@@ -404,7 +407,7 @@ kbd {
   bottom: 0.05rem;
   height: 1.5px;
   border-radius: 2px;
-  background: var(--teal);
+  background: var(--accent);
 }
 
 .nav__actions {
@@ -428,8 +431,8 @@ kbd {
 }
 
 .icon-btn:hover {
-  color: var(--teal);
-  border-color: var(--teal-deep);
+  color: var(--accent);
+  border-color: var(--accent-deep);
   background: var(--surface-2);
 }
 
@@ -506,7 +509,7 @@ kbd {
   content: "";
   width: 22px;
   height: 1px;
-  background: var(--teal);
+  background: var(--accent);
   opacity: 0.7;
 }
 
@@ -553,7 +556,7 @@ kbd {
 }
 
 .accent {
-  color: var(--teal);
+  color: var(--accent);
 }
 
 /* Heading sits close to the text it introduces (proximity), while the whole
@@ -617,9 +620,9 @@ kbd {
 }
 
 .chip--designed {
-  color: var(--blue);
-  border-color: color-mix(in srgb, var(--blue) 38%, transparent);
-  background: color-mix(in srgb, var(--blue) 8%, transparent);
+  color: var(--violet);
+  border-color: color-mix(in srgb, var(--violet) 38%, transparent);
+  background: color-mix(in srgb, var(--violet) 10%, transparent);
 }
 
 .chip--won {
@@ -658,7 +661,7 @@ kbd {
 
 .btn:hover {
   color: var(--text);
-  border-color: var(--teal-deep);
+  border-color: var(--accent-deep);
   background: var(--surface-3);
   transform: translateY(-1px);
 }
@@ -674,15 +677,15 @@ kbd {
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-deep) 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
   border-color: transparent;
-  color: #03181d;
-  box-shadow: 0 6px 20px -8px var(--glow-teal);
+  color: #ffffff;
+  box-shadow: 0 6px 20px -8px var(--glow-accent);
 }
 
 .btn--primary:hover {
-  color: #03181d;
-  box-shadow: 0 10px 28px -8px var(--glow-teal);
+  color: #ffffff;
+  box-shadow: 0 10px 28px -8px var(--glow-accent);
   filter: brightness(1.06);
 }
 
@@ -785,7 +788,7 @@ kbd {
   position: absolute;
   width: 10px;
   height: 10px;
-  border-color: var(--teal);
+  border-color: var(--accent);
   opacity: 0.5;
   pointer-events: none;
 }
@@ -848,17 +851,17 @@ kbd {
   gap: 0.6rem;
   padding: 0.35rem 0.85rem 0.35rem 0.7rem;
   margin-bottom: 1.5rem;
-  border: 1px solid color-mix(in srgb, var(--teal) 32%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
   border-radius: 999px;
-  background: var(--wash-teal);
+  background: var(--wash-accent);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   letter-spacing: 0.02em;
-  color: var(--teal-bright);
+  color: var(--accent-bright);
 }
 
 [data-theme="light"] .hero__status {
-  color: var(--teal-deep);
+  color: var(--accent-deep);
 }
 
 .hero__status-dot {
@@ -866,7 +869,7 @@ kbd {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--teal);
+  background: var(--accent);
   flex: none;
 }
 
@@ -875,7 +878,7 @@ kbd {
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  border: 1.5px solid var(--teal);
+  border: 1.5px solid var(--accent);
   opacity: 0;
   animation: radar 2.4s var(--ease-in-out) infinite;
 }
@@ -898,7 +901,7 @@ kbd {
 .hero__role {
   font-family: var(--font-mono);
   font-size: clamp(0.95rem, 2vw, 1.1rem);
-  color: var(--teal);
+  color: var(--accent);
   letter-spacing: -0.01em;
   margin-bottom: 1.35rem;
   min-height: 1.6em;
@@ -910,7 +913,7 @@ kbd {
   height: 1.05em;
   margin-left: 2px;
   vertical-align: -0.16em;
-  background: var(--teal);
+  background: var(--accent);
   animation: blink 1.05s steps(2, start) infinite;
 }
 
@@ -974,7 +977,9 @@ kbd {
 .hero__visual-label {
   position: absolute;
   left: 0;
+  right: 0;
   bottom: 0;
+  text-align: center;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.08em;
@@ -1023,7 +1028,7 @@ kbd {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: var(--teal);
+  background: var(--accent);
   opacity: 0.8;
   flex: none;
 }
@@ -1064,7 +1069,7 @@ kbd {
   inset: 0;
   background: radial-gradient(
     380px circle at var(--mx, 50%) var(--my, 0%),
-    var(--wash-teal),
+    var(--wash-accent),
     transparent 62%
   );
   opacity: 0;
@@ -1138,7 +1143,7 @@ kbd {
 }
 
 .syscard__facts b {
-  color: var(--teal);
+  color: var(--accent);
   font-weight: 500;
   flex: none;
   min-width: 4.5rem;
@@ -1181,7 +1186,7 @@ kbd {
 .doctrine__card {
   padding: var(--s-5);
   border: 1px solid var(--border);
-  border-left: 2px solid var(--accent-c, var(--teal));
+  border-left: 2px solid var(--accent-c, var(--accent));
   border-radius: var(--r-md);
   background: var(--surface);
   transition: transform 0.25s var(--ease), background-color 0.25s var(--ease);
@@ -1198,7 +1203,7 @@ kbd {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--accent-c, var(--teal));
+  color: var(--accent-c, var(--accent));
 }
 
 .doctrine__card p {
@@ -1213,7 +1218,7 @@ kbd {
 }
 
 .doctrine__card--built {
-  --accent-c: var(--teal);
+  --accent-c: var(--accent);
 }
 
 .doctrine__card--detour {
@@ -1225,7 +1230,7 @@ kbd {
   padding: 1.5rem 1.75rem;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  background: linear-gradient(135deg, var(--wash-teal), transparent 65%);
+  background: linear-gradient(135deg, var(--wash-accent), transparent 65%);
   font-size: clamp(1.05rem, 2.1vw, 1.28rem);
   line-height: 1.6;
   letter-spacing: -0.02em;
@@ -1233,7 +1238,7 @@ kbd {
 }
 
 .pullquote b {
-  color: var(--teal);
+  color: var(--accent);
   font-weight: 700;
 }
 
@@ -1272,8 +1277,8 @@ kbd {
   height: 32px;
   margin-bottom: 0.85rem;
   border-radius: var(--r-sm);
-  background: var(--wash-teal);
-  color: var(--teal);
+  background: var(--wash-accent);
+  color: var(--accent);
 }
 
 .signal__icon svg {
@@ -1291,6 +1296,43 @@ kbd {
   color: var(--text-2);
   line-height: var(--lh-sm);
   margin: 0;
+}
+
+/* --- Facts list ----------------------------------------------------------- */
+
+.facts {
+  display: grid;
+  gap: var(--s-2);
+  max-width: var(--measure-wide);
+}
+
+.facts li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.2rem;
+  padding: var(--s-4) var(--s-5);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease);
+}
+
+.facts li:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+}
+
+.facts b {
+  font-size: var(--fs-body);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+
+.facts span {
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  color: var(--muted);
 }
 
 /* --- Also shipped list ---------------------------------------------------- */
@@ -1368,12 +1410,21 @@ kbd {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 90% at 50% 0%, var(--wash-teal), transparent 70%);
+  background: radial-gradient(ellipse 60% 90% at 50% 0%, var(--wash-accent), transparent 70%);
   pointer-events: none;
 }
 
 .cta > * {
   position: relative;
+}
+
+/* Headings carry a max-width for measure, which leaves them left-aligned
+   inside a centred block unless they also centre their own box. */
+.cta .h1,
+.cta .h2,
+.cta .lede,
+.cta p {
+  margin-inline: auto;
 }
 
 .cta p {
@@ -1416,7 +1467,7 @@ kbd {
 }
 
 .footer__links a:hover {
-  color: var(--teal);
+  color: var(--accent);
 }
 
 .footer__mono {

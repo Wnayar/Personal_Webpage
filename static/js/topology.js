@@ -353,8 +353,8 @@
     if (!path) return;
     var len = path.getTotalLength();
 
-    var dot = el("circle", { class: "packet", r: 4.2, fill: "var(--teal)" }, packetLayer);
-    dot.style.filter = "drop-shadow(0 0 6px var(--glow-teal))";
+    var dot = el("circle", { class: "packet", r: 4.2, fill: "var(--accent)" }, packetLayer);
+    dot.style.filter = "drop-shadow(0 0 6px var(--glow-accent))";
     dot.style.opacity = "0";
 
     var start = null;

@@ -49,9 +49,9 @@
 }
 
 .subnav__link.is-active {
-  color: var(--teal);
-  border-color: color-mix(in srgb, var(--teal) 32%, transparent);
-  background: var(--wash-teal);
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 32%, transparent);
+  background: var(--wash-accent);
 }
 
 .subnav__link i {
@@ -173,11 +173,48 @@
   margin-top: 1rem;
 }
 
-/* Lab wrapper */
-/* A lab is its own subsection: clearly separated from the one before it,
-   but its own title/intro/panel stay tightly grouped. */
+/* Contents list for a single project, so it is obvious how many parts there
+   are and where you currently are inside one. */
+.sys__toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+}
+
+.sys__toc a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  transition: all 0.2s var(--ease);
+}
+
+.sys__toc a:hover {
+  color: var(--text);
+  border-color: var(--accent-deep);
+  background: var(--surface-2);
+}
+
+.sys__toc a b {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* A lab is its own numbered part, with a rule above it so the boundary
+   between parts is visible rather than implied by whitespace alone. */
 .lab {
-  margin-top: var(--s-9);
+  margin-top: var(--s-8);
+  padding-top: var(--s-7);
+  border-top: 1px solid var(--border);
+  scroll-margin-top: calc(var(--nav-h) + 4.5rem);
 }
 
 .lab__head {
@@ -186,6 +223,19 @@
   gap: var(--s-3);
   flex-wrap: wrap;
   margin-bottom: var(--s-3);
+}
+
+.lab__num {
+  flex: none;
+  align-self: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 5px;
+  background: var(--wash-accent);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
 .lab__title {
@@ -248,7 +298,7 @@
 
 .seg button[aria-pressed="true"] {
   background: var(--surface-3);
-  color: var(--teal);
+  color: var(--accent);
   box-shadow: var(--shadow-1);
 }
 
@@ -281,7 +331,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: var(--teal);
+  background: var(--accent);
   cursor: pointer;
   border: 0;
 }
@@ -291,7 +341,7 @@ input[type="range"]::-moz-range-thumb {
   height: 15px;
   border: 0;
   border-radius: 50%;
-  background: var(--teal);
+  background: var(--accent);
   cursor: pointer;
 }
 
@@ -355,7 +405,7 @@ input[type="range"]::-moz-range-thumb {
 .topo__scroll-hint svg {
   width: 13px;
   height: 13px;
-  color: var(--teal);
+  color: var(--accent);
   animation: nudge 1.8s var(--ease-in-out) infinite;
 }
 
@@ -414,13 +464,13 @@ input[type="range"]::-moz-range-thumb {
 .node:hover .node__box,
 .node.is-sel .node__box {
   fill: var(--surface-3);
-  stroke: var(--teal);
+  stroke: var(--accent);
 }
 
 .node.is-lit .node__box {
-  stroke: var(--teal);
-  fill: color-mix(in srgb, var(--teal) 14%, var(--surface-2));
-  filter: drop-shadow(0 0 9px var(--glow-teal));
+  stroke: var(--accent);
+  fill: color-mix(in srgb, var(--accent) 14%, var(--surface-2));
+  filter: drop-shadow(0 0 9px var(--glow-accent));
 }
 
 .node.is-dim {
@@ -480,7 +530,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .edge.is-lit {
-  stroke: var(--teal);
+  stroke: var(--accent);
   stroke-width: 2;
   opacity: 1;
 }
@@ -549,14 +599,14 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .scenario-btn:hover {
-  border-color: var(--teal-deep);
+  border-color: var(--accent-deep);
   color: var(--text);
 }
 
 .scenario-btn.is-running {
-  border-color: var(--teal);
-  background: var(--wash-teal);
-  color: var(--teal);
+  border-color: var(--accent);
+  background: var(--wash-accent);
+  color: var(--accent);
 }
 
 .scenario-btn svg {
@@ -581,7 +631,7 @@ input[type="range"]::-moz-range-thumb {
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--accent);
   margin-bottom: 0.45rem;
 }
 
@@ -628,7 +678,7 @@ input[type="range"]::-moz-range-thumb {
   font-size: var(--fs-micro);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--accent);
   margin-bottom: 0.15rem;
 }
 
@@ -716,8 +766,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .gwbox.is-active {
-  border-color: var(--teal);
-  background: var(--wash-teal);
+  border-color: var(--accent);
+  background: var(--wash-accent);
 }
 
 .gwbox.is-conflict {
@@ -761,8 +811,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .token-cell.is-full {
-  background: var(--teal);
-  box-shadow: 0 0 8px -1px var(--glow-teal);
+  background: var(--accent);
+  box-shadow: 0 0 8px -1px var(--glow-accent);
 }
 
 .token-cell.is-over {
@@ -967,8 +1017,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .editor:focus {
-  border-color: var(--teal);
-  box-shadow: 0 0 0 3px var(--wash-teal);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--wash-accent);
 }
 
 .editor.is-paused {
@@ -986,7 +1036,7 @@ input[type="range"]::-moz-range-thumb {
 
 @keyframes charIn {
   from {
-    background: var(--glow-teal);
+    background: var(--glow-accent);
     border-radius: 2px;
   }
 }
@@ -997,7 +1047,7 @@ input[type="range"]::-moz-range-thumb {
   height: 1.1em;
   margin: 0 -1px;
   vertical-align: -0.2em;
-  background: var(--teal);
+  background: var(--accent);
   animation: blink 1.05s steps(2, start) infinite;
 }
 
@@ -1069,8 +1119,8 @@ input[type="range"]::-moz-range-thumb {
   height: 9px;
   margin-left: -4.5px;
   border-radius: 50%;
-  background: var(--teal);
-  box-shadow: 0 0 8px var(--glow-teal);
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--glow-accent);
 }
 
 @media (max-width: 900px) {
@@ -1145,8 +1195,8 @@ input[type="range"]::-moz-range-thumb {
 
 .ir__input:focus {
   outline: none;
-  border-color: var(--teal);
-  box-shadow: 0 0 0 3px var(--wash-teal);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--wash-accent);
 }
 
 .ir__chips {
@@ -1168,8 +1218,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .ir__chip:hover {
-  border-color: var(--teal-deep);
-  color: var(--teal);
+  border-color: var(--accent-deep);
+  color: var(--accent);
 }
 
 .ir__pipeline {
@@ -1212,8 +1262,8 @@ input[type="range"]::-moz-range-thumb {
   padding: 0.05rem 0.35rem;
   margin: 0 0.15rem 0.2rem 0;
   border-radius: 3px;
-  background: var(--wash-teal);
-  color: var(--teal);
+  background: var(--wash-accent);
+  color: var(--accent);
   animation: charIn 0.3s var(--ease);
 }
 
@@ -1257,7 +1307,7 @@ input[type="range"]::-moz-range-thumb {
   top: 0;
   bottom: 0;
   width: var(--w, 0%);
-  background: var(--wash-teal);
+  background: var(--wash-accent);
   transition: width 0.5s var(--ease);
   pointer-events: none;
 }
@@ -1283,7 +1333,7 @@ input[type="range"]::-moz-range-thumb {
 .hit__src {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--teal);
+  color: var(--accent);
 }
 
 .hit__score {
@@ -1302,14 +1352,14 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .hit__text mark {
-  background: color-mix(in srgb, var(--teal) 22%, transparent);
-  color: var(--teal-bright);
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: var(--accent-bright);
   border-radius: 2px;
   padding: 0 2px;
 }
 
 [data-theme="light"] .hit__text mark {
-  color: var(--teal-deep);
+  color: var(--accent-deep);
 }
 
 .hit__math {
@@ -1362,7 +1412,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .formula em {
-  color: var(--teal);
+  color: var(--accent);
   font-style: normal;
 }
 
@@ -1409,8 +1459,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .lane.is-running {
-  border-color: var(--teal);
-  background: var(--wash-teal);
+  border-color: var(--accent);
+  background: var(--wash-accent);
 }
 
 .lane.is-done {
@@ -1440,7 +1490,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .lane.is-running .lane__icon {
-  color: var(--teal);
+  color: var(--accent);
 }
 
 .lane.is-done .lane__icon {
@@ -1493,7 +1543,7 @@ input[type="range"]::-moz-range-thumb {
   flex: none;
   border-radius: 50%;
   border: 2px solid var(--border-strong);
-  border-top-color: var(--teal);
+  border-top-color: var(--accent);
   opacity: 0;
   animation: spin 0.7s linear infinite;
 }
@@ -1635,7 +1685,7 @@ input[type="range"]::-moz-range-thumb {
   content: "";
   position: absolute;
   inset: 0;
-  box-shadow: inset 0 0 0 1px var(--wash-teal);
+  box-shadow: inset 0 0 0 1px var(--wash-accent);
   pointer-events: none;
 }
 
@@ -1652,7 +1702,7 @@ input[type="range"]::-moz-range-thumb {
   top: 6px;
   bottom: 6px;
   width: 1.5px;
-  background: linear-gradient(180deg, var(--teal), var(--border) 85%);
+  background: linear-gradient(180deg, var(--accent), var(--border) 85%);
   opacity: 0.5;
 }
 
@@ -1679,8 +1729,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .tl-item.is-in::before {
-  border-color: var(--teal);
-  box-shadow: 0 0 0 4px var(--wash-teal);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--wash-accent);
 }
 
 .tl-item__when {
@@ -1699,7 +1749,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .tl-item__what span {
-  color: var(--teal);
+  color: var(--accent);
   font-weight: 500;
 }
 
@@ -1729,7 +1779,7 @@ input[type="range"]::-moz-range-thumb {
   font-size: 0.7rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--accent);
   margin-bottom: 0.8rem;
 }
 
@@ -1760,7 +1810,7 @@ input[type="range"]::-moz-range-thumb {
 
 .contact:hover {
   color: var(--text);
-  border-color: var(--teal-deep);
+  border-color: var(--accent-deep);
   background: var(--surface-2);
   transform: translateY(-2px);
 }
@@ -1769,7 +1819,7 @@ input[type="range"]::-moz-range-thumb {
   width: 17px;
   height: 17px;
   flex: none;
-  color: var(--teal);
+  color: var(--accent);
 }
 
 .contact span {
@@ -1785,6 +1835,67 @@ input[type="range"]::-moz-range-thumb {
   font-size: 0.9rem;
   font-weight: 550;
   word-break: break-all;
+}
+
+/* Figures.
+   Explicit width/height attributes on every img so the browser reserves the
+   right box before the file arrives and the page never jumps. */
+.figure {
+  margin: var(--s-6) 0 0;
+}
+
+.figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+}
+
+.figure figcaption {
+  margin-top: var(--s-3);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  color: var(--muted);
+  max-width: var(--measure);
+}
+
+.figure figcaption b {
+  color: var(--text-2);
+  font-weight: 600;
+}
+
+.figure--wide {
+  max-width: 780px;
+}
+
+/* A certificate is a tall portrait document, so it gets a narrow column
+   rather than the full content width. */
+.figure--doc {
+  max-width: 380px;
+  margin-top: 0;
+}
+
+.figure--doc img {
+  border-color: var(--border-strong);
+}
+
+.edu {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(1.5rem, 5vw, 3.5rem);
+  align-items: start;
+}
+
+@media (max-width: 780px) {
+  .edu {
+    grid-template-columns: 1fr;
+  }
+
+  .figure--doc {
+    max-width: 320px;
+  }
 }
 
 /* Prose blocks */
@@ -1829,7 +1940,7 @@ input[type="range"]::-moz-range-thumb {
   width: 6px;
   height: 6px;
   border-radius: 1px;
-  background: var(--teal);
+  background: var(--accent);
   transform: rotate(45deg);
 }
 
@@ -1906,7 +2017,7 @@ input[type="range"]::-moz-range-thumb {
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--accent);
 }
 
 .qa__toggle::after {
@@ -1989,8 +2100,8 @@ input[type="range"]::-moz-range-thumb {
   font-size: 0.68rem;
   padding: 0.15rem 0.45rem;
   border-radius: 4px;
-  background: var(--wash-teal);
-  color: var(--teal);
+  background: var(--wash-accent);
+  color: var(--accent);
   flex: none;
 }
 
@@ -2005,7 +2116,7 @@ input[type="range"]::-moz-range-thumb {
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--teal);
+  color: var(--accent);
 }
 
 .adr__toggle::after {

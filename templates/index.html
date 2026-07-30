@@ -9,7 +9,7 @@
     "@type": "Person",
     "name": "William Nayar",
     "url": canonical_url,
-    "image": absolute_static("profile_picture_black.png"),
+    "image": absolute_static("img/profile.jpg"),
     "email": "wnayar98@gmail.com",
     "jobTitle": "Software engineer",
     "description": "Final-year Computer Science at NUS. Backend and distributed systems.",
@@ -34,50 +34,44 @@
     <div class="hero__grid-bg" aria-hidden="true"></div>
     <div class="wrap hero__inner">
         <div>
-            <p class="hero__status">
+            <a class="hero__status" href="#contact">
                 <span class="hero__status-dot" aria-hidden="true"></span>
                 Open to a 6-month SWE internship · from early 2027
-            </p>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+            </a>
 
             <h1 class="h-display">William Nayar</h1>
 
-            <p class="hero__role" data-typewriter='["backend &amp; distributed systems","six services, one gateway, no shared tables","CRDTs, event logs, and the races underneath","build what has a hard problem inside it"]'>
-                <span class="hero__role-text"></span><span class="hero__caret" aria-hidden="true"></span>
-            </p>
+            <p class="hero__role">backend &amp; distributed systems</p>
 
             <p class="lede hero__lede">
-                Final-year Computer Science at NUS, specialising in Software Engineering.
-                I build backend systems, and what I care about is <strong>where work belongs in a
-                system</strong>: which boundary owns it, what races underneath it, and what it costs when it fails.
+                Final-year Computer Science at NUS. I build backend systems, and I like the problems that only
+                show up once more than one machine is involved.
             </p>
 
             <div class="btn-row hero__actions">
                 <a class="btn btn--primary" href="/systems">
-                    Read the systems
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                    See what I'm building
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
                 </a>
-                <a class="btn" href="/about">About &amp; background</a>
+                <a class="btn" href="https://github.com/Wnayar" target="_blank" rel="noopener">GitHub ↗</a>
             </div>
 
             <div class="hero__meta">
                 <span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                     NUS Computer Science
                 </span>
                 <span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     Singapore
-                </span>
-                <span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
-                    Teaching CS3219 from Aug 2026
                 </span>
             </div>
         </div>
 
         <div class="hero__visual" aria-hidden="true">
             <canvas class="hero__canvas" id="hero-canvas"></canvas>
-            <p class="hero__visual-label">request path · illustrative</p>
+            <p class="hero__visual-label">illustration, not live data</p>
         </div>
     </div>
 </section>
@@ -86,90 +80,69 @@
 <section class="section" id="work">
     <div class="wrap">
         <div class="section-head reveal">
-            <p class="eyebrow">Selected systems</p>
-            <h2 class="h1">What I am building</h2>
+            <p class="eyebrow">What I'm building</p>
+            <h2 class="h1">Three systems</h2>
             <p class="lede">
-                Each card says how far along it is. <strong>Shipped</strong> means it works and people have
-                used it. <strong>In build</strong> means I'm writing the code now. <strong>Designed</strong> means
-                the plan is finished and the code hasn't started.
+                Each card says how far along it is, because half-finished work described as finished helps nobody.
             </p>
         </div>
 
         <div class="systems-grid">
-            <!-- DeepCS -->
             <article class="syscard reveal" data-delay="1">
                 <div class="syscard__top">
                     <h3 class="syscard__name">DeepCS</h3>
-                    <span class="chip chip--building syscard__chip"><i class="chip__dot"></i>In build</span>
+                    <span class="chip chip--building"><i class="chip__dot"></i>In build</span>
                 </div>
                 <div class="syscard__viz"><canvas data-card-viz="deepcs"></canvas></div>
                 <p class="syscard__desc">
-                    A CS-fundamentals question bank where two people solve the same question together in real time.
-                    Six independently deployable services behind a gateway I'm writing rather than buying.
+                    Two people get matched and solve the same CS question together in real time, typing into one
+                    shared document. Six services behind a gateway I'm writing myself.
                 </p>
-                <ul class="syscard__facts">
-                    <li><b>hard part</b><span>CRDT sync across instances sharing no memory</span></li>
-                    <li><b>doc</b><span>9 ADRs, every build-vs-buy call tagged</span></li>
-                    <li><b>status</b><span>design locked, building now</span></li>
-                </ul>
                 <div class="syscard__stack">
-                    <span class="tag">TypeScript</span><span class="tag">Fastify</span><span class="tag">Yjs</span>
+                    <span class="tag">TypeScript</span><span class="tag">Yjs</span>
                     <span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Cloud Run</span>
                 </div>
                 <div class="syscard__foot">
-                    <a class="btn btn--sm" href="/systems#deepcs">Architecture &amp; demos</a>
-                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/deepcs" target="_blank" rel="noopener">Design doc ↗</a>
+                    <a class="btn btn--sm" href="/systems#deepcs">Take a look</a>
+                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/deepcs" target="_blank" rel="noopener">Repo ↗</a>
                 </div>
             </article>
 
-            <!-- Recall -->
             <article class="syscard reveal" data-delay="2">
                 <div class="syscard__top">
                     <h3 class="syscard__name">Recall</h3>
-                    <span class="chip chip--designed syscard__chip"><i class="chip__dot"></i>Designed</span>
+                    <span class="chip chip--designed"><i class="chip__dot"></i>Designed</span>
                 </div>
                 <div class="syscard__viz"><canvas data-card-viz="recall"></canvas></div>
                 <p class="syscard__desc">
-                    A search engine over my school notes that answers with citations, and refuses when
-                    retrieval confidence is low. Inverted index and BM25 written from scratch in Go.
+                    A search engine over my own notes that answers with sources, and refuses when it isn't
+                    confident. Written from scratch in Go, no search library.
                 </p>
-                <ul class="syscard__facts">
-                    <li><b>why</b><span>the index <em>is</em> the point, so no search library</span></li>
-                    <li><b>scale</b><span>sharding and scatter-gather on the roadmap</span></li>
-                    <li><b>status</b><span>build plan written, code not started</span></li>
-                </ul>
                 <div class="syscard__stack">
                     <span class="tag">Go</span><span class="tag">BM25</span><span class="tag">Python</span>
-                    <span class="tag">Docker</span><span class="tag">RAG</span>
+                    <span class="tag">Docker</span>
                 </div>
                 <div class="syscard__foot">
-                    <a class="btn btn--sm" href="/systems#recall">How retrieval works</a>
-                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/recall" target="_blank" rel="noopener">Build plan ↗</a>
+                    <a class="btn btn--sm" href="/systems#recall">Try the search</a>
+                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/recall" target="_blank" rel="noopener">Repo ↗</a>
                 </div>
             </article>
 
-            <!-- Airlock -->
             <article class="syscard reveal" data-delay="3">
                 <div class="syscard__top">
                     <h3 class="syscard__name">Airlock</h3>
-                    <span class="chip chip--shipped syscard__chip"><i class="chip__dot"></i>Shipped</span>
+                    <span class="chip chip--shipped"><i class="chip__dot"></i>Shipped</span>
                 </div>
                 <div class="syscard__viz"><canvas data-card-viz="airlock"></canvas></div>
                 <p class="syscard__desc">
-                    A safety gate for AI agents: every package an agent installs is detonated in a disposable sandbox
-                    first. Won 1st place at the Daytona HackSprint, built in a five-hour window.
+                    AI agents install packages unattended. Airlock runs each one in a throwaway sandbox first and
+                    blocks it if it misbehaves. Won the Daytona HackSprint.
                 </p>
-                <ul class="syscard__facts">
-                    <li><b>result</b><span>1st place · NUS Singapore · Jul 2026</span></li>
-                    <li><b>design</b><span>tripwires in plain code; the model can only tighten</span></li>
-                    <li><b>status</b><span>working code, real recorded output</span></li>
-                </ul>
                 <div class="syscard__stack">
                     <span class="tag">Python</span><span class="tag">Daytona</span><span class="tag">Sandboxing</span>
-                    <span class="tag">Static analysis</span><span class="tag">LLM judge</span>
                 </div>
                 <div class="syscard__foot">
-                    <a class="btn btn--sm" href="/systems#airlock">Watch the gate</a>
+                    <a class="btn btn--sm" href="/systems#airlock">Watch it block one</a>
                     <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/airlock" target="_blank" rel="noopener">Repo ↗</a>
                 </div>
             </article>
@@ -179,139 +152,46 @@
 
 <hr class="rule">
 
-<!-- ===================== DOCTRINE ===================== -->
-<section class="section">
-    <div class="wrap">
-        <div class="section-head reveal">
-            <p class="eyebrow">How I decide</p>
-            <h2 class="h1">How I decide what to build myself</h2>
-            <p class="lede">
-                Every tricky decision in my design doc gets one of three tags. The rule is simple: build the
-                thing with a hard problem inside it, and pay for the thing that is only risk.
-            </p>
-        </div>
-
-        <div class="doctrine">
-            <div class="doctrine__card doctrine__card--bought reveal" data-delay="1">
-                <span class="doctrine__tag">[bought]</span>
-                <p>
-                    Deliberately not built. There's no interesting problem inside it, so paying for it is the
-                    correct engineering call, not a shortcut. <strong>Auth is bought.</strong> Identity is
-                    security-critical and fully solved, and Google's key rotation beats anything I'd hand-roll.
-                </p>
-            </div>
-            <div class="doctrine__card doctrine__card--built reveal" data-delay="2">
-                <span class="doctrine__tag">[built · learning]</span>
-                <p>
-                    A mature off-the-shelf option exists and is what I'd use commercially. Built here because
-                    the problem underneath is one I wanted to hit directly. <strong>The gateway is built.</strong>
-                    Kong would fix its rate-limiter race on my behalf, and that race is the whole lesson.
-                </p>
-            </div>
-            <div class="doctrine__card doctrine__card--detour reveal" data-delay="3">
-                <span class="doctrine__tag">[detour · learning]</span>
-                <p>
-                    Built, run, then deliberately <em>not</em> kept in production. <strong>Kubernetes is a
-                    detour.</strong> Stood up on GKE beside the live deploy, demonstrated, then deleted, because an
-                    always-on cluster breaks the cost ceiling the whole design is shaped by.
-                </p>
-            </div>
-        </div>
-
-        <blockquote class="pullquote reveal">
-            The failure mode this doc is written to prevent isn't picking a wrong tool; it's
-            <b>spending three weeks on infrastructure and one on the only part that's hard.</b>
-            <cite>DeepCS DESIGN.md, closing note</cite>
-        </blockquote>
-    </div>
-</section>
-
-<hr class="rule">
-
 <!-- ===================== SIGNALS ===================== -->
 <section class="section">
     <div class="wrap">
         <div class="section-head reveal">
-            <p class="eyebrow">Signals</p>
-            <h2 class="h1">Wins, and other people's code</h2>
+            <p class="eyebrow">Elsewhere</p>
+            <h2 class="h1">A few things worth mentioning</h2>
         </div>
 
-        <div class="signals">
-            <div class="signal reveal" data-delay="1">
-                <span class="signal__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M6 3h12v6a6 6 0 0 1-12 0z"/><path d="M12 15v6M9 21h6"/></svg></span>
-                <h3>1st place, Daytona HackSprint</h3>
-                <p>AI Builders at NUS, July 2026, for Airlock. A teammate and I shaped the concept and the system design.</p>
-            </div>
-            <div class="signal reveal" data-delay="2">
-                <span class="signal__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></span>
-                <h3>Certificate of Distinction</h3>
-                <p>Software Engineering focus area, NUS School of Computing.</p>
-            </div>
-            <div class="signal reveal" data-delay="3">
-                <span class="signal__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg></span>
-                <h3>Merged open-source PRs</h3>
-                <p>In <a href="https://github.com/Automattic/mongoose" target="_blank" rel="noopener">Automattic/mongoose</a> and <a href="https://github.com/redis/node-redis" target="_blank" rel="noopener">redis/node-redis</a>. Gaps found by reading the source, not by working off issue labels.</p>
-            </div>
-            <div class="signal reveal" data-delay="4">
-                <span class="signal__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7l10-4 10 4-10 4z"/><path d="M6 10v5c3 2.5 9 2.5 12 0v-5"/></svg></span>
-                <h3>Teaching CS3219 at NUS</h3>
-                <p>Academic tutor for Software Engineering Principles and Patterns, Aug to Dec 2026. It's microservices-based, so students make real boundary and deployment calls.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<hr class="rule">
-
-<!-- ===================== ALSO SHIPPED ===================== -->
-<section class="section">
-    <div class="wrap">
-        <div class="section-head reveal">
-            <p class="eyebrow">Also shipped</p>
-            <h2 class="h1">Earlier work</h2>
-            <p class="lede">Product work from before I focused on systems. Kept short on purpose.</p>
-        </div>
-
-        <ul class="also reveal">
-            <li class="also__row">
-                <div class="also__name">Aqua Vitae <span>2026 · own venture</span></div>
-                <p class="also__what">Sole engineer for a fragrance brand: React and TypeScript storefront, Supabase Postgres behind it, and a Shopify-hosted checkout to keep payments and PCI scope off my own stack.</p>
-                <div class="also__links">
-                    <a href="https://www.aquavitaeparfums.com/" target="_blank" rel="noopener">site ↗</a>
-                </div>
+        <ul class="facts reveal">
+            <li>
+                <b>1st place, Daytona HackSprint</b>
+                <span>NUS Singapore, July 2026, for Airlock.</span>
             </li>
-            <li class="also__row">
-                <div class="also__name">PeerPrep <span>2025 · NUS CS3219</span></div>
-                <p class="also__what">Owned the Question Service inside a 6-service architecture. Moved randomised selection into MongoDB aggregation pipelines instead of the application layer; 35 tests across CRUD and the pipelines.</p>
-                <div class="also__links">
-                    <a href="https://github.com/Wnayar/PeerPrep" target="_blank" rel="noopener">repo ↗</a>
-                </div>
+            <li>
+                <b>Certificate of Distinction</b>
+                <span>Software Engineering focus area, NUS School of Computing.</span>
             </li>
-            <li class="also__row">
-                <div class="also__name">GroupMatch <span>2024 · NUS Orbital</span></div>
-                <p class="also__what">Apollo 11 (Advanced). A MERN study-group platform matched on live NUSMods course data, parsing 20 to 50+ timetable entries per module into something searchable.</p>
-                <div class="also__links">
-                    <a href="https://github.com/Wnayar/NUS-GroupMatch" target="_blank" rel="noopener">repo ↗</a>
-                </div>
+            <li>
+                <b>Merged pull requests into open source</b>
+                <span><a href="https://github.com/Automattic/mongoose" target="_blank" rel="noopener">mongoose</a> and <a href="https://github.com/redis/node-redis" target="_blank" rel="noopener">node-redis</a>, found by reading the source.</span>
+            </li>
+            <li>
+                <b>Teaching CS3219 at NUS</b>
+                <span>The microservices module, August to December 2026.</span>
             </li>
         </ul>
     </div>
 </section>
 
-<!-- ===================== CTA ===================== -->
-<section class="section section--tight">
+<!-- ===================== CONTACT ===================== -->
+<section class="section section--tight" id="contact">
     <div class="wrap">
         <div class="cta reveal">
             <p class="eyebrow" style="justify-content:center">Get in touch</p>
-            <h2 class="h1">Looking for a 6-month SWE internship, early 2027</h2>
-            <p class="lede">
-                Backend, distributed systems, infrastructure. If you've got a problem with a real concurrency
-                question inside it, I'd like to hear about it.
-            </p>
+            <h2 class="h1">Looking for a 6-month internship from early 2027</h2>
+            <p class="lede">Backend, distributed systems, infrastructure. Based in Singapore.</p>
             <div class="btn-row">
                 <a class="btn btn--primary" href="mailto:wnayar98@gmail.com">wnayar98@gmail.com</a>
                 <a class="btn" href="https://www.linkedin.com/in/william-nayar/" target="_blank" rel="noopener">LinkedIn ↗</a>
-                <a class="btn" href="https://github.com/Wnayar" target="_blank" rel="noopener">GitHub ↗</a>
+                <a class="btn" href="/about">More about me</a>
             </div>
         </div>
     </div>

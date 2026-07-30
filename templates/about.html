@@ -13,52 +13,39 @@
     <div class="wrap">
         <div class="about__hero reveal">
             <div class="about__photo">
-                <img src="/static/profile_picture_black.png" alt="William Nayar" width="168" height="168" loading="eager" decoding="async">
+                <img src="{{ asset('img/profile@320.jpg') }}"
+                     srcset="{{ asset('img/profile@320.jpg') }} 320w, {{ asset('img/profile.jpg') }} 640w"
+                     sizes="168px"
+                     alt="William Nayar" width="168" height="168" loading="eager" decoding="async" fetchpriority="high">
             </div>
             <div>
                 <p class="eyebrow">About</p>
                 <h1 class="h1" style="margin-bottom:.9rem">William Nayar</h1>
-                <p class="lede" style="max-width:56ch">
-                    Final-year Computer Science at NUS, specialising in Software Engineering. I build backend
-                    systems, and what I care about is <strong>where work belongs in a system</strong>: which boundary
-                    owns it, what races underneath it, and what it costs when it fails.
+                <p class="lede">
+                    Final-year Computer Science at NUS. I build backend systems, and I like the problems that only
+                    show up once more than one machine is involved.
                 </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===================== CURRENTLY ===================== -->
+<!-- ===================== NOW ===================== -->
 <section class="section section--tight">
     <div class="wrap">
         <div class="section-head reveal">
-            <p class="eyebrow">Currently</p>
-            <h2 class="h2">What I am doing right now</h2>
+            <p class="eyebrow">Right now</p>
+            <h2 class="h2">Three things at once</h2>
         </div>
 
-        <ul class="bullets reveal" style="max-width:74ch">
-            <li>
-                <strong>Teaching CS3219, Software Engineering Principles and Patterns</strong>, at NUS as an academic
-                tutor, August to December 2026. It's the module that opened my eyes to how broad software
-                engineering gets once distributed systems are involved. Teams spend the semester making real
-                decisions: where a service boundary goes, which database suits the access pattern, how everything
-                gets deployed and stays up. My job is to help them think those through before they commit.
-            </li>
-            <li>
-                <strong>Building DeepCS</strong>, a CS-fundamentals question bank where two people solve the
-                same question together in real time. Six independently deployable services behind a gateway I'm
-                writing rather than buying, a Yjs CRDT holding the shared document across instances, and an
-                append-only event log a scheduled job drains into stats. That last part is where at-least-once
-                delivery forces idempotency.
-            </li>
-            <li>
-                <strong>Building Recall</strong> after that: a search engine in Go, to understand indexing and
-                retrieval by implementing them rather than reading about them.
-            </li>
+        <ul class="bullets reveal">
+            <li><strong>Teaching CS3219</strong> at NUS as a tutor, August to December 2026. It's the microservices module, so students spend the term making real calls about service boundaries and deployment.</li>
+            <li><strong>Building DeepCS</strong>, where two people solve the same question together in real time.</li>
+            <li><strong>Building Recall</strong> next, a search engine in Go, to learn indexing by writing it.</li>
         </ul>
 
-        <div class="btn-row reveal" style="margin-top:1.5rem">
-            <a class="btn" href="/systems">See the systems in depth</a>
+        <div class="btn-row reveal" style="margin-top:var(--s-5)">
+            <a class="btn" href="/systems">See what I'm building</a>
         </div>
     </div>
 </section>
@@ -71,56 +58,49 @@
         <div class="section-head reveal">
             <p class="eyebrow">Path</p>
             <h2 class="h1">How I got here</h2>
-            <p class="lede">From a first commit in 2022 to distributed systems, roughly in the order it happened.</p>
         </div>
 
         <div class="timeline">
             <div class="tl-item">
-                <div class="tl-item__when">Aug – Dec 2026</div>
-                <h3 class="tl-item__what">Academic tutor, <span>CS3219</span> · NUS School of Computing</h3>
-                <p class="tl-item__detail">Teaching Software Engineering Principles and Patterns, the microservices module. Helping teams reason about service boundaries, data stores and deployment before they commit to them.</p>
+                <div class="tl-item__when">Aug to Dec 2026</div>
+                <h3 class="tl-item__what">Tutor, <span>CS3219</span> · NUS School of Computing</h3>
+                <p class="tl-item__detail">Teaching the microservices module: service boundaries, choosing a data store, getting it deployed and keeping it up.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">Jul 2026</div>
                 <h3 class="tl-item__what">1st place, <span>Daytona HackSprint</span></h3>
-                <p class="tl-item__detail">Built Airlock in a five-hour window at the AI Builders × NUS StartIT hackathon: a safety gate that detonates every package an AI agent installs inside a disposable sandbox first. Judged on completeness, innovation, real-world problem solving and sponsor usage.</p>
+                <p class="tl-item__detail">Built Airlock with Basil in a five-hour window: a safety gate that runs every package an AI agent installs inside a throwaway sandbox first.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">2026</div>
-                <h3 class="tl-item__what">Merged open-source PRs in <span>mongoose</span> and <span>node-redis</span></h3>
-                <p class="tl-item__detail">Gaps I found by reading the source rather than working off issue labels, in Automattic's MongoDB ODM and Redis's official Node client.</p>
+                <h3 class="tl-item__what">Merged pull requests into <span>mongoose</span> and <span>node-redis</span></h3>
+                <p class="tl-item__detail">Gaps I found by reading the source, not by picking off issue labels.</p>
             </div>
 
             <div class="tl-item">
-                <div class="tl-item__when">2026 – present</div>
+                <div class="tl-item__when">2026 to now</div>
                 <h3 class="tl-item__what">Sole engineer, <span>Aqua Vitae</span></h3>
-                <p class="tl-item__detail">My own venture: a fragrance brand where I own the storefront, the backend and the infrastructure. React and TypeScript on the front, Supabase Postgres behind it, and a Shopify-hosted checkout deliberately chosen to keep payments and PCI scope off my own stack.</p>
+                <p class="tl-item__detail">My own fragrance brand. I own the storefront, the backend and the infrastructure.</p>
             </div>
 
             <div class="tl-item">
-                <div class="tl-item__when">Aug – Nov 2025</div>
+                <div class="tl-item__when">Aug to Nov 2025</div>
                 <h3 class="tl-item__what">Question Service owner, <span>PeerPrep</span></h3>
-                <p class="tl-item__detail">Owned one service end to end inside a distributed 6-service architecture: 15 REST endpoints with standardised error handling, randomised selection moved into MongoDB aggregation pipelines instead of the application layer, and 35 tests across CRUD workflows and the pipelines.</p>
+                <p class="tl-item__detail">One service, owned end to end, inside a six-service system. 15 endpoints and 35 tests.</p>
             </div>
 
             <div class="tl-item">
-                <div class="tl-item__when">May – Jul 2024</div>
-                <h3 class="tl-item__what">NUS Orbital, <span>Apollo 11 (Advanced)</span></h3>
-                <p class="tl-item__detail">A MERN study-group platform matched on live NUSMods course data, parsing nested timetable data of 20 to 50+ entries per module into something searchable and sortable.</p>
+                <div class="tl-item__when">May to Jul 2024</div>
+                <h3 class="tl-item__what">NUS Orbital, <span>Apollo 11</span></h3>
+                <p class="tl-item__detail">A study-group platform matched on live NUSMods course data.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">2023</div>
-                <h3 class="tl-item__what">Harvard <span>CS50</span>, and this site's first version</h3>
-                <p class="tl-item__detail">Where it started. The original version of this website was my CS50 final project, a Flask app. It still builds with Flask today, it just renders to static files now.</p>
-            </div>
-
-            <div class="tl-item">
-                <div class="tl-item__when">Nov 2022</div>
-                <h3 class="tl-item__what">First commit</h3>
-                <p class="tl-item__detail">The account this all sits on.</p>
+                <h3 class="tl-item__what">Harvard <span>CS50</span></h3>
+                <p class="tl-item__detail">Where it started. The first version of this site was my final project for it.</p>
             </div>
         </div>
     </div>
@@ -128,53 +108,16 @@
 
 <hr class="rule">
 
-<!-- ===================== HOW I WORK ===================== -->
-<section class="section">
-    <div class="wrap">
-        <div class="section-head reveal">
-            <p class="eyebrow">How I work</p>
-            <h2 class="h1">How I work</h2>
-        </div>
-
-        <div class="split">
-            <div class="reveal">
-                <h3 class="lab__title" style="margin-bottom:.6rem">Write the doc before the code</h3>
-                <p class="lab__intro">
-                    DeepCS had a locked design document with nine ADRs before the first service existed. Not because
-                    documentation is virtuous, but because it's the cheapest place to find out an idea doesn't
-                    work. It's also where I record what I turned down, and why.
-                </p>
-            </div>
-            <div class="reveal" data-delay="1">
-                <h3 class="lab__title" style="margin-bottom:.6rem">Name the tradeoff you're accepting</h3>
-                <p class="lab__intro">
-                    Six deployables means a cold match request can chain cold starts. One Postgres instance means a
-                    shared failure domain. Buying auth means a revoked token stays valid for up to an hour. Those are
-                    written down as accepted costs, with the condition that would change the decision. They are not
-                    left out because they're inconvenient.
-                </p>
-            </div>
-            <div class="reveal" data-delay="2">
-                <h3 class="lab__title" style="margin-bottom:.6rem">Report p95, never the average</h3>
-                <p class="lab__intro">
-                    If 95 requests take 10 ms and 5 take 2 s, the average is 110 ms and not one request was
-                    anywhere near it. The tail is what a user feels, and it's where queueing, contention and cold
-                    starts show up first. The same instinct is why this site marks what's designed versus what's
-                    running.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<hr class="rule">
-
-<!-- ===================== SKILLS ===================== -->
+<!-- ===================== TOOLS ===================== -->
 <section class="section">
     <div class="wrap">
         <div class="section-head reveal">
             <p class="eyebrow">Toolbox</p>
-            <h2 class="h1">Tools I use</h2>
+            <h2 class="h1">What I've worked with</h2>
+            <p class="lede">
+                None of this is a loyalty list. I pick whatever suits the problem, and I'm always happy to pick up
+                something new.
+            </p>
         </div>
 
         <div class="skills">
@@ -236,35 +179,44 @@
             <h2 class="h1">National University of Singapore</h2>
         </div>
 
-        <ul class="bullets reveal" style="max-width:70ch">
-            <li><strong>BComp, Computer Science</strong>, final year, specialising in <strong>Software Engineering</strong>.</li>
-            <li><strong>Certificate of Distinction</strong>, Software Engineering focus area, NUS School of Computing.</li>
-            <li>Coursework that shows up in the systems on this site: software engineering principles and patterns, operating systems, computer networks, databases, and formal methods.</li>
-            <li>Started with <strong>Harvard CS50</strong> in 2023, the reason this site exists at all.</li>
-        </ul>
+        <div class="edu reveal">
+            <ul class="bullets">
+                <li><strong>Bachelor of Computing in Computer Science</strong>, final year, specialising in Software Engineering.</li>
+                <li><strong>Certificate of Distinction</strong> in the Software Engineering focus area, awarded July 2026.</li>
+                <li>Started with <strong>Harvard CS50</strong> in 2023, which is the reason this site exists at all.</li>
+            </ul>
+
+            <figure class="figure figure--doc">
+                <img src="{{ asset('img/cert-distinction@550.jpg') }}"
+                     srcset="{{ asset('img/cert-distinction@550.jpg') }} 550w, {{ asset('img/cert-distinction.jpg') }} 1100w"
+                     sizes="(max-width: 780px) 320px, 380px"
+                     alt="NUS School of Computing Certificate of Distinction in the Software Engineering Focus Area, awarded to William Nayar, 3 July 2026."
+                     width="550" height="778" loading="lazy" decoding="async">
+            </figure>
+        </div>
     </div>
 </section>
 
 <!-- ===================== CONTACT ===================== -->
-<section class="section section--tight">
+<section class="section section--tight" id="contact">
     <div class="wrap">
         <div class="section-head reveal">
             <p class="eyebrow">Contact</p>
-            <h2 class="h1">Open to a 6-month SWE internship from early 2027</h2>
+            <h2 class="h1">Looking for a 6-month internship from early 2027</h2>
             <p class="lede">Backend, distributed systems, infrastructure. Based in Singapore.</p>
         </div>
 
         <div class="contacts reveal">
             <a class="contact" href="mailto:wnayar98@gmail.com">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="17" height="17"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
                 <span style="display:block"><span>Email</span><b>wnayar98@gmail.com</b></span>
             </a>
             <a class="contact" href="https://www.linkedin.com/in/william-nayar/" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="17" height="17"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9z"/></svg>
                 <span style="display:block"><span>LinkedIn</span><b>william-nayar</b></span>
             </a>
             <a class="contact" href="https://github.com/Wnayar" target="_blank" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="17" height="17"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
                 <span style="display:block"><span>GitHub</span><b>Wnayar</b></span>
             </a>
         </div>
