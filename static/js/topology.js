@@ -8,6 +8,11 @@
   var stage = document.getElementById("topo-stage");
   if (!stage) return;
 
+  /* True while a walkthrough owns the highlighting, so hover does not fight it. */
+  function scenarioActive() {
+    return !!(typeof player !== "undefined" && player && player.key);
+  }
+
   var reduced = (window.WN && window.WN.reduced) || false;
   var NS = "http://www.w3.org/2000/svg";
 
@@ -321,10 +326,10 @@
     };
     g.addEventListener("click", select);
     g.addEventListener("mouseenter", function () {
-      if (!running) hoverNode(n.id);
+      if (!scenarioActive()) hoverNode(n.id);
     });
     g.addEventListener("mouseleave", function () {
-      if (!running) clearHighlight();
+      if (!scenarioActive()) clearHighlight();
     });
     g.addEventListener("focus", select);
     g.addEventListener("keydown", function (ev) {
@@ -461,7 +466,7 @@
     html += "</dl>";
     inspect.innerHTML = html;
 
-    if (!running) hoverNode(id);
+    if (!scenarioActive()) hoverNode(id);
   }
 
   /* --- Packets ------------------------------------------------------------ */
@@ -510,75 +515,154 @@
     livePackets = [];
   }
 
-  /* --- Scenario player ---------------------------------------------------- */
+  /* --- Scenario player ----------------------------------------------------
+     The captions carry real detail, so this is a stepper rather than a fixed
+     animation: it can be paused, and stepped back and forth by hand. */
 
   var capStep = document.getElementById("topo-cap-step");
   var capText = document.getElementById("topo-cap-text");
   var buttons = document.querySelectorAll(".scenario-btn");
-  var running = null;
-  var timers = [];
+  var ctrls = document.getElementById("topo-controls");
+  var btnPrev = document.getElementById("topo-prev");
+  var btnPlay = document.getElementById("topo-play");
+  var btnNext = document.getElementById("topo-next");
+  var DWELL = 4600;
 
-  function stopScenario() {
-    timers.forEach(clearTimeout);
-    timers = [];
-    clearPackets();
-    running = null;
+  var player = { key: null, i: 0, playing: false, timer: null };
+
+  function clearTimer() {
+    if (player.timer) {
+      clearTimeout(player.timer);
+      player.timer = null;
+    }
+  }
+
+  function syncControls() {
+    var sc = SCENARIOS[player.key];
+    var active = !!sc;
+    if (ctrls) ctrls.hidden = !active;
+    if (!active) return;
+
+    btnPrev.disabled = player.i <= 0;
+    btnNext.disabled = player.i >= sc.steps.length;
+    btnPlay.setAttribute("aria-pressed", String(player.playing));
+    btnPlay.querySelector("[data-play-label]").textContent = player.playing
+      ? "Pause"
+      : player.i >= sc.steps.length
+      ? "Replay"
+      : "Play";
+    btnPlay.classList.toggle("is-playing", player.playing);
+
     buttons.forEach(function (b) {
-      b.classList.remove("is-running");
+      b.classList.toggle("is-running", b.getAttribute("data-scenario") === player.key);
     });
   }
 
-  function playScenario(key, btn) {
-    stopScenario();
-    running = key;
-    btn.classList.add("is-running");
+  function renderStep() {
+    var sc = SCENARIOS[player.key];
+    if (!sc) return;
+    clearPackets();
 
-    var sc = SCENARIOS[key];
-    var stepMs = reduced ? 2600 : 3000;
+    if (player.i >= sc.steps.length) {
+      capStep.textContent = "Done · " + sc.label;
+      capText.textContent = sc.close;
+      clearHighlight();
+      player.playing = false;
+      clearTimer();
+      syncControls();
+      return;
+    }
 
-    sc.steps.forEach(function (step, i) {
-      timers.push(
-        setTimeout(function () {
-          highlight(step.nodes, step.edges || []);
-          capStep.textContent = "Step " + (i + 1) + " / " + sc.steps.length + " · " + sc.label;
-          capText.textContent = step.text;
+    var step = sc.steps[player.i];
+    highlight(step.nodes, step.edges || []);
+    capStep.textContent = "Step " + (player.i + 1) + " of " + sc.steps.length + " · " + sc.label;
+    capText.textContent = step.text;
 
-          if (!reduced) {
-            (step.edges || []).forEach(function (eid) {
-              for (var k = 0; k < 3; k++) {
-                firePacket(eid, step.dir || 1, k * 420);
-              }
-            });
-          }
-        }, i * stepMs)
-      );
+    if (!reduced) {
+      (step.edges || []).forEach(function (eid) {
+        for (var k = 0; k < 3; k++) firePacket(eid, step.dir || 1, k * 420);
+      });
+    }
+    syncControls();
+  }
+
+  function tick() {
+    clearTimer();
+    if (!player.playing) return;
+    player.timer = setTimeout(function () {
+      player.i += 1;
+      renderStep();
+      tick();
+    }, DWELL);
+  }
+
+  function startScenario(key) {
+    player.key = key;
+    player.i = 0;
+    player.playing = true;
+    renderStep();
+    tick();
+  }
+
+  function stopScenario() {
+    clearTimer();
+    clearPackets();
+    player.key = null;
+    player.playing = false;
+    clearHighlight();
+    buttons.forEach(function (b) {
+      b.classList.remove("is-running");
     });
-
-    timers.push(
-      setTimeout(function () {
-        capStep.textContent = "Done · " + sc.label;
-        capText.textContent = sc.close;
-        clearHighlight();
-        running = null;
-        buttons.forEach(function (b) {
-          b.classList.remove("is-running");
-        });
-      }, sc.steps.length * stepMs)
-    );
+    if (ctrls) ctrls.hidden = true;
+    capStep.textContent = "Idle";
+    capText.textContent = "Pick a request path, or tap any service to see what it owns.";
   }
 
   buttons.forEach(function (btn) {
     btn.addEventListener("click", function () {
       var key = btn.getAttribute("data-scenario");
-      if (running === key) {
+      if (player.key === key) {
         stopScenario();
-        capStep.textContent = "Idle";
-        capText.textContent = "Pick a request path, or hover any service to see what it owns.";
         return;
       }
-      playScenario(key, btn);
+      startScenario(key);
     });
   });
+
+  if (btnPlay) {
+    btnPlay.addEventListener("click", function () {
+      var sc = SCENARIOS[player.key];
+      if (!sc) return;
+      if (player.i >= sc.steps.length) {
+        player.i = 0;
+        player.playing = true;
+        renderStep();
+        tick();
+        return;
+      }
+      player.playing = !player.playing;
+      if (player.playing) tick();
+      else clearTimer();
+      syncControls();
+    });
+
+    btnPrev.addEventListener("click", function () {
+      if (!SCENARIOS[player.key]) return;
+      player.playing = false;
+      clearTimer();
+      player.i = Math.max(0, player.i - 1);
+      renderStep();
+    });
+
+    btnNext.addEventListener("click", function () {
+      var sc = SCENARIOS[player.key];
+      if (!sc) return;
+      player.playing = false;
+      clearTimer();
+      player.i = Math.min(sc.steps.length, player.i + 1);
+      renderStep();
+    });
+  }
 
   /* Start on the gateway so the inspector is never empty. */
   selectNode("gw");

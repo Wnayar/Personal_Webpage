@@ -111,7 +111,20 @@
                         </div>
                         <div class="topo__caption">
                             <div class="topo__caption-step" id="topo-cap-step">Idle</div>
-                            <p class="topo__caption-text" id="topo-cap-text">Pick a request path, or hover any service to see what it owns.</p>
+                            <p class="topo__caption-text" id="topo-cap-text">Pick a request path, or tap any service to see what it owns.</p>
+                            <div class="topo__controls" id="topo-controls" hidden>
+                                <button type="button" class="topo__ctrl" id="topo-prev" aria-label="Previous step">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                                </button>
+                                <button type="button" class="topo__ctrl topo__ctrl--play" id="topo-play" aria-pressed="true">
+                                    <svg class="topo__icon-play" viewBox="0 0 24 24" fill="currentColor" width="13" height="13" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg>
+                                    <svg class="topo__icon-pause" viewBox="0 0 24 24" fill="currentColor" width="13" height="13" aria-hidden="true"><path d="M7 4h4v16H7zM13 4h4v16h-4z"/></svg>
+                                    <span data-play-label>Pause</span>
+                                </button>
+                                <button type="button" class="topo__ctrl" id="topo-next" aria-label="Next step">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                                </button>
+                            </div>
                         </div>
                         <div class="topo__inspect" id="topo-inspect"></div>
                     </div>
@@ -250,8 +263,8 @@
                 <span class="lab__hint">real BM25, scored live</span>
             </div>
             <p class="lab__intro">
-                Type a question and watch it get taken apart, looked up, and scored. Try the pizza one to see it
-                refuse rather than invent an answer.
+                Type a question, or tap one below. It searches my notes and ranks what it finds. Ask it about
+                pizza and it refuses, because nothing in the notes is about pizza.
             </p>
 
             <div class="panel">
@@ -263,11 +276,7 @@
                 </div>
                 <div class="panel__body">
                     <div class="ir__search">
-                        <input class="ir__input" data-ir-input type="search" placeholder="ask about OS, networks, databases…" aria-label="Search the sample corpus">
-                        <div class="seg">
-                            <button type="button" data-ir-mode="keyword" aria-pressed="true">BM25</button>
-                            <button type="button" data-ir-mode="hybrid" aria-pressed="false">+ expansion</button>
-                        </div>
+                        <input class="ir__input" data-ir-input type="search" placeholder="Ask a question…" aria-label="Search the notes">
                     </div>
 
                     <div class="ir__chips">
@@ -277,23 +286,7 @@
                         <button type="button" class="ir__chip" data-ir-example>best pizza in singapore</button>
                     </div>
 
-                    <div class="ir__pipeline">
-                        <div class="ir__stage">
-                            <div class="ir__stage-name">1 · tokenise</div>
-                            <div class="ir__stage-body" data-stage-tokens></div>
-                        </div>
-                        <div class="ir__stage">
-                            <div class="ir__stage-name">2 · stem</div>
-                            <div class="ir__stage-body" data-stage-terms></div>
-                        </div>
-                        <div class="ir__stage">
-                            <div class="ir__stage-name">3 · postings</div>
-                            <div class="ir__stage-body" data-stage-postings></div>
-                        </div>
-                        <div class="ir__stage">
-                            <div class="ir__stage-name">4 · score</div>
-                            <div class="ir__stage-body" data-stage-scored></div>
-                        </div>
+                    <p class="ir__matched" data-ir-matched></p>
                     </div>
 
                     <div class="ir__results" data-ir-results></div>
@@ -301,7 +294,7 @@
             </div>
 
             <p class="lab__intro" style="margin-top:var(--s-5)">
-                Nothing in the index is about pizza, so everything scores too low and it refuses.
+                Every result shows the score it earned and the words it matched on.
             </p>
 
             
@@ -387,6 +380,11 @@
 
                     <div class="gate__term">
                         <div class="term-window" data-terminal></div>
+                        <p class="gate__hint" data-gate-hint>
+                            Pick one of the two installs above. <b>python-pillow</b> is a fake built to look like
+                            the real <code>pillow</code> and gets blocked. <b>requests</b> is genuine and passes
+                            straight through. The output here is the real thing from the repo.
+                        </p>
                     </div>
                 </div>
             </div>

@@ -108,6 +108,7 @@
   var verdictEl = lab.querySelector("[data-verdict]");
   var tierEl = lab.querySelector("[data-tier]");
   var termEl = lab.querySelector("[data-terminal]");
+  var hintEl = lab.querySelector("[data-gate-hint]");
   var runBtns = lab.querySelectorAll("[data-case]");
 
   var timers = [];
@@ -127,6 +128,7 @@
     });
     verdictEl.className = "verdict";
     verdictEl.textContent = "waiting for an install";
+    if (hintEl) hintEl.classList.remove("is-hidden");
     tierEl.innerHTML = "<b>Tier 1 · deterministic tripwires.</b> Plain code, no model. Reading a planted honeytoken, connecting out to a non-registry host, or spawning a shell during an install triggers an instant block on its own.";
     termEl.innerHTML = "";
   }
@@ -189,6 +191,7 @@
 
   function run(caseKey) {
     clearAll();
+    if (hintEl) hintEl.classList.add("is-hidden");
     var c = CASES[caseKey];
 
     verdictEl.textContent = "checking " + c.pkg + " …";

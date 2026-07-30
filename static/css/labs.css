@@ -2252,3 +2252,108 @@ input[type="range"]::-moz-range-thumb {
     padding: var(--s-3) var(--s-4);
   }
 }
+
+/* Playback controls for the request walkthrough. The captions carry real
+   detail, so it has to be possible to stop and go back. */
+.topo__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
+
+.topo__ctrl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 32px;
+  padding: 0 0.6rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.2s var(--ease);
+}
+
+.topo__ctrl:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--accent-deep);
+  background: var(--surface-3);
+}
+
+.topo__ctrl:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.topo__ctrl--play {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: var(--wash-accent);
+  padding-inline: 0.75rem;
+}
+
+.topo__ctrl .topo__icon-pause {
+  display: none;
+}
+
+.topo__ctrl.is-playing .topo__icon-pause {
+  display: block;
+}
+
+.topo__ctrl.is-playing .topo__icon-play {
+  display: none;
+}
+
+/* Tells you the terminal is waiting on you, rather than being broken. */
+.gate__term {
+  position: relative;
+}
+
+.gate__hint {
+  position: absolute;
+  inset: auto var(--s-5) var(--s-5) var(--s-5);
+  margin: 0;
+  max-width: none;
+  padding: var(--s-4);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  color: var(--muted);
+  transition: opacity 0.3s var(--ease);
+}
+
+.gate__hint b {
+  color: var(--text-2);
+}
+
+.gate__hint.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* One plain sentence in place of the old four-stage pipeline. */
+.ir__matched {
+  margin: 0 0 var(--s-4);
+  max-width: none;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+
+.ir__matched b {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* A display value beats the hidden attribute, so say it outright. */
+.topo__controls[hidden] {
+  display: none;
+}

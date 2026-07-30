@@ -59,20 +59,6 @@
     which: 1, when: 1, why: 1, can: 1, will: 1, would: 1, s: 1
   };
 
-  /* Illustrative expansion only. Recall's hybrid mode fuses BM25 with vector
-     similarity over real embeddings; a hand-written map is not that, and is
-     labelled as such in the UI. */
-  var RELATED = {
-    handshake: ["syn", "ack", "connect"],
-    lock: ["deadlock", "mutual", "exclus"],
-    stuck: ["deadlock", "wait", "circular"],
-    memori: ["page", "frame", "virtual"],
-    fast: ["index", "logarithm", "cach"],
-    partit: ["cap", "consist", "avail"],
-    shard: ["hash", "ring", "node"],
-    order: ["sort", "sequenc", "rang"]
-  };
-
   var K1 = 1.2;
   var B = 0.75;
 
@@ -150,13 +136,8 @@
   /* --- UI ----------------------------------------------------------------- */
 
   var input = lab.querySelector("[data-ir-input]");
-  var stageTokens = lab.querySelector("[data-stage-tokens]");
-  var stageTerms = lab.querySelector("[data-stage-terms]");
-  var stagePostings = lab.querySelector("[data-stage-postings]");
-  var stageScored = lab.querySelector("[data-stage-scored]");
+  var matchedEl = lab.querySelector("[data-ir-matched]");
   var results = lab.querySelector("[data-ir-results]");
-  var hybridBtns = lab.querySelectorAll("[data-ir-mode]");
-  var mode = "keyword";
 
   var REFUSE_BELOW = 1.0;
 
@@ -168,64 +149,19 @@
     var q = input.value.trim();
 
     if (!q) {
-      stageTokens.innerHTML = '<span class="muted">·</span>';
-      stageTerms.innerHTML = '<span class="muted">·</span>';
-      stagePostings.innerHTML = '<span class="muted">·</span>';
-      stageScored.innerHTML = '<span class="muted">·</span>';
+      matchedEl.textContent = "";
       results.innerHTML = "";
       return;
     }
 
     var a = analyse(q);
-
-    /* Stage 1: raw tokens, with stopwords struck through. */
-    var tokHtml = "";
-    a.raw.forEach(function (w) {
-      var isStop = STOPWORDS[w] || w.length < 2;
-      tokHtml += chipHtml(w, isStop ? "drop" : "");
-    });
-    stageTokens.innerHTML = tokHtml || '<span class="muted">·</span>';
-
-    /* Stage 2: stems, plus expansion terms if hybrid is on. */
     var terms = a.kept.map(function (t) {
       return t.term;
     });
     var expanded = [];
-    if (mode === "hybrid") {
-      terms.forEach(function (t) {
-        (RELATED[t] || []).forEach(function (r) {
-          if (terms.indexOf(r) === -1 && expanded.indexOf(r) === -1) expanded.push(r);
-        });
-      });
-    }
+    var all = terms;
 
-    var termHtml = terms
-      .map(function (t) {
-        return chipHtml(t);
-      })
-      .join("");
-    termHtml += expanded
-      .map(function (t) {
-        return chipHtml(t, "syn");
-      })
-      .join("");
-    stageTerms.innerHTML = termHtml || '<span class="muted">·</span>';
-
-    /* Stage 3: postings list sizes, the actual index lookup. */
-    var all = terms.concat(expanded);
-    var postHtml = all
-      .map(function (t) {
-        var e = index[t];
-        var n = e ? Object.keys(e.postings).length : 0;
-        return (
-          '<div>' + t + " → " + (n ? n + " chunk" + (n === 1 ? "" : "s") : "∅") +
-          '<span class="muted"> · idf ' + idf(t).toFixed(2) + "</span></div>"
-        );
-      })
-      .join("");
-    stagePostings.innerHTML = postHtml || '<span class="muted">·</span>';
-
-    /* Stage 4: score every candidate document. */
+    /* Score every candidate chunk. */
     var scores = [];
     for (var d = 0; d < N; d++) {
       var total = 0;
@@ -247,19 +183,24 @@
       return y.score - x.score;
     });
 
-    stageScored.innerHTML = scores.length
-      ? scores.length + " chunk" + (scores.length === 1 ? "" : "s") + " matched · top-k by min-heap"
-      : '<span class="muted">no chunk contains any query term</span>';
+    /* One plain line instead of a four-stage jargon pipeline. */
+    var used = terms.filter(function (t) {
+      return index[t] && Object.keys(index[t].postings).length;
+    });
+    matchedEl.innerHTML = used.length
+      ? "Searching for " + used.map(function (t) { return "<b>" + t + "</b>"; }).join(", ") +
+        " · found " + scores.length + " result" + (scores.length === 1 ? "" : "s")
+      : "None of those words appear anywhere in the notes.";
 
     /* Results, or the refusal the build plan specifies. */
     var top = scores.slice(0, 3);
 
     if (!top.length || top[0].score < REFUSE_BELOW) {
       results.innerHTML =
-        '<div class="refusal"><b>Refused: retrieval confidence too low</b>' +
-        "Nothing in the index scored above the threshold" +
-        (top.length ? " (best was " + top[0].score.toFixed(2) + ", floor is " + REFUSE_BELOW.toFixed(2) + ")" : "") +
-        ". Recall answers from retrieved chunks or not at all: an answer with no sources behind it is the failure mode the citation requirement exists to prevent." +
+        '<div class="refusal"><b>No answer</b>' +
+        "Nothing in the notes is a good enough match" +
+        (top.length ? " (best score " + top[0].score.toFixed(2) + ", it needs " + REFUSE_BELOW.toFixed(2) + ")" : "") +
+        ". It would rather say nothing than make something up." +
         "</div>";
       return;
     }
@@ -278,15 +219,6 @@
           return matched[stem(w.toLowerCase())] ? "<mark>" + w + "</mark>" : w;
         });
 
-        var math = hit.parts
-          .sort(function (x, y) {
-            return y.s - x.s;
-          })
-          .map(function (p) {
-            return "<b>" + p.t + "</b> " + p.s.toFixed(2);
-          })
-          .join("");
-
         return (
           '<article class="hit" style="animation-delay:' + rank * 60 + 'ms">' +
           '<span class="hit__bar" style="--w:' + ((hit.score / maxScore) * 100).toFixed(1) + '%"></span>' +
@@ -294,7 +226,6 @@
           '<span class="hit__src">' + doc.src + "</span>" +
           '<span class="hit__score">' + hit.score.toFixed(2) + "</span></div>" +
           '<p class="hit__text">' + highlighted + "</p>" +
-          '<div class="hit__math"><span class="muted">term contributions:</span>' + math + "</div>" +
           "</article>"
         );
       })
@@ -311,21 +242,10 @@
     });
   });
 
-  hybridBtns.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      mode = btn.getAttribute("data-ir-mode");
-      hybridBtns.forEach(function (b) {
-        b.setAttribute("aria-pressed", String(b === btn));
-      });
-      run();
-    });
-  });
-
   /* Corpus stats for the panel bar. */
   var statsEl = lab.querySelector("[data-ir-stats]");
   if (statsEl) {
-    statsEl.textContent =
-      N + " chunks · " + Object.keys(index).length + " terms · avgdl " + avgdl.toFixed(1);
+    statsEl.textContent = N + " notes indexed";
   }
 
   input.value = "how does tcp start a connection";
