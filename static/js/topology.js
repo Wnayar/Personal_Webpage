@@ -197,6 +197,56 @@
     }
   };
 
+  /* --- Mobile layout ------------------------------------------------------
+     The wide diagram needs a sideways swipe on a phone, which is a poor way to
+     read a system. On narrow screens the same nodes are re-laid out as a single
+     column, with edges routed through channels down either side. Same nodes,
+     same edges, same scenarios: only the geometry changes. */
+
+  var MW = 360;
+  var MOBILE = {
+    client:    { x: 64, y: 6, w: 232, h: 38 },
+    gw:        { x: 64, y: 68, w: 232, h: 44 },
+    users:     { x: 64, y: 142, w: 232, h: 40 },
+    questions: { x: 64, y: 194, w: 232, h: 40 },
+    matching:  { x: 64, y: 246, w: 232, h: 40 },
+    collab:    { x: 64, y: 298, w: 232, h: 40 },
+    stats:     { x: 64, y: 366, w: 232, h: 40 },
+    pg:        { x: 64, y: 452, w: 232, h: 40 },
+    redis:     { x: 64, y: 506, w: 232, h: 40 }
+  };
+  var M_LEFT = 30;   // channel for gateway to service edges
+  var M_INNER = 47;  // channel for service to service calls
+  var M_RIGHT = 332; // channel for anything touching a datastore
+
+  function mcy(id) {
+    var b = MOBILE[id];
+    return b.y + b.h / 2;
+  }
+
+  /* Orthogonal routes, generated rather than hand-authored. */
+  function mobileEdge(e) {
+    var a = MOBILE[e.from];
+    var b = MOBILE[e.to];
+    var ay = mcy(e.from);
+    var by = mcy(e.to);
+
+    if (e.id === "e1") {
+      return "M180," + (a.y + a.h) + " L180," + b.y;
+    }
+    if (e.to === "pg" || e.to === "redis") {
+      return "M" + (a.x + a.w) + "," + ay + " L" + M_RIGHT + "," + ay +
+             " L" + M_RIGHT + "," + by + " L" + (b.x + b.w) + "," + by;
+    }
+    if (e.type === "internal") {
+      return "M" + a.x + "," + ay + " L" + M_INNER + "," + ay +
+             " L" + M_INNER + "," + by + " L" + b.x + "," + by;
+    }
+    return "M180," + (a.y + a.h) + " L180," + (a.y + a.h + 14) +
+           " L" + M_LEFT + "," + (a.y + a.h + 14) +
+           " L" + M_LEFT + "," + by + " L" + b.x + "," + by;
+  }
+
   /* --- Build the SVG ------------------------------------------------------ */
 
   var svg = document.createElementNS(NS, "svg");
@@ -214,11 +264,16 @@
     return node;
   }
 
-  /* Zones */
-  el("rect", { class: "zone", x: 10, y: 200, width: 940, height: 250, rx: 14 });
-  el("text", { class: "zone__label", x: 24, y: 216 }).textContent = "Cloud Run · stateless, scales to zero";
-  el("rect", { class: "zone", x: 130, y: 470, width: 560, height: 112, rx: 14 });
-  el("text", { class: "zone__label", x: 144, y: 488 }).textContent = "Managed free tiers · always on";
+  /* Zones. Hidden on mobile, where the single column already reads clearly. */
+  var zones = [];
+  zones.push(el("rect", { class: "zone", x: 10, y: 200, width: 940, height: 250, rx: 14 }));
+  var z1 = el("text", { class: "zone__label", x: 24, y: 216 });
+  z1.textContent = "Cloud Run · stateless, scales to zero";
+  zones.push(z1);
+  zones.push(el("rect", { class: "zone", x: 130, y: 470, width: 560, height: 112, rx: 14 }));
+  var z2 = el("text", { class: "zone__label", x: 144, y: 488 });
+  z2.textContent = "Managed free tiers · always on";
+  zones.push(z2);
 
   /* Edges first so nodes paint over them */
   var edgeEls = {};
@@ -240,10 +295,11 @@
       "aria-label": n.label + ": " + n.kindLabel
     });
 
+    var stackEl = null;
     if (n.stack) {
-      el("rect", { class: "node__stack", x: n.x + 5, y: n.y - 5, width: n.w, height: n.h, rx: 9 }, g);
+      stackEl = el("rect", { class: "node__stack", x: n.x + 5, y: n.y - 5, width: n.w, height: n.h, rx: 9 }, g);
     }
-    el("rect", { class: "node__box", x: n.x, y: n.y, width: n.w, height: n.h, rx: 9 }, g);
+    var boxEl = el("rect", { class: "node__box", x: n.x, y: n.y, width: n.w, height: n.h, rx: 9 }, g);
 
     var cx = n.x + n.w / 2;
     var t1 = el("text", { class: "node__label", x: cx, y: n.y + n.h / 2 - 3, "text-anchor": "middle" }, g);
@@ -251,11 +307,13 @@
     var t2 = el("text", { class: "node__sub", x: cx, y: n.y + n.h / 2 + 13, "text-anchor": "middle" }, g);
     t2.textContent = n.sub;
 
+    var t3 = null;
     if (n.idx) {
-      var t3 = el("text", { class: "node__idx", x: n.x + 9, y: n.y + 14 }, g);
+      t3 = el("text", { class: "node__idx", x: n.x + 9, y: n.y + 14 }, g);
       t3.textContent = n.idx;
     }
 
+    g.__parts = { stack: stackEl, box: boxEl, label: t1, sub: t2, idx: t3 };
     nodeEls[n.id] = g;
 
     var select = function () {
@@ -279,6 +337,68 @@
 
   var packetLayer = el("g", { class: "packet-layer" });
   stage.appendChild(svg);
+
+  /* --- Layout switching --------------------------------------------------- */
+
+  var isMobile = null;
+
+  function applyLayout(mobile) {
+    if (mobile === isMobile) return;
+    isMobile = mobile;
+
+    svg.setAttribute("viewBox", mobile ? "0 0 " + MW + " 560" : "0 0 960 620");
+    svg.classList.toggle("topo__svg--stacked", mobile);
+
+    zones.forEach(function (z) {
+      z.style.display = mobile ? "none" : "";
+    });
+
+    NODES.forEach(function (n) {
+      var box = mobile ? MOBILE[n.id] : n;
+      var g = nodeEls[n.id];
+      var parts = g.__parts;
+      var cx = box.x + box.w / 2;
+
+      if (parts.stack) {
+        parts.stack.setAttribute("x", box.x + 5);
+        parts.stack.setAttribute("y", box.y - 5);
+        parts.stack.setAttribute("width", box.w);
+        parts.stack.setAttribute("height", box.h);
+        parts.stack.style.display = mobile ? "none" : "";
+      }
+      parts.box.setAttribute("x", box.x);
+      parts.box.setAttribute("y", box.y);
+      parts.box.setAttribute("width", box.w);
+      parts.box.setAttribute("height", box.h);
+
+      parts.label.setAttribute("x", cx);
+      parts.label.setAttribute("y", box.y + box.h / 2 - (mobile ? 1 : 3));
+      parts.sub.setAttribute("x", cx);
+      parts.sub.setAttribute("y", box.y + box.h / 2 + (mobile ? 13 : 13));
+      parts.sub.style.display = mobile && n.kind === "client" ? "none" : "";
+
+      if (parts.idx) {
+        parts.idx.setAttribute("x", box.x + 8);
+        parts.idx.setAttribute("y", box.y + 13);
+      }
+    });
+
+    EDGES.forEach(function (e) {
+      edgeEls[e.id].setAttribute("d", mobile ? mobileEdge(e) : e.d);
+    });
+  }
+
+  var mq = window.matchMedia("(max-width: 1000px)");
+  applyLayout(mq.matches);
+  if (mq.addEventListener) {
+    mq.addEventListener("change", function (ev) {
+      applyLayout(ev.matches);
+    });
+  } else if (mq.addListener) {
+    mq.addListener(function (ev) {
+      applyLayout(ev.matches);
+    });
+  }
 
   /* --- Highlighting ------------------------------------------------------- */
 

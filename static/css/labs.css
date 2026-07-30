@@ -373,18 +373,14 @@ input[type="range"]::-moz-range-thumb {
   .topo__stage {
     border-right: 0;
     border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-    scrollbar-width: thin;
+    overflow-x: hidden;
   }
 
-  .topo__svg {
-    min-width: 620px;
-  }
-
-  /* The diagram is wider than the screen, so say so rather than hoping
-     someone discovers the horizontal scroll. */
-  .topo__scroll-hint {
-    display: flex;
+  /* The stacked layout fits the screen, so nothing needs to scroll sideways. */
+  .topo__svg--stacked {
+    min-width: 0;
+    max-width: 360px;
+    margin-inline: auto;
   }
 }
 
@@ -2222,4 +2218,37 @@ input[type="range"]::-moz-range-thumb {
 .panel__try svg {
   width: 12px;
   height: 12px;
+}
+
+/* On a phone the two replicas stack, so they have to be short enough that both
+   are on screen together. Seeing them agree is the entire point of the demo. */
+@media (max-width: 900px) {
+  .crdt__pane {
+    padding: var(--s-3) var(--s-4);
+  }
+
+  .editor {
+    min-height: 84px;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .crdt__pane-head {
+    font-size: var(--fs-micro);
+    gap: 0.4rem;
+  }
+
+  .crdt__wire {
+    padding: 0.4rem 0.75rem;
+  }
+
+  .crdt__wire-label {
+    font-size: 0.6rem;
+  }
+
+  .crdt__status {
+    font-size: var(--fs-micro);
+    gap: 0.35rem 0.7rem;
+    padding: var(--s-3) var(--s-4);
+  }
 }
