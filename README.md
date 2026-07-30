@@ -1,13 +1,13 @@
-# William Nayar — Personal Website
+# William Nayar: Personal Website
 
-Personal site of William Nayar (final-year CS at NUS — backend and distributed systems).
+Personal site of William Nayar, a final-year CS student at NUS working on backend and distributed systems.
 Authored as a small Flask app and **shipped as a static site** on Cloudflare Pages.
 
 **Live site:** https://williamnayar.com
 
 ## How it works
 
-The site has no database, forms, or logins — every route renders a fixed page.
+The site has no database, forms, or logins, so every route renders a fixed page.
 So Flask is used as a **static-site generator**: `freeze.py` renders each route to
 plain HTML in a `dist/` folder, which Cloudflare Pages serves from its global CDN.
 
@@ -26,7 +26,7 @@ demo that implies more than it is would undercut the point of the site:
 | Lab | What it really is |
 | --- | --- |
 | DeepCS topology | A rendering of the architecture in DeepCS's `DESIGN.md`, with the request paths it describes. Not connected to a deployment. |
-| Token bucket race | A browser simulation of the lost update in ADR-08 — read-then-write vs. an atomic script. |
+| Token bucket race | A browser simulation of the lost update in ADR-08: read-then-write versus an atomic script. |
 | CRDT convergence | A real (simplified RGA) CRDT implemented in `crdt.js`. Convergence is genuinely computed. DeepCS itself uses Yjs. |
 | BM25 search | Real BM25 scoring over a 9-chunk sample corpus, computed in `bm25.js`. Recall implements this in Go. |
 | Airlock gate | A replay of the real recorded verdict output from the Airlock repo. |
@@ -37,10 +37,10 @@ demo that implies more than it is would undercut the point of the site:
 | --- | --- |
 | Authoring | Python, Flask, Jinja2 |
 | Build | `freeze.py` (Flask test client → static HTML) |
-| Frontend | HTML5, hand-written CSS, vanilla JS — no framework, no CDN scripts |
-| Fonts/UI | Plus Jakarta Sans + JetBrains Mono, dark-first with a light theme toggle |
+| Frontend | HTML5, hand-written CSS, vanilla JS. No framework, no CDN scripts |
+| Fonts/UI | Plus Jakarta Sans and JetBrains Mono, dark-first with a light theme toggle |
 | Hosting | Cloudflare Pages (static, free TLS, global CDN) |
-| Domain | Cloudflare Registrar — `williamnayar.com` |
+| Domain | Cloudflare Registrar (`williamnayar.com`) |
 
 ## Project structure
 
@@ -53,7 +53,7 @@ Personal_Webpage/
 ├── .python-version     # Pins Python for reproducible Cloudflare builds
 ├── templates/
 │   ├── layout.html     # Base template: <head>, nav, SEO meta, theme bootstrap
-│   ├── index.html      # Home — hero, the three systems, build-vs-buy, signals
+│   ├── index.html      # Home: hero, the three systems, build-vs-buy, signals
 │   ├── systems.html    # Deep dives: DeepCS, Recall, Airlock + the four labs
 │   └── about.html      # Background, timeline, teaching, skills, contact
 └── static/
@@ -106,7 +106,7 @@ Connect the GitHub repo to a Cloudflare Pages project and set:
 | --- | --- |
 | Build command | `pip install -r requirements.txt && python freeze.py` |
 | Build output directory | `dist` |
-| Environment variable | `CANONICAL_BASE_URL=https://williamnayar.com` *(optional — it's the default)* |
+| Environment variable | `CANONICAL_BASE_URL=https://williamnayar.com` *(optional, it's the default)* |
 | Python version | from `.python-version` (override with `PYTHON_VERSION` if the build can't find it) |
 
 Then add `williamnayar.com` (and `www`) under **Custom domains**; TLS is automatic.
@@ -128,7 +128,7 @@ Every push to `main` triggers a rebuild and redeploy.
 
 ## Accessibility & performance notes
 
-- No CSS or JS frameworks and no CDN scripts — only the two stylesheets, six small
+- No CSS or JS frameworks and no CDN scripts. Only the two stylesheets, six small
   scripts, and Google Fonts.
 - Scroll-reveal styles are gated behind a `.js` class on `<html>`, so with scripts
   blocked the page renders fully visible instead of blank.
@@ -144,5 +144,5 @@ Every push to `main` triggers a rebuild and redeploy.
 
 ---
 
-Originally built as a CS50 final project in 2023; since rebuilt into a static,
+Originally built as a CS50 final project in 2023, since rebuilt into a static,
 CDN-hosted personal site.

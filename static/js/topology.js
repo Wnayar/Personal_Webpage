@@ -1,4 +1,4 @@
-/* DeepCS architecture — an interactive rendering of the topology in DESIGN.md §3.
+/* DeepCS architecture: an interactive rendering of the topology in DESIGN.md §3.
    This draws the *designed* system. It is not connected to a running deployment;
    the packets are a walkthrough of the request paths described in the doc. */
 
@@ -36,7 +36,7 @@
       kindLabel: "Service · [built · learning]",
       info: [
         ["Owns", "Nothing. It is stateless."],
-        ["Why separate", "Position. A cross-cutting enforcement point has to sit in front of what it protects — true even if its scaling profile matched everything else exactly."],
+        ["Why separate", "Position. A cross-cutting enforcement point has to sit in front of what it protects. That holds even if its scaling profile matched everything else exactly."],
         ["The catch", "Every WebSocket burns a slot here and on Collab, and these slots are shared with every HTTP request in the system."]
       ]
     },
@@ -50,7 +50,7 @@
       kindLabel: "Service",
       info: [
         ["Owns", "Profile rows keyed by firebase_uid."],
-        ["Why separate", "One capability, one owner. Small and stable — it will change less than anything else here."],
+        ["Why separate", "One capability, one owner. Small and stable, and it will change less than anything else here."],
         ["Detail", "No auth code at all. The row is created lazily by an upsert whose RETURNING clause is the only reliable signal of a genuine first sign-up."]
       ]
     },
@@ -65,7 +65,7 @@
       info: [
         ["Owns", "The question bank, tags, full-text index, and reference_md."],
         ["Why separate", "Read-heavy and cacheable in a way nothing else is; also the only service holding answer keys, so a narrower blast radius is worth something."],
-        ["Detail", "Cursor pagination, not OFFSET — OFFSET makes Postgres read and discard every skipped row, and duplicates rows that shift between requests."]
+        ["Detail", "Cursor pagination, not OFFSET. OFFSET makes Postgres read and discard every skipped row, and it duplicates rows that shift between requests."]
       ]
     },
     {
@@ -93,7 +93,7 @@
       info: [
         ["Owns", "Live Yjs documents and their snapshots."],
         ["Why separate", "Forced by the platform. One WebSocket occupies a concurrency slot for twenty minutes; this service needs the opposite --concurrency and --timeout values from every other one, and those are per-service flags."],
-        ["Detail", "Cross-instance sync goes through a Redis channel per session, because the two users may be connected to different instances. Sticky sessions cannot fix that — affinity pins a client, not a pair."]
+        ["Detail", "Cross-instance sync goes through a Redis channel per session, because the two users may be connected to different instances. Sticky sessions cannot fix that, because affinity pins a client, not a pair."]
       ]
     },
     {
@@ -106,8 +106,8 @@
       kindLabel: "Job, not a service",
       info: [
         ["Owns", "Session summaries and aggregates."],
-        ["Why separate", "Trigger. It's time-driven, not request-driven — and a scaled-to-zero service has no running process for a timer to fire in, so it cannot be a server at all."],
-        ["Detail", "Reads past its bookmark on the event stream, then acks. Redis holds delivered-but-unacked entries pending, so a crash means redelivery, not loss — at-least-once, which is what forces every write to be idempotent."]
+        ["Why separate", "Trigger. It is time-driven rather than request-driven, and a scaled-to-zero service has no running process for a timer to fire inside. So it cannot be a server at all."],
+        ["Detail", "Reads past its bookmark on the event stream, then acks. Redis holds delivered-but-unacked entries pending, so a crash means redelivery, not loss. Delivery is at-least-once, which is what forces every write to be idempotent."]
       ]
     },
     {
@@ -132,7 +132,7 @@
       kindLabel: "Managed · [bought]",
       info: [
         ["Shape", "One Upstash instance doing five jobs: match queue, rate-limit buckets, cross-instance pub/sub, the event stream, and the question-bank cache."],
-        ["Why here", "Split from Postgres by access pattern — ephemeral shared state versus durable relational data — not by service."],
+        ["Why here", "Split from Postgres by access pattern (ephemeral shared state versus durable relational data), not by service."],
         ["Detail", "Atomicity has to live where the single copy of the state lives. That is why the token bucket is a Lua script and not an in-process mutex."]
       ]
     }
@@ -164,13 +164,13 @@
     match: {
       label: "A match request",
       steps: [
-        { nodes: ["client", "gw"], edges: ["e1"], text: "The browser joins the queue. Every request — HTTP or WebSocket — enters through the Gateway, because exactly one place should verify a token." },
+        { nodes: ["client", "gw"], edges: ["e1"], text: "The browser joins the queue. Every request, HTTP or WebSocket, enters through the Gateway, because exactly one place should verify a token." },
         { nodes: ["gw", "redis"], edges: ["e6"], text: "The Gateway verifies the Firebase ID token against Google's published JWKS. It holds no service-account credential, so it can verify a token but cannot mint one. Then it spends a token-bucket token in Redis." },
-        { nodes: ["gw", "matching"], edges: ["e4"], text: "Routed to Matching, and X-User-Id is injected here. Downstream services never re-verify — they read that header and trust it, which is only safe because no other service has public ingress." },
+        { nodes: ["gw", "matching"], edges: ["e4"], text: "Routed to Matching, and X-User-Id is injected here. Downstream services never re-verify. They read that header and trust it, which is only safe because no other service has public ingress." },
         { nodes: ["matching", "users"], edges: ["e7"], text: "Matching validates the UID by calling Users. It cannot join to Users' tables: each service has its own Postgres role, so the database rejects a cross-schema read outright." },
-        { nodes: ["matching", "questions"], edges: ["e8"], text: "It fetches parts[] from Questions to seed the shared scaffold. The reference answer stays behind — Questions releases it only after Matching verifies both users consented." },
-        { nodes: ["matching", "redis"], edges: ["e15"], text: "The partner is claimed from the Redis queue by a Lua script. Two users joining in the same instant race for the same partner, so the claim has to be atomic — the same shape of race as the rate limiter." },
-        { nodes: ["matching", "pg"], edges: ["e12"], text: "Session row written to Matching's own schema, then a match event published. The claim is in Redis and the row is in Postgres, so nothing spans them — the client re-checks after ~10s if no event arrives." }
+        { nodes: ["matching", "questions"], edges: ["e8"], text: "It fetches parts[] from Questions to seed the shared scaffold. The reference answer stays behind. Questions releases it only after Matching verifies both users consented." },
+        { nodes: ["matching", "redis"], edges: ["e15"], text: "The partner is claimed from the Redis queue by a Lua script. Two users joining in the same instant race for the same partner, so the claim has to be atomic. It is the same shape of race as the rate limiter." },
+        { nodes: ["matching", "pg"], edges: ["e12"], text: "Session row written to Matching's own schema, then a match event published. The claim is in Redis and the row is in Postgres, so nothing spans them. The client re-checks after about 10 seconds if no event arrives." }
       ],
       close: "Cold, this chain can start four containers from zero. That is the accepted price of --min-instances=0, and it's why cross-service calls are kept off the browsing path a first-time visitor hits."
     },
@@ -179,9 +179,9 @@
       steps: [
         { nodes: ["client", "gw", "collab"], edges: ["e1", "e5"], text: "User A types. The Yjs update rides A's WebSocket, proxied by the Gateway, into whichever Collab instance A happened to land on." },
         { nodes: ["collab"], edges: [], text: "Instance 1 merges the update into its own copy of the document." },
-        { nodes: ["collab", "redis"], edges: ["e16"], text: "It publishes the update on a Redis channel for that session — necessary because the two users may be connected to different Collab instances, and Cloud Run's session affinity pins a client, not a pair." },
-        { nodes: ["redis", "collab"], edges: ["e16"], dir: -1, text: "Instance 2 is subscribed, receives it, and merges. A CRDT converges to the same document regardless of the order updates arrive in — there is no central referee." },
-        { nodes: ["collab", "pg"], edges: ["e13"], text: "Every 30 seconds — and on disconnect, and before SIGTERM — the doc is snapshotted to Postgres. The live document exists only in one instance's memory, so without this a restart loses the session." }
+        { nodes: ["collab", "redis"], edges: ["e16"], text: "It publishes the update on a Redis channel for that session. That is necessary because the two users may be connected to different Collab instances, and Cloud Run's session affinity pins a client, not a pair." },
+        { nodes: ["redis", "collab"], edges: ["e16"], dir: -1, text: "Instance 2 is subscribed, receives it, and merges. A CRDT converges to the same document regardless of the order updates arrive in. There is no central referee." },
+        { nodes: ["collab", "pg"], edges: ["e13"], text: "Every 30 seconds, and on disconnect, and before SIGTERM, the doc is snapshotted to Postgres. The live document exists only in one instance's memory, so without this a restart loses the session." }
       ],
       close: "Per-keystroke writes would exhaust the free tier and add latency to the hot path. 30s bounds worst-case loss; the disconnect and SIGTERM snapshots mean deploys and closed tabs lose nothing at all."
     },
@@ -189,9 +189,9 @@
       label: "The stats drain",
       steps: [
         { nodes: ["stats"], edges: [], text: "Cloud Scheduler starts the Stats job every 5 minutes. It is a job, not a server: a scale-to-zero service has no running process for a timer to fire inside." },
-        { nodes: ["stats", "redis"], edges: ["e17"], text: "It reads everything past its bookmark on the events stream — an append-only log, so reading never deletes. Services appended those events fire-and-forget; a log hiccup never fails a user request." },
-        { nodes: ["stats", "pg"], edges: ["e18"], text: "Summaries and aggregates are written to Postgres, and only then are the entries acked. A crash mid-batch means redelivery, not loss — delivery is at-least-once." },
-        { nodes: ["stats"], edges: [], text: "So every write is idempotent, keyed by entry ID. That is what converts at-least-once into effectively exactly-once — with a queue instead of a log, a bug in this logic would have destroyed the data needed to recompute." }
+        { nodes: ["stats", "redis"], edges: ["e17"], text: "It reads everything past its bookmark on the events stream, an append-only log, so reading never deletes. Services appended those events fire-and-forget; a log hiccup never fails a user request." },
+        { nodes: ["stats", "pg"], edges: ["e18"], text: "Summaries and aggregates are written to Postgres, and only then are the entries acked. A crash mid-batch means redelivery, not loss. Delivery is at-least-once." },
+        { nodes: ["stats"], edges: [], text: "So every write is idempotent, keyed by entry ID. That is what converts at-least-once into effectively exactly-once. With a queue instead of a log, a bug in this logic would have destroyed the data needed to recompute." }
       ],
       close: "A log keeps entries after reading. Rewind the bookmark after a bug fix, or add a consumer later, and the history is still there."
     }
@@ -216,9 +216,9 @@
 
   /* Zones */
   el("rect", { class: "zone", x: 10, y: 200, width: 940, height: 250, rx: 14 });
-  el("text", { class: "zone__label", x: 24, y: 216 }).textContent = "Cloud Run — stateless, scales to zero";
+  el("text", { class: "zone__label", x: 24, y: 216 }).textContent = "Cloud Run · stateless, scales to zero";
   el("rect", { class: "zone", x: 130, y: 470, width: 560, height: 112, rx: 14 });
-  el("text", { class: "zone__label", x: 144, y: 488 }).textContent = "Managed free tiers — always on, own the disks";
+  el("text", { class: "zone__label", x: 144, y: 488 }).textContent = "Managed free tiers · always on";
 
   /* Edges first so nodes paint over them */
   var edgeEls = {};
@@ -237,7 +237,7 @@
       class: "node node--" + n.kind,
       tabindex: "0",
       role: "button",
-      "aria-label": n.label + " — " + n.kindLabel
+      "aria-label": n.label + ": " + n.kindLabel
     });
 
     if (n.stack) {

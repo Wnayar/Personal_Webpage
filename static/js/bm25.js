@@ -1,7 +1,7 @@
 /* Recall's retrieval path, running for real in this page.
 
    The BM25 scores, IDF values and postings lists below are computed here from
-   the sample corpus — nothing is precomputed or faked. What this is NOT is
+   the sample corpus. Nothing is precomputed or faked. What this is NOT is
    Recall itself: Recall implements this in Go over a semester of my own notes,
    and its code is not written yet. This is the algorithm, made pokeable. */
 
@@ -78,7 +78,7 @@
 
   /* --- Tokenising --------------------------------------------------------- */
 
-  /* Deliberately crude suffix stripping — the same order of sophistication the
+  /* Deliberately crude suffix stripping, the same order of sophistication the
      Go version starts with. Real stemmers do more; this is enough to make
      "indexes" and "indexing" meet at "index". */
   function stem(w) {
@@ -168,25 +168,25 @@
     var q = input.value.trim();
 
     if (!q) {
-      stageTokens.innerHTML = '<span class="muted">—</span>';
-      stageTerms.innerHTML = '<span class="muted">—</span>';
-      stagePostings.innerHTML = '<span class="muted">—</span>';
-      stageScored.innerHTML = '<span class="muted">—</span>';
+      stageTokens.innerHTML = '<span class="muted">·</span>';
+      stageTerms.innerHTML = '<span class="muted">·</span>';
+      stagePostings.innerHTML = '<span class="muted">·</span>';
+      stageScored.innerHTML = '<span class="muted">·</span>';
       results.innerHTML = "";
       return;
     }
 
     var a = analyse(q);
 
-    /* Stage 1 — raw tokens, with stopwords struck through. */
+    /* Stage 1: raw tokens, with stopwords struck through. */
     var tokHtml = "";
     a.raw.forEach(function (w) {
       var isStop = STOPWORDS[w] || w.length < 2;
       tokHtml += chipHtml(w, isStop ? "drop" : "");
     });
-    stageTokens.innerHTML = tokHtml || '<span class="muted">—</span>';
+    stageTokens.innerHTML = tokHtml || '<span class="muted">·</span>';
 
-    /* Stage 2 — stems, plus expansion terms if hybrid is on. */
+    /* Stage 2: stems, plus expansion terms if hybrid is on. */
     var terms = a.kept.map(function (t) {
       return t.term;
     });
@@ -209,9 +209,9 @@
         return chipHtml(t, "syn");
       })
       .join("");
-    stageTerms.innerHTML = termHtml || '<span class="muted">—</span>';
+    stageTerms.innerHTML = termHtml || '<span class="muted">·</span>';
 
-    /* Stage 3 — postings list sizes, the actual index lookup. */
+    /* Stage 3: postings list sizes, the actual index lookup. */
     var all = terms.concat(expanded);
     var postHtml = all
       .map(function (t) {
@@ -223,16 +223,16 @@
         );
       })
       .join("");
-    stagePostings.innerHTML = postHtml || '<span class="muted">—</span>';
+    stagePostings.innerHTML = postHtml || '<span class="muted">·</span>';
 
-    /* Stage 4 — score every candidate document. */
+    /* Stage 4: score every candidate document. */
     var scores = [];
     for (var d = 0; d < N; d++) {
       var total = 0;
       var parts = [];
       all.forEach(function (t) {
         var s = bm25(t, d);
-        /* Expansion terms contribute at a discount — they are a weaker signal
+        /* Expansion terms contribute at a discount, since they are a weaker signal
            than a term the user actually typed. */
         if (expanded.indexOf(t) > -1) s *= 0.45;
         if (s > 0) {
@@ -256,7 +256,7 @@
 
     if (!top.length || top[0].score < REFUSE_BELOW) {
       results.innerHTML =
-        '<div class="refusal"><b>Refused — retrieval confidence too low</b>' +
+        '<div class="refusal"><b>Refused: retrieval confidence too low</b>' +
         "Nothing in the index scored above the threshold" +
         (top.length ? " (best was " + top[0].score.toFixed(2) + ", floor is " + REFUSE_BELOW.toFixed(2) + ")" : "") +
         ". Recall answers from retrieved chunks or not at all: an answer with no sources behind it is the failure mode the citation requirement exists to prevent." +

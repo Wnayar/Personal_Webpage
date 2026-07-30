@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Interactive labs — topology, token bucket, CRDT, BM25, Airlock gate
+   Interactive labs: topology, token bucket, CRDT, BM25, Airlock gate
    Plus the /systems and /about page furniture.
    ========================================================================== */
 
@@ -65,15 +65,15 @@
 
 /* System deep-dive header */
 .sys {
-  scroll-margin-top: calc(var(--nav-h) + 60px);
+  scroll-margin-top: calc(var(--nav-h) + var(--s-7));
 }
 
 .sys__head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 340px);
-  gap: clamp(1.5rem, 4vw, 3rem);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
   align-items: start;
-  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  margin-bottom: var(--s-7);
 }
 
 @media (max-width: 880px) {
@@ -85,9 +85,9 @@
 .sys__title-row {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: var(--s-3);
   flex-wrap: wrap;
-  margin-bottom: 0.85rem;
+  margin-bottom: var(--s-4);
 }
 
 .sys__title {
@@ -96,10 +96,11 @@
 }
 
 .sys__oneline {
-  font-size: clamp(1.02rem, 1.8vw, 1.15rem);
+  font-size: var(--fs-lede);
+  line-height: var(--lh-lede);
   color: var(--text-2);
-  max-width: 58ch;
-  margin-bottom: 1.35rem;
+  max-width: var(--measure-tight);
+  margin-bottom: var(--s-5);
 }
 
 .sys__spec {
@@ -113,10 +114,10 @@
   display: grid;
   grid-template-columns: 5.5rem minmax(0, 1fr);
   gap: 0.85rem;
-  padding: 0.6rem 0.9rem;
+  padding: var(--s-3) var(--s-4);
   border-bottom: 1px solid var(--border);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
 }
 
 .sys__spec-row:last-child {
@@ -134,26 +135,32 @@
 .sys__spec-row dd {
   margin: 0;
   color: var(--text-2);
+  line-height: var(--lh-mono);
 }
 
-/* Honesty note — what a demo is and is not */
+/* Honesty note: what a demo is and is not */
 .note {
   display: flex;
-  gap: 0.75rem;
-  padding: 0.8rem 1rem;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5);
   border: 1px dashed var(--border-strong);
   border-radius: var(--r-md);
   background: var(--surface-2);
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--muted);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  color: var(--text-2);
+}
+
+.note p {
+  margin: 0;
+  max-width: var(--measure);
 }
 
 .note svg {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   flex: none;
-  margin-top: 0.28rem;
+  margin-top: 0.3rem;
   color: var(--amber);
 }
 
@@ -167,34 +174,38 @@
 }
 
 /* Lab wrapper */
+/* A lab is its own subsection: clearly separated from the one before it,
+   but its own title/intro/panel stay tightly grouped. */
 .lab {
-  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  margin-top: var(--s-9);
 }
 
 .lab__head {
   display: flex;
   align-items: baseline;
-  gap: 0.75rem;
+  gap: var(--s-3);
   flex-wrap: wrap;
-  margin-bottom: 0.85rem;
+  margin-bottom: var(--s-3);
 }
 
 .lab__title {
-  font-size: 1.05rem;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
   font-weight: 650;
   letter-spacing: -0.022em;
 }
 
 .lab__hint {
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: var(--fs-micro);
   color: var(--faint);
 }
 
 .lab__intro {
-  max-width: 68ch;
-  margin-bottom: 1.1rem;
-  font-size: 0.95rem;
+  max-width: var(--measure);
+  margin-bottom: var(--s-5);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   color: var(--text-2);
 }
 
@@ -575,9 +586,10 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .topo__caption-text {
-  font-size: 0.86rem;
-  line-height: 1.55;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
   color: var(--text-2);
+  margin: 0;
 }
 
 .topo__inspect {
@@ -608,12 +620,12 @@ input[type="range"]::-moz-range-thumb {
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: var(--s-4);
 }
 
 .topo__inspect dt {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--fs-micro);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--teal);
@@ -622,8 +634,8 @@ input[type="range"]::-moz-range-thumb {
 
 .topo__inspect dd {
   margin: 0;
-  font-size: 0.84rem;
-  line-height: 1.55;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
   color: var(--text-2);
 }
 
@@ -816,8 +828,8 @@ input[type="range"]::-moz-range-thumb {
   border-radius: var(--r-sm);
   background: var(--bg-deep);
   font-family: var(--font-mono);
-  font-size: 0.755rem;
-  line-height: 1.75;
+  font-size: 0.8rem;
+  line-height: var(--lh-mono);
   scrollbar-width: thin;
 }
 
@@ -1104,7 +1116,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ==========================================================================
-   4. Recall — BM25
+   4. Recall: BM25
    ========================================================================== */
 
 .ir__search {
@@ -1188,9 +1200,9 @@ input[type="range"]::-moz-range-thumb {
 
 .ir__stage-body {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--text-2);
-  line-height: 1.7;
+  line-height: var(--lh-mono);
   word-break: break-word;
   min-height: 1.7em;
 }
@@ -1283,9 +1295,10 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .hit__text {
-  font-size: 0.875rem;
-  line-height: 1.6;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
   color: var(--text-2);
+  max-width: var(--measure-wide);
 }
 
 .hit__text mark {
@@ -1300,11 +1313,11 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .hit__math {
-  margin-top: 0.6rem;
-  padding-top: 0.55rem;
+  margin-top: var(--s-3);
+  padding-top: var(--s-3);
   border-top: 1px dashed var(--border);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   color: var(--muted);
   display: flex;
   flex-wrap: wrap;
@@ -1445,7 +1458,7 @@ input[type="range"]::-moz-range-thumb {
 
 .lane__name {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: var(--text);
   display: flex;
   gap: 0.45rem;
@@ -1460,7 +1473,8 @@ input[type="range"]::-moz-range-thumb {
 
 .lane__result {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.8rem;
+  line-height: var(--lh-mono);
   color: var(--muted);
   min-height: 1.4em;
 }
@@ -1515,12 +1529,13 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .tier {
-  margin-top: 0.9rem;
-  padding: 0.75rem 0.85rem;
+  margin-top: var(--s-4);
+  padding: var(--s-3) var(--s-4);
   border-left: 2px solid var(--border-strong);
-  font-size: 0.82rem;
-  color: var(--muted);
-  line-height: 1.6;
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  line-height: var(--lh-sm);
+  max-width: var(--measure);
 }
 
 .tier b {
@@ -1643,7 +1658,7 @@ input[type="range"]::-moz-range-thumb {
 
 .tl-item {
   position: relative;
-  padding-bottom: 1.85rem;
+  padding-bottom: var(--s-7);
 }
 
 .tl-item:last-child {
@@ -1689,9 +1704,10 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .tl-item__detail {
-  font-size: 0.92rem;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   color: var(--text-2);
-  max-width: 62ch;
+  max-width: var(--measure);
 }
 
 /* Skills */
@@ -1773,7 +1789,7 @@ input[type="range"]::-moz-range-thumb {
 
 /* Prose blocks */
 .prose {
-  max-width: 68ch;
+  max-width: var(--measure);
 }
 
 .prose p {
@@ -1793,16 +1809,16 @@ input[type="range"]::-moz-range-thumb {
 .bullets {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  max-width: 68ch;
+  gap: var(--s-4);
+  max-width: var(--measure);
 }
 
 .bullets li {
   position: relative;
-  padding-left: 1.35rem;
-  font-size: 0.95rem;
+  padding-left: 1.5rem;
+  font-size: var(--fs-body);
   color: var(--text-2);
-  line-height: 1.65;
+  line-height: var(--lh-body);
 }
 
 .bullets li::before {
@@ -1825,14 +1841,92 @@ input[type="range"]::-moz-range-thumb {
 /* Two-column feature split */
 .split {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: clamp(1.25rem, 3vw, 2.25rem);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--s-6) clamp(2rem, 5vw, 4rem);
+}
+
+.split > * > p:last-child {
+  margin-bottom: 0;
+}
+
+/* Disclosure rows.
+   Supporting rationale used to sit in open two-column walls of prose, which is
+   most of what made the page feel heavy. It now collapses by default, so the
+   page scans as a list of questions and expands only where the reader cares. */
+.qa {
+  display: grid;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+  max-width: var(--measure-wide);
+}
+
+.qa__item {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.qa__item[open] {
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+}
+
+.qa__sum {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+  transition: background-color 0.2s var(--ease);
+}
+
+.qa__sum::-webkit-details-marker {
+  display: none;
+}
+
+.qa__sum:hover {
+  background: var(--surface-2);
+}
+
+.qa__sum svg {
+  margin-left: auto;
+  flex: none;
+  width: 14px;
+  height: 14px;
+  color: var(--faint);
+  transition: transform 0.25s var(--ease);
+}
+
+.qa__item[open] .qa__sum svg {
+  transform: rotate(180deg);
+}
+
+.qa__body {
+  padding: 0 var(--s-4) var(--s-4);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
+  color: var(--text-2);
+}
+
+.qa__body p {
+  max-width: var(--measure);
+  margin: 0;
+}
+
+.qa__body p + p {
+  margin-top: var(--s-3);
 }
 
 /* ADR list */
 .adr {
   display: grid;
-  gap: 0.7rem;
+  gap: var(--s-2);
+  max-width: var(--measure-wide);
 }
 
 .adr__item {
@@ -1891,16 +1985,20 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .adr__body {
-  padding: 0 1rem 1rem;
-  font-size: 0.9rem;
-  line-height: 1.65;
+  padding: var(--s-4) var(--s-5) var(--s-5);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
   color: var(--text-2);
   border-top: 1px solid var(--border);
-  padding-top: 0.85rem;
+}
+
+.adr__body p {
+  max-width: var(--measure);
+  margin: 0;
 }
 
 .adr__body p + p {
-  margin-top: 0.7rem;
+  margin-top: var(--s-4);
 }
 
 .adr__body b {

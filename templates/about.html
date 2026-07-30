@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 
-{% block title %}About — William Nayar{% endblock %}
-{% block social_title %}About — William Nayar{% endblock %}
-{% set _about_meta = "William Nayar — final-year Computer Science at NUS, Software Engineering focus area. Teaching CS3219, building backend and distributed systems, open to a 2027 SWE internship." %}
+{% block title %}About · William Nayar{% endblock %}
+{% block social_title %}About · William Nayar{% endblock %}
+{% set _about_meta = "William Nayar, final-year Computer Science at NUS, Software Engineering focus area. Teaching CS3219, building backend and distributed systems, open to a 2027 SWE internship." %}
 {% block meta_description %}{{ _about_meta }}{% endblock %}
 {% block og_description %}{{ _about_meta }}{% endblock %}
 
@@ -19,8 +19,8 @@
                 <p class="eyebrow">About</p>
                 <h1 class="h1" style="margin-bottom:.9rem">William Nayar</h1>
                 <p class="lede" style="max-width:56ch">
-                    Final-year Computer Science at NUS, specialising in Software Engineering. I build backend systems,
-                    and what I actually care about is <strong>where work belongs in a system</strong> — which boundary
+                    Final-year Computer Science at NUS, specialising in Software Engineering. I build backend
+                    systems, and what I care about is <strong>where work belongs in a system</strong>: which boundary
                     owns it, what races underneath it, and what it costs when it fails.
                 </p>
             </div>
@@ -39,21 +39,20 @@
         <ul class="bullets reveal" style="max-width:74ch">
             <li>
                 <strong>Teaching CS3219, Software Engineering Principles and Patterns</strong>, at NUS as an academic
-                tutor, August to December 2026. One of my favourite modules taken at NUS, and the one that opened my
-                eyes to how broad software engineering gets once distributed systems are involved. It's
-                microservices-based, so teams spend the semester making real decisions: where a service boundary goes,
-                which database suits the access pattern, how everything gets deployed and stays up. My job is to help
-                them think those through before they commit.
+                tutor, August to December 2026. It's the module that opened my eyes to how broad software
+                engineering gets once distributed systems are involved. Teams spend the semester making real
+                decisions: where a service boundary goes, which database suits the access pattern, how everything
+                gets deployed and stays up. My job is to help them think those through before they commit.
             </li>
             <li>
-                <strong>Building DeepCS</strong> — a CS-fundamentals question bank where two people solve the same
-                question together in real time. Six independently deployable services on Cloud Run behind a gateway I'm
+                <strong>Building DeepCS</strong>, a CS-fundamentals question bank where two people solve the
+                same question together in real time. Six independently deployable services behind a gateway I'm
                 writing rather than buying, a Yjs CRDT holding the shared document across instances, and an
-                append-only event log a scheduled job drains into stats — which is where at-least-once delivery forces
-                idempotency.
+                append-only event log a scheduled job drains into stats. That last part is where at-least-once
+                delivery forces idempotency.
             </li>
             <li>
-                <strong>Building Recall</strong> after that — a search engine in Go, to understand indexing and
+                <strong>Building Recall</strong> after that: a search engine in Go, to understand indexing and
                 retrieval by implementing them rather than reading about them.
             </li>
         </ul>
@@ -72,14 +71,14 @@
         <div class="section-head reveal">
             <p class="eyebrow">Path</p>
             <h2 class="h1">How I got here</h2>
-            <p class="lede">From a first commit in 2022 to distributed systems — roughly in the order it happened.</p>
+            <p class="lede">From a first commit in 2022 to distributed systems, roughly in the order it happened.</p>
         </div>
 
         <div class="timeline">
             <div class="tl-item">
                 <div class="tl-item__when">Aug – Dec 2026</div>
                 <h3 class="tl-item__what">Academic tutor, <span>CS3219</span> · NUS School of Computing</h3>
-                <p class="tl-item__detail">Teaching Software Engineering Principles and Patterns — the microservices module. Helping teams reason about service boundaries, data stores and deployment before they commit to them.</p>
+                <p class="tl-item__detail">Teaching Software Engineering Principles and Patterns, the microservices module. Helping teams reason about service boundaries, data stores and deployment before they commit to them.</p>
             </div>
 
             <div class="tl-item">
@@ -91,7 +90,7 @@
             <div class="tl-item">
                 <div class="tl-item__when">2026</div>
                 <h3 class="tl-item__what">Merged open-source PRs in <span>mongoose</span> and <span>node-redis</span></h3>
-                <p class="tl-item__detail">Gaps I found by reading the source rather than working off issue labels — in Automattic's MongoDB ODM and Redis's official Node client.</p>
+                <p class="tl-item__detail">Gaps I found by reading the source rather than working off issue labels, in Automattic's MongoDB ODM and Redis's official Node client.</p>
             </div>
 
             <div class="tl-item">
@@ -109,13 +108,13 @@
             <div class="tl-item">
                 <div class="tl-item__when">May – Jul 2024</div>
                 <h3 class="tl-item__what">NUS Orbital, <span>Apollo 11 (Advanced)</span></h3>
-                <p class="tl-item__detail">A MERN study-group platform matched on live NUSMods course data — parsing nested timetable data, 20 to 50+ entries per module, into something searchable and sortable.</p>
+                <p class="tl-item__detail">A MERN study-group platform matched on live NUSMods course data, parsing nested timetable data of 20 to 50+ entries per module into something searchable and sortable.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">2023</div>
                 <h3 class="tl-item__what">Harvard <span>CS50</span>, and this site's first version</h3>
-                <p class="tl-item__detail">Where it started. The original version of this website was my CS50 final project — a Flask app. It still builds with Flask today; it just renders to static files now.</p>
+                <p class="tl-item__detail">Where it started. The original version of this website was my CS50 final project, a Flask app. It still builds with Flask today, it just renders to static files now.</p>
             </div>
 
             <div class="tl-item">
@@ -142,9 +141,9 @@
                 <h3 class="lab__title" style="margin-bottom:.6rem">Write the doc before the code</h3>
                 <p class="lab__intro">
                     DeepCS had a locked design document with nine ADRs before the first service existed. Not because
-                    documentation is virtuous, but because it's the cheapest place to find out that an idea doesn't
-                    work. The doc is also where the rejected options get recorded — an ADR only earns its place when
-                    the option that lost was genuinely defensible.
+                    documentation is virtuous, but because it's the cheapest place to find out that an idea
+                    doesn't work. The doc is also where rejected options get recorded, and an ADR only earns its
+                    place when the option that lost was genuinely defensible.
                 </p>
             </div>
             <div class="reveal" data-delay="1">
@@ -152,16 +151,17 @@
                 <p class="lab__intro">
                     Six deployables means a cold match request can chain cold starts. One Postgres instance means a
                     shared failure domain. Buying auth means a revoked token stays valid for up to an hour. Those are
-                    written down as accepted costs, with the condition that would change the decision — not left out
-                    because they're inconvenient.
+                    written down as accepted costs, with the condition that would change the decision. They are not
+                    left out because they're inconvenient.
                 </p>
             </div>
             <div class="reveal" data-delay="2">
                 <h3 class="lab__title" style="margin-bottom:.6rem">Report p95, never the average</h3>
                 <p class="lab__intro">
-                    If 95 requests take 10 ms and 5 take 2 s, the average is 110 ms and not one request was anywhere
-                    near it. The tail is what a user feels, and it's where queueing, contention and cold starts show up
-                    first. The same instinct is why this site marks what's designed versus what's running.
+                    If 95 requests take 10 ms and 5 take 2 s, the average is 110 ms and not one request was
+                    anywhere near it. The tail is what a user feels, and it's where queueing, contention and cold
+                    starts show up first. The same instinct is why this site marks what's designed versus what's
+                    running.
                 </p>
             </div>
         </div>
@@ -238,10 +238,10 @@
         </div>
 
         <ul class="bullets reveal" style="max-width:70ch">
-            <li><strong>BComp, Computer Science</strong> — final year, specialising in <strong>Software Engineering</strong>.</li>
+            <li><strong>BComp, Computer Science</strong>, final year, specialising in <strong>Software Engineering</strong>.</li>
             <li><strong>Certificate of Distinction</strong>, Software Engineering focus area, NUS School of Computing.</li>
             <li>Coursework that shows up in the systems on this site: software engineering principles and patterns, operating systems, computer networks, databases, and formal methods.</li>
-            <li>Started with <strong>Harvard CS50</strong> in 2023 — the reason this site exists at all.</li>
+            <li>Started with <strong>Harvard CS50</strong> in 2023, the reason this site exists at all.</li>
         </ul>
     </div>
 </section>

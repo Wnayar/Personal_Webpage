@@ -1,9 +1,9 @@
-/* Token bucket under two Gateway instances — the race in DeepCS ADR-08.
+/* Token bucket under two Gateway instances: the race in DeepCS ADR-08.
 
    This is a simulation running in your browser, not a recording of a deployment.
    What it reproduces faithfully is the *shape* of the bug: a read-then-write
    sequence on shared state, interleaved between two processes, loses a decrement.
-   The fix is the same one the design doc reaches for — make the whole
+   The fix is the same one the design doc reaches for: make the whole
    read-compute-write happen where the single copy of the state lives. */
 
 (function () {
@@ -111,7 +111,7 @@
     render();
   }
 
-  /* --- Racy path: read, compute, write — with a window in between --------- */
+  /* --- Racy path: read, compute, write, with a window in between --------- */
 
   var pending = [];
 
@@ -126,7 +126,7 @@
     log("GET bucket → " + have, null, "gw-" + who);
 
     /* The write lands a moment later. Anything that reads in the meantime
-       reads the stale value — that gap is the entire bug. */
+       reads the stale value. That gap is the entire bug. */
     var record = { who: who, read: have };
     pending.push(record);
 
@@ -146,7 +146,7 @@
         if (lost) {
           state.overAdmitted += 1;
           flash(box, "is-conflict");
-          log("SET bucket = " + written + " — lost update: this decrement overwrote the other instance's", "bad", "gw-" + who);
+          log("SET bucket = " + written + " · lost update: this decrement overwrote the other instance's", "bad", "gw-" + who);
           log("request admitted that the bucket could not pay for", "bad", "");
         } else {
           log("SET bucket = " + written + " → allow", null, "gw-" + who);
@@ -175,8 +175,8 @@
       reset();
       log(
         state.mode === "atomic"
-          ? "mode: Lua script — Redis runs it start to finish, nothing interleaves"
-          : "mode: read-then-write — two instances, one bucket, no lock",
+          ? "mode: Lua script · Redis runs it start to finish, nothing interleaves"
+          : "mode: read-then-write · two instances, one bucket, no lock",
         "sys",
         "system"
       );
@@ -219,8 +219,8 @@
     state.overAdmitted = 0;
     state.rejected = 0;
     pending = [];
-    readA.textContent = "—";
-    readB.textContent = "—";
+    readA.textContent = "·";
+    readB.textContent = "·";
     logEl.innerHTML = "";
     render();
   }
@@ -238,5 +238,5 @@
 
   reset();
   log("bucket: capacity 10, refill 2/sec, shared by both instances", "sys", "system");
-  log("mode: Lua script — Redis runs it start to finish, nothing interleaves", "sys", "system");
+  log("mode: Lua script · Redis runs it start to finish, nothing interleaves", "sys", "system");
 })();

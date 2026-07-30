@@ -451,7 +451,7 @@
 
         for (var r = 0; r < rows; r++) {
           for (var col = 0; col < cols; col++) {
-            /* Deterministic "postings" pattern — no randomness per frame. */
+            /* Deterministic "postings" pattern, no randomness per frame. */
             var on = (col * 7 + r * 3) % 5 === 0 || (col * 3 + r) % 11 === 0;
             var near = Math.abs(col - scan) < 1.6;
             c.fillStyle = on ? teal : border;

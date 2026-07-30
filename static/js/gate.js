@@ -1,7 +1,7 @@
 /* Airlock's gate, replayed.
 
    Airlock is built and it won the Daytona HackSprint. The BLOCKED output typed
-   out below is the real verdict text from the repo's README — this page replays
+   out below is the real verdict text from the repo's README. This page replays
    a recorded run, it does not call Daytona, Nosana, Doubleword, Oxylabs or ai&
    from your browser. The lane timings are a paced replay, not measurements. */
 
@@ -39,7 +39,7 @@
         match: { text: "close match to a known stealer family", hit: true },
         rep: { text: "not published on PyPI · name mimics 'pillow'", hit: true }
       },
-      tier: "Three tripwires fired — a honeytoken read, an outbound connection to a non-registry host, and a shell spawn are never acceptable during an install. That's a plain if-statement, decided before any model is consulted.",
+      tier: "Three tripwires fired. A honeytoken read, an outbound connection to a non-registry host, and a shell spawn are never acceptable during an install. That's a plain if-statement, decided before any model is consulted.",
       /* Verbatim from the Airlock README. */
       terminal: [
         { t: "$ ", c: "t-prompt" },
@@ -72,7 +72,7 @@
         match: { text: "no similarity to the known-malware corpus", hit: false },
         rep: { text: "published, widely used, no advisories", hit: false }
       },
-      tier: "No tripwire fired, so the evidence goes to the judge for the gray zone. ai& can only ever make the gate stricter — it cannot overrule a tripwire and turn a BLOCK into a SAFE.",
+      tier: "No tripwire fired, so the evidence goes to the judge for the gray zone. ai& can only ever make the gate stricter. It cannot overrule a tripwire and turn a BLOCK into a SAFE.",
       terminal: [
         { t: "$ ", c: "t-prompt" },
         { t: "pip install requests\n", c: "" },
@@ -127,7 +127,7 @@
     });
     verdictEl.className = "verdict";
     verdictEl.textContent = "waiting for an install";
-    tierEl.innerHTML = "<b>Tier 1 — deterministic tripwires.</b> Plain code, no model. Reading a planted honeytoken, connecting out to a non-registry host, or spawning a shell during an install triggers an instant block on its own.";
+    tierEl.innerHTML = "<b>Tier 1 · deterministic tripwires.</b> Plain code, no model. Reading a planted honeytoken, connecting out to a non-registry host, or spawning a shell during an install triggers an instant block on its own.";
     termEl.innerHTML = "";
   }
 
@@ -221,8 +221,8 @@
       setTimeout(function () {
         verdictEl.className = "verdict " + (c.verdict === "block" ? "is-block" : "is-safe");
         verdictEl.textContent =
-          c.verdict === "block" ? "BLOCKED — " + c.pkg : "SAFE — " + c.pkg + " installs normally";
-        tierEl.innerHTML = "<b>" + (c.verdict === "block" ? "Tier 1 — tripwires." : "Tier 2 — the judge.") + "</b> " + c.tier;
+          c.verdict === "block" ? "BLOCKED · " + c.pkg : "SAFE · " + c.pkg + " installs normally";
+        tierEl.innerHTML = "<b>" + (c.verdict === "block" ? "Tier 1 · tripwires." : "Tier 2 · the judge.") + "</b> " + c.tier;
         typeOut(c.terminal);
       }, finish)
     );

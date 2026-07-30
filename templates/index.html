@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}William Nayar — Backend &amp; distributed systems{% endblock %}
+{% block title %}William Nayar · Backend and distributed systems{% endblock %}
 
 {% block extrahead %}
 <script type="application/ld+json">
@@ -47,8 +47,8 @@
 
             <p class="lede hero__lede">
                 Final-year Computer Science at NUS, specialising in Software Engineering.
-                I build backend systems and care about <strong>where work belongs in a system</strong> —
-                which boundary owns it, what races underneath it, and what it costs when it fails.
+                I build backend systems, and what I care about is <strong>where work belongs in a
+                system</strong>: which boundary owns it, what races underneath it, and what it costs when it fails.
             </p>
 
             <div class="btn-row hero__actions">
@@ -82,24 +82,6 @@
     </div>
 </section>
 
-<!-- ===================== MARQUEE ===================== -->
-<div class="rail" aria-hidden="true">
-    <div class="rail__track">
-        {% for _ in range(2) %}
-        <span class="rail__item"><i></i><b>Go</b> · from-scratch inverted index</span>
-        <span class="rail__item"><i></i><b>TypeScript</b> · Fastify across six services</span>
-        <span class="rail__item"><i></i><b>PostgreSQL</b> · schema per service, one role each</span>
-        <span class="rail__item"><i></i><b>Redis</b> · streams, pub/sub, Lua</span>
-        <span class="rail__item"><i></i><b>Yjs</b> · CRDT convergence</span>
-        <span class="rail__item"><i></i><b>Cloud Run</b> · scale to zero</span>
-        <span class="rail__item"><i></i><b>Docker</b> · dev/prod parity</span>
-        <span class="rail__item"><i></i><b>Python</b> · sandboxed detonation</span>
-        <span class="rail__item"><i></i><b>k6</b> · p95, never the average</span>
-        <span class="rail__item"><i></i><b>Terraform</b> · second pass, not first</span>
-        {% endfor %}
-    </div>
-</div>
-
 <!-- ===================== SYSTEMS ===================== -->
 <section class="section" id="work">
     <div class="wrap">
@@ -107,9 +89,9 @@
             <p class="eyebrow">Selected systems</p>
             <h2 class="h1">Three systems, and the honest status of each</h2>
             <p class="lede">
-                Every project below carries a status chip. <strong>Shipped</strong> means it runs and other people have used it.
-                <strong>In build</strong> means the design is locked and the code is going in. <strong>Designed</strong> means the doc
-                exists and the code does not — yet. Nothing here is dressed up as further along than it is.
+                <strong>Shipped</strong> means it runs and other people have used it. <strong>In build</strong>
+                means the design is locked and the code is going in. <strong>Designed</strong> means the doc exists
+                and the code does not, yet.
             </p>
         </div>
 
@@ -126,8 +108,8 @@
                     Six independently deployable services behind a gateway I'm writing rather than buying.
                 </p>
                 <ul class="syscard__facts">
-                    <li><b>hard part</b><span>CRDT sync across instances that share no memory</span></li>
-                    <li><b>doc</b><span>9 ADRs; every build-vs-buy call tagged</span></li>
+                    <li><b>hard part</b><span>CRDT sync across instances sharing no memory</span></li>
+                    <li><b>doc</b><span>9 ADRs, every build-vs-buy call tagged</span></li>
                     <li><b>status</b><span>design locked, building now</span></li>
                 </ul>
                 <div class="syscard__stack">
@@ -148,12 +130,12 @@
                 </div>
                 <div class="syscard__viz"><canvas data-card-viz="recall"></canvas></div>
                 <p class="syscard__desc">
-                    A search engine over my school notes that answers questions with citations — and refuses when
-                    retrieval confidence is low. Inverted index, BM25 and hybrid retrieval written from scratch in Go.
+                    A search engine over my school notes that answers with citations, and refuses when
+                    retrieval confidence is low. Inverted index and BM25 written from scratch in Go.
                 </p>
                 <ul class="syscard__facts">
-                    <li><b>why</b><span>the index <em>is</em> the point — no search library</span></li>
-                    <li><b>scale</b><span>sharding + scatter-gather on the roadmap</span></li>
+                    <li><b>why</b><span>the index <em>is</em> the point, so no search library</span></li>
+                    <li><b>scale</b><span>sharding and scatter-gather on the roadmap</span></li>
                     <li><b>status</b><span>build plan written, code not started</span></li>
                 </ul>
                 <div class="syscard__stack">
@@ -205,7 +187,7 @@
             <h2 class="h1">Build what has a hard problem inside it. Buy what is risk without insight.</h2>
             <p class="lede">
                 Every non-obvious decision in the DeepCS design doc carries one of three tags. The same test produces
-                opposite answers in different places — and that consistency is the point.
+                opposite answers in different places, and that consistency is the point.
             </p>
         </div>
 
@@ -213,25 +195,25 @@
             <div class="doctrine__card doctrine__card--bought reveal" data-delay="1">
                 <span class="doctrine__tag">[bought]</span>
                 <p>
-                    Deliberately not built. There's no interesting problem inside it, so paying for it is the correct
-                    engineering call, not a shortcut. <strong>Auth is bought</strong> — identity is security-critical and
-                    fully solved, and Google's key rotation beats anything I'd hand-roll.
+                    Deliberately not built. There's no interesting problem inside it, so paying for it is the
+                    correct engineering call, not a shortcut. <strong>Auth is bought.</strong> Identity is
+                    security-critical and fully solved, and Google's key rotation beats anything I'd hand-roll.
                 </p>
             </div>
             <div class="doctrine__card doctrine__card--built reveal" data-delay="2">
                 <span class="doctrine__tag">[built · learning]</span>
                 <p>
-                    A mature off-the-shelf option exists and is what I'd use commercially. Built here because the problem
-                    underneath is one I wanted to hit directly. <strong>The gateway is built</strong> — Kong would fix its
-                    rate-limiter race on my behalf, and that race is the whole lesson.
+                    A mature off-the-shelf option exists and is what I'd use commercially. Built here because
+                    the problem underneath is one I wanted to hit directly. <strong>The gateway is built.</strong>
+                    Kong would fix its rate-limiter race on my behalf, and that race is the whole lesson.
                 </p>
             </div>
             <div class="doctrine__card doctrine__card--detour reveal" data-delay="3">
                 <span class="doctrine__tag">[detour · learning]</span>
                 <p>
-                    Built, run, then deliberately <em>not</em> kept in production. <strong>Kubernetes is a detour</strong> —
-                    stood up on GKE beside the live deploy, demonstrated, then deleted, because an always-on cluster
-                    breaks the cost ceiling the whole design is shaped by.
+                    Built, run, then deliberately <em>not</em> kept in production. <strong>Kubernetes is a
+                    detour.</strong> Stood up on GKE beside the live deploy, demonstrated, then deleted, because an
+                    always-on cluster breaks the cost ceiling the whole design is shaped by.
                 </p>
             </div>
         </div>
@@ -239,7 +221,7 @@
         <blockquote class="pullquote reveal">
             The failure mode this doc is written to prevent isn't picking a wrong tool; it's
             <b>spending three weeks on infrastructure and one on the only part that's hard.</b>
-            <cite>— DeepCS DESIGN.md, closing note</cite>
+            <cite>DeepCS DESIGN.md, closing note</cite>
         </blockquote>
     </div>
 </section>
@@ -268,12 +250,12 @@
             <div class="signal reveal" data-delay="3">
                 <span class="signal__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg></span>
                 <h3>Merged open-source PRs</h3>
-                <p>In <a href="https://github.com/Automattic/mongoose" target="_blank" rel="noopener">Automattic/mongoose</a> and <a href="https://github.com/redis/node-redis" target="_blank" rel="noopener">redis/node-redis</a> — gaps found by reading the source, not by working off issue labels.</p>
+                <p>In <a href="https://github.com/Automattic/mongoose" target="_blank" rel="noopener">Automattic/mongoose</a> and <a href="https://github.com/redis/node-redis" target="_blank" rel="noopener">redis/node-redis</a>. Gaps found by reading the source, not by working off issue labels.</p>
             </div>
             <div class="signal reveal" data-delay="4">
                 <span class="signal__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 7l10-4 10 4-10 4z"/><path d="M6 10v5c3 2.5 9 2.5 12 0v-5"/></svg></span>
                 <h3>Teaching CS3219 at NUS</h3>
-                <p>Academic tutor for Software Engineering Principles and Patterns, Aug–Dec 2026. Microservices-based — students make real boundary and deployment calls.</p>
+                <p>Academic tutor for Software Engineering Principles and Patterns, Aug to Dec 2026. It's microservices-based, so students make real boundary and deployment calls.</p>
             </div>
         </div>
     </div>
@@ -293,7 +275,7 @@
         <ul class="also reveal">
             <li class="also__row">
                 <div class="also__name">Aqua Vitae <span>2026 · own venture</span></div>
-                <p class="also__what">Sole engineer for a fragrance brand: React/TypeScript storefront, Supabase Postgres behind it, and a Shopify-hosted checkout to keep payments and PCI scope off my own stack.</p>
+                <p class="also__what">Sole engineer for a fragrance brand: React and TypeScript storefront, Supabase Postgres behind it, and a Shopify-hosted checkout to keep payments and PCI scope off my own stack.</p>
                 <div class="also__links">
                     <a href="https://www.aquavitaeparfums.com/" target="_blank" rel="noopener">site ↗</a>
                 </div>
@@ -307,7 +289,7 @@
             </li>
             <li class="also__row">
                 <div class="also__name">GroupMatch <span>2024 · NUS Orbital</span></div>
-                <p class="also__what">Apollo 11 (Advanced). MERN study-group platform matched on live NUSMods course data — parsing 20–50+ timetable entries per module into something searchable.</p>
+                <p class="also__what">Apollo 11 (Advanced). A MERN study-group platform matched on live NUSMods course data, parsing 20 to 50+ timetable entries per module into something searchable.</p>
                 <div class="also__links">
                     <a href="https://github.com/Wnayar/NUS-GroupMatch" target="_blank" rel="noopener">repo ↗</a>
                 </div>

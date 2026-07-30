@@ -1,5 +1,5 @@
 /* ==========================================================================
-   William Nayar — instrumentation design system
+   William Nayar: instrumentation design system
    Hand-built. No CSS framework. Dark-first, with a tuned light theme.
    ========================================================================== */
 
@@ -18,13 +18,13 @@
   --surface: #0c0e13;
   --surface-2: #11141b;
   --surface-3: #171b24;
-  --border: #1d222c;
-  --border-strong: #2a3140;
+  --border: #2f3542;        /* ~1.7:1, a card edge you can actually see */
+  --border-strong: #454c5a; /* ~2.3:1 for controls and dividers */
 
-  --text: #e7ecf3;
-  --text-2: #b3bdcc;
-  --muted: #7d8798;
-  --faint: #59616f;
+  --text: #e7ecf3;      /* 16.97:1 */
+  --text-2: #c4ccdd;    /* 12.50:1, APCA Lc 75 = the floor for body copy */
+  --muted: #abb2c1;     /*  9.47:1, Lc 60, non-body content */
+  --faint: #9096a2;     /*  6.78:1, was 3.23:1 and failed AA outright */
 
   --teal: #2dd4bf;
   --teal-bright: #5eead4;
@@ -42,6 +42,52 @@
   --wash-red: rgba(248, 113, 113, 0.09);
 
   --grid-line: rgba(148, 163, 184, 0.045);
+
+  /* --- Type scale -------------------------------------------------------
+     Few, clearly separated steps. The previous system had five sizes packed
+     between 12 and 15.2px, which reads as uniformly small rather than as a
+     hierarchy. Leading tightens as size grows, and loosens as measure grows. */
+  --fs-display: clamp(2.6rem, 6vw, 4rem);
+  --fs-h1: clamp(1.95rem, 3.8vw, 2.7rem);
+  --fs-h2: clamp(1.45rem, 2.5vw, 1.85rem);
+  --fs-h3: 1.2rem;
+  --fs-lede: clamp(1.09rem, 1.4vw, 1.2rem);
+  --fs-body: 1.0625rem;
+  --fs-sm: 0.95rem;
+  --fs-xs: 0.82rem;
+  --fs-micro: 0.72rem;
+
+  --lh-display: 1.04;
+  --lh-h1: 1.12;
+  --lh-h2: 1.22;
+  --lh-h3: 1.35;
+  --lh-lede: 1.58;
+  --lh-body: 1.68;
+  --lh-sm: 1.65;
+  --lh-mono: 1.7;
+
+  /* --- Measure ----------------------------------------------------------
+     Body text past ~75 characters makes the eye lose the line on the return
+     sweep. Expressed in em, not ch: Plus Jakarta Sans has an unusually wide
+     zero glyph (1ch = 0.71em), so a 68ch cap actually renders ~96 characters.
+     An average character is ~0.5em, so 34em lands near the 66 ideal. */
+  --measure: 34em;
+  --measure-tight: 29em;
+  --measure-wide: 38em;
+
+  /* --- Spacing ----------------------------------------------------------
+     Non-linear so adjacent steps are visibly different. Proximity does the
+     grouping: related things sit at s-3/s-4, unrelated at s-7 and up. */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 5.5rem;
+  --s-10: 7rem;
 
   --r-sm: 6px;
   --r-md: 10px;
@@ -68,8 +114,8 @@
   --surface: #ffffff;
   --surface-2: #f6f8fb;
   --surface-3: #eef2f7;
-  --border: #dde4ed;
-  --border-strong: #c3ceda;
+  --border: #d5dde7;
+  --border-strong: #b3c0cf;
 
   --text: #101725;
   --text-2: #3a465a;
@@ -119,8 +165,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 1.0625rem;
-  line-height: 1.7;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -132,14 +178,23 @@ h2,
 h3,
 h4 {
   margin: 0;
-  line-height: 1.15;
+  line-height: var(--lh-h3);
   letter-spacing: -0.028em;
   font-weight: 700;
   text-wrap: balance;
 }
 
+/* Prose blocks cap their own measure, so a wide container never produces a
+   wide line. Applied at the element rather than the container, because the
+   containers here are also holding full-width diagrams. */
+p,
+li {
+  text-wrap: pretty;
+}
+
 p {
-  margin: 0 0 1.1em;
+  margin: 0 0 var(--s-4);
+  max-width: var(--measure);
 }
 
 p:last-child {
@@ -232,12 +287,26 @@ kbd {
 }
 
 .section {
-  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  padding-block: clamp(3rem, 6vw, 5rem);
   position: relative;
 }
 
 .section--tight {
-  padding-block: clamp(2.5rem, 5vw, 4rem);
+  padding-block: clamp(2rem, 4vw, 3rem);
+}
+
+/* Stacks a section's own children on the spacing scale, so rhythm comes from
+   one rule rather than from per-element margins that drift apart. */
+.stack > * + * {
+  margin-top: var(--s-5);
+}
+
+.stack--tight > * + * {
+  margin-top: var(--s-3);
+}
+
+.stack--loose > * + * {
+  margin-top: var(--s-7);
 }
 
 .rule {
@@ -425,12 +494,12 @@ kbd {
   align-items: center;
   gap: 0.55rem;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--fs-micro);
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 1rem;
+  margin-bottom: var(--s-3);
 }
 
 .eyebrow::before {
@@ -442,29 +511,37 @@ kbd {
 }
 
 .h-display {
-  font-size: clamp(2.3rem, 6.2vw, 4.05rem);
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
   letter-spacing: -0.042em;
+  max-width: 16ch;
 }
 
 .h1 {
-  font-size: clamp(2rem, 4.6vw, 2.95rem);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
   letter-spacing: -0.035em;
+  max-width: 22ch;
 }
 
 .h2 {
-  font-size: clamp(1.5rem, 3vw, 2.05rem);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
   letter-spacing: -0.03em;
+  max-width: 26ch;
 }
 
 .h3 {
-  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
   letter-spacing: -0.02em;
 }
 
 .lede {
-  font-size: clamp(1.075rem, 1.7vw, 1.2rem);
-  line-height: 1.65;
+  font-size: var(--fs-lede);
+  line-height: var(--lh-lede);
   color: var(--text-2);
+  max-width: var(--measure);
 }
 
 .muted {
@@ -479,13 +556,16 @@ kbd {
   color: var(--teal);
 }
 
+/* Heading sits close to the text it introduces (proximity), while the whole
+   block sits far from what precedes it. */
 .section-head {
-  max-width: 62ch;
-  margin-bottom: clamp(2rem, 4vw, 3rem);
+  max-width: var(--measure);
+  margin-bottom: var(--s-7);
 }
 
 .section-head p {
-  margin-top: 0.95rem;
+  margin-top: var(--s-4);
+  margin-bottom: 0;
 }
 
 /* --- Status chips --------------------------------------------------------- */
@@ -695,10 +775,10 @@ kbd {
 }
 
 .panel__body {
-  padding: clamp(1rem, 2.4vw, 1.5rem);
+  padding: clamp(1.15rem, 2.4vw, 1.75rem);
 }
 
-/* Corner ticks — instrumentation framing. */
+/* Corner ticks: instrumentation framing. */
 .ticked::before,
 .ticked::after {
   content: "";
@@ -841,8 +921,8 @@ kbd {
 }
 
 .hero__lede {
-  max-width: 52ch;
-  margin-bottom: 1.85rem;
+  max-width: var(--measure-tight);
+  margin-bottom: var(--s-6);
 }
 
 .hero__actions {
@@ -969,7 +1049,7 @@ kbd {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 1.4rem;
+  padding: var(--s-5);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   background: var(--surface);
@@ -1036,9 +1116,10 @@ kbd {
 }
 
 .syscard__desc {
-  font-size: 0.95rem;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
   color: var(--text-2);
-  margin-bottom: 1.1rem;
+  margin-bottom: var(--s-5);
 }
 
 .syscard__facts {
@@ -1098,7 +1179,7 @@ kbd {
 }
 
 .doctrine__card {
-  padding: 1.25rem;
+  padding: var(--s-5);
   border: 1px solid var(--border);
   border-left: 2px solid var(--accent-c, var(--teal));
   border-radius: var(--r-md);
@@ -1121,8 +1202,10 @@ kbd {
 }
 
 .doctrine__card p {
-  font-size: 0.92rem;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
   color: var(--text-2);
+  margin: 0;
 }
 
 .doctrine__card--bought {
@@ -1174,7 +1257,7 @@ kbd {
 
 .signal {
   position: relative;
-  padding: 1.2rem;
+  padding: var(--s-5);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   background: var(--surface);
@@ -1204,9 +1287,10 @@ kbd {
 }
 
 .signal p {
-  font-size: 0.87rem;
-  color: var(--muted);
-  line-height: 1.6;
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  line-height: var(--lh-sm);
+  margin: 0;
 }
 
 /* --- Also shipped list ---------------------------------------------------- */
@@ -1218,9 +1302,9 @@ kbd {
 .also__row {
   display: grid;
   grid-template-columns: minmax(0, 210px) minmax(0, 1fr) auto;
-  gap: 1rem 1.5rem;
+  gap: var(--s-3) var(--s-6);
   align-items: baseline;
-  padding: 1.15rem 0.35rem;
+  padding: var(--s-5) var(--s-2);
   border-bottom: 1px solid var(--border);
   transition: background-color 0.25s var(--ease), padding-left 0.25s var(--ease);
 }
@@ -1246,8 +1330,11 @@ kbd {
 }
 
 .also__what {
-  font-size: 0.93rem;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-sm);
   color: var(--text-2);
+  margin: 0;
+  max-width: var(--measure);
 }
 
 .also__links {
@@ -1340,7 +1427,7 @@ kbd {
 
 /* --- Reveal on scroll ----------------------------------------------------- */
 
-/* Only hide when JS is present to un-hide it — otherwise the page would be
+/* Only hide when JS is present to un-hide it. Otherwise the page would be
    blank for anyone with scripts blocked. */
 .js .reveal {
   opacity: 0;

@@ -1,11 +1,11 @@
-/* Cross-instance convergence — the Collab service's sync topology, DESIGN.md §5.
+/* Cross-instance convergence: the Collab service's sync topology, DESIGN.md §5.
 
    What is real here: this page implements a small RGA (Replicated Growable Array)
    CRDT. Two independent replicas each hold their own copy, operations are shipped
    between them over a simulated pub/sub channel with latency you control, and the
    convergence check below compares the two documents character by character.
 
-   What is simulated: the network. DeepCS itself uses Yjs, a mature CRDT library —
+   What is simulated: the network. DeepCS itself uses Yjs, a mature CRDT library.
    the interesting part there is the sync topology (cross-instance fanout,
    snapshots, reconnect), which is exactly the part Yjs does not do for you. */
 
@@ -73,7 +73,7 @@
     else this.applyDelete(op);
   };
 
-  /* Visible characters only — tombstones stay in the array forever. */
+  /* Visible characters only. Tombstones stay in the array forever. */
   Replica.prototype.visible = function () {
     return this.chars.filter(function (c) {
       return !c.deleted;
@@ -220,7 +220,7 @@
     convergedEl.className = "converged " + (same ? "is-yes" : "is-no");
     convergedEl.innerHTML = same
       ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg> replicas identical'
-      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/></svg> diverged — ' +
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/></svg> diverged, ' +
         (pendingA + pendingB) + " op(s) still in flight or buffered";
 
     opCountEl.textContent = String(opsSent);
@@ -340,7 +340,7 @@
   });
   latencyOut.textContent = latencyInput.value + " ms";
 
-  /* Type the same instant into both replicas — the concurrent-edit case. */
+  /* Type the same instant into both replicas: the concurrent-edit case. */
   lab.querySelector("[data-collide]").addEventListener("click", function () {
     var wordA = "SYN, ";
     var wordB = "SYN-ACK, ";
