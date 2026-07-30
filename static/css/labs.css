@@ -1893,16 +1893,39 @@ input[type="range"]::-moz-range-thumb {
   background: var(--surface-2);
 }
 
-.qa__sum svg {
+/* A bare chevron does not read as "expandable", so the trigger says so in
+   words and the whole row behaves like a control. */
+.qa__toggle {
   margin-left: auto;
   flex: none;
-  width: 14px;
-  height: 14px;
-  color: var(--faint);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.qa__toggle::after {
+  content: "Show";
+}
+
+.qa__item[open] .qa__toggle::after {
+  content: "Hide";
+}
+
+.qa__sum svg {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  color: currentColor;
   transition: transform 0.25s var(--ease);
 }
 
-.qa__item[open] .qa__sum svg {
+.qa__item[open] .qa__toggle svg {
   transform: rotate(180deg);
 }
 
@@ -1971,12 +1994,33 @@ input[type="range"]::-moz-range-thumb {
   flex: none;
 }
 
-.adr__caret {
+.adr__toggle {
   margin-left: auto;
   flex: none;
-  width: 14px;
-  height: 14px;
-  color: var(--faint);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.adr__toggle::after {
+  content: "Show";
+}
+
+.adr__item[open] .adr__toggle::after {
+  content: "Hide";
+}
+
+.adr__caret {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  color: currentColor;
   transition: transform 0.25s var(--ease);
 }
 

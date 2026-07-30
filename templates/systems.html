@@ -12,10 +12,10 @@
 <section class="section section--tight">
     <div class="wrap">
         <p class="eyebrow">Systems</p>
-        <h1 class="h1">The three systems, in depth</h1>
+        <h1 class="h1">Three systems, up close</h1>
         <p class="lede" style="margin-top:var(--s-4)">
-            Each one states what it is, what stage it's at, and what the interactive pieces actually are.
-            Where something is designed but not yet built, it says so.
+            Each one says what it is, how far along it is, and what you're actually looking at.
+            If something isn't built yet, I say so.
         </p>
     </div>
 </section>
@@ -61,21 +61,21 @@
         <div class="note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
             <p>
-                <b>This is the design, not a running deployment.</b> There are no measured latency numbers on
-                this page, because there is nothing deployed to measure yet.
+                <b>This is the design, not a live system.</b> You won't find any performance numbers here,
+                because there is nothing deployed to measure yet.
             </p>
         </div>
 
         <!-- ---------- LAB: topology ---------- -->
         <div class="lab">
             <div class="lab__head">
-                <h3 class="lab__title">The six deployables</h3>
-                <span class="lab__hint">hover a service, or play a request path</span>
+                <h3 class="lab__title">How the six services fit together</h3>
+                <span class="lab__hint">hover a service, or watch a request travel</span>
             </div>
             <p class="lab__intro">
-                Two of these six are not really splits. The <strong>Gateway is a position</strong>, because a
-                cross-cutting enforcement point has to sit in front of what it protects. <strong>Stats is a
-                job</strong>, because a scale-to-zero service has no running process for a timer to fire inside.
+                Four of these are ordinary services. Two are not. The <strong>Gateway</strong> has to sit in
+                front of everything it protects, and <strong>Stats</strong> is a scheduled job, because a service
+                that scales to zero has nothing running for a timer to fire inside.
             </p>
 
             <div class="panel ticked">
@@ -127,19 +127,18 @@
                 <details class="qa__item">
                     <summary class="qa__sum">
                         Isn't six services too many for this?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <p>
-                            By a strict scaling-forces test, yes. Users, Questions and Matching would merge: they
-                            share a request shape, a failure domain and a deploy cadence, and an earlier draft did
-                            exactly that.
+                            Probably, yes. Users, Questions and Matching could be one service. They handle
+                            similar requests, fail in similar ways, and ship on the same cadence. An earlier draft
+                            had them merged.
                         </p>
                         <p>
-                            They're kept separate for independent deployability and one clear owner per capability.
-                            If cold-start latency on the match path starts dominating, they recombine cheaply,
-                            because they already share a database instance. That makes it a code move rather than a
-                            data migration.
+                            I split them so each one can be deployed on its own and has a single clear owner.
+                            If cold starts on the match path ever become the bottleneck, merging them back is cheap:
+                            they already share a database, so it's a code move, not a data migration.
                         </p>
                     </div>
                 </details>
@@ -149,13 +148,13 @@
         <!-- ---------- LAB: token bucket ---------- -->
         <div class="lab" id="bucket-lab">
             <div class="lab__head">
-                <h3 class="lab__title">Why the gateway is built, not bought</h3>
-                <span class="lab__hint">simulation, runs in your browser</span>
+                <h3 class="lab__title">The race I built a gateway to understand</h3>
+                <span class="lab__hint">a simulation, running in your browser</span>
             </div>
             <p class="lab__intro">
-                Kong would do this Gateway's whole job in about fifteen lines of config. It's built here because
-                the rate limiter is the one race a product would otherwise solve on my behalf. Switch to
-                <strong>read-then-write</strong> and send a burst.
+                Kong does this entire job in about fifteen lines of config, and that is what I'd use at work.
+                I built my own because the rate limiter hides a race that a product would quietly solve for me.
+                Switch to <strong>read-then-write</strong> and hit burst.
             </p>
 
             <div class="panel">
@@ -214,35 +213,35 @@
             <div class="qa">
                 <details class="qa__item">
                     <summary class="qa__sum">
-                        Why does a token bucket need a script at all?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        Why does this need a script at all?
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <p>
-                            A fixed-window counter needs only <code>INCR</code>, which is already atomic. A token
-                            bucket reads two values, computes a refill from elapsed time, and writes both back. That
-                            is multi-step, so atomicity has to come from wrapping it in a script Redis runs start to
-                            finish with nothing interleaved.
+                            A simple counter only needs <code>INCR</code>, which Redis already does in one
+                            step. A token bucket reads two values, works out a refill from the time elapsed, then
+                            writes both back. That is three steps, and anything can happen between them unless
+                            Redis runs the whole thing start to finish.
                         </p>
                         <p>
-                            Note what the bug does <em>not</em> require: no threads, no shared memory. Two ordinary
-                            processes on two machines are enough. That is also why an in-process mutex is not a fix.
-                            It would guard one instance's own memory, at an address the other instance cannot reach.
-                            <strong>Atomicity has to live where the single copy of the state lives.</strong>
+                            Notice what this bug does <em>not</em> need: no threads, no shared memory. Two
+                            ordinary processes on two machines are enough. A lock inside one process cannot fix it
+                            either, since it only guards that machine's own memory.
+                            <strong>The fix has to live where the single copy of the data lives.</strong>
                         </p>
                     </div>
                 </details>
                 <details class="qa__item">
                     <summary class="qa__sum">
                         Why not Envoy?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <p>
-                            Its <code>jwt_authn</code> filter would replace token verification cleanly, but its local
-                            rate-limit filter is per-instance, which is exactly the split-bucket bug. Its global one
-                            delegates to a separate gRPC service backed by Redis. Envoy relocates this problem rather
-                            than removing it. Kong is the honest comparison, and it's what I'd reach for commercially.
+                            Envoy handles token checking well. But its local rate limiter counts per machine,
+                            which is exactly the bug above, and its global one just hands the job to another service
+                            backed by Redis. It moves the problem rather than solving it. Kong is the fair
+                            comparison, and it's what I'd actually deploy.
                         </p>
                     </div>
                 </details>
@@ -252,12 +251,13 @@
         <!-- ---------- LAB: CRDT ---------- -->
         <div class="lab" id="crdt-lab">
             <div class="lab__head">
-                <h3 class="lab__title">The hard part: convergence across instances</h3>
-                <span class="lab__hint">a real CRDT, computed in this page</span>
+                <h3 class="lab__title">Two people, two servers, one document</h3>
+                <span class="lab__hint">a real CRDT, running in this page</span>
             </div>
             <p class="lab__intro">
-                Two users in one session can land on different Collab instances, which share no memory. Type in
-                both panes at once, drop a connection, or raise the latency. The replicas still converge.
+                Two people in the same session can land on different servers that share no memory. Type in both
+                panes at once, drop a connection, or drag the latency slider. They still end up with the same
+                document.
             </p>
 
             <div class="panel">
@@ -311,30 +311,29 @@
             <div class="qa">
                 <details class="qa__item">
                     <summary class="qa__sum">
-                        Why not just pin both users to one instance?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        Why not just put both people on the same server?
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <p>
-                            Cloud Run's session affinity is best-effort, and it pins <strong>a client</strong>, not a
-                            group. The two people in a session are different clients connecting at different moments,
-                            so nothing would co-locate them in the first place, and affinity evaporates on scale-down.
-                            Fanning through Redis makes instance placement irrelevant, which is the property that
-                            survives autoscaling.
+                            Cloud Run can try to keep <strong>one visitor</strong> on one machine, but not a
+                            pair. The two people join at different moments as different clients, so nothing would
+                            put them together in the first place, and the stickiness disappears when it scales down.
+                            Routing through Redis makes it stop mattering which machine anyone lands on.
                         </p>
                     </div>
                 </details>
                 <details class="qa__item">
                     <summary class="qa__sum">
-                        Why snapshot every 30 seconds rather than on every edit?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        Why save every 30 seconds instead of every keystroke?
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <p>
-                            Per-keystroke writes would exhaust the free Postgres tier and add latency to the hot path.
-                            30 seconds bounds worst-case loss, and the disconnect and SIGTERM snapshots mean the
-                            routine cases, a deploy or a closed tab, lose nothing at all. Only an ungraceful crash
-                            hits the full window.
+                            Saving on every keystroke would burn through the free database tier and slow down
+                            typing. Thirty seconds caps the worst case, and since it also saves when someone
+                            disconnects or the server shuts down, the everyday cases lose nothing at all. Only a
+                            hard crash costs you the full window.
                         </p>
                     </div>
                 </details>
@@ -344,12 +343,12 @@
         <!-- ---------- ADRs ---------- -->
         <div class="lab">
             <div class="lab__head">
-                <h3 class="lab__title">Decisions worth defending</h3>
+                <h3 class="lab__title">Decisions I would defend in an interview</h3>
                 <span class="lab__hint">4 of the 9 ADRs</span>
             </div>
             <p class="lab__intro">
-                An ADR is reserved for decisions where the <em>rejected</em> option was genuinely defensible and the
-                tradeoff is still being paid.
+                I only write one of these when the option I turned down was genuinely a good one, and I'm still
+                living with the cost of choosing otherwise.
             </p>
 
             <div class="adr">
@@ -357,7 +356,7 @@
                     <summary class="adr__sum">
                         <span class="adr__num">ADR-04</span>
                         Firebase Auth instead of self-hosted auth
-                        <svg class="adr__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <span class="adr__toggle" aria-hidden="true"><svg class="adr__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="adr__body">
                         <p>The first draft built auth directly: bcrypt, RS256 signing, opaque refresh tokens rotated in Redis. The decision was to buy it. Identity is security-critical and fully solved, and Google's credential-stuffing detection and signing-key rotation are not things a solo project reproduces.</p>
@@ -371,7 +370,7 @@
                     <summary class="adr__sum">
                         <span class="adr__num">ADR-08</span>
                         A custom gateway instead of Kong
-                        <svg class="adr__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <span class="adr__toggle" aria-hidden="true"><svg class="adr__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="adr__body">
                         <p>Kong DB-less provides all four things this Gateway does, the rate limiter included. Build it anyway: the token bucket is the one component whose concurrency bug a product would fix on my behalf, and the fix only means something if you've seen the broken version fail.</p>
@@ -384,7 +383,7 @@
                     <summary class="adr__sum">
                         <span class="adr__num">ADR-09</span>
                         One Postgres instance, one schema and one role per service
-                        <svg class="adr__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <span class="adr__toggle" aria-hidden="true"><svg class="adr__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="adr__body">
                         <p>Each service reaches its own schema through its own Postgres role, so a cross-service read is <b>rejected by the database, not discouraged by convention</b>. That is asserted by a test, not left as a rule people remember. No foreign key crosses a schema boundary.</p>
@@ -397,7 +396,7 @@
                     <summary class="adr__sum">
                         <span class="adr__num">ADR-07</span>
                         A replayable event log, not a queue
-                        <svg class="adr__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <span class="adr__toggle" aria-hidden="true"><svg class="adr__caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="adr__body">
                         <p>A queue deletes on consume, so a bug in the summary logic means the data needed to recompute is gone. A log keeps entries after reading, so the fix is rewinding the bookmark.</p>
@@ -444,19 +443,19 @@
         <div class="note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
             <p>
-                <b>Recall is not built yet.</b> The search box below is real BM25, computed in your browser over a
-                nine-chunk sample corpus. Recall itself will do this in Go over my actual notes.
+                <b>Recall isn't built yet.</b> The search box below is real BM25 running in your browser over
+                nine sample chunks. The real thing will do this in Go, over my own notes.
             </p>
         </div>
 
         <!-- ---------- LAB: BM25 ---------- -->
         <div class="lab" id="ir-lab">
             <div class="lab__head">
-                <h3 class="lab__title">Query, tokens, postings, ranked chunks</h3>
-                <span class="lab__hint">real BM25, computed live</span>
+                <h3 class="lab__title">How a question becomes ranked results</h3>
+                <span class="lab__hint">real BM25, scored live</span>
             </div>
             <p class="lab__intro">
-                Hand-rolled inverted index and BM25 ranking, no search library, because the index is the point.
+                No search library. Building the index myself is the whole point of the project.
             </p>
 
             <div class="panel">
@@ -505,15 +504,15 @@
             </div>
 
             <p class="lab__intro" style="margin-top:var(--s-5)">
-                Try the pizza query. Nothing in the index is about pizza, so every chunk scores below the floor and
-                the system <strong>refuses instead of inventing an answer</strong>.
+                Try the pizza one. Nothing in the index is about pizza, so everything scores too low and it
+                <strong>refuses rather than making something up</strong>.
             </p>
 
             <div class="qa">
                 <details class="qa__item">
                     <summary class="qa__sum">
                         The scoring function
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <div class="formula" style="margin-bottom:var(--s-4)">
@@ -522,35 +521,36 @@ score(<em>q</em>, <em>d</em>) = Σ<sub>t ∈ q</sub>  IDF(<em>t</em>) · ( tf ·
 IDF(<em>t</em>) = ln( 1 + (N − df + 0.5) / (df + 0.5) )        k₁ = 1.2, b = 0.75
                         </div>
                         <p>
-                            The <code>k₁</code> term saturates, so the tenth occurrence of a word says far less than
-                            the second. The <code>b</code> term normalises by length, so a long chunk doesn't win just
-                            by containing more words. Those two corrections are most of why BM25 beats naive TF-IDF.
+                            <code>k₁</code> makes repetition count for less each time, so the tenth mention of a
+                            word matters far less than the second. <code>b</code> adjusts for length, so a long chunk
+                            can't win just by containing more words. Those two corrections are most of why BM25 beats
+                            simpler scoring.
                         </p>
                     </div>
                 </details>
                 <details class="qa__item">
                     <summary class="qa__sum">
                         Why not just paste the notes into an LLM?
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <p>
-                            A whole semester of notes doesn't fit a context window, and re-sending everything per
-                            question is slow and expensive. The right architecture is a persistent index with
-                            retrieval: fetch the few relevant chunks, then answer from those with citations.
+                            A semester of notes doesn't fit, and re-sending all of it for every question is slow
+                            and expensive. Build the index once, pull the few chunks that matter, then answer from
+                            those and cite them.
                         </p>
                     </div>
                 </details>
                 <details class="qa__item">
                     <summary class="qa__sum">
                         Where the concurrency lives
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <p>
-                            The index is read-only after build, so reads are lock-free by design. The parts that need
-                            synchronisation are the rate limiter and the hot-query cache, and later a scatter-gather
-                            coordinator fanning a query across shards with goroutines and merging results back.
+                            Nothing writes to the index after it's built, so reads need no locks at all. The parts
+                            that do need care are the rate limiter and the cache, and later the piece that fans a
+                            query out across shards and merges the results back.
                         </p>
                     </div>
                 </details>
@@ -559,7 +559,7 @@ IDF(<em>t</em>) = ln( 1 + (N − df + 0.5) / (df + 0.5) )        k₁ = 1.2, b =
 
         <div class="lab">
             <div class="lab__head">
-                <h3 class="lab__title">Build order</h3>
+                <h3 class="lab__title">What I am building, in order</h3>
                 <span class="lab__hint">from PLAN.md</span>
             </div>
             <ul class="bullets">
@@ -609,20 +609,20 @@ IDF(<em>t</em>) = ln( 1 + (N − df + 0.5) / (df + 0.5) )        k₁ = 1.2, b =
         <div class="note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
             <p>
-                <b>This one is real code.</b> The verdict below is the actual blocked-package output from the repo,
-                replayed at a readable pace. The lane timings are pacing, not measurements.
+                <b>This one is real code.</b> The verdict below is the actual output from the repo, replayed
+                slowly enough to read. The timings are for pacing, not measurements.
             </p>
         </div>
 
         <div class="lab" id="gate-lab">
             <div class="lab__head">
-                <h3 class="lab__title">Run it, read it, judge it</h3>
+                <h3 class="lab__title">How Airlock makes up its mind</h3>
                 <span class="lab__hint">recorded verdict, replayed</span>
             </div>
             <p class="lab__intro">
-                An agent is told to install <code>python-pillow</code>, a fake designed to look like the real
-                <code>pillow</code>. Two independent checks gather evidence, because running the code exposes
-                obfuscated payloads and reading it exposes dormant ones.
+                An AI agent tries to install <code>python-pillow</code>, a fake built to look like the real
+                <code>pillow</code>. Airlock checks it two ways, because running the code catches things that are
+                hidden, and reading it catches things that are waiting.
             </p>
 
             <div class="panel">
@@ -653,44 +653,43 @@ IDF(<em>t</em>) = ln( 1 + (N − df + 0.5) / (df + 0.5) )        k₁ = 1.2, b =
             <div class="qa">
                 <details class="qa__item">
                     <summary class="qa__sum">
-                        Why the floor is plain code, not the model
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        Why the hard rules are plain code, not AI
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <p>
-                            The verdict is <code>tripwire-BLOCK OR judge-BLOCK</code>. Reading a planted honeytoken,
-                            connecting out to a non-registry host, or spawning a shell during an install is never
-                            acceptable, and any one blocks on its own, decided before a model is consulted. The model
-                            handles the gray areas on top of that floor, and by construction it can only make the gate
-                            stricter, never weaker.
+                            Some things are never acceptable during an install: reading the fake credentials we
+                            planted, calling out to an unknown server, or opening a shell. Any one of those blocks
+                            immediately, decided by ordinary code before any model is asked. The model only handles
+                            the unclear cases on top, and it can only ever make the gate stricter.
                         </p>
                     </div>
                 </details>
                 <details class="qa__item">
                     <summary class="qa__sum">
-                        Why the gray zone needs a judge at all
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        Why the unclear cases need a judge
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <p>
-                            The same log line means opposite things for different packages. Reading <code>.env</code>
-                            is an attack for a typosquat, but it is <code>python-dotenv</code>'s entire legitimate job.
-                            A plain rule over the raw log would either miss real attacks or block half of PyPI, so
-                            ambiguous cases go to the judge, told to block when unsure. A false block costs a retry.
-                            A false pass costs the machine.
+                            The same behaviour means opposite things depending on the package. Reading
+                            <code>.env</code> is an attack for a fake package, but it is literally
+                            <code>python-dotenv</code>'s job. A fixed rule would either miss real attacks or block
+                            half of PyPI. So unclear cases go to the judge, which is told to block when unsure.
+                            A wrong block costs a retry. A wrong pass costs you the machine.
                         </p>
                     </div>
                 </details>
                 <details class="qa__item">
                     <summary class="qa__sum">
-                        What Airlock does not address
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        What Airlock doesn't cover
+                        <span class="qa__toggle" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
                     </summary>
                     <div class="qa__body">
                         <p>
-                            It addresses malicious code that <em>runs</em>: install-time trojans, credential stealers,
-                            typosquats. It does not address accidental source-code leaks, and doesn't claim to. Its
-                            blind spots are named in the design doc rather than left for a judge to find.
+                            It catches malicious code that <em>runs</em>: trojans that fire on install, credential
+                            stealers, and fake lookalike packages. It does not catch accidental source-code leaks,
+                            and doesn't pretend to. The blind spots are written down in the design doc.
                         </p>
                     </div>
                 </details>
@@ -704,8 +703,8 @@ IDF(<em>t</em>) = ln( 1 + (N − df + 0.5) / (df + 0.5) )        k₁ = 1.2, b =
     <div class="wrap">
         <div class="cta reveal">
             <p class="eyebrow" style="justify-content:center">Next</p>
-            <h2 class="h1" style="margin-inline:auto">Want the background behind these?</h2>
-            <p class="lede">Education, teaching, open source, and how I got here.</p>
+            <h2 class="h1" style="margin-inline:auto">Want to know more about me?</h2>
+            <p class="lede">Where I study, what I teach, and how I got here.</p>
             <div class="btn-row">
                 <a class="btn btn--primary" href="/about">About me</a>
                 <a class="btn" href="mailto:wnayar98@gmail.com">Get in touch</a>
