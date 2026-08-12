@@ -598,39 +598,27 @@ kbd {
   flex: none;
 }
 
-.chip--shipped {
-  color: var(--green);
-  border-color: color-mix(in srgb, var(--green) 40%, transparent);
-  background: color-mix(in srgb, var(--green) 9%, transparent);
-}
-
-.chip--shipped .chip__dot {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 20%, transparent);
-  animation: pulse-dot 2.6s var(--ease-in-out) infinite;
-}
-
-/* Built and measured, but not deployed anywhere. Green like shipped,
-   without the pulsing dot, which reads as "something is live right now". */
+/* Two build states, and only two: built, or in progress. Green reads as
+   done, amber as still moving. The pulsing dot belongs to the amber one,
+   because that is the one where work is still happening. */
 .chip--built {
   color: var(--green);
   border-color: color-mix(in srgb, var(--green) 40%, transparent);
   background: color-mix(in srgb, var(--green) 9%, transparent);
 }
 
-.chip--building {
+.chip--built .chip__dot {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 20%, transparent);
+}
+
+.chip--progress {
   color: var(--amber);
   border-color: color-mix(in srgb, var(--amber) 40%, transparent);
   background: var(--wash-amber);
 }
 
-.chip--building .chip__dot {
+.chip--progress .chip__dot {
   animation: pulse-dot 1.6s var(--ease-in-out) infinite;
-}
-
-.chip--designed {
-  color: var(--violet);
-  border-color: color-mix(in srgb, var(--violet) 38%, transparent);
-  background: color-mix(in srgb, var(--violet) 10%, transparent);
 }
 
 .chip--won {
