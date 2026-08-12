@@ -2464,3 +2464,37 @@ input[type="range"]::-moz-range-thumb {
     max-height: 240px;
   }
 }
+
+/* ============================================================
+   TOUCH TARGETS, LAB CONTROLS
+   Same reasoning as the block at the end of site.css. These are the
+   controls the demos are driven from, so they are the ones a thumb
+   has to hit. Desktop keeps its denser sizing.
+   ============================================================ */
+@media (pointer: coarse) {
+  /* iOS Safari zooms the whole page in when a focused field computes
+     under 16px, and never zooms back out. 16px keeps the search usable. */
+  .ir__input {
+    font-size: 16px;
+  }
+
+  .ir__chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-inline: 0.9rem;
+  }
+
+  .topo__ctrl {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .scenario-btn {
+    min-height: 44px;
+  }
+
+  .subnav__link {
+    min-height: 44px;
+  }
+}

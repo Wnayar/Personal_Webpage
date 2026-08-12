@@ -609,6 +609,14 @@ kbd {
   animation: pulse-dot 2.6s var(--ease-in-out) infinite;
 }
 
+/* Built and measured, but not deployed anywhere. Green like shipped,
+   without the pulsing dot, which reads as "something is live right now". */
+.chip--built {
+  color: var(--green);
+  border-color: color-mix(in srgb, var(--green) 40%, transparent);
+  background: color-mix(in srgb, var(--green) 9%, transparent);
+}
+
 .chip--building {
   color: var(--amber);
   border-color: color-mix(in srgb, var(--amber) 40%, transparent);
@@ -1588,4 +1596,22 @@ kbd {
 
 .facts li:hover b {
   color: var(--accent);
+}
+
+/* ============================================================
+   TOUCH TARGETS
+   Phones and tablets only. The desktop sizes stay dense on purpose,
+   but a 34px control is well under the 44px a thumb reliably hits,
+   so every interactive element gets grown on coarse pointers.
+   ============================================================ */
+@media (pointer: coarse) {
+  .icon-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .btn--sm {
+    min-height: 44px;
+    padding-block: 0.6rem;
+  }
 }
