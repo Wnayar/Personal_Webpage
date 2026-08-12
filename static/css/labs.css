@@ -1894,6 +1894,14 @@ input[type="range"]::-moz-range-thumb {
   max-width: 14ch;
 }
 
+/* The bullet list is taller than the certificate, so a top-aligned figure
+   leaves a long gap under it. Centring only the figure keeps the heading
+   and bullets starting where they should. No effect once the grid stacks
+   to one column, where each row is sized to its own content. */
+.edu .figure--doc {
+  align-self: center;
+}
+
 @media (max-width: 780px) {
   .edu {
     grid-template-columns: 1fr;
