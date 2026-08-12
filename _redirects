@@ -6,3 +6,7 @@
 /insights     /             301
 /philosophy   /about        301
 /motivation   /about        301
+
+# Short, shareable path for the resume. 301 so the browser lands on the real
+# filename and the download is named William_Nayar_Resume.pdf, not resume.pdf.
+/resume       /static/William_Nayar_Resume.pdf   301

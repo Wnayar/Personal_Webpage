@@ -41,3 +41,8 @@ Thumbs.db
 *.docx
 **/resume.pdf
 **/Resume.pdf
+
+# One deliberate exception: the resume published at /resume. This is the only
+# personal document meant to be public, so it is tracked on purpose. Nothing
+# else matching the rules above should ever be un-ignored.
+!static/William_Nayar_Resume.pdf
