@@ -1,6 +1,6 @@
 # William Nayar: Personal Website
 
-Personal site of William Nayar, a final-year CS student at NUS working on backend and distributed systems.
+Personal site of William Nayar, a software engineer and founder in his final year of CS at NUS.
 Authored as a small Flask app and **shipped as a static site** on Cloudflare Pages.
 
 **Live site:** https://williamnayar.com
@@ -20,15 +20,13 @@ Everything interactive on the site is client-side JavaScript with no network cal
 
 ## The interactive pieces, and what they actually are
 
-The `/systems` page carries four labs. Each is labelled on the page, because a
+The `/work` page carries three labs. Each is labelled on the page, because a
 demo that implies more than it is would undercut the point of the site:
 
 | Lab | What it really is |
 | --- | --- |
-| DeepCS topology | A rendering of the architecture in DeepCS's `DESIGN.md`, with the request paths it describes. Not connected to a deployment. |
-| Token bucket race | A browser simulation of the lost update in ADR-08: read-then-write versus an atomic script. |
-| CRDT convergence | A real (simplified RGA) CRDT implemented in `crdt.js`. Convergence is genuinely computed. DeepCS itself uses Yjs. |
-| BM25 search | Real BM25 scoring over a 9-chunk sample corpus, computed in `bm25.js`. Recall implements this in Go. |
+| DeepCS topology | Two renderings of the architecture in DeepCS's `DESIGN.md`, v1 (six services on Cloud Run) and v2 (one Cloudflare Worker), switchable, with the request paths each one describes. Neither is connected to a deployment. |
+| CRDT convergence | A real (simplified RGA) CRDT implemented in `crdt.js`. Convergence is genuinely computed. DeepCS v1 itself used Yjs; v2 has no collaborative editing at all. |
 | Airlock gate | A replay of the real recorded verdict output from the Airlock repo. |
 
 ## Tech stack
@@ -53,19 +51,17 @@ Personal_Webpage/
 ├── .python-version     # Pins Python for reproducible Cloudflare builds
 ├── templates/
 │   ├── layout.html     # Base template: <head>, nav, SEO meta, theme bootstrap
-│   ├── index.html      # Home: hero, the three systems, build-vs-buy, signals
-│   ├── systems.html    # Deep dives: DeepCS, Recall, Airlock + the four labs
+│   ├── index.html      # Home: hero, the three builds, signals
+│   ├── work.html       # Deep dives: DeepCS, Aqua Vitae, Airlock + the three labs
 │   └── about.html      # Background, timeline, teaching, skills, contact
 └── static/
     ├── css/
     │   ├── site.css    # Design system: tokens, layout, nav, cards, both themes
-    │   └── labs.css    # The interactive labs + /systems and /about furniture
+    │   └── labs.css    # The interactive labs + /work and /about furniture
     ├── js/
     │   ├── core.js     # Theme, nav, scroll reveal, hero + card canvases
-    │   ├── topology.js # DeepCS architecture SVG + scenario player
-    │   ├── bucket.js   # Token bucket lost-update simulation
+    │   ├── topology.js # DeepCS architecture SVG (v1 and v2) + scenario player
     │   ├── crdt.js     # RGA CRDT + simulated pub/sub channel
-    │   ├── bm25.js     # Inverted index + BM25 over the sample corpus
     │   └── gate.js     # Airlock run→read→judge replay
     └── profile_picture_black.png, favicon.ico, favicon-192.png
 ```
@@ -96,7 +92,7 @@ Output goes to `dist/` (git-ignored): the three pages plus `robots.txt`,
 `sitemap.xml`, the copied `static/` assets, and `_redirects`.
 
 To preview the build exactly as Cloudflare serves it (extensionless URLs like
-`/systems`), serve `dist/` with a static server that falls back to `<path>.html`.
+`/work`), serve `dist/` with a static server that falls back to `<path>.html`.
 
 ## Deployment (Cloudflare Pages)
 
@@ -122,13 +118,13 @@ Every push to `main` triggers a rebuild and redeploy.
 
   | Old path | Now |
   | --- | --- |
-  | `/projects` | `/systems` |
+  | `/systems`, `/projects` | `/work` |
   | `/guides`, `/blogs`, `/insights` | `/` |
   | `/philosophy`, `/motivation` | `/about` |
 
 ## Accessibility & performance notes
 
-- No CSS or JS frameworks and no CDN scripts. Only the two stylesheets, six small
+- No CSS or JS frameworks and no CDN scripts. Only the two stylesheets, four small
   scripts, and Google Fonts.
 - Scroll-reveal styles are gated behind a `.js` class on `<html>`, so with scripts
   blocked the page renders fully visible instead of blank.

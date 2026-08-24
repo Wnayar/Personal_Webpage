@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}William Nayar · Backend and distributed systems{% endblock %}
+{% block title %}William Nayar · Software engineer and founder{% endblock %}
 
 {% block extrahead %}
 <script type="application/ld+json">
@@ -11,13 +11,14 @@
     "url": canonical_url,
     "image": absolute_static("img/profile.jpg"),
     "email": "wnayar98@gmail.com",
-    "jobTitle": "Software engineer",
-    "description": "Final-year Computer Science at NUS. Backend and distributed systems.",
+    "jobTitle": "Software engineer and founder",
+    "description": "Final-year Computer Science at NUS. Founder of DeepCS and Aqua Vitae Parfums, teaching assistant for CS3219.",
     "affiliation": {"@type": "CollegeOrUniversity", "name": "National University of Singapore"},
     "address": {"@type": "PostalAddress", "addressLocality": "Singapore"},
     "knowsAbout": [
-        "Distributed systems", "Backend engineering", "Microservices",
-        "CRDTs", "Information retrieval", "Go", "TypeScript", "PostgreSQL", "Redis"
+        "Software engineering", "Full-stack development", "Edge computing",
+        "Distributed systems", "System design", "Payments infrastructure",
+        "TypeScript", "React", "Cloudflare Workers", "PostgreSQL", "Stripe"
     ],
     "sameAs": [
         "https://www.linkedin.com/in/william-nayar/",
@@ -42,16 +43,17 @@
 
             <h1 class="h-display">William Nayar</h1>
 
-            <p class="hero__role">backend &amp; distributed systems</p>
+            <p class="hero__role">software engineer &amp; founder</p>
 
             <p class="lede hero__lede">
-                Final-year Computer Science at NUS. I like solving hard problems, whatever they are, and the
-                ones I keep coming back to are in backend and distributed systems.
+                Final-year Computer Science at NUS. I've founded and shipped two products, both with real
+                users on the other end, and I lead student engineering teams through building their own.
+                Drawn to hard problems, wherever they turn up.
             </p>
 
             <div class="btn-row hero__actions">
-                <a class="btn btn--primary" href="/systems">
-                    See what I'm building
+                <a class="btn btn--primary" href="/work">
+                    See what I've built
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
                 </a>
                 <a class="btn" href="https://github.com/Wnayar" target="_blank" rel="noopener">GitHub ↗</a>
@@ -76,14 +78,16 @@
     </div>
 </section>
 
-<!-- ===================== SYSTEMS ===================== -->
+<!-- ===================== WORK ===================== -->
 <section class="section" id="work">
     <div class="wrap">
         <div class="section-head reveal">
-            <p class="eyebrow">What I'm building</p>
-            <h2 class="h1">Three systems</h2>
+            <p class="eyebrow">What I've built</p>
+            <h2 class="h1">Two ventures and a win</h2>
             <p class="lede">
-                Each card says how far along it is, because half-finished work described as finished helps nobody.
+                Two of these I founded and ran myself, from the first commit to the people on the other end of
+                it. Each card says exactly where it stands, because half-finished work described as finished
+                helps nobody.
             </p>
         </div>
 
@@ -91,58 +95,59 @@
             <article class="syscard reveal" data-delay="1">
                 <div class="syscard__top">
                     <h3 class="syscard__name">DeepCS</h3>
-                    <span class="chip chip--built"><i class="chip__dot"></i>Built</span>
+                    <span class="chip chip--built"><i class="chip__dot"></i>Live</span>
                 </div>
                 <div class="syscard__viz"><canvas data-card-viz="deepcs"></canvas></div>
                 <p class="syscard__desc">
-                    Two people get matched and solve the same CS question together in real time, typing into one
-                    shared document. Six services behind a gateway I wrote myself.
+                    A CS learning platform I founded, served entirely from the edge by one Cloudflare Worker.
+                    Auth, a paywall and Stripe payments, built and tested end to end, in front of real users.
+                    It began as six services. I deleted five of them.
                 </p>
                 <div class="syscard__stack">
-                    <span class="tag">TypeScript</span><span class="tag">Yjs</span>
-                    <span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Cloud Run</span>
+                    <span class="tag">TypeScript</span><span class="tag">Cloudflare Workers</span>
+                    <span class="tag">D1</span><span class="tag">Stripe</span><span class="tag">React</span>
                 </div>
                 <div class="syscard__foot">
-                    <a class="btn btn--sm" href="/systems#deepcs">Take a look</a>
-                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/deepcs" target="_blank" rel="noopener">Repo ↗</a>
+                    <a class="btn btn--sm" href="/work#deepcs">Take a look</a>
+                    <a class="btn btn--sm btn--ghost" href="https://deepcs.org" target="_blank" rel="noopener">deepcs.org ↗</a>
                 </div>
             </article>
 
             <article class="syscard reveal" data-delay="2">
                 <div class="syscard__top">
-                    <h3 class="syscard__name">Recall</h3>
-                    <span class="chip chip--progress"><i class="chip__dot"></i>In progress</span>
+                    <h3 class="syscard__name">Aqua Vitae</h3>
+                    <span class="chip chip--built"><i class="chip__dot"></i>Shipped</span>
                 </div>
-                <div class="syscard__viz"><canvas data-card-viz="recall"></canvas></div>
+                <div class="syscard__viz"><canvas data-card-viz="aquavitae"></canvas></div>
                 <p class="syscard__desc">
-                    A search engine over my own notes that answers with sources, and refuses when it isn't
-                    confident. Written from scratch in Go, no search library.
+                    A perfume brand I founded and ran alone: the product, the brand, the storefront and
+                    everything behind it. Built the shop, bought the checkout.
                 </p>
                 <div class="syscard__stack">
-                    <span class="tag">Go</span><span class="tag">BM25</span><span class="tag">Python</span>
-                    <span class="tag">Docker</span>
+                    <span class="tag">React</span><span class="tag">TypeScript</span>
+                    <span class="tag">Shopify</span><span class="tag">Brand</span>
                 </div>
                 <div class="syscard__foot">
-                    <a class="btn btn--sm" href="/systems#recall">Try the search</a>
-                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/recall" target="_blank" rel="noopener">Repo ↗</a>
+                    <a class="btn btn--sm" href="/work#aquavitae">The build-buy line</a>
+                    <a class="btn btn--sm btn--ghost" href="https://aquavitaeparfums.com" target="_blank" rel="noopener">Storefront ↗</a>
                 </div>
             </article>
 
             <article class="syscard reveal" data-delay="3">
                 <div class="syscard__top">
                     <h3 class="syscard__name">Airlock</h3>
-                    <span class="chip chip--built"><i class="chip__dot"></i>Built</span>
+                    <span class="chip chip--won"><i class="chip__dot"></i>1st place</span>
                 </div>
                 <div class="syscard__viz"><canvas data-card-viz="airlock"></canvas></div>
                 <p class="syscard__desc">
                     AI agents install packages unattended. Airlock runs each one in a throwaway sandbox first and
-                    blocks it if it misbehaves. Won the Daytona HackSprint.
+                    blocks it if it misbehaves. Overall winner at the AI Builder and Daytona HackSprint.
                 </p>
                 <div class="syscard__stack">
                     <span class="tag">Python</span><span class="tag">Daytona</span><span class="tag">Sandboxing</span>
                 </div>
                 <div class="syscard__foot">
-                    <a class="btn btn--sm" href="/systems#airlock">Watch it block one</a>
+                    <a class="btn btn--sm" href="/work#airlock">Watch it block one</a>
                     <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/airlock" target="_blank" rel="noopener">Repo ↗</a>
                 </div>
             </article>
@@ -162,9 +167,16 @@
 
         <ul class="facts reveal">
             <li>
-                <a href="/systems#airlock">
-                    <b>1st place, Daytona HackSprint</b>
-                    <span>NUS Singapore, July 2026, for Airlock.</span>
+                <a href="/about#path">
+                    <b>Leading 11 engineering teams at NUS</b>
+                    <span>Teaching assistant for CS3219, software design and architecture. Weekly classes of 30.</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+                </a>
+            </li>
+            <li>
+                <a href="/work#airlock">
+                    <b>1st place, AI Builder and Daytona HackSprint</b>
+                    <span>Overall winner. NUS Singapore, July 2026, for Airlock.</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
                 </a>
             </li>
@@ -176,16 +188,9 @@
                 </a>
             </li>
             <li>
-                <a href="https://github.com/Wnayar?tab=repositories" target="_blank" rel="noopener">
+                <a href="/about#path">
                     <b>Three merged pull requests into open source</b>
                     <span>Into mongoose and node-redis, 27k and 17k stars, found by reading the source.</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-                </a>
-            </li>
-            <li>
-                <a href="/about#path">
-                    <b>Teaching CS3219 at NUS</b>
-                    <span>The microservices module, August to December 2026.</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
                 </a>
             </li>
@@ -199,7 +204,7 @@
         <div class="cta reveal">
             <p class="eyebrow" style="justify-content:center">Get in touch</p>
             <h2 class="h1">Looking for a 6-month internship from early 2027</h2>
-            <p class="lede">Backend, distributed systems, infrastructure. Based in Singapore.</p>
+            <p class="lede">Software engineering, end to end. Based in Singapore.</p>
             <div class="btn-row">
                 <a class="btn btn--primary" href="mailto:wnayar98@gmail.com">wnayar98@gmail.com</a>
                 <a class="btn" href="{{ asset('William_Nayar_Resume.pdf') }}" target="_blank" rel="noopener">Resume (PDF)</a>

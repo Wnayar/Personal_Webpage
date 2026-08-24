@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    {% set _default_meta = "William Nayar, final-year CS at NUS building backend and distributed systems. Design docs, architecture, and interactive write-ups for DeepCS, Recall and Airlock." %}
-    <title>{% block title %}William Nayar · Backend and distributed systems{% endblock %}</title>
+    {% set _default_meta = "William Nayar, software engineer and founder, final-year CS at NUS. Founded DeepCS and Aqua Vitae Parfums, leads 11 engineering teams as a CS3219 teaching assistant." %}
+    <title>{% block title %}William Nayar · Software engineer and founder{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}{{ _default_meta }}{% endblock %}">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <meta name="google-site-verification" content="lL632B8-tNJC8M56GPNNgdphLKLm4ni7_yQzqSJJF1g">
@@ -13,7 +13,7 @@
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ canonical_url }}">
-    <meta property="og:title" content="{% block social_title %}William Nayar · Backend and distributed systems{% endblock %}">
+    <meta property="og:title" content="{% block social_title %}William Nayar · Software engineer and founder{% endblock %}">
     <meta property="og:description" content="{% block og_description %}{{ _default_meta }}{% endblock %}">
     <meta property="og:image" content="{{ absolute_static('img/profile.jpg') }}">
     <meta property="og:locale" content="en_SG">
@@ -70,7 +70,7 @@
 
             <nav class="nav__links" id="nav-links" aria-label="Primary">
                 <a class="nav__link {% if request.path == '/' %}is-active{% endif %}" href="/">Home</a>
-                <a class="nav__link {% if request.path.startswith('/systems') %}is-active{% endif %}" href="/systems">Systems</a>
+                <a class="nav__link {% if request.path.startswith('/work') %}is-active{% endif %}" href="/work">Work</a>
                 <a class="nav__link {% if request.path.startswith('/about') %}is-active{% endif %}" href="/about">About</a>
                 <a class="nav__link" href="{{ asset('William_Nayar_Resume.pdf') }}" target="_blank" rel="noopener">Resume&nbsp;↗</a>
                 <a class="nav__link" href="https://github.com/Wnayar" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
@@ -97,7 +97,7 @@
             <div>
                 <div class="footer__links">
                     <a href="/">Home</a>
-                    <a href="/systems">Systems</a>
+                    <a href="/work">Work</a>
                     <a href="/about">About</a>
                     <a href="{{ asset('William_Nayar_Resume.pdf') }}" target="_blank" rel="noopener">Resume</a>
                     <a href="https://github.com/Wnayar" target="_blank" rel="noopener">GitHub</a>

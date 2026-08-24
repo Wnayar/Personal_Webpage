@@ -110,7 +110,7 @@ def sitemap_xml():
     """Helps search engines discover public HTML routes."""
     routes = (
         ("/", "weekly", "1.0"),
-        ("/systems", "weekly", "0.9"),
+        ("/work", "weekly", "0.9"),
         ("/about", "monthly", "0.7"),
     )
     lines = [
@@ -137,9 +137,9 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/systems")
-def systems():
-    return render_template("systems.html")
+@app.route("/work")
+def work():
+    return render_template("work.html")
 
 
 @app.route("/about")
@@ -150,7 +150,8 @@ def about():
 # Retired routes. The static deploy serves these from _redirects; the Flask
 # versions keep local dev and any non-Pages host behaving identically.
 _RETIRED = {
-    "/projects": "/systems",
+    "/systems": "/work",
+    "/projects": "/work",
     "/guides": "/",
     "/blogs": "/",
     "/insights": "/",
@@ -159,6 +160,7 @@ _RETIRED = {
 }
 
 
+@app.route("/systems")
 @app.route("/projects")
 @app.route("/guides")
 @app.route("/blogs")

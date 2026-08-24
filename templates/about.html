@@ -2,7 +2,7 @@
 
 {% block title %}About · William Nayar{% endblock %}
 {% block social_title %}About · William Nayar{% endblock %}
-{% set _about_meta = "William Nayar, final-year Computer Science at NUS, Software Engineering focus area. Teaching CS3219, building backend and distributed systems, open to a 2027 SWE internship." %}
+{% set _about_meta = "William Nayar, software engineer and founder. Final-year Computer Science at NUS, teaching CS3219 to 11 engineering teams, founder of DeepCS and Aqua Vitae Parfums, open to a 2027 SWE internship." %}
 {% block meta_description %}{{ _about_meta }}{% endblock %}
 {% block og_description %}{{ _about_meta }}{% endblock %}
 
@@ -22,8 +22,10 @@
                 <p class="eyebrow">About</p>
                 <h1 class="h1" style="margin-bottom:.9rem">William Nayar</h1>
                 <p class="lede">
-                    Final-year Computer Science at NUS. I like solving hard problems, whatever they are, and the
-                    ones I keep coming back to are in backend and distributed systems.
+                    Software engineer and founder, in my final year of Computer Science at NUS. I take software
+                    through the whole of its life, design, build, test, deploy and then the unglamorous part of
+                    keeping it running for real people, and I lead student engineering teams through doing the
+                    same.
                 </p>
             </div>
         </div>
@@ -38,12 +40,12 @@
         </div>
 
         <ul class="bullets reveal">
-            <li><strong>Teaching CS3219</strong> at NUS as a tutor, August to December 2026. Weekly classes of 20, mentoring teams through building and deploying a distributed application: service boundaries, REST, containerisation, CI/CD, and the trade-offs behind every call they make.</li>
-            <li><strong>Building Recall</strong>, a search engine in Go, to learn indexing by writing it.</li>
+            <li><strong>Teaching CS3219</strong> at NUS, software design and architecture. I mentor 11 student engineering teams through the full development lifecycle, from service boundaries to a deployed distributed application, and lead weekly classes of 30 on large-scale system design and the trade-offs behind every call they make. Course materials get reworked with the professors each week, driven by what students actually got stuck on.</li>
+            <li><strong>Running DeepCS</strong>, the learning platform I founded. It is live, it has real users, and it is mine to keep up.</li>
         </ul>
 
         <div class="btn-row reveal" style="margin-top:var(--s-5)">
-            <a class="btn" href="/systems">See what I'm building</a>
+            <a class="btn" href="/work">See what I've built</a>
         </div>
     </div>
 </section>
@@ -55,41 +57,48 @@
     <div class="wrap">
         <div class="section-head reveal">
             <p class="eyebrow">Path</p>
-            <h2 class="h1">My SWE journey</h2>
+            <h2 class="h1">How I got here</h2>
         </div>
 
         <div class="timeline">
             <div class="tl-item">
-                <div class="tl-item__when">Aug to Dec 2026</div>
-                <h3 class="tl-item__what">Tutor, <span>CS3219</span> · NUS School of Computing</h3>
-                <p class="tl-item__detail">Weekly classes of 20 on the microservices module: service boundaries, choosing a data store, getting it deployed and keeping it up.</p>
+                <div class="tl-item__when">Aug 2026 to now</div>
+                <h3 class="tl-item__what">Teaching Assistant, <span>CS3219</span> · NUS School of Computing</h3>
+                <p class="tl-item__detail">Software design and architecture. Eleven engineering teams mentored through designing, building, testing and deploying distributed microservices applications with REST APIs, Docker and CI/CD, plus weekly classes of 30 on system design and architecture trade-offs.</p>
+            </div>
+
+            <div class="tl-item">
+                <div class="tl-item__when">Jul 2026 to now</div>
+                <h3 class="tl-item__what">Founder and engineer, <span>DeepCS</span></h3>
+                <p class="tl-item__detail">Built it as six microservices to learn distributed systems the hard way, then re-architected it into a single Cloudflare Worker when users showed no demand for the collaborative half. Secured the API, built payments on Stripe, and put unit, integration and end-to-end tests in CI.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">Jul 2026</div>
-                <h3 class="tl-item__what">1st place, <span>Daytona HackSprint</span></h3>
+                <h3 class="tl-item__what">1st place overall, <span>AI Builder and Daytona HackSprint</span></h3>
                 <p class="tl-item__detail">Built Airlock over a weekend with my teammate and friend Basil: a safety gate that runs every package an AI agent installs inside a throwaway sandbox first.</p>
             </div>
 
             <div class="tl-item">
-                <div class="tl-item__when">Jul 2026</div>
+                <div class="tl-item__when">Jun to Jul 2026</div>
                 <h3 class="tl-item__what">Merged pull requests into <span>mongoose</span> and <span>node-redis</span></h3>
                 <p class="tl-item__detail">
-                    Three of them, into projects with 27k and 17k stars. Two documented the undocumented
+                    Three of them, into database libraries with 27k and 17k stars used by millions of developers.
+                    Two documented the undocumented
                     <code>perDocumentLimit</code> populate option and its per-document semantics
                     (<a href="https://github.com/Automattic/mongoose/pull/16371" target="_blank" rel="noopener">#16371</a>,
                     <a href="https://github.com/Automattic/mongoose/pull/16369" target="_blank" rel="noopener">#16369</a>).
                     The third corrected a README still pointing at the deprecated <code>disconnect()</code> API,
                     traced through node-redis's socket source
                     (<a href="https://github.com/redis/node-redis/pull/3332" target="_blank" rel="noopener">#3332</a>).
-                    Gaps I found by reading the source, not by picking off issue labels.
+                    Gaps I hit while using the libraries in my own production work, not issues picked off a label.
                 </p>
             </div>
 
             <div class="tl-item">
-                <div class="tl-item__when">2026 to now</div>
-                <h3 class="tl-item__what">Sole engineer, <span>Aqua Vitae</span></h3>
-                <p class="tl-item__detail">My own fragrance brand. I own the storefront, the backend and the infrastructure.</p>
+                <div class="tl-item__when">Dec 2025 to Mar 2026</div>
+                <h3 class="tl-item__what">Founder, <span>Aqua Vitae Parfums</span></h3>
+                <p class="tl-item__detail">A perfume business I founded and ran as the sole engineer, designer and operator. Custom React and TypeScript storefront with Shopify for checkout, taken from an empty repo to a live storefront with real users.</p>
             </div>
 
             <div class="tl-item">
@@ -131,45 +140,48 @@
             <div class="skillgrp reveal">
                 <h3>Languages</h3>
                 <ul>
-                    <li class="tag">TypeScript</li><li class="tag">JavaScript</li><li class="tag">Go</li>
-                    <li class="tag">Python</li><li class="tag">Java</li><li class="tag">C</li>
-                    <li class="tag">C++</li><li class="tag">SQL</li><li class="tag">Bash</li>
+                    <li class="tag">Python</li><li class="tag">C</li><li class="tag">C++</li>
+                    <li class="tag">Java</li><li class="tag">JavaScript</li><li class="tag">TypeScript</li>
+                    <li class="tag">SQL</li><li class="tag">Bash</li>
                 </ul>
             </div>
             <div class="skillgrp reveal" data-delay="1">
-                <h3>Backend</h3>
+                <h3>Frontend</h3>
                 <ul>
-                    <li class="tag">Node.js</li><li class="tag">Fastify</li><li class="tag">Express</li>
-                    <li class="tag">Flask</li><li class="tag">REST</li><li class="tag">WebSockets</li>
+                    <li class="tag">React</li><li class="tag">HTML</li><li class="tag">CSS</li>
+                    <li class="tag">Tailwind CSS</li>
                 </ul>
             </div>
             <div class="skillgrp reveal" data-delay="2">
-                <h3>Data</h3>
+                <h3>Backend &amp; systems</h3>
                 <ul>
-                    <li class="tag">PostgreSQL</li><li class="tag">Redis</li><li class="tag">MongoDB</li>
-                    <li class="tag">Supabase</li><li class="tag">SQLite</li><li class="tag">Firebase</li>
+                    <li class="tag">Node.js</li><li class="tag">Fastify</li><li class="tag">Express</li>
+                    <li class="tag">Flask</li><li class="tag">REST APIs</li><li class="tag">WebSockets</li>
+                    <li class="tag">Distributed systems</li><li class="tag">TCP/IP</li><li class="tag">HTTP</li>
+                    <li class="tag">Unix/Linux</li>
                 </ul>
             </div>
             <div class="skillgrp reveal" data-delay="3">
-                <h3>Infra &amp; cloud</h3>
+                <h3>Databases</h3>
                 <ul>
-                    <li class="tag">Docker</li><li class="tag">Google Cloud</li><li class="tag">Cloud Run</li>
-                    <li class="tag">AWS</li><li class="tag">Cloudflare</li><li class="tag">Vercel</li>
-                    <li class="tag">GitHub Actions</li><li class="tag">Nginx</li><li class="tag">Linux</li>
+                    <li class="tag">PostgreSQL</li><li class="tag">MongoDB</li><li class="tag">Redis</li>
+                    <li class="tag">SQLite</li><li class="tag">D1</li><li class="tag">Firebase</li>
+                    <li class="tag">Supabase</li>
                 </ul>
             </div>
             <div class="skillgrp reveal">
-                <h3>Frontend</h3>
+                <h3>Cloud &amp; platform</h3>
                 <ul>
-                    <li class="tag">React</li><li class="tag">Next.js</li><li class="tag">Vite</li>
-                    <li class="tag">Tailwind CSS</li>
+                    <li class="tag">Cloudflare Workers</li><li class="tag">Google Cloud</li><li class="tag">AWS</li>
+                    <li class="tag">Docker</li><li class="tag">Nginx</li><li class="tag">Stripe</li>
+                    <li class="tag">Shopify</li><li class="tag">Firebase Auth</li>
                 </ul>
             </div>
             <div class="skillgrp reveal" data-delay="1">
                 <h3>Testing &amp; tooling</h3>
                 <ul>
-                    <li class="tag">Jest</li><li class="tag">Supertest</li><li class="tag">k6</li>
-                    <li class="tag">Git</li><li class="tag">Postman</li><li class="tag">VS Code</li>
+                    <li class="tag">Vitest</li><li class="tag">Jest</li><li class="tag">GitHub Actions</li>
+                    <li class="tag">CI/CD</li><li class="tag">Git</li><li class="tag">Postman</li>
                 </ul>
             </div>
         </div>
@@ -189,8 +201,8 @@
                 <ul class="bullets" style="margin-top:var(--s-6)">
                 <li><strong>Bachelor of Computing in Computer Science</strong>, August 2023 to May 2027, specialising in Software Engineering, Honours (Distinction).</li>
                 <li><strong>Certificate of Distinction</strong> in the Software Engineering focus area, awarded July 2026, off a 4.50 GPA across the focus-area modules.</li>
-                <li><strong>The modules that did the work</strong>: data structures and algorithms, design and analysis of algorithms, operating systems, computer networks, database systems, AI and machine learning, and software engineering principles and patterns.</li>
-                <li><strong>HackerRank Software Engineering certification</strong>, problem solving and SQL. <strong>NUS Orbital</strong> at Apollo 11 level, the independent-project tier.</li>
+                <li><strong>The modules that did the work</strong>: formal methods for software engineering (A), communicating in the information age (A+), big data systems, data structures and algorithms, design and analysis of algorithms, operating systems, computer networks, database systems, AI and machine learning, and digital ethics and data privacy (A).</li>
+                <li><strong>NUS Orbital</strong> at Apollo 11 level, the independent-project tier.</li>
                 <li>Started with <strong>Harvard CS50</strong> in 2023, which is the reason this site exists at all.</li>
                 </ul>
             </div>
@@ -212,7 +224,7 @@
         <div class="section-head reveal">
             <p class="eyebrow">Contact</p>
             <h2 class="h1">Looking for a 6-month internship from early 2027</h2>
-            <p class="lede">Backend, distributed systems, infrastructure. Based in Singapore.</p>
+            <p class="lede">Software engineering, end to end. Based in Singapore.</p>
         </div>
 
         <div class="contacts reveal">

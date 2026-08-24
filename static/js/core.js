@@ -200,16 +200,17 @@
     var ctx = fitCanvas(hero);
 
     /* Layout is in normalised 0..1 space so it scales with the box.
-       Shape mirrors the DeepCS topology: one edge, a fan of services, two stores. */
+       Shape mirrors DeepCS as it runs today: a browser, one Worker doing the
+       routing, its handlers, and what sits behind them. */
     var nodes = [
-      { id: "client", x: 0.5, y: 0.08, r: 5.5, kind: "client", label: "browsers" },
-      { id: "gw", x: 0.5, y: 0.3, r: 7.5, kind: "edge", label: "gateway" },
-      { id: "users", x: 0.15, y: 0.56, r: 5, kind: "svc", label: "users" },
-      { id: "questions", x: 0.38, y: 0.56, r: 5, kind: "svc", label: "questions" },
-      { id: "matching", x: 0.62, y: 0.56, r: 5, kind: "svc", label: "matching" },
-      { id: "collab", x: 0.85, y: 0.56, r: 5, kind: "svc", label: "collab" },
-      { id: "pg", x: 0.32, y: 0.87, r: 6, kind: "store", label: "postgres" },
-      { id: "redis", x: 0.7, y: 0.87, r: 6, kind: "store", label: "redis" }
+      { id: "client", x: 0.5, y: 0.08, r: 5.5, kind: "client", label: "browser" },
+      { id: "edge", x: 0.5, y: 0.3, r: 7.5, kind: "edge", label: "worker" },
+      { id: "auth", x: 0.19, y: 0.56, r: 5, kind: "svc", label: "verify" },
+      { id: "gate", x: 0.5, y: 0.56, r: 5, kind: "svc", label: "gate" },
+      { id: "pay", x: 0.81, y: 0.56, r: 5, kind: "svc", label: "payments" },
+      { id: "d1", x: 0.5, y: 0.87, r: 6, kind: "store", label: "d1" },
+      { id: "stripe", x: 0.83, y: 0.87, r: 6, kind: "store", label: "stripe" },
+      { id: "firebase", x: 0.17, y: 0.87, r: 6, kind: "store", label: "firebase" }
     ];
 
     var byId = {};
@@ -218,16 +219,15 @@
     });
 
     var edges = [
-      ["client", "gw"],
-      ["gw", "users"],
-      ["gw", "questions"],
-      ["gw", "matching"],
-      ["gw", "collab"],
-      ["users", "pg"],
-      ["questions", "pg"],
-      ["matching", "redis"],
-      ["collab", "redis"],
-      ["questions", "redis"]
+      ["client", "edge"],
+      ["edge", "auth"],
+      ["edge", "gate"],
+      ["edge", "pay"],
+      ["auth", "firebase"],
+      ["auth", "gate"],
+      ["gate", "d1"],
+      ["pay", "d1"],
+      ["pay", "stripe"]
     ];
 
     /* Each packet walks one edge, then hands off to a connected edge. */
@@ -401,71 +401,114 @@
       c.clearRect(0, 0, w, h);
 
       if (kind === "deepcs") {
-        /* Two replicas converging: same document, edits crossing between them. */
-        var midY = h / 2;
-        var lx = w * 0.2;
-        var rx = w * 0.8;
+        /* One node at the centre answering everything: requests arrive from
+           every direction and are served from the same single place. */
+        var cx = w / 2;
+        var cy = h / 2;
+        var ring = Math.min(w, h) * 0.34;
+        var pts = 5;
 
         c.strokeStyle = border;
         c.lineWidth = 1;
-        c.beginPath();
-        c.moveTo(lx, midY);
-        c.lineTo(rx, midY);
-        c.stroke();
+        for (var s = 0; s < pts; s++) {
+          var ang = (s / pts) * Math.PI * 2 - Math.PI / 2;
+          c.beginPath();
+          c.moveTo(cx + Math.cos(ang) * ring, cy + Math.sin(ang) * ring);
+          c.lineTo(cx, cy);
+          c.stroke();
+        }
 
-        [lx, rx].forEach(function (x, idx) {
-          c.fillStyle = idx === 0 ? teal : amber;
-          c.globalAlpha = 0.15;
+        for (var s2 = 0; s2 < pts; s2++) {
+          var a2 = (s2 / pts) * Math.PI * 2 - Math.PI / 2;
+          c.fillStyle = border;
+          c.globalAlpha = 0.75;
           c.beginPath();
-          c.arc(x, midY, 17, 0, Math.PI * 2);
+          c.arc(cx + Math.cos(a2) * ring, cy + Math.sin(a2) * ring, 3, 0, Math.PI * 2);
           c.fill();
-          c.globalAlpha = 1;
-          c.strokeStyle = idx === 0 ? teal : amber;
-          c.lineWidth = 1.4;
+
+          /* In on the way there, back out on the way home. */
+          var ph = (t * 0.4 + s2 / pts) % 1;
+          var inbound = ph < 0.5;
+          var leg = inbound ? ph * 2 : (ph - 0.5) * 2;
+          var travel = inbound ? 1 - leg : leg;
+          c.fillStyle = inbound ? teal : amber;
+          c.globalAlpha = Math.sin(leg * Math.PI) * 0.85 + 0.15;
           c.beginPath();
-          c.arc(x, midY, 11, 0, Math.PI * 2);
+          c.arc(cx + Math.cos(a2) * ring * travel, cy + Math.sin(a2) * ring * travel, 2.8, 0, Math.PI * 2);
+          c.fill();
+        }
+
+        c.globalAlpha = 0.14;
+        c.fillStyle = teal;
+        c.beginPath();
+        c.arc(cx, cy, 16, 0, Math.PI * 2);
+        c.fill();
+        c.globalAlpha = 1;
+        c.strokeStyle = teal;
+        c.lineWidth = 1.6;
+        c.beginPath();
+        c.arc(cx, cy, 10, 0, Math.PI * 2);
+        c.stroke();
+      } else if (kind === "aquavitae") {
+        /* A storefront funnel: visitors arrive across three lanes, narrow
+           through one checkout, and a few come out the other side as orders. */
+        var midY2 = h / 2;
+        var neckX = w * 0.62;
+        var lanes = [-1, 0, 1];
+
+        c.lineWidth = 1;
+        lanes.forEach(function (lane) {
+          var y0 = midY2 + lane * 17;
+          c.strokeStyle = border;
+          c.beginPath();
+          c.moveTo(10, y0);
+          c.lineTo(neckX - 26, y0);
+          c.quadraticCurveTo(neckX - 12, y0, neckX, midY2);
           c.stroke();
         });
 
-        for (var k = 0; k < 3; k++) {
-          var phase = (t * 0.42 + k / 3) % 1;
-          var dir = k % 2 === 0 ? 1 : -1;
-          var pt = dir === 1 ? phase : 1 - phase;
-          var x = lx + (rx - lx) * pt;
-          var y = midY + Math.sin(phase * Math.PI) * 15 * dir;
-          c.fillStyle = dir === 1 ? teal : amber;
-          c.globalAlpha = Math.sin(phase * Math.PI) * 0.9 + 0.1;
+        c.strokeStyle = border;
+        c.beginPath();
+        c.moveTo(neckX, midY2);
+        c.lineTo(w - 10, midY2);
+        c.stroke();
+
+        /* The checkout: bought, not built, so it is drawn as one solid block. */
+        c.globalAlpha = 0.16;
+        c.fillStyle = amber;
+        c.fillRect(neckX - 4, midY2 - 13, 8, 26);
+        c.globalAlpha = 0.9;
+        c.strokeStyle = amber;
+        c.lineWidth = 1.8;
+        c.beginPath();
+        c.moveTo(neckX, midY2 - 13);
+        c.lineTo(neckX, midY2 + 13);
+        c.stroke();
+        c.globalAlpha = 1;
+
+        for (var v = 0; v < 6; v++) {
+          var lane2 = lanes[v % 3];
+          var vp = (t * 0.3 + v / 6) % 1;
+          /* Only a couple of the six make it past the neck, which is what a
+             real funnel looks like. */
+          var converts = v % 3 === 0;
+          if (!converts && vp > 0.58) continue;
+
+          var vx, vy;
+          if (vp < 0.58) {
+            vx = 10 + (neckX - 10) * (vp / 0.58);
+            var pinch = Math.max(0, (vx - (neckX - 26)) / 26);
+            vy = midY2 + lane2 * 17 * (1 - pinch);
+          } else {
+            vx = neckX + (w - 10 - neckX) * ((vp - 0.58) / 0.42);
+            vy = midY2;
+          }
+          c.fillStyle = vp < 0.58 ? teal : amber;
+          c.globalAlpha = vp < 0.58 ? 0.8 : 0.95;
           c.beginPath();
-          c.arc(x, y, 3, 0, Math.PI * 2);
+          c.arc(vx, vy, vp < 0.58 ? 2.6 : 3.4, 0, Math.PI * 2);
           c.fill();
         }
-        c.globalAlpha = 1;
-      } else if (kind === "recall") {
-        /* Postings lists: rows of cells, a scan sweeping across the matches. */
-        var rows = 4;
-        var cols = 14;
-        var cw = (w - 32) / cols;
-        var rh = 13;
-        var top = (h - rows * rh) / 2;
-        var scan = ((t * 0.3) % 1) * cols;
-
-        for (var r = 0; r < rows; r++) {
-          for (var col = 0; col < cols; col++) {
-            /* Deterministic "postings" pattern, no randomness per frame. */
-            var on = (col * 7 + r * 3) % 5 === 0 || (col * 3 + r) % 11 === 0;
-            var near = Math.abs(col - scan) < 1.6;
-            c.fillStyle = on ? teal : border;
-            c.globalAlpha = on ? (near ? 1 : 0.45) : 0.3;
-            c.fillRect(16 + col * cw, top + r * rh, cw - 3, rh - 4);
-          }
-        }
-        c.globalAlpha = 0.7;
-        c.strokeStyle = amber;
-        c.lineWidth = 1.2;
-        c.beginPath();
-        c.moveTo(16 + scan * cw, top - 5);
-        c.lineTo(16 + scan * cw, top + rows * rh + 1);
-        c.stroke();
         c.globalAlpha = 1;
       } else if (kind === "airlock") {
         /* A gate: packages approach, one is stopped at the barrier. */

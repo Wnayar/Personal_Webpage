@@ -1,9 +1,9 @@
 /* ==========================================================================
-   Interactive labs: topology, token bucket, CRDT, BM25, Airlock gate
-   Plus the /systems and /about page furniture.
+   Interactive labs: DeepCS topology (v1 and v2), CRDT convergence, Airlock gate
+   Plus the /work and /about page furniture.
    ========================================================================== */
 
-/* --- Systems page shell --------------------------------------------------- */
+/* --- Work page shell --------------------------------------------------- */
 
 .subnav {
   position: sticky;
@@ -364,6 +364,11 @@ input[type="range"]::-moz-range-thumb {
 .topo__stage {
   position: relative;
   min-width: 0;
+  /* v1 and v2 have different aspect ratios, and the stage is as tall as the
+     side column either way. Centring means the shorter diagram sits in the
+     middle of the panel rather than leaving a dead band under it. */
+  display: grid;
+  align-content: center;
   background: radial-gradient(ellipse 80% 70% at 50% 40%, var(--surface-2), var(--bg-deep));
   border-right: 1px solid var(--border);
   overflow: hidden;
@@ -498,6 +503,18 @@ input[type="range"]::-moz-range-thumb {
 .node--client .node__box {
   fill: var(--surface);
   stroke-dasharray: 3 3;
+}
+
+/* Bought, not built: the services someone else runs. */
+.node--ext .node__box {
+  fill: color-mix(in srgb, var(--blue) 14%, transparent);
+  stroke: color-mix(in srgb, var(--blue) 62%, transparent);
+}
+
+.node--ext.is-lit .node__box {
+  stroke: var(--blue);
+  filter: drop-shadow(0 0 9px rgba(121, 184, 255, 0.3));
+  fill: color-mix(in srgb, var(--blue) 18%, var(--surface-2));
 }
 
 /* Instance stack marks behind a node = "×0–2 instances" */
@@ -722,226 +739,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ==========================================================================
-   2. Token bucket race
-   ========================================================================== */
-
-.bucket {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1px;
-  background: var(--border);
-}
-
-@media (max-width: 860px) {
-  .bucket {
-    grid-template-columns: 1fr;
-  }
-}
-
-.bucket__viz,
-.bucket__log-pane {
-  background: var(--surface);
-  padding: 1.1rem;
-  min-width: 0;
-}
-
-.bucket__instances {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.7rem;
-  margin-bottom: 1rem;
-}
-
-.gwbox {
-  padding: 0.7rem;
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  background: var(--surface-2);
-  text-align: center;
-  transition: all 0.2s var(--ease);
-}
-
-.gwbox.is-active {
-  border-color: var(--accent);
-  background: var(--wash-accent);
-}
-
-.gwbox.is-conflict {
-  border-color: var(--red);
-  background: var(--wash-red);
-}
-
-.gwbox__name {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--muted);
-  margin-bottom: 0.3rem;
-}
-
-.gwbox__read {
-  font-family: var(--font-mono);
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--text);
-  min-height: 1.5em;
-}
-
-.bucket__tank {
-  position: relative;
-  height: 34px;
-  margin-bottom: 0.5rem;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--r-sm);
-  background: var(--bg-deep);
-  overflow: hidden;
-  display: flex;
-  gap: 3px;
-  padding: 4px;
-}
-
-.token-cell {
-  flex: 1;
-  border-radius: 2px;
-  background: var(--surface-3);
-  transition: background-color 0.22s var(--ease), box-shadow 0.22s var(--ease);
-}
-
-.token-cell.is-full {
-  background: var(--accent);
-  box-shadow: 0 0 8px -1px var(--glow-accent);
-}
-
-.token-cell.is-over {
-  background: var(--red);
-  box-shadow: 0 0 8px -1px rgba(248, 113, 113, 0.5);
-}
-
-.bucket__tank-label {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--muted);
-  margin-bottom: 1rem;
-}
-
-.bucket__stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.6rem;
-}
-
-.stat {
-  padding: 0.65rem 0.7rem;
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  background: var(--surface-2);
-  text-align: center;
-}
-
-.stat__num {
-  font-family: var(--font-mono);
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--text);
-  line-height: 1.2;
-}
-
-.stat__num.is-bad {
-  color: var(--red);
-}
-
-.stat__num.is-good {
-  color: var(--green);
-}
-
-.stat__label {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--faint);
-  margin-top: 0.25rem;
-}
-
-/* Log */
-.logview {
-  height: 250px;
-  overflow-y: auto;
-  padding: 0.75rem;
-  border: 1px solid var(--border);
-  border-radius: var(--r-sm);
-  background: var(--bg-deep);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  line-height: var(--lh-mono);
-  scrollbar-width: thin;
-}
-
-.logview::-webkit-scrollbar {
-  width: 7px;
-}
-
-.logview::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
-  border-radius: 4px;
-}
-
-.logline {
-  display: flex;
-  gap: 0.6rem;
-  color: var(--muted);
-  animation: logIn 0.24s var(--ease);
-}
-
-@keyframes logIn {
-  from {
-    opacity: 0;
-    transform: translateX(-4px);
-  }
-}
-
-.logline__who {
-  flex: none;
-  width: 5.5rem;
-  color: var(--faint);
-}
-
-@media (max-width: 620px) {
-  .logview {
-    font-size: 0.7rem;
-  }
-
-  .logline__who {
-    width: 3.6rem;
-  }
-}
-
-.logline--a .logline__who {
-  color: var(--blue);
-}
-
-.logline--b .logline__who {
-  color: var(--violet);
-}
-
-.logline--bad {
-  color: var(--red);
-  font-weight: 500;
-}
-
-.logline--good {
-  color: var(--green);
-}
-
-.logline--sys {
-  color: var(--faint);
-  font-style: italic;
-}
-
-/* ==========================================================================
-   3. CRDT convergence
+   2. CRDT convergence
    ========================================================================== */
 
 .crdt__panes {
@@ -1162,258 +960,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ==========================================================================
-   4. Recall: BM25
-   ========================================================================== */
-
-.ir__search {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.ir__input {
-  flex: 1;
-  min-width: 200px;
-  padding: 0.7rem 0.9rem;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--r-md);
-  background: var(--bg-deep);
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
-}
-
-.ir__input::placeholder {
-  color: var(--faint);
-}
-
-.ir__input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--wash-accent);
-}
-
-.ir__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-bottom: 1.1rem;
-}
-
-.ir__chip {
-  padding: 0.28rem 0.65rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface-2);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--muted);
-  transition: all 0.2s var(--ease);
-}
-
-.ir__chip:hover {
-  border-color: var(--accent-deep);
-  color: var(--accent);
-}
-
-.ir__pipeline {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  overflow: hidden;
-  margin-bottom: 1.1rem;
-}
-
-.ir__stage {
-  background: var(--surface-2);
-  padding: 0.7rem 0.8rem;
-  min-width: 0;
-}
-
-.ir__stage-name {
-  font-family: var(--font-mono);
-  font-size: 0.64rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--faint);
-  margin-bottom: 0.45rem;
-}
-
-.ir__stage-body {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  color: var(--text-2);
-  line-height: var(--lh-mono);
-  word-break: break-word;
-  min-height: 1.7em;
-}
-
-.term {
-  display: inline-block;
-  padding: 0.05rem 0.35rem;
-  margin: 0 0.15rem 0.2rem 0;
-  border-radius: 3px;
-  background: var(--wash-accent);
-  color: var(--accent);
-  animation: charIn 0.3s var(--ease);
-}
-
-.term--drop {
-  background: var(--surface-3);
-  color: var(--faint);
-  text-decoration: line-through;
-}
-
-.term--syn {
-  background: color-mix(in srgb, var(--violet) 14%, transparent);
-  color: var(--violet);
-}
-
-.ir__results {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.hit {
-  position: relative;
-  padding: 0.85rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  background: var(--surface-2);
-  overflow: hidden;
-  animation: hitIn 0.35s var(--ease) backwards;
-}
-
-@keyframes hitIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-}
-
-.hit__bar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: var(--w, 0%);
-  background: var(--wash-accent);
-  transition: width 0.5s var(--ease);
-  pointer-events: none;
-}
-
-.hit > * {
-  position: relative;
-}
-
-.hit__head {
-  display: flex;
-  align-items: baseline;
-  gap: 0.7rem;
-  margin-bottom: 0.4rem;
-  flex-wrap: wrap;
-}
-
-.hit__rank {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--faint);
-}
-
-.hit__src {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--accent);
-}
-
-.hit__score {
-  margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.hit__text {
-  font-size: var(--fs-sm);
-  line-height: var(--lh-sm);
-  color: var(--text-2);
-  max-width: var(--measure-wide);
-}
-
-.hit__text mark {
-  background: color-mix(in srgb, var(--accent) 22%, transparent);
-  color: var(--accent-bright);
-  border-radius: 2px;
-  padding: 0 2px;
-}
-
-[data-theme="light"] .hit__text mark {
-  color: var(--accent-deep);
-}
-
-.hit__math {
-  margin-top: var(--s-3);
-  padding-top: var(--s-3);
-  border-top: 1px dashed var(--border);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--muted);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem 0.9rem;
-}
-
-.hit__math b {
-  color: var(--text-2);
-  font-weight: 500;
-}
-
-.refusal {
-  padding: 1rem;
-  border: 1px dashed color-mix(in srgb, var(--amber) 45%, transparent);
-  border-radius: var(--r-md);
-  background: var(--wash-amber);
-  font-size: 0.9rem;
-  color: var(--text-2);
-}
-
-.refusal b {
-  display: block;
-  color: var(--amber);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 0.4rem;
-}
-
-.formula {
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-  background: var(--bg-deep);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-2);
-  overflow-x: auto;
-  line-height: 1.9;
-  white-space: pre-wrap;
-}
-
-.formula em {
-  color: var(--accent);
-  font-style: normal;
-}
-
-/* ==========================================================================
-   5. Airlock gate
+   3. Airlock gate
    ========================================================================== */
 
 .gate {
@@ -1643,7 +1190,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ==========================================================================
-   6. About page
+   4. About page
    ========================================================================== */
 
 .about__hero {
@@ -2345,20 +1892,6 @@ input[type="range"]::-moz-range-thumb {
 .gate__hint.is-hidden {
   opacity: 0;
   pointer-events: none;
-}
-
-/* One plain sentence in place of the old four-stage pipeline. */
-.ir__matched {
-  margin: 0 0 var(--s-4);
-  max-width: none;
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  color: var(--muted);
-}
-
-.ir__matched b {
-  color: var(--accent);
-  font-weight: 500;
 }
 
 /* A display value beats the hidden attribute, so say it outright. */
