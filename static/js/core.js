@@ -193,188 +193,119 @@
     });
   }
 
-  /* --- Hero: request flowing through a service graph ---------------------- */
+  /* --- Hero: the three things I've started -------------------------------
+     Two founded, one won. Each marker climbs off the baseline and holds
+     there, which is the point: things that got started and stayed up. */
 
   var hero = document.getElementById("hero-canvas");
   if (hero) {
     var ctx = fitCanvas(hero);
 
-    /* Layout is in normalised 0..1 space so it scales with the box.
-       Shape mirrors DeepCS as it runs today: a browser, one Worker doing the
-       routing, its handlers, and what sits behind them. */
-    var nodes = [
-      { id: "client", x: 0.5, y: 0.08, r: 5.5, kind: "client", label: "browser" },
-      { id: "edge", x: 0.5, y: 0.3, r: 7.5, kind: "edge", label: "worker" },
-      { id: "auth", x: 0.19, y: 0.56, r: 5, kind: "svc", label: "verify" },
-      { id: "gate", x: 0.5, y: 0.56, r: 5, kind: "svc", label: "gate" },
-      { id: "pay", x: 0.81, y: 0.56, r: 5, kind: "svc", label: "payments" },
-      { id: "d1", x: 0.5, y: 0.87, r: 6, kind: "store", label: "d1" },
-      { id: "stripe", x: 0.83, y: 0.87, r: 6, kind: "store", label: "stripe" },
-      { id: "firebase", x: 0.17, y: 0.87, r: 6, kind: "store", label: "firebase" }
+    var MONO = 'ui-monospace, "JetBrains Mono", monospace';
+    var LAUNCHES = [
+      { name: "DeepCS", note: "founded", h: 0.94, won: false },
+      { name: "Aqua Vitae", note: "founded", h: 0.56, won: false },
+      { name: "Airlock", note: "1st place", h: 0.78, won: true }
     ];
 
-    var byId = {};
-    nodes.forEach(function (n) {
-      byId[n.id] = n;
-    });
-
-    var edges = [
-      ["client", "edge"],
-      ["edge", "auth"],
-      ["edge", "gate"],
-      ["edge", "pay"],
-      ["auth", "firebase"],
-      ["auth", "gate"],
-      ["gate", "d1"],
-      ["pay", "d1"],
-      ["pay", "stripe"]
-    ];
-
-    /* Each packet walks one edge, then hands off to a connected edge. */
-    var packets = [];
-    var spawnAt = 0;
-
-    function spawn() {
-      packets.push({
-        e: 0,
-        t: 0,
-        speed: 0.006 + Math.random() * 0.005,
-        hops: 1 + Math.floor(Math.random() * 2)
-      });
-    }
-
-    function edgesFrom(nodeId) {
-      var out = [];
-      edges.forEach(function (e, i) {
-        if (e[0] === nodeId) out.push(i);
-      });
-      return out;
-    }
+    var CYCLE = 7600;   /* one full climb-and-hold, in ms */
+    var STAGGER = 620;  /* so they do not all leave the ground together */
 
     runWhenVisible(hero, function (time) {
       var w = hero.__w;
       var h = hero.__h;
       if (!w || !h) return;
 
-      var pad = 26;
-      var px = function (n) {
-        return pad + n.x * (w - pad * 2);
-      };
-      var py = function (n) {
-        return pad + n.y * (h - pad * 2);
-      };
-
-      var cTeal = themeColor("--accent", "#4493f8");
-      var cBorder = themeColor("--border-strong", "#46617f");
-      var cAmber = themeColor("--amber", "#d29922");
-      var cMuted = themeColor("--faint", "#7f93aa");
+      var accent = themeColor("--accent", "#4493f8");
+      var amber = themeColor("--amber", "#d29922");
+      var border = themeColor("--border-strong", "#46617f");
+      var text2 = themeColor("--text-2", "#aec9ee");
+      var faint = themeColor("--faint", "#7f93aa");
 
       ctx.clearRect(0, 0, w, h);
 
-      /* Edges */
+      var labels = w > 260;
+      var base = h * (labels ? 0.74 : 0.86);
+      var span = base - h * 0.13;
+
+      /* The ground everything leaves from. */
+      ctx.strokeStyle = border;
       ctx.lineWidth = 1;
-      edges.forEach(function (e) {
-        var a = byId[e[0]];
-        var b = byId[e[1]];
-        ctx.strokeStyle = cBorder;
-        ctx.globalAlpha = 0.75;
-        ctx.beginPath();
-        ctx.moveTo(px(a), py(a));
-        ctx.lineTo(px(b), py(b));
-        ctx.stroke();
-      });
+      ctx.globalAlpha = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(w * 0.06, base);
+      ctx.lineTo(w * 0.94, base);
+      ctx.stroke();
       ctx.globalAlpha = 1;
 
-      /* Packets */
-      if (!reduced && time - spawnAt > 620 && packets.length < 7) {
-        spawnAt = time;
-        spawn();
-      }
+      LAUNCHES.forEach(function (it, i) {
+        var x = w * (0.2 + i * 0.3);
+        var col = it.won ? amber : accent;
 
-      var arrivals = {};
-      for (var i = packets.length - 1; i >= 0; i--) {
-        var p = packets[i];
-        p.t += p.speed;
-
-        var e = edges[p.e];
-        var a = byId[e[0]];
-        var b = byId[e[1]];
-        var x = px(a) + (px(b) - px(a)) * p.t;
-        var y = py(a) + (py(b) - py(a)) * p.t;
-
-        if (p.t >= 1) {
-          arrivals[e[1]] = time;
-          var next = edgesFrom(e[1]);
-          if (p.hops > 0 && next.length) {
-            p.e = next[Math.floor(Math.random() * next.length)];
-            p.t = 0;
-            p.hops--;
-          } else {
-            packets.splice(i, 1);
-            continue;
-          }
+        var climb = 1;
+        var fade = 1;
+        if (!reduced) {
+          var t = (((time - i * STAGGER) % CYCLE) + CYCLE) % CYCLE / CYCLE;
+          /* Climb over the first quarter, hold, then fade out and repeat. */
+          climb = t < 0.26 ? 1 - Math.pow(1 - t / 0.26, 3) : 1;
+          fade = t > 0.9 ? 1 - (t - 0.9) / 0.1 : 1;
         }
 
-        var g = ctx.createRadialGradient(x, y, 0, x, y, 9);
-        g.addColorStop(0, cTeal);
-        g.addColorStop(1, "rgba(68,147,248,0)");
-        ctx.fillStyle = g;
-        ctx.globalAlpha = 0.85;
-        ctx.beginPath();
-        ctx.arc(x, y, 9, 0, Math.PI * 2);
-        ctx.fill();
+        var y = base - span * it.h * climb;
+        var r = 4.6;
 
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = cTeal;
-        ctx.beginPath();
-        ctx.arc(x, y, 2.4, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      /* Nodes */
-      nodes.forEach(function (n) {
-        var x = px(n);
-        var y = py(n);
-        var hit = arrivals[n.id] ? 1 : 0;
-        var pulse = hit ? 1 : 0.55 + Math.sin(time / 900 + n.x * 7) * 0.12;
-        var color = n.kind === "store" ? cAmber : n.kind === "client" ? cMuted : cTeal;
-
-        if (n.kind === "store") {
-          ctx.strokeStyle = color;
-          ctx.globalAlpha = 0.5;
-          ctx.lineWidth = 1.3;
+        /* Trail, fading out towards the ground it came from. */
+        if (y < base - 1) {
+          var grad = ctx.createLinearGradient(x, base, x, y);
+          grad.addColorStop(0, "transparent");
+          grad.addColorStop(1, col);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 1.5;
+          ctx.globalAlpha = 0.6 * fade;
           ctx.beginPath();
-          ctx.ellipse(x, y, n.r + 2, n.r - 1, 0, 0, Math.PI * 2);
+          ctx.moveTo(x, base);
+          ctx.lineTo(x, y);
           ctx.stroke();
-        } else {
-          ctx.globalAlpha = 0.16 * pulse;
-          ctx.fillStyle = color;
-          ctx.beginPath();
-          ctx.arc(x, y, n.r + 7, 0, Math.PI * 2);
-          ctx.fill();
         }
 
-        ctx.globalAlpha = n.kind === "client" ? 0.6 : 0.95;
-        ctx.fillStyle = color;
+        /* Marker: a soft halo, a ring, and a solid core. */
+        ctx.fillStyle = col;
+        ctx.globalAlpha = 0.14 * fade * climb;
         ctx.beginPath();
-        ctx.arc(x, y, n.r * (n.kind === "edge" ? 0.62 : 0.5), 0, Math.PI * 2);
+        ctx.arc(x, y, 15, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.globalAlpha = 0.85;
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 1.2;
+        ctx.globalAlpha = 0.85 * fade;
+        ctx.strokeStyle = col;
+        ctx.lineWidth = 1.3;
         ctx.beginPath();
-        ctx.arc(x, y, n.r, 0, Math.PI * 2);
+        ctx.arc(x, y, 9.5, 0, Math.PI * 2);
         ctx.stroke();
 
-        /* Labels make this read as an architecture rather than abstract dots. */
-        if (n.label && w > 300) {
-          ctx.globalAlpha = hit ? 0.95 : 0.5;
-          ctx.fillStyle = color;
-          ctx.font = '9px ui-monospace, "JetBrains Mono", monospace';
+        ctx.globalAlpha = fade;
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+
+        /* A tick on the baseline, so the start point stays visible. */
+        ctx.globalAlpha = 0.5;
+        ctx.strokeStyle = border;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x, base - 3);
+        ctx.lineTo(x, base + 3);
+        ctx.stroke();
+
+        if (labels) {
+          ctx.globalAlpha = 1;
           ctx.textAlign = "center";
           ctx.textBaseline = "top";
-          ctx.fillText(n.label, x, y + n.r + 10);
+          ctx.fillStyle = text2;
+          ctx.font = '600 11px ' + MONO;
+          ctx.fillText(it.name, x, base + 16);
+          ctx.fillStyle = it.won ? amber : faint;
+          ctx.font = '10px ' + MONO;
+          ctx.fillText(it.note, x, base + 32);
         }
       });
 

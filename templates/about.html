@@ -2,7 +2,7 @@
 
 {% block title %}About · William Nayar{% endblock %}
 {% block social_title %}About · William Nayar{% endblock %}
-{% set _about_meta = "William Nayar, software engineer and founder. Final-year Computer Science at NUS, teaching CS3219, founder of DeepCS and Aqua Vitae Parfums." %}
+{% set _about_meta = "William Nayar, Software Engineer and Founder. Teaching assistant at NUS, founder of DeepCS and Aqua Vitae Parfums." %}
 {% block meta_description %}{{ _about_meta }}{% endblock %}
 {% block og_description %}{{ _about_meta }}{% endblock %}
 
@@ -21,8 +21,8 @@
                 <p class="eyebrow">About</p>
                 <h1 class="h1" style="margin-bottom:.9rem">William Nayar</h1>
                 <p class="lede">
-                    Software engineer and founder, final year of Computer Science at NUS. I build things, ship
-                    them, and keep them running.
+                    Software Engineer and Founder, leading student engineering teams at NUS, building at scale
+                    and drawn to hard problems.
                 </p>
             </div>
         </div>
@@ -31,61 +31,44 @@
 
 <hr class="rule">
 
-<!-- ===================== TIMELINE ===================== -->
+<!-- ===================== EXPERIENCE ===================== -->
 <section class="section" id="path">
     <div class="wrap">
         <div class="section-head reveal">
-            <p class="eyebrow">Path</p>
-            <h2 class="h1">How I got here</h2>
+            <p class="eyebrow">Experience</p>
+            <h2 class="h1">Where I've worked</h2>
         </div>
 
         <div class="timeline">
             <div class="tl-item">
                 <div class="tl-item__when">Aug 2026 to now</div>
-                <h3 class="tl-item__what">Teaching Assistant, <span>CS3219</span> · NUS</h3>
-                <p class="tl-item__detail">Software design and architecture. 11 engineering teams mentored through building and deploying distributed applications. Weekly classes of 30.</p>
+                <h3 class="tl-item__what">Teaching Assistant, Software Design &amp; Architecture (<span>CS3219</span>) · NUS</h3>
+                <p class="tl-item__detail">Mentor 11 student engineering teams through the full development lifecycle, from design and testing to deploying distributed microservices with REST APIs, Docker and CI/CD. Lead weekly classes of 30 on large-scale system design and architecture trade-offs.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">Jul 2026 to now</div>
-                <h3 class="tl-item__what">Founder and engineer, <span>DeepCS</span></h3>
-                <p class="tl-item__detail">Built as six microservices, then cut to one Cloudflare Worker after 72% of surveyed users said they did not want the collaborative half.</p>
-            </div>
-
-            <div class="tl-item">
-                <div class="tl-item__when">Jul 2026</div>
-                <h3 class="tl-item__what">1st place overall, <span>AI Builder and Daytona HackSprint</span></h3>
-                <p class="tl-item__detail">Airlock, built over a weekend with my friend Basil.</p>
+                <h3 class="tl-item__what">Founder &amp; Software Engineer, <span>DeepCS</span></h3>
+                <p class="tl-item__detail">Deployed and maintain a full-stack learning platform on Cloudflare Workers and D1, serving the React app and all content from the edge. Re-architected a 6-service microservices backend into a single edge Worker after user feedback showed no demand for live collaboration.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">Jun to Jul 2026</div>
-                <h3 class="tl-item__what">Merged PRs into <span>mongoose</span> and <span>node-redis</span></h3>
+                <h3 class="tl-item__what">Software Engineer, Open Source · <span>Mongoose</span> &amp; <span>node-redis</span></h3>
                 <p class="tl-item__detail">
-                    Three of them, into libraries with 27k and 17k stars
+                    Improved official documentation for Mongoose (27K+ stars) and node-redis (17K+ stars), with three
+                    pull requests reviewed and merged by maintainers
                     (<a href="https://github.com/Automattic/mongoose/pull/16371" target="_blank" rel="noopener">#16371</a>,
                     <a href="https://github.com/Automattic/mongoose/pull/16369" target="_blank" rel="noopener">#16369</a>,
                     <a href="https://github.com/redis/node-redis/pull/3332" target="_blank" rel="noopener">#3332</a>).
-                    Gaps I hit using them in my own work.
+                    Gaps I found using the libraries in production work.
                 </p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">Dec 2025 to Mar 2026</div>
-                <h3 class="tl-item__what">Founder, <span>Aqua Vitae Parfums</span></h3>
-                <p class="tl-item__detail">Sole engineer, designer and operator. React and TypeScript storefront, Shopify checkout.</p>
-            </div>
-
-            <div class="tl-item">
-                <div class="tl-item__when">Aug to Nov 2025</div>
-                <h3 class="tl-item__what">Question Service owner, <span>PeerPrep</span></h3>
-                <p class="tl-item__detail">One service owned end to end. 15 endpoints, 35 tests.</p>
-            </div>
-
-            <div class="tl-item">
-                <div class="tl-item__when">2023</div>
-                <h3 class="tl-item__what">Harvard <span>CS50</span></h3>
-                <p class="tl-item__detail">Where it started. The first version of this site was my final project.</p>
+                <h3 class="tl-item__what">Founder &amp; Software Engineer, <span>Aqua Vitae Parfums</span></h3>
+                <p class="tl-item__detail">Founded and launched a perfume business as the sole engineer, designer and operator. Custom React and TypeScript storefront, integrating Shopify for checkout to keep payments and compliance off my plate.</p>
             </div>
         </div>
     </div>
@@ -93,11 +76,11 @@
 
 <hr class="rule">
 
-<!-- ===================== TOOLS ===================== -->
+<!-- ===================== SKILLS ===================== -->
 <section class="section">
     <div class="wrap">
         <div class="section-head reveal">
-            <p class="eyebrow">Toolbox</p>
+            <p class="eyebrow">Technical skills</p>
             <h2 class="h1">What I've worked with</h2>
         </div>
 
@@ -122,30 +105,24 @@
                 <ul>
                     <li class="tag">Node.js</li><li class="tag">Fastify</li><li class="tag">Express</li>
                     <li class="tag">Flask</li><li class="tag">REST APIs</li><li class="tag">WebSockets</li>
-                    <li class="tag">Distributed systems</li><li class="tag">TCP/IP</li><li class="tag">Unix/Linux</li>
+                    <li class="tag">Distributed systems</li><li class="tag">TCP/IP</li><li class="tag">HTTP</li>
+                    <li class="tag">Unix/Linux</li>
                 </ul>
             </div>
             <div class="skillgrp reveal" data-delay="3">
                 <h3>Databases</h3>
                 <ul>
                     <li class="tag">PostgreSQL</li><li class="tag">MongoDB</li><li class="tag">Redis</li>
-                    <li class="tag">SQLite</li><li class="tag">D1</li><li class="tag">Firebase</li>
-                    <li class="tag">Supabase</li>
+                    <li class="tag">SQLite</li><li class="tag">Firebase</li><li class="tag">Supabase</li>
                 </ul>
             </div>
             <div class="skillgrp reveal">
-                <h3>Cloud &amp; platform</h3>
+                <h3>Cloud &amp; tools</h3>
                 <ul>
-                    <li class="tag">Cloudflare Workers</li><li class="tag">Google Cloud</li><li class="tag">AWS</li>
-                    <li class="tag">Docker</li><li class="tag">Nginx</li><li class="tag">Stripe</li>
-                    <li class="tag">Shopify</li>
-                </ul>
-            </div>
-            <div class="skillgrp reveal" data-delay="1">
-                <h3>Testing &amp; tooling</h3>
-                <ul>
-                    <li class="tag">Vitest</li><li class="tag">Jest</li><li class="tag">GitHub Actions</li>
-                    <li class="tag">CI/CD</li><li class="tag">Git</li><li class="tag">Postman</li>
+                    <li class="tag">Google Cloud</li><li class="tag">AWS</li><li class="tag">Cloudflare</li>
+                    <li class="tag">Nginx</li><li class="tag">Docker</li><li class="tag">Git</li>
+                    <li class="tag">GitHub Actions</li><li class="tag">CI/CD</li><li class="tag">Vitest</li>
+                    <li class="tag">Jest</li><li class="tag">Postman</li>
                 </ul>
             </div>
         </div>
@@ -154,18 +131,19 @@
 
 <hr class="rule">
 
-<!-- ===================== EDUCATION ===================== -->
+<!-- ===================== EDUCATION & AWARDS ===================== -->
 <section class="section" id="education">
     <div class="wrap">
         <div class="edu reveal">
             <div>
-                <p class="eyebrow">Education</p>
+                <p class="eyebrow">Education &amp; awards</p>
                 <h2 class="h1">National University of Singapore</h2>
 
                 <ul class="bullets" style="margin-top:var(--s-6)">
-                <li><strong>BComp in Computer Science</strong>, 2023 to 2027. Software Engineering specialisation, Honours (Distinction).</li>
-                <li><strong>Certificate of Distinction</strong>, Software Engineering focus area. 4.50 GPA.</li>
-                <li>Formal methods (A), digital ethics and data privacy (A), communicating in the information age (A+), big data systems, algorithms, operating systems, networks, databases, AI and machine learning.</li>
+                <li><strong>Bachelor of Computing in Computer Science</strong>, Aug 2023 to May 2027. Specialising in Software Engineering, Honours (Distinction).</li>
+                <li><strong>NUS Certificate of Distinction</strong>, Software Engineering. 4.50 GPA across key Software Engineering modules.</li>
+                <li><strong>Hackathon Overall Winner</strong>, 1st Place at the AI Builder and Daytona HackSprint 2026.</li>
+                <li>Formal methods for software engineering (A), digital ethics and data privacy (A), communicating in the information age (A+), big data systems, data structures and algorithms, design and analysis of algorithms, operating systems, computer networks, database systems, AI and machine learning.</li>
                 </ul>
             </div>
 
