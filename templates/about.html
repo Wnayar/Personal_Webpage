@@ -2,13 +2,12 @@
 
 {% block title %}About · William Nayar{% endblock %}
 {% block social_title %}About · William Nayar{% endblock %}
-{% set _about_meta = "William Nayar, software engineer and founder. Final-year Computer Science at NUS, teaching CS3219 to 11 engineering teams, founder of DeepCS and Aqua Vitae Parfums, open to a 2027 SWE internship." %}
+{% set _about_meta = "William Nayar, software engineer and founder. Final-year Computer Science at NUS, teaching CS3219, founder of DeepCS and Aqua Vitae Parfums." %}
 {% block meta_description %}{{ _about_meta }}{% endblock %}
 {% block og_description %}{{ _about_meta }}{% endblock %}
 
 {% block main %}
 
-<!-- ===================== INTRO ===================== -->
 <section class="section">
     <div class="wrap">
         <div class="about__hero reveal">
@@ -22,30 +21,10 @@
                 <p class="eyebrow">About</p>
                 <h1 class="h1" style="margin-bottom:.9rem">William Nayar</h1>
                 <p class="lede">
-                    Software engineer and founder, in my final year of Computer Science at NUS. I take software
-                    through the whole of its life, design, build, test, deploy and then the unglamorous part of
-                    keeping it running for real people, and I lead student engineering teams through doing the
-                    same.
+                    Software engineer and founder, final year of Computer Science at NUS. I build things, ship
+                    them, and keep them running.
                 </p>
             </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===================== NOW ===================== -->
-<section class="section section--tight">
-    <div class="wrap">
-        <div class="section-head reveal">
-            <h2 class="h2">Right now</h2>
-        </div>
-
-        <ul class="bullets reveal">
-            <li><strong>Teaching CS3219</strong> at NUS, software design and architecture. I mentor 11 student engineering teams through the full development lifecycle, from service boundaries to a deployed distributed application, and lead weekly classes of 30 on large-scale system design and the trade-offs behind every call they make. Course materials get reworked with the professors each week, driven by what students actually got stuck on.</li>
-            <li><strong>Running DeepCS</strong>, the learning platform I founded. It is live, it has real users, and it is mine to keep up.</li>
-        </ul>
-
-        <div class="btn-row reveal" style="margin-top:var(--s-5)">
-            <a class="btn" href="/work">See what I've built</a>
         </div>
     </div>
 </section>
@@ -63,60 +42,50 @@
         <div class="timeline">
             <div class="tl-item">
                 <div class="tl-item__when">Aug 2026 to now</div>
-                <h3 class="tl-item__what">Teaching Assistant, <span>CS3219</span> · NUS School of Computing</h3>
-                <p class="tl-item__detail">Software design and architecture. Eleven engineering teams mentored through designing, building, testing and deploying distributed microservices applications with REST APIs, Docker and CI/CD, plus weekly classes of 30 on system design and architecture trade-offs.</p>
+                <h3 class="tl-item__what">Teaching Assistant, <span>CS3219</span> · NUS</h3>
+                <p class="tl-item__detail">Software design and architecture. 11 engineering teams mentored through building and deploying distributed applications. Weekly classes of 30.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">Jul 2026 to now</div>
                 <h3 class="tl-item__what">Founder and engineer, <span>DeepCS</span></h3>
-                <p class="tl-item__detail">Built it as six microservices to learn distributed systems the hard way, then re-architected it into a single Cloudflare Worker when users showed no demand for the collaborative half. Secured the API, built payments on Stripe, and put unit, integration and end-to-end tests in CI.</p>
+                <p class="tl-item__detail">Built as six microservices, then cut to one Cloudflare Worker after 72% of surveyed users said they did not want the collaborative half.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">Jul 2026</div>
                 <h3 class="tl-item__what">1st place overall, <span>AI Builder and Daytona HackSprint</span></h3>
-                <p class="tl-item__detail">Built Airlock over a weekend with my teammate and friend Basil: a safety gate that runs every package an AI agent installs inside a throwaway sandbox first.</p>
+                <p class="tl-item__detail">Airlock, built over a weekend with my friend Basil.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">Jun to Jul 2026</div>
-                <h3 class="tl-item__what">Merged pull requests into <span>mongoose</span> and <span>node-redis</span></h3>
+                <h3 class="tl-item__what">Merged PRs into <span>mongoose</span> and <span>node-redis</span></h3>
                 <p class="tl-item__detail">
-                    Three of them, into database libraries with 27k and 17k stars used by millions of developers.
-                    Two documented the undocumented
-                    <code>perDocumentLimit</code> populate option and its per-document semantics
+                    Three of them, into libraries with 27k and 17k stars
                     (<a href="https://github.com/Automattic/mongoose/pull/16371" target="_blank" rel="noopener">#16371</a>,
-                    <a href="https://github.com/Automattic/mongoose/pull/16369" target="_blank" rel="noopener">#16369</a>).
-                    The third corrected a README still pointing at the deprecated <code>disconnect()</code> API,
-                    traced through node-redis's socket source
-                    (<a href="https://github.com/redis/node-redis/pull/3332" target="_blank" rel="noopener">#3332</a>).
-                    Gaps I hit while using the libraries in my own production work, not issues picked off a label.
+                    <a href="https://github.com/Automattic/mongoose/pull/16369" target="_blank" rel="noopener">#16369</a>,
+                    <a href="https://github.com/redis/node-redis/pull/3332" target="_blank" rel="noopener">#3332</a>).
+                    Gaps I hit using them in my own work.
                 </p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">Dec 2025 to Mar 2026</div>
                 <h3 class="tl-item__what">Founder, <span>Aqua Vitae Parfums</span></h3>
-                <p class="tl-item__detail">A perfume business I founded and ran as the sole engineer, designer and operator. Custom React and TypeScript storefront with Shopify for checkout, taken from an empty repo to a live storefront with real users.</p>
+                <p class="tl-item__detail">Sole engineer, designer and operator. React and TypeScript storefront, Shopify checkout.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">Aug to Nov 2025</div>
                 <h3 class="tl-item__what">Question Service owner, <span>PeerPrep</span></h3>
-                <p class="tl-item__detail">One service, owned end to end, inside a six-service system. 15 endpoints and 35 tests.</p>
-            </div>
-
-            <div class="tl-item">
-                <div class="tl-item__when">May to Jul 2024</div>
-                <h3 class="tl-item__what">NUS Orbital, <span>Apollo 11</span></h3>
-                <p class="tl-item__detail">A study-group platform matched on live NUSMods course data.</p>
+                <p class="tl-item__detail">One service owned end to end. 15 endpoints, 35 tests.</p>
             </div>
 
             <div class="tl-item">
                 <div class="tl-item__when">2023</div>
                 <h3 class="tl-item__what">Harvard <span>CS50</span></h3>
-                <p class="tl-item__detail">Where it started. The first version of this site was my final project for it.</p>
+                <p class="tl-item__detail">Where it started. The first version of this site was my final project.</p>
             </div>
         </div>
     </div>
@@ -130,10 +99,6 @@
         <div class="section-head reveal">
             <p class="eyebrow">Toolbox</p>
             <h2 class="h1">What I've worked with</h2>
-            <p class="lede">
-                None of this is a loyalty list. I pick whatever suits the problem, and I'm always happy to pick up
-                something new.
-            </p>
         </div>
 
         <div class="skills">
@@ -157,8 +122,7 @@
                 <ul>
                     <li class="tag">Node.js</li><li class="tag">Fastify</li><li class="tag">Express</li>
                     <li class="tag">Flask</li><li class="tag">REST APIs</li><li class="tag">WebSockets</li>
-                    <li class="tag">Distributed systems</li><li class="tag">TCP/IP</li><li class="tag">HTTP</li>
-                    <li class="tag">Unix/Linux</li>
+                    <li class="tag">Distributed systems</li><li class="tag">TCP/IP</li><li class="tag">Unix/Linux</li>
                 </ul>
             </div>
             <div class="skillgrp reveal" data-delay="3">
@@ -174,7 +138,7 @@
                 <ul>
                     <li class="tag">Cloudflare Workers</li><li class="tag">Google Cloud</li><li class="tag">AWS</li>
                     <li class="tag">Docker</li><li class="tag">Nginx</li><li class="tag">Stripe</li>
-                    <li class="tag">Shopify</li><li class="tag">Firebase Auth</li>
+                    <li class="tag">Shopify</li>
                 </ul>
             </div>
             <div class="skillgrp reveal" data-delay="1">
@@ -199,11 +163,9 @@
                 <h2 class="h1">National University of Singapore</h2>
 
                 <ul class="bullets" style="margin-top:var(--s-6)">
-                <li><strong>Bachelor of Computing in Computer Science</strong>, August 2023 to May 2027, specialising in Software Engineering, Honours (Distinction).</li>
-                <li><strong>Certificate of Distinction</strong> in the Software Engineering focus area, awarded July 2026, off a 4.50 GPA across the focus-area modules.</li>
-                <li><strong>The modules that did the work</strong>: formal methods for software engineering (A), communicating in the information age (A+), big data systems, data structures and algorithms, design and analysis of algorithms, operating systems, computer networks, database systems, AI and machine learning, and digital ethics and data privacy (A).</li>
-                <li><strong>NUS Orbital</strong> at Apollo 11 level, the independent-project tier.</li>
-                <li>Started with <strong>Harvard CS50</strong> in 2023, which is the reason this site exists at all.</li>
+                <li><strong>BComp in Computer Science</strong>, 2023 to 2027. Software Engineering specialisation, Honours (Distinction).</li>
+                <li><strong>Certificate of Distinction</strong>, Software Engineering focus area. 4.50 GPA.</li>
+                <li>Formal methods (A), digital ethics and data privacy (A), communicating in the information age (A+), big data systems, algorithms, operating systems, networks, databases, AI and machine learning.</li>
                 </ul>
             </div>
 
@@ -223,8 +185,7 @@
     <div class="wrap">
         <div class="section-head reveal">
             <p class="eyebrow">Contact</p>
-            <h2 class="h1">Looking for a 6-month internship from early 2027</h2>
-            <p class="lede">Software engineering, end to end. Based in Singapore.</p>
+            <h2 class="h1">Open to a 6-month internship, early 2027</h2>
         </div>
 
         <div class="contacts reveal">

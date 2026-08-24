@@ -2,26 +2,19 @@
 
 {% block title %}Work · William Nayar{% endblock %}
 {% block social_title %}Work · William Nayar{% endblock %}
-{% set _sys_meta = "DeepCS, Aqua Vitae Parfums and Airlock: what William Nayar founded, built and shipped, with the architecture decisions and interactive walkthroughs behind each one." %}
+{% set _sys_meta = "DeepCS, Aqua Vitae Parfums and Airlock: what William Nayar has founded, built and shipped." %}
 {% block meta_description %}{{ _sys_meta }}{% endblock %}
 {% block og_description %}{{ _sys_meta }}{% endblock %}
 
 {% block main %}
 
-<!-- ===================== PAGE HEAD ===================== -->
 <section class="section section--tight">
     <div class="wrap">
         <p class="eyebrow">Work</p>
-        <h1 class="h1">Two ventures and a win, up close</h1>
-        <p class="lede" style="margin-top:var(--s-4)">
-            Two products I founded and shipped, both with real users, and one weekend build that won its
-            hackathon. Each has something on this page you can actually poke at. The full write-ups live in
-            the repos.
-        </p>
+        <h1 class="h1">Three things I've built</h1>
     </div>
 </section>
 
-<!-- ===================== SUBNAV ===================== -->
 <div class="subnav">
     <div class="subnav__inner">
         <a class="subnav__link is-active" href="#deepcs" data-spy><i></i>DeepCS</a>
@@ -30,9 +23,7 @@
     </div>
 </div>
 
-<!-- ================================================================
-     DEEPCS
-     ================================================================ -->
+<!-- ===================== DEEPCS ===================== -->
 <section class="section sys" id="deepcs">
     <div class="wrap">
         <div class="sys__head">
@@ -42,78 +33,62 @@
                     <span class="chip chip--built"><i class="chip__dot"></i>Live</span>
                 </div>
                 <p class="sys__oneline">
-                    A CS learning platform I founded, serving its app and its content from one Cloudflare Worker
-                    at the edge, with auth, a paywall and Stripe payments in front of real users.
+                    A CS learning platform, served from the edge by one Cloudflare Worker.
                 </p>
                 <div class="btn-row">
                     <a class="btn btn--sm" href="https://deepcs.org" target="_blank" rel="noopener">deepcs.org ↗</a>
-                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/deepcs/blob/main/DESIGN.md" target="_blank" rel="noopener">Read DESIGN.md ↗</a>
                     <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/deepcs" target="_blank" rel="noopener">Repo ↗</a>
                 </div>
             </div>
 
             <dl class="sys__spec">
-                <div class="sys__spec-row"><dt>Stage</dt><dd>Live at deepcs.org</dd></div>
                 <div class="sys__spec-row"><dt>Role</dt><dd>Founder, sole engineer</dd></div>
-                <div class="sys__spec-row"><dt>Stack</dt><dd>TypeScript · Cloudflare Workers · D1 · React · Firebase Auth · Stripe</dd></div>
-                <div class="sys__spec-row"><dt>Doc</dt><dd>9 ADRs, every build-vs-buy call tagged</dd></div>
+                <div class="sys__spec-row"><dt>Stack</dt><dd>TypeScript · Cloudflare Workers · D1 · React · Stripe</dd></div>
+                <div class="sys__spec-row"><dt>Cut</dt><dd>5 of 6 services</dd></div>
             </dl>
         </div>
 
         <div class="note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
             <p>
-                <b>The interesting part is what came out.</b> v1 was six services, Docker, Redis, PostgreSQL and
-                WebSockets, and the hardest thing in it was two people editing one document live. When I put it in
-                front of real users, nobody wanted that. v2 is one Worker at the edge, running at zero idle cost.
-                Both are below, and you can switch between them.
+                I asked 32 users whether a collaborative editor mattered. <b>72% said no.</b> So I cut it,
+                deleted five of six services, and rebuilt on one Worker for cost and scale.
             </p>
         </div>
 
-        <nav class="sys__toc" aria-label="DeepCS contents">
-            <a href="#deepcs-architecture"><b>01</b> Six services, then one</a>
-            <a href="#crdt-lab"><b>02</b> The part I deleted</a>
-        </nav>
-
-        <!-- ---------- LAB: topology ---------- -->
         <div class="lab" id="deepcs-architecture">
             <div class="lab__head">
                 <span class="lab__num">01</span>
-                <h3 class="lab__title">Six services, then one</h3>
-                <span class="lab__hint">switch versions, or press play</span>
+                <h3 class="lab__title">What runs today</h3>
+                <span class="lab__hint">tap a box, or press play</span>
             </div>
-            <p class="lab__intro">
-                Both architectures are real: v1 was built, deployed and measured before v2 replaced it. Switch
-                between them, tap any box to see what it owns, or walk a request through either one.
-            </p>
 
             <div class="panel ticked">
                 <div class="panel__bar">
                     <span class="panel__bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                     <span class="panel__try"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="m9 9 5 12 1.8-5.2L21 14z"/><path d="M7.2 2.2 8 5M5 5l2.5 1.2M2.2 7.2 5 8"/></svg>Try it</span>
                     deepcs · architecture
-                    <span class="panel__bar-right">before and after</span>
-                </div>
-
-                <div class="ctl-row" style="padding:var(--s-3) var(--s-4);border-bottom:1px solid var(--border)">
-                    <span class="ctl-label">version</span>
-                    <div class="seg" id="topo-arch" role="group" aria-label="Choose which architecture to show">
-                        <button type="button" data-arch="v1" aria-pressed="false">v1 · six services</button>
-                        <button type="button" data-arch="v2" aria-pressed="true">v2 · one edge Worker</button>
-                    </div>
-                    <span class="mono" data-arch-note style="font-size:var(--fs-xs);color:var(--muted);margin-left:auto"></span>
                 </div>
 
                 <div class="topo">
                     <div class="topo__stage" id="topo-stage"></div>
                     <div class="topo__side">
                         <div class="topo__scenarios">
-                            <span class="ctl-label">Walk a request path</span>
-                            <div class="scenario-btns" id="topo-scenarios"></div>
+                            <span class="ctl-label">Walk a path</span>
+                            <div class="scenario-btns">
+                                <button type="button" class="scenario-btn" data-scenario="request">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="m5 3 14 9-14 9z"/></svg>
+                                    A paid request
+                                </button>
+                                <button type="button" class="scenario-btn" data-scenario="pays">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="m5 3 14 9-14 9z"/></svg>
+                                    Someone pays
+                                </button>
+                            </div>
                         </div>
                         <div class="topo__caption">
                             <div class="topo__caption-step" id="topo-cap-step">Idle</div>
-                            <p class="topo__caption-text" id="topo-cap-text">Pick a request path, or tap any part of the system to see what it owns.</p>
+                            <p class="topo__caption-text" id="topo-cap-text">Pick a path, or tap any box.</p>
                             <div class="topo__controls" id="topo-controls" hidden>
                                 <button type="button" class="topo__ctrl" id="topo-prev" aria-label="Previous step">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
@@ -134,123 +109,17 @@
                 <div class="topo__legend" id="topo-legend"></div>
             </div>
 
-            <div class="doctrine" style="margin-top:var(--s-6)">
-                <div class="doctrine__card doctrine__card--detour">
-                    <span class="doctrine__tag">[why v1 existed]</span>
-                    <p>
-                        I wanted to learn distributed systems by running into their problems rather than reading
-                        about them, so I built six services on purpose: atomic claims, cross-instance pub/sub,
-                        an at-least-once event log, a rate limiter that had to be a Lua script. That was a good
-                        reason to build it. It was not a good reason to keep it.
-                    </p>
-                </div>
-                <div class="doctrine__card doctrine__card--built">
-                    <span class="doctrine__tag">[why v2 replaced it]</span>
-                    <p>
-                        User feedback showed no demand for the collaborative half, which was the part I was
-                        proudest of. Six services became four handlers in one Worker, two managed databases
-                        became one SQLite file at the edge, and idle cost went to zero.
-                    </p>
-                </div>
-                <div class="doctrine__card doctrine__card--bought">
-                    <span class="doctrine__tag">[what survived]</span>
-                    <p>
-                        Every enforcement property. One place decides who you are, the user id comes from the
-                        verified token and never from the request, the paywall is server-side, and every write a
-                        webhook makes is idempotent. Deleting code is only safe if you know which parts were
-                        load-bearing.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ---------- LAB: CRDT ---------- -->
-        <div class="lab" id="crdt-lab">
-            <div class="lab__head">
-                <span class="lab__num">02</span>
-                <h3 class="lab__title">The part I deleted</h3>
-                <span class="lab__hint">a real CRDT, running in this page</span>
-            </div>
-            <p class="lab__intro">
-                This is what v1's Collab service did, and it is the hardest thing I have built. Two people, two
-                servers, no shared memory. Type in both at once, drop a connection, drag the latency slider. They
-                still end up with the same document. Then it shipped, and the users who arrived wanted to work
-                alone, so it came out.
-            </p>
-
-            <div class="panel">
-                <div class="panel__bar">
-                    <span class="panel__bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="panel__try"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="m9 9 5 12 1.8-5.2L21 14z"/><path d="M7.2 2.2 8 5M5 5l2.5 1.2M2.2 7.2 5 8"/></svg>Try it</span>
-                    deepcs v1 · collab · session s42
-                    <span class="panel__bar-right">RGA implemented in this page</span>
-                </div>
-
-                <div class="ctl-row" style="padding:var(--s-3) var(--s-4);border-bottom:1px solid var(--border)">
-                    <button type="button" class="btn btn--sm" data-collide>Type in both at once</button>
-                    <span class="ctl-label">delivery</span>
-                    <input type="range" data-latency min="60" max="2000" step="20" value="420" aria-label="Pub/sub delivery latency">
-                    <span class="mono" data-latency-out style="font-size:var(--fs-xs);color:var(--muted)">420 ms</span>
-                    <button type="button" class="btn btn--sm btn--ghost" data-reset-crdt style="margin-left:auto">Reset</button>
-                </div>
-
-                <div class="crdt__panes">
-                    <div class="crdt__pane crdt__pane--a" data-pane="a">
-                        <div class="crdt__pane-head">
-                            <span class="crdt__dot" aria-hidden="true"></span>
-                            User A · collab instance 1
-                            <button type="button" class="btn btn--sm btn--ghost" data-pause aria-pressed="false">Drop connection</button>
-                        </div>
-                        <div class="editor" aria-label="User A's editor"></div>
-                    </div>
-
-                    <div class="crdt__wire">
-                        <span class="crdt__wire-label">redis<br>pub/sub</span>
-                        <div class="crdt__wire-track" data-wire></div>
-                    </div>
-
-                    <div class="crdt__pane crdt__pane--b" data-pane="b">
-                        <div class="crdt__pane-head">
-                            <span class="crdt__dot" aria-hidden="true"></span>
-                            User B · collab instance 2
-                            <button type="button" class="btn btn--sm btn--ghost" data-pause aria-pressed="false">Drop connection</button>
-                        </div>
-                        <div class="editor" aria-label="User B's editor"></div>
-                    </div>
-                </div>
-
-                <div class="crdt__status">
-                    <span class="converged is-yes" data-converged></span>
-                    <span>ops shipped: <b data-opcount>0</b></span>
-                    <span>tombstones: <b data-tombstones>0</b></span>
-                    <span class="muted">click into a pane and type</span>
-                </div>
-            </div>
-
-            <p class="lab__intro" style="margin-top:var(--s-5)">
-                Cutting it was the right call and it was not a comfortable one. Being able to build a thing is a
-                separate question from whether it should exist, and I would rather learn that on my own product
-                than on someone else's.
+            <p class="lab__intro" style="margin-top:var(--s-6)">
+                Unit, integration and end-to-end tests run in CI on every push. Nine decision records are in
+                <a href="https://github.com/Wnayar/deepcs/blob/main/DESIGN.md" target="_blank" rel="noopener">DESIGN.md</a>.
             </p>
         </div>
-
-        <!-- ---------- CLOSING ---------- -->
-        <p class="lab__intro" style="margin-top:var(--s-8)">
-            Underneath sits a test suite of unit, integration and end-to-end tests, running in CI on every
-            push, because a solo project has no second pair of eyes on a pull request. There is more in the repo
-            than fits here, including the atomic rate limiter, the replayable event log, and the reasoning
-            behind every service boundary I drew and later erased. Nine architecture decision records live in
-            <a href="https://github.com/Wnayar/deepcs/blob/main/DESIGN.md" target="_blank" rel="noopener">DESIGN.md</a>,
-            including why I built the gateway instead of using Kong, and why auth is the one thing I paid for.
-        </p>
     </div>
 </section>
 
 <hr class="rule">
 
-<!-- ================================================================
-     AQUA VITAE
-     ================================================================ -->
+<!-- ===================== AQUA VITAE ===================== -->
 <section class="section sys" id="aquavitae">
     <div class="wrap">
         <div class="sys__head">
@@ -260,8 +129,7 @@
                     <span class="chip chip--built"><i class="chip__dot"></i>Shipped</span>
                 </div>
                 <p class="sys__oneline">
-                    A perfume brand I founded and ran alone: the product, the name, the storefront, the checkout
-                    and everything behind them.
+                    A perfume brand I founded and ran alone: product, brand, storefront, orders.
                 </p>
                 <div class="btn-row">
                     <a class="btn btn--sm" href="https://aquavitaeparfums.com" target="_blank" rel="noopener">aquavitaeparfums.com ↗</a>
@@ -269,137 +137,63 @@
             </div>
 
             <dl class="sys__spec">
-                <div class="sys__spec-row"><dt>Stage</dt><dd>Shipped and live · Dec 2025 to Mar 2026</dd></div>
-                <div class="sys__spec-row"><dt>Role</dt><dd>Founder, sole engineer, designer and operator</dd></div>
+                <div class="sys__spec-row"><dt>When</dt><dd>Dec 2025 to Mar 2026</dd></div>
+                <div class="sys__spec-row"><dt>Role</dt><dd>Founder, sole engineer and operator</dd></div>
                 <div class="sys__spec-row"><dt>Stack</dt><dd>React · TypeScript · Shopify Checkout</dd></div>
-                <div class="sys__spec-row"><dt>The call</dt><dd>Built the shop, bought the checkout</dd></div>
             </dl>
         </div>
 
-        <div class="note">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
-            <p>
-                <b>No lab for this one, because the engineering was not the hard part.</b> The hard part was
-                that every deadline was mine and nobody was going to notice if I let one slip. Deciding what to
-                build, building it, and putting it in front of people is the closest thing to running a real
-                product I have done, and it is the reason this section exists.
-            </p>
-        </div>
-
-        <div class="lab" id="aqua-buildbuy">
-            <div class="lab__head">
-                <span class="lab__num">01</span>
-                <h3 class="lab__title">Where I drew the build-buy line</h3>
-                <span class="lab__hint">one founder, finite hours</span>
+        <div class="doctrine">
+            <div class="doctrine__card doctrine__card--built">
+                <span class="doctrine__tag">[built]</span>
+                <p>The storefront, and everything that is not code: brand, bottles, photography, pricing, fulfilment.</p>
             </div>
-            <p class="lab__intro">
-                A solo founder's real constraint is attention, not skill. Every hour spent rebuilding something
-                boring is an hour not spent on the thing customers actually see. This is where I put the line,
-                and why.
-            </p>
-
-            <div class="doctrine">
-                <div class="doctrine__card doctrine__card--built">
-                    <span class="doctrine__tag">[built]</span>
-                    <p>
-                        The storefront. React and TypeScript, reusable components and one central place for state
-                        rather than a prop threaded through six levels. This is what a customer forms an opinion
-                        from in about four seconds, so it was worth writing myself rather than fighting a theme.
-                    </p>
-                </div>
-                <div class="doctrine__card doctrine__card--bought">
-                    <span class="doctrine__tag">[bought]</span>
-                    <p>
-                        Checkout. Shopify takes the card, the tax, the fraud rules and the PCI scope. There is no
-                        version of me building that better in a fortnight, and payments is the one area where a
-                        subtle mistake is somebody else's money rather than my time. Payments and compliance
-                        stayed off my plate on purpose.
-                    </p>
-                </div>
-                <div class="doctrine__card doctrine__card--built">
-                    <span class="doctrine__tag">[built]</span>
-                    <p>
-                        Everything that is not code. The brand, the bottles, the photography, the copy, the
-                        pricing and the fulfilment. Engineers who have only ever received requirements do not
-                        find out what it costs to decide them. I decided all of them, and shipped anyway.
-                    </p>
-                </div>
-                <div class="doctrine__card doctrine__card--detour">
-                    <span class="doctrine__tag">[what it taught me]</span>
-                    <p>
-                        The same instinct runs through DeepCS: build the part that is yours, buy the part that is
-                        solved, and be honest about which is which. Buying auth and payments there was the same
-                        decision as buying checkout here, made with more evidence.
-                    </p>
-                </div>
+            <div class="doctrine__card doctrine__card--bought">
+                <span class="doctrine__tag">[bought]</span>
+                <p>Checkout. Shopify takes the card, the tax and the PCI scope, so payments stayed off my plate.</p>
             </div>
-
-            <p class="lab__intro" style="margin-top:var(--s-6)">
-                It ran from December 2025 to March 2026, from an empty repo to a live storefront with people
-                using it. Following a product all the way through to real users is a different job from
-                finishing a feature, and it is the part I would not have learned any other way.
-            </p>
         </div>
     </div>
 </section>
 
 <hr class="rule">
 
-<!-- ================================================================
-     AIRLOCK
-     ================================================================ -->
+<!-- ===================== AIRLOCK ===================== -->
 <section class="section sys" id="airlock">
     <div class="wrap">
         <div class="sys__head">
             <div>
                 <div class="sys__title-row">
                     <h2 class="sys__title">Airlock</h2>
-                    <span class="chip chip--built"><i class="chip__dot"></i>Built</span>
                     <span class="chip chip--won"><i class="chip__dot"></i>1st place</span>
                 </div>
                 <p class="sys__oneline">
-                    A safety gate between an AI coding agent and every package it tries to install. Each install is
-                    detonated in a disposable sandbox before it touches the machine.
+                    Every package an AI agent installs is detonated in a throwaway sandbox first.
                 </p>
                 <div class="btn-row">
                     <a class="btn btn--sm" href="https://github.com/Wnayar/airlock" target="_blank" rel="noopener">Repo ↗</a>
-                    <a class="btn btn--sm btn--ghost" href="https://github.com/Wnayar/airlock/blob/main/DESIGN.md" target="_blank" rel="noopener">Design doc ↗</a>
                 </div>
             </div>
 
             <dl class="sys__spec">
-                <div class="sys__spec-row"><dt>Stage</dt><dd>Built and working</dd></div>
-                <div class="sys__spec-row"><dt>Result</dt><dd>Overall winner, AI Builder and Daytona HackSprint · NUS Singapore · Jul 2026</dd></div>
-                <div class="sys__spec-row"><dt>Role</dt><dd>Weekend team build with my friend Basil. We shaped the concept and system design together</dd></div>
-                <div class="sys__spec-row"><dt>Stack</dt><dd>Python · Daytona · Nosana · Doubleword · Oxylabs · ai&amp;</dd></div>
+                <div class="sys__spec-row"><dt>Result</dt><dd>Overall winner, AI Builder and Daytona HackSprint, Jul 2026</dd></div>
+                <div class="sys__spec-row"><dt>Role</dt><dd>Weekend build with my friend Basil</dd></div>
+                <div class="sys__spec-row"><dt>Stack</dt><dd>Python · Daytona · Nosana · Doubleword · Oxylabs</dd></div>
             </dl>
-        </div>
-
-        <div class="note">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
-            <p>
-                <b>This one is real code.</b> The verdict below is the actual output from the repo, replayed
-                slowly enough to read. The timings are for pacing, not measurements.
-            </p>
         </div>
 
         <div class="lab" id="gate-lab">
             <div class="lab__head">
                 <span class="lab__num">01</span>
-                <h3 class="lab__title">How Airlock makes up its mind</h3>
-                <span class="lab__hint">recorded verdict, replayed</span>
+                <h3 class="lab__title">Watch it block one</h3>
+                <span class="lab__hint">real output, replayed</span>
             </div>
-            <p class="lab__intro">
-                An agent tries to install <code>python-pillow</code>, a fake built to look like the real
-                <code>pillow</code>. Airlock runs it somewhere disposable, reads it, then decides.
-            </p>
 
             <div class="panel">
                 <div class="panel__bar">
                     <span class="panel__bar-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                     <span class="panel__try"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" aria-hidden="true"><path d="m9 9 5 12 1.8-5.2L21 14z"/><path d="M7.2 2.2 8 5M5 5l2.5 1.2M2.2 7.2 5 8"/></svg>Try it</span>
                     airlock · pre-install gate
-                    <span class="panel__bar-right">enforced as a hook</span>
                 </div>
                 <div class="gate">
                     <div class="gate__flow">
@@ -417,9 +211,8 @@
                     <div class="gate__term">
                         <div class="term-window" data-terminal></div>
                         <p class="gate__hint" data-gate-hint>
-                            Pick one of the two installs above. <b>python-pillow</b> is a fake built to look like
-                            the real <code>pillow</code> and gets blocked. <b>requests</b> is genuine and passes
-                            straight through. The output here is the real thing from the repo.
+                            <b>python-pillow</b> is a fake built to look like the real <code>pillow</code>, and gets
+                            blocked. <b>requests</b> is genuine and passes.
                         </p>
                     </div>
                 </div>
@@ -429,27 +222,21 @@
                 <img src="{{ asset('img/hackathon-win.jpg') }}"
                      srcset="{{ asset('img/hackathon-win@600.jpg') }} 600w, {{ asset('img/hackathon-win.jpg') }} 1200w"
                      sizes="(max-width: 820px) 100vw, 780px"
-                     alt="Airlock announced as overall champion on the projector at the AI Builder and Daytona HackSprint, with the team standing in front of it."
+                     alt="Airlock announced as overall champion on the projector at the AI Builder and Daytona HackSprint."
                      width="1200" height="795" loading="lazy" decoding="async">
-                <figcaption>
-                    <b>Overall champion, AI Builder and Daytona HackSprint.</b> NUS Singapore, July 2026. Built
-                    over a weekend with my teammate and friend Basil, using all five sponsor technologies.
-                </figcaption>
+                <figcaption>Overall champion. NUS Singapore, July 2026.</figcaption>
             </figure>
         </div>
     </div>
 </section>
 
-<!-- ===================== CTA ===================== -->
 <section class="section section--tight">
     <div class="wrap">
         <div class="cta reveal">
-            <p class="eyebrow" style="justify-content:center">Next</p>
-            <h2 class="h1" style="margin-inline:auto">Final-year CS at NUS</h2>
-            <p class="lede">Leading 11 engineering teams through the software lifecycle, running DeepCS, and looking for a 6-month internship from early 2027.</p>
+            <h2 class="h1" style="margin-inline:auto">Open to a 6-month internship, early 2027</h2>
             <div class="btn-row">
-                <a class="btn btn--primary" href="/about">About me</a>
-                <a class="btn" href="mailto:wnayar98@gmail.com">Get in touch</a>
+                <a class="btn btn--primary" href="mailto:wnayar98@gmail.com">wnayar98@gmail.com</a>
+                <a class="btn" href="/about">About me</a>
             </div>
         </div>
     </div>
@@ -459,6 +246,5 @@
 
 {% block scripts %}
 <script src="{{ asset('js/topology.js') }}" defer></script>
-<script src="{{ asset('js/crdt.js') }}" defer></script>
 <script src="{{ asset('js/gate.js') }}" defer></script>
 {% endblock %}
